@@ -1,0 +1,34 @@
+# Core LLM and orchestration
+openai
+langchain
+langchainhub
+langgraph
+
+# Vector Store & RAG
+faiss-cpu            # 로컬 벡터 DB (또는 chromadb 대체 가능)
+tiktoken             # Token 계산용
+unstructured         # PDF, HTML 등 전처리할 경우 사용
+
+# ML Agent (sklearn or torch 등 상황에 따라)
+scikit-learn         # 간단한 ML 파이프라인용
+pandas
+numpy
+
+# LLM 기반 DST (의도분류 등)
+transformers
+torch                # 🤗 모델 쓸 경우
+sentence-transformers
+
+# Env & HTTP
+python-dotenv        # .env 관리
+requests             # API 요청용
+
+# Dev tools (선택)
+rich                 # 터미널 출력 이쁘게
+ipykernel            # 노트북 환경에서도 실행 가능하게
+
+# Database
+psycopg2-binary
+sqlalchemy
+alembic             # (선택) DB 마이그레이션
+pgvector            # (선택) 벡터 검색 기능
