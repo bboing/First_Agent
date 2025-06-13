@@ -31,25 +31,24 @@ connections.connect(
 
 # 5. Milvus 컬렉션 생성 (없으면)
 def recreate_collection_if_needed(name: str, vector_dim: int):
-    if name in utility.list_collections():
-        print(f"⚠️ 기존 컬렉션 '{name}' 삭제 중...")
-        utility.drop_collection(name)
-
-    fields = [
-        FieldSchema(name="id", dtype=DataType.INT64, is_primary=True, auto_id=True),
-        FieldSchema(name="embedding", dtype=DataType.FLOAT_VECTOR, dim=vector_dim),
-        FieldSchema(name="text", dtype=DataType.VARCHAR, max_length=2048)
-    ]
-    schema = CollectionSchema(fields, description="임베딩 테스트용 컬렉션")
-    collection = Collection(name=name, schema=schema)
-    collection.create_index(
-        field_name="embedding",
-        index_params={"index_type": "IVF_FLAT", 
-                      "metric_type": "COSINE", 
-                      "params": {"nlist": 128}}
-    )
-    collection.load()
-    return collection
+    if name not in utility.list_collections():
+        fields = [
+            FieldSchema(name="id", dtype=DataType.INT64, is_primary=True, auto_id=True),
+            FieldSchema(name="embedding", dtype=DataType.FLOAT_VECTOR, dim=vector_dim),
+            FieldSchema(name="text", dtype=DataType.VARCHAR, max_length=2048)
+        ]
+        schema = CollectionSchema(fields, description="임베딩 테스트용 컬렉션")
+        collection = Collection(name=name, schema=schema)
+        collection.create_index(
+            field_name="embedding",
+            index_params={"index_type": "IVF_FLAT", "metric_type": "COSINE", "params": {"nlist": 128}}
+        )
+        collection.load()
+        return collection
+    else:
+        collection = Collection(name)
+        collection.load()
+        return collection
 
 
 collection_name = "embedding_test"
