@@ -8,6 +8,7 @@ langgraph
 faiss-cpu            # 로컬 벡터 DB (또는 chromadb 대체 가능)
 tiktoken             # Token 계산용
 unstructured         # PDF, HTML 등 전처리할 경우 사용
+pymilvus
 
 # ML Agent (sklearn or torch 등 상황에 따라)
 scikit-learn         # 간단한 ML 파이프라인용
@@ -30,5 +31,6 @@ ipykernel            # 노트북 환경에서도 실행 가능하게
 # Database
 psycopg2-binary
 sqlalchemy
+redis
 alembic             # (선택) DB 마이그레이션
 pgvector            # (선택) 벡터 검색 기능

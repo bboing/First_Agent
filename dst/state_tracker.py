@@ -8,8 +8,7 @@ def get_user_intent(query: str) -> str:
     Returns:
         str: 파악된 의도 ('rag' 또는 'ml')
     """
-    # TODO: 실제 의도 파악 로직 구현
-    # 임시로 간단한 키워드 기반 분류
+
     rag_keywords = ['검색', '찾아', 'rag', '검색해', '찾아줘']
     ml_keywords = ['학습', '예측', '분류', 'ml', '머신러닝']
     

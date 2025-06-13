@@ -1,14 +1,17 @@
-from Agent.rag_agent import handle_rag
-from Agent.ml_agent import handle_ml
-from dst.state_tracker import get_user_intent
+from agent.embedding import search_similar_texts
+from agent.ml_agent import handle_ml
+from agent.rag_agent import handle_rag
 
 def route_query(user_input):
-    # 일단 intent 분기를 단순하게 if로 구성
-    intent = get_user_intent(user_input)
-    
-    if intent == "rag":
-        return handle_rag(user_input)
-    elif intent == "ml":
-        return handle_ml(user_input)
+    results = search_similar_texts(user_input, limit=1)
+    if results and len(results[0]) > 0:
+        best_hit = results[0][0]
+        score = best_hit.distance  # L2 거리(작을수록 유사)
+        # 예시: 0.2 이하(유사도 높음)면 ML, 아니면 RAG
+        if score < 0.2:
+            return handle_ml(user_input)
+        else:
+            return handle_rag(user_input)
     else:
-        return "죄송합니다. 이해하지 못했어요."
+        # 검색 결과 없으면 RAG로
+        return handle_rag(user_input)
