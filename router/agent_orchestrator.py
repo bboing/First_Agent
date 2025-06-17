@@ -9,9 +9,12 @@ def route_query(user_input):
         score = best_hit.distance  # L2 거리(작을수록 유사)
         # 예시: 0.2 이하(유사도 높음)면 ML, 아니면 RAG
         if score < 0.2:
+            print("ML 에이전트 호출")
             return handle_ml(user_input)
         else:
+            print("RAG 에이전트 호출")
             return handle_rag(user_input)
     else:
         # 검색 결과 없으면 RAG로
+        print("검색 결과 없음, RAG 에이전트 호출")
         return handle_rag(user_input)

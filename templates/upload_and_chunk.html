@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>문서 업로드 및 청킹</title>
+    <link rel="stylesheet" href="/static/chat.css">
+    <style>
+        .upload-container {
+            max-width: 480px;
+            margin: 60px auto;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+            padding: 32px 28px 24px 28px;
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+        .upload-container h2 {
+            margin-bottom: 8px;
+        }
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .form-group label {
+            font-weight: bold;
+        }
+        .form-group input[type="text"],
+        .form-group input[type="file"] {
+            padding: 8px;
+            border-radius: 6px;
+            border: 1px solid #e5e7eb;
+        }
+        .form-group input[type="file"] {
+            background: #f3f4f6;
+        }
+        .upload-btn {
+            margin-top: 16px;
+            padding: 12px 0;
+            background: #10a37f;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .result-area {
+            margin-top: 18px;
+            background: #f3f4f6;
+            border-radius: 8px;
+            padding: 14px 12px;
+            font-size: 15px;
+            min-height: 40px;
+        }
+    </style>
+</head>
+<body>
+    <div class="upload-container">
+        <h2>문서 업로드 및 청킹</h2>
+        <form id="upload-form">
+            <div class="form-group">
+                <label for="file">문서 파일 (PDF 등)</label>
+                <input type="file" id="file" name="file" accept=".pdf,.docx,.txt" required />
+            </div>
+            <div class="form-group">
+                <label for="category">카테고리 (문서 전체에 적용)</label>
+                <input type="text" id="category" name="category" placeholder="예: 예약, 고객문의 등" required />
+            </div>
+            <button type="submit" class="upload-btn">청킹</button>
+        </form>
+        <div class="result-area" id="result-area"></div>
+    </div>
+    <script>
+        const form = document.getElementById('upload-form');
+        const resultArea = document.getElementById('result-area');
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            resultArea.textContent = '청킹 중...';
+            const formData = new FormData(form);
+            try {
+                const res = await fetch('/upload-chunk', {
+                    method: 'POST',
+                    body: formData
+                });
+                const data = await res.json();
+                if (data.success) {
+                    resultArea.textContent = `청킹 완료! 청크 수: ${data.chunk_count}`;
+                } else {
+                    resultArea.textContent = '청킹 실패: ' + (data.error || '알 수 없는 오류');
+                }
+            } catch (err) {
+                resultArea.textContent = '오류 발생: ' + err;
+            }
+        });
+    </script>
+</body>
+</html> 

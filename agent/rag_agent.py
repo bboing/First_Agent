@@ -16,19 +16,24 @@ def handle_rag(query: str) -> str:
     Returns:
         str: RAG 에이전트의 응답
     """
-    # 1. Milvus에서 유사 문서 검색
-    results = search_similar_texts(query, limit=3)
-    context = "\n".join([hit.entity.get('text') for hits in results for hit in hits])
-    if not context:
-        return "관련 문서가 없습니다."
+    # 1. Milvus에서 유사 문서 검색 (유사도 임계값 0.7 적용)
+    results = search_similar_texts(query, limit=3, similarity_threshold=0.7)
+    
+    # 필터링된 결과가 없으면 관련 문서 없음 메시지 반환
+    if not results:
+        return "죄송합니다. 질문과 관련된 문서를 찾을 수 없습니다. 다른 질문을 해주시거나, 더 구체적으로 질문해주세요."
+    
+    # 2. 필터링된 결과에서 컨텍스트 생성
+    context = "\n".join([hit.entity.get('text') for hit in results])
+    print(f"RAG 에이전트 컨텍스트: {context}")
 
-    # 2. 역할별 메시지 생성 (System: 컨텍스트, Human: 질문)
+    # 3. 역할별 메시지 생성 (System: 컨텍스트, Human: 질문)
     messages = [
         SystemMessage(content=f"다음 컨텍스트를 참고해서 질문에 답변해 주세요.\n\n[컨텍스트]\n{context}"),
         HumanMessage(content=f"[질문]\n{query}")
     ]
 
-    # 3. LLM 호출 (Azure OpenAI)
+    # 4. LLM 호출 (Azure OpenAI)
     llm = AzureChatOpenAI(
         azure_deployment=os.getenv("DEPLOYMENT_CHAT"),
         azure_endpoint=os.getenv("AZURE_OPENAI_ENDPOINT"),

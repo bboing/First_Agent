@@ -3,6 +3,7 @@ from pymilvus import connections, Collection, FieldSchema, CollectionSchema, Dat
 from dotenv import load_dotenv
 import os
 import sys
+import re
 
 # 1. 환경변수 로드
 dotenv_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "..",  ".env"))
@@ -35,7 +36,10 @@ def recreate_collection_if_needed(name: str, vector_dim: int):
         fields = [
             FieldSchema(name="id", dtype=DataType.INT64, is_primary=True, auto_id=True),
             FieldSchema(name="embedding", dtype=DataType.FLOAT_VECTOR, dim=vector_dim),
-            FieldSchema(name="text", dtype=DataType.VARCHAR, max_length=2048)
+            FieldSchema(name="text", dtype=DataType.VARCHAR, max_length=2048),
+            FieldSchema(name="page", dtype=DataType.INT64),
+            FieldSchema(name="category", dtype=DataType.VARCHAR, max_length=128),
+            FieldSchema(name="topic", dtype=DataType.VARCHAR, max_length=256)
         ]
         schema = CollectionSchema(fields, description="임베딩 테스트용 컬렉션")
         collection = Collection(name=name, schema=schema)
@@ -50,27 +54,52 @@ def recreate_collection_if_needed(name: str, vector_dim: int):
         collection.load()
         return collection
 
+# LLM을 이용한 topic 추출 함수 예시 (OpenAI)
+def extract_topic(text: str) -> str:
+    from langchain_openai import AzureOpenAI
+    llm = AzureOpenAI(
+        azure_deployment=os.getenv("DEPLOYMENT_CHAT"),
+        azure_endpoint=os.getenv("AZURE_OPENAI_ENDPOINT"),
+        openai_api_key=os.getenv("AZURE_OPENAI_API_KEY"),
+        openai_api_version=os.getenv("AZURE_OPENAI_API_VERSION"),
+        openai_api_type="azure"
+    )
+    prompt = f"다음 텍스트의 주제를 짧은 문장으로 요약해줘:\n{text[:300]}"
+    return llm(prompt)
 
 collection_name = "embedding_test"
 vector = get_embedding("이 문장을 벡터로 변환해줘")
 collection = recreate_collection_if_needed(collection_name, len(vector))
 
 # 6. Milvus에 벡터 삽입
-def insert_text_and_embedding(text: str):
+def insert_text_and_embedding(text: str, page: int, category: str, topic: str):
     vector = [float(x) for x in get_embedding(text)]
-
     insert_data = [
         {
             "embedding": vector,
-            "text": text
+            "text": text,
+            "page": page,
+            "category": category,
+            "topic": topic
         }
     ]
     collection.insert(insert_data)
     collection.flush()
-    print(f"Milvus에 벡터 저장 완료! (text: {text[:50]}...)")
+    print(f"Milvus에 벡터 저장 완료! (page: {page}, category: {category}, topic: {topic}, text: {text[:50]}...)")
 
 # 7. Milvus에서 벡터 검색
-def search_similar_texts(query: str, limit: int = 3):
+def search_similar_texts(query: str, limit: int = 3, similarity_threshold: float = 0.7):
+    """
+    유사한 텍스트를 검색합니다.
+    
+    Args:
+        query (str): 검색할 쿼리
+        limit (int): 반환할 최대 결과 수
+        similarity_threshold (float): 유사도 임계값 (0~1, 1에 가까울수록 유사)
+    
+    Returns:
+        list: 임계값을 만족하는 검색 결과들
+    """
     query_vector = get_embedding(query)
     search_params = {"metric_type": "COSINE", 
                      "params": {"nprobe": 10}}
@@ -82,53 +111,34 @@ def search_similar_texts(query: str, limit: int = 3):
         output_fields=["text"]
     )
 
-    return results
-    # for hits in results:
-    #     for hit in hits:
-    #         print(f"Score: {hit.distance}, Text: {hit.entity.get('text')}")
+    # 유사도 임계값 필터링
+    filtered_results = []
+    for hits in results:
+        for hit in hits:
+            # cosine 유사도: 1에 가까울수록 유사, 임계값 이상인 것만 필터링
+            if hit.distance >= similarity_threshold:
+                filtered_results.append(hit)
+    
+    print(f"🔍 검색 결과: {len(results[0])}개 중 {len(filtered_results)}개가 임계값({similarity_threshold}) 이상")
+    for hit in filtered_results:
+        print(f"  - 유사도: {hit.distance:.3f}, 텍스트: {hit.entity.get('text')[:50]}...")
+    
+    return filtered_results
 
 # 8. 임시 파일에서 청킹된 텍스트 처리
-def process_chunked_file(temp_file_path: str):
+def process_chunks(chunks: list, category: str):
     """
-    임시 파일에서 청킹된 텍스트를 읽어서 임베딩하고 벡터DB에 저장합니다.
+    (텍스트, 페이지번호) 리스트와 카테고리를 받아 임베딩 및 벡터DB에 저장합니다.
     Args:
-        temp_file_path (str): 임시 파일 경로
+        chunks (list): (텍스트, 페이지번호) 튜플 리스트
+        category (str): 수동 입력 카테고리
     """
-    if not os.path.exists(temp_file_path):
-        print(f"❌ 파일을 찾을 수 없습니다: {temp_file_path}")
-        return
-    
-    print(f"📄 임시 파일 처리 시작: {temp_file_path}")
-    
-    with open(temp_file_path, 'r', encoding='utf-8') as f:
-        content = f.read()
-    
-    # 청크별로 분리 (--- Chunk로 구분)
-    chunks = content.split("--- Chunk")
-    chunks = [chunk.strip() for chunk in chunks if chunk.strip()]
-    
-    print(f"✅ {len(chunks)}개 청크를 찾았습니다.")
-    
-    # 각 청크를 임베딩해서 벡터DB에 저장
-    for i, chunk in enumerate(chunks):
-        # "Chunk X ---" 부분 제거하고 실제 텍스트만 추출
-        if "---" in chunk:
-            text = chunk.split("---", 1)[1].strip()
-        else:
-            text = chunk
-        
-        if text:
-            print(f"💾 청크 {i+1}/{len(chunks)} 임베딩 중...")
-            insert_text_and_embedding(text)
-    
+    for i, (text, page) in enumerate(chunks):
+        print(f"💾 청크 {i+1}/{len(chunks)} 임베딩 중... (page: {page}, category: {category})")
+        topic_llm = extract_topic(text)
+        topic = f"{category} - {topic_llm}"
+        insert_text_and_embedding(text, page, category, topic)
     print(f"🎉 모든 청크가 벡터DB에 저장되었습니다!")
-    
-    # 임시 파일 삭제
-    try:
-        os.unlink(temp_file_path)
-        print(f"🗑️ 임시 파일 삭제 완료: {temp_file_path}")
-    except Exception as e:
-        print(f"⚠️ 임시 파일 삭제 실패: {e}")
 
 # 9. 컬렉션 정보 확인
 def check_collection_info():

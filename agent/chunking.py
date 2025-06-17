@@ -101,6 +101,65 @@ def process_document_to_temp_file(file_path: str, chunk_size: int = 1000, overla
     print(f"🎉 청킹 완료! 임시 파일: {temp_file_path}")
     return temp_file_path
 
+def extract_texts_by_page(file_path: str):
+    """
+    Azure Document Intelligence를 활용해 문서에서 페이지별 텍스트를 추출합니다.
+    Returns:
+        list[tuple(page_text:str, page_num:int)]
+    """
+    endpoint = os.getenv("AZURE_DI_ENDPOINT")
+    key = os.getenv("AZURE_DI_KEY")
+    client = DocumentAnalysisClient(endpoint, AzureKeyCredential(key))
+
+    with open(file_path, "rb") as f:
+        poller = client.begin_analyze_document("prebuilt-document", document=f)
+        result = poller.result()
+
+    page_texts = []
+    for idx, page in enumerate(result.pages):
+        page_text = ""
+        for line in page.lines:
+            page_text += line.content + "\n"
+        page_texts.append((page_text, idx+1))
+    return page_texts
+
+def chunk_by_paragraph_with_page_range(file_path: str, min_chunk_len: int = 200):
+    """
+    페이지별로 텍스트를 추출한 뒤, 의미 단위(문단)로 청킹하고,
+    각 청크가 여러 페이지에 걸치면 page='1~2'와 같이 범위로 저장합니다.
+    Returns:
+        list[tuple(chunk_text:str, page_range:str)]
+    """
+    page_texts = extract_texts_by_page(file_path)
+    paragraphs = []
+    page_marks = []
+    for text, page_num in page_texts:
+        # 문단 단위로 쪼개기
+        for para in text.split("\n\n"):
+            para = para.strip()
+            if para:
+                paragraphs.append(para)
+                page_marks.append(page_num)
+    # 의미 단위로 묶기 (min_chunk_len 이상이 될 때까지 문단 합치기)
+    chunks = []
+    i = 0
+    while i < len(paragraphs):
+        chunk = paragraphs[i]
+        start_page = page_marks[i]
+        end_page = start_page
+        j = i + 1
+        while len(chunk) < min_chunk_len and j < len(paragraphs):
+            chunk += '\n\n' + paragraphs[j]
+            end_page = page_marks[j]
+            j += 1
+        if start_page == end_page:
+            page_range = str(start_page)
+        else:
+            page_range = f"{start_page}~{end_page}"
+        chunks.append((chunk, page_range))
+        i = j
+    return chunks
+
 if __name__ == "__main__":
     # sub_lang/agent/chunking.py에서 sub_lang/docs/로 가는 상대경로
     file_path = "../docs/Customer Service_Booking_Manual.pdf"

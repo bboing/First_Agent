@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Data Transform</title>
+    <link rel="stylesheet" type="text/css" href="/static/chat.css">
+    <title>SweetAlert2</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+</head>
+<body>
+    <div class="header-container">
+        <a href="http://localhost:8000/RAG_Management">
+            <img src="/static/taegyun_logo.jpg" alt="taegyun logo" class="header-image">
+        </a>
+        <h1 class="header-title">RAG Test Page</h1>
+    </div>
+    <div class="menu">
+        <ul>
+            <li><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-chat-left-text icon" viewBox="0 0 16 16">
+                <path d="M14 1a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H4.414A2 2 0 0 0 3 11.586l-2 2V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12.793a.5.5 0 0 0 .854.353l2.853-2.853A1 1 0 0 1 4.414 12H14a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z"/>
+                <path d="M3 3.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5M3 6a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9A.5.5 0 0 1 3 6m0 2.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5"/>
+                </svg>
+                <a href="/docs-management">문서 관리</a></li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-book icon" viewBox="0 0 16 16">
+                <path d="M1 2.828c.885-.37 2.154-.769 3.388-.893 1.33-.134 2.458.063 3.112.752v9.746c-.935-.53-2.12-.603-3.213-.493-1.18.12-2.37.461-3.287.811zm7.5-.141c.654-.689 1.782-.886 3.112-.752 1.234.124 2.503.523 3.388.893v9.923c-.918-.35-2.107-.692-3.287-.81-1.094-.111-2.278-.039-3.213.492zM8 1.783C7.015.936 5.587.81 4.287.94c-1.514.153-3.042.672-3.994 1.105A.5.5 0 0 0 0 2.5v11a.5.5 0 0 0 .707.455c.882-.4 2.303-.881 3.68-1.02 1.409-.142 2.59.087 3.223.877a.5.5 0 0 0 .78 0c.633-.79 1.814-1.019 3.222-.877 1.378.139 2.8.62 3.681 1.02A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.293-.455c-.952-.433-2.48-.952-3.994-1.105C10.413.809 8.985.936 8 1.783"/>
+                </svg>
+                <a href="/RAG_Management">RAG Test</a></li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-file-earmark-arrow-down icon" viewBox="0 0 16 16">
+                <path d="M8.5 6.5a.5.5 0 0 0-1 0v3.793L6.354 9.146a.5.5 0 1 0-.708.708l2 2a.5.5 0 0 0 .708 0l2-2a.5.5 0 0 0-.708-.708L8.5 10.293z"/>
+                <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2M9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5z"/>
+                </svg>
+        </ul>
+    </div>
+    <div style="display: flex; justify-content: center; align-items: center; min-height: 70vh;">
+        <div class="chat-container">
+            <div id="chat-window" class="chat-messages"></div>
+            <form id="chat-form">
+                <input id="user-input" type="text" placeholder="메시지를 입력하세요..." autocomplete="off" />
+                <button type="submit">전송</button>
+            </form>
+        </div>
+    </div>
+    <script>
+        const chatWindow = document.getElementById('chat-window');
+        const chatForm = document.getElementById('chat-form');
+        const userInput = document.getElementById('user-input');
+
+        // 페이지 로드 시 초기 그리팅 메시지 표시
+        window.addEventListener('load', function() {
+            addMessage('bot', '안녕하세요! 🤖\n저는 RAG 챗봇입니다.\n\n문서에 대한 질문을 해주시면, 관련 정보를 찾아서 답변해드릴게요.\n\n무엇을 도와드릴까요?', true);
+        });
+
+        function addMessage(role, text, animated = false) {
+            const messageContainer = document.createElement('div');
+            messageContainer.className = 'message-container';
+            
+            // 아이콘 생성
+            const icon = document.createElement('div');
+            icon.className = `profile-icon ${role}`;
+            
+            if (role === 'user') {
+                icon.textContent = '👤';
+            } else {
+                icon.textContent = '🤖';
+            }
+            
+            // 메시지 버블 생성
+            const bubble = document.createElement('div');
+            bubble.className = role === 'user' ? 'chat-bubble-user' : 'chat-bubble-bot';
+            bubble.innerHTML = animated ? '' : text.replace(/\n/g, '<br>');
+            
+            // 사용자 메시지는 오른쪽 정렬, 봇 메시지는 왼쪽 정렬
+            if (role === 'user') {
+                messageContainer.style.justifyContent = 'flex-end';
+                messageContainer.appendChild(bubble);
+                messageContainer.appendChild(icon);
+            } else {
+                messageContainer.style.justifyContent = 'flex-start';
+                messageContainer.appendChild(icon);
+                messageContainer.appendChild(bubble);
+            }
+            
+            chatWindow.appendChild(messageContainer);
+            chatWindow.scrollTop = chatWindow.scrollHeight;
+
+            if (animated) {
+                let i = 0;
+                function typeChar() {
+                    if (i < text.length) {
+                        if (text[i] === '\n') {
+                            bubble.innerHTML += '<br>';
+                        } else {
+                            bubble.innerHTML += text[i];
+                        }
+                        i++;
+                        chatWindow.scrollTop = chatWindow.scrollHeight;
+                        setTimeout(typeChar, 15);
+                    }
+                }
+                typeChar();
+            }
+        }
+
+        chatForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const message = userInput.value.trim();
+            if (!message) return;
+            addMessage('user', message);
+            userInput.value = '';
+            addMessage('bot', '...'); // 로딩 표시
+            try {
+                const res = await fetch('/chat', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ question: message })
+                });
+                const data = await res.json();
+                chatWindow.removeChild(chatWindow.lastChild); // 로딩 제거
+                addMessage('bot', data.answer, true); // animated=true
+            } catch (err) {
+                chatWindow.removeChild(chatWindow.lastChild);
+                addMessage('bot', '오류가 발생했습니다.');
+            }
+        });
+    </script>
+</body>
+<footer class="footer">
+    <p>© 2024 WiseNut AI Technologies. All rights reserved.</p>
+    <p>Contact us: <a>Visit AITech Business Department  Or  </a><a href="mailto:bboing@wisenut.co.kr">bboing@wisenut.co.kr</a></p>
+</footer>
+</html>

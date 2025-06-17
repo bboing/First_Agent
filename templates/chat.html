@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RAG Chatbot</title>
+    <link rel="stylesheet" href="/static/chat.css">
+</head>
+<body>
+    <div class="main-layout">
+        <div class="chat-section">
+            <div class="chat-container">
+                <div id="chat-window" class="chat-messages"></div>
+                <form id="chat-form">
+                    <input id="user-input" type="text" placeholder="메시지를 입력하세요..." autocomplete="off" />
+                    <button type="submit">전송</button>
+                </form>
+            </div>
+        </div>
+        <div class="pdf-section">
+            <!-- PDF.js 뷰어 자리: 임시로 샘플 PDF를 iframe으로 표시 -->
+            <iframe id="pdf-viewer" src="/static/sample.pdf#page=1" width="100%" height="100%" style="border:none;"></iframe>
+        </div>
+    </div>
+    <script>
+        const chatWindow = document.getElementById('chat-window');
+        const chatForm = document.getElementById('chat-form');
+        const userInput = document.getElementById('user-input');
+
+        // 페이지 로드 시 초기 그리팅 메시지 표시
+        window.addEventListener('load', function() {
+            addMessage('bot', '안녕하세요! 🤖\n저는 RAG 챗봇입니다.\n\n문서에 대한 질문을 해주시면, 관련 정보를 찾아서 답변해드릴게요.\n\n무엇을 도와드릴까요?', true);
+        });
+
+        function addMessage(role, text, animated = false) {
+            const messageContainer = document.createElement('div');
+            messageContainer.className = 'message-container';
+            
+            // 아이콘 생성
+            const icon = document.createElement('div');
+            icon.className = `profile-icon ${role}`;
+            
+            if (role === 'user') {
+                icon.textContent = '👤';
+            } else {
+                icon.textContent = '🤖';
+            }
+            
+            // 메시지 버블 생성
+            const bubble = document.createElement('div');
+            bubble.className = role === 'user' ? 'chat-bubble-user' : 'chat-bubble-bot';
+            bubble.innerHTML = animated ? '' : text.replace(/\n/g, '<br>');
+            
+            // 사용자 메시지는 오른쪽 정렬, 봇 메시지는 왼쪽 정렬
+            if (role === 'user') {
+                messageContainer.style.justifyContent = 'flex-end';
+                messageContainer.appendChild(bubble);
+                messageContainer.appendChild(icon);
+            } else {
+                messageContainer.style.justifyContent = 'flex-start';
+                messageContainer.appendChild(icon);
+                messageContainer.appendChild(bubble);
+            }
+            
+            chatWindow.appendChild(messageContainer);
+            chatWindow.scrollTop = chatWindow.scrollHeight;
+
+            if (animated) {
+                let i = 0;
+                function typeChar() {
+                    if (i < text.length) {
+                        if (text[i] === '\n') {
+                            bubble.innerHTML += '<br>';
+                        } else {
+                            bubble.innerHTML += text[i];
+                        }
+                        i++;
+                        chatWindow.scrollTop = chatWindow.scrollHeight;
+                        setTimeout(typeChar, 15);
+                    }
+                }
+                typeChar();
+            }
+        }
+
+        chatForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const message = userInput.value.trim();
+            if (!message) return;
+            addMessage('user', message);
+            userInput.value = '';
+            addMessage('bot', '...'); // 로딩 표시
+            try {
+                const res = await fetch('/chat', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ question: message })
+                });
+                const data = await res.json();
+                chatWindow.removeChild(chatWindow.lastChild); // 로딩 제거
+                addMessage('bot', data.answer, true); // animated=true
+            } catch (err) {
+                chatWindow.removeChild(chatWindow.lastChild);
+                addMessage('bot', '오류가 발생했습니다.');
+            }
+        });
+    </script>
+</body>
+</html> 
