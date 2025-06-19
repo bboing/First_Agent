@@ -59,7 +59,11 @@ body {
     box-shadow: 0 2px 8px rgba(0,0,0,0.05);
     display: flex;
     flex-direction: column;
-    height: 80vh;
+    height: auto;
+    min-height: 630px;
+    max-height: calc(100vh - 220px);
+    overflow-y: auto;
+    margin-bottom: 0;
 }
 .chat-messages {
     flex: 1;
@@ -181,4 +185,207 @@ body {
         opacity: 1;
         transform: translateY(0);
     }
-} 
+}
+
+/* 메뉴, 헤더, 푸터, content, input-group 등 style.css에서 필요한 부분 추가 */
+
+.header-container {
+    font-family: 'Abril_Font', 'Hahmlet', sans-serif;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #fff;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.header-image {
+    float: left;
+    top: 0;
+    margin-right: 10px;
+    max-width: 170px;
+    height: auto;
+    z-index: 10;
+    position: relative;
+}
+
+.header-title {
+    float: left;
+    margin-top: 12px;
+    margin-left: 26px;
+    margin-bottom: 10px;
+    color: #0b0d75;
+}
+
+.menu {
+    font-family: 'Hahmlet_ExBold', 'Hahmlet', sans-serif;
+    width: 20%;
+    max-width: 200px;
+    position: fixed;
+    left: 0;
+    top: 100px;
+    bottom: 20px;
+    background-color: #ffffff;
+    z-index: 5;
+}
+.menu ul {
+    list-style-type: none;
+    padding: 0;
+}
+.menu li {
+    padding: 8px;
+    border-bottom: 1px solid #ccc;
+    background-color: transparent;
+}
+.menu li:hover {
+    background-color: #f7f7f7;
+}
+.menu a {
+    color: black;
+    text-decoration: none;
+    font-weight: bold;
+    position: relative;
+    padding: 10px 5px;
+    top: -4px;
+}
+.menu a:hover {
+    color: gray;
+    text-decoration: underline;
+}
+
+.content {
+    font-family: 'Hahmlet_Bold', 'Hahmlet', sans-serif;
+    margin-top: 115px;
+    margin-left: -400px;
+    margin-bottom: 70px;
+    padding-bottom: 110px;
+}
+
+.input-group {
+    font-family: 'Hahmlet_Light', 'Hahmlet', sans-serif;
+    width: 80%;
+    max-width: 850px;
+    min-width: 500px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.footer {
+    font-family: 'Hahmlet_Light', 'Hahmlet', sans-serif;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    height: 80px;
+    width: 100%;
+    background-color: #f8f9fa;
+    color: #333;
+    text-align: center;
+    padding: 5px 0;
+    border-top: 1px solid #ccc;
+    z-index: 100;
+    box-shadow: 6px 4px 0px rgba(0,0,0,0.1);
+}
+
+@media screen and (max-width: 768px) {
+    .header-image {
+        float: none;
+        display: block;
+        margin: 0 auto;
+    }
+    .header-title {
+        float: none;
+        text-align: center;
+    }
+    .menu {
+        position : fixed;
+        height: auto;
+        width: 100%;
+        max-width: 200px;
+        top: 100px;
+        left: 0;
+        overflow-y: auto;
+        display: none;
+        z-index: 999;
+    }
+    .input-group {
+        width: 100%;
+    }
+    .menu li {
+        text-align: center;
+    }
+    .content {
+        position: relative;
+        margin-left: 0;
+        margin-top: 140px;
+        width: 95%;  
+        padding: 10px;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+    .input-group {
+        width: 70%;
+    }
+}
+
+/* style.css의 grid 레이아웃(.help-area, .helper, .graph-area, .down-sent 등) 관련 스타일 추가 */
+
+.help-area {
+    display: grid;
+    grid-template-columns: 1fr 5fr;
+    grid-template-rows: auto auto 1fr;
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+}
+.helper { grid-area: 1 / 2 / 2 / 3; }
+.helper {
+    margin: 0;
+    text-align: left;
+    white-space: pre-wrap;
+    background-color: #f8f9fa;
+    color: #333;
+    border: 1px solid #1f12dd;
+    padding: 20px;
+    max-width: 650px;
+}
+
+.graph-area {
+    display: grid;
+    grid-template-columns: repeat(9, 1fr);
+    grid-template-rows: auto auto 1fr;
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+}
+.down-sent {
+    grid-area: 3 / 3 / 8 / 9;
+}
+
+.download-icon {
+    padding: 5px;
+    background-color: #f8f9fa;
+    border-radius: 5px;
+    display: inline-block;
+    margin-right: 5px;
+}
+.download-text {
+    display: inline;
+    margin-bottom: 5px;
+}
+
+.subheading-text {
+    color: #0b0d75;
+    display: inline-block;
+    transform: translateY(-3px);
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+.arrow-icon {
+    border-radius: 5px;
+    margin-bottom: 10px;
+    display: inline;
+}

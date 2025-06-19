@@ -1,0 +1,1249 @@
+2025-06-18 18:01:21,672 [DEBUG] httpcore.connection: close.started
+2025-06-18 18:01:21,672 [DEBUG] httpcore.connection: close.complete
+2025-06-18 18:01:28,451 [DEBUG] httpcore.connection: close.started
+2025-06-18 18:01:28,451 [DEBUG] httpcore.connection: close.complete
+2025-06-18 18:02:47,047 [DEBUG] httpcore.connection: close.started
+2025-06-18 18:02:47,047 [DEBUG] httpcore.connection: close.complete
+2025-06-18 18:03:05,595 [DEBUG] httpcore.connection: close.started
+2025-06-18 18:03:05,595 [DEBUG] httpcore.connection: close.complete
+2025-06-18 18:03:14,640 [DEBUG] httpcore.connection: close.started
+2025-06-18 18:03:14,640 [DEBUG] httpcore.connection: close.complete
+2025-06-19 09:30:20,416 [DEBUG] httpcore.connection: close.started
+2025-06-19 09:30:20,416 [DEBUG] httpcore.connection: close.complete
+2025-06-19 09:31:30,401 [DEBUG] httpcore.connection: close.started
+2025-06-19 09:31:30,401 [DEBUG] httpcore.connection: close.complete
+2025-06-19 09:34:17,044 [DEBUG] httpcore.connection: close.started
+2025-06-19 09:34:17,044 [DEBUG] httpcore.connection: close.complete
+2025-06-19 09:34:46,266 [DEBUG] httpcore.connection: close.started
+2025-06-19 09:34:46,267 [DEBUG] httpcore.connection: close.complete
+2025-06-19 09:59:53,033 [DEBUG] openai._base_client: Request options: {'method': 'post', 'url': '/embeddings', 'headers': {'api-key': '<redacted>'}, 'files': None, 'idempotency_key': 'stainless-python-retry-ae79aa08-fe20-457f-801e-17e5d3bdd5fe', 'post_parser': <function Embeddings.create.<locals>.parser at 0x12449ac00>, 'json_data': {'input': [[13094, 54535, 41953, 18359, 48765, 94, 34961, 17835, 47419, 66338, 34983, 59269, 246]], 'model': 'text-embedding-ada-002', 'encoding_format': 'base64'}}
+2025-06-19 09:59:53,087 [DEBUG] openai._base_client: Sending HTTP Request: POST https://adt-consulting.openai.azure.com/openai/deployments/ada-002/embeddings?api-version=2025-01-01-preview
+2025-06-19 09:59:53,088 [DEBUG] httpcore.connection: connect_tcp.started host='adt-consulting.openai.azure.com' port=443 local_address=None timeout=None socket_options=None
+2025-06-19 09:59:53,167 [DEBUG] httpcore.connection: connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x1244c8050>
+2025-06-19 09:59:53,167 [DEBUG] httpcore.connection: start_tls.started ssl_context=<ssl.SSLContext object at 0x117c4e8d0> server_hostname='adt-consulting.openai.azure.com' timeout=None
+2025-06-19 09:59:53,237 [DEBUG] httpcore.connection: start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x124459310>
+2025-06-19 09:59:53,237 [DEBUG] httpcore.http11: send_request_headers.started request=<Request [b'POST']>
+2025-06-19 09:59:53,237 [DEBUG] httpcore.http11: send_request_headers.complete
+2025-06-19 09:59:53,237 [DEBUG] httpcore.http11: send_request_body.started request=<Request [b'POST']>
+2025-06-19 09:59:53,237 [DEBUG] httpcore.http11: send_request_body.complete
+2025-06-19 09:59:53,237 [DEBUG] httpcore.http11: receive_response_headers.started request=<Request [b'POST']>
+2025-06-19 09:59:53,311 [DEBUG] httpcore.http11: receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Content-Length', b'8416'), (b'Content-Type', b'application/json'), (b'access-control-allow-origin', b'*'), (b'apim-request-id', b'c0667b8f-f3ea-48f9-a3e5-657eb56a9d7d'), (b'Strict-Transport-Security', b'max-age=31536000; includeSubDomains; preload'), (b'x-content-type-options', b'nosniff'), (b'x-ms-region', b'Japan East'), (b'x-ratelimit-remaining-tokens', b'149987'), (b'x-ratelimit-limit-tokens', b'150000'), (b'x-request-id', b'004b5e43-3fe3-4437-a3b7-77afb2d7c004'), (b'x-ms-client-request-id', b'c0667b8f-f3ea-48f9-a3e5-657eb56a9d7d'), (b'azureml-model-session', b'd021-20250523095313'), (b'x-ms-deployment-name', b'ada-002'), (b'Date', b'Thu, 19 Jun 2025 00:59:52 GMT')])
+2025-06-19 09:59:53,312 [INFO] httpx: HTTP Request: POST https://adt-consulting.openai.azure.com/openai/deployments/ada-002/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2025-06-19 09:59:53,312 [DEBUG] httpcore.http11: receive_response_body.started request=<Request [b'POST']>
+2025-06-19 09:59:53,312 [DEBUG] httpcore.http11: receive_response_body.complete
+2025-06-19 09:59:53,312 [DEBUG] httpcore.http11: response_closed.started
+2025-06-19 09:59:53,312 [DEBUG] httpcore.http11: response_closed.complete
+2025-06-19 09:59:53,312 [DEBUG] openai._base_client: HTTP Response: POST https://adt-consulting.openai.azure.com/openai/deployments/ada-002/embeddings?api-version=2025-01-01-preview "200 OK" Headers({'content-length': '8416', 'content-type': 'application/json', 'access-control-allow-origin': '*', 'apim-request-id': 'c0667b8f-f3ea-48f9-a3e5-657eb56a9d7d', 'strict-transport-security': 'max-age=31536000; includeSubDomains; preload', 'x-content-type-options': 'nosniff', 'x-ms-region': 'Japan East', 'x-ratelimit-remaining-tokens': '149987', 'x-ratelimit-limit-tokens': '150000', 'x-request-id': '004b5e43-3fe3-4437-a3b7-77afb2d7c004', 'x-ms-client-request-id': 'c0667b8f-f3ea-48f9-a3e5-657eb56a9d7d', 'azureml-model-session': 'd021-20250523095313', 'x-ms-deployment-name': 'ada-002', 'date': 'Thu, 19 Jun 2025 00:59:52 GMT'})
+2025-06-19 09:59:53,312 [DEBUG] openai._base_client: request_id: 004b5e43-3fe3-4437-a3b7-77afb2d7c004
+2025-06-19 10:00:06,377 [DEBUG] openai._base_client: Request options: {'method': 'post', 'url': '/embeddings', 'headers': {'api-key': '<redacted>'}, 'files': None, 'idempotency_key': 'stainless-python-retry-c87caeae-d0f0-48e9-b6bb-2431aa182309', 'post_parser': <function Embeddings.create.<locals>.parser at 0x10fa8ac00>, 'json_data': {'input': [[13094, 54535, 41953, 18359, 48765, 94, 34961, 17835, 47419, 66338, 34983, 59269, 246]], 'model': 'text-embedding-ada-002', 'encoding_format': 'base64'}}
+2025-06-19 10:00:06,394 [DEBUG] openai._base_client: Sending HTTP Request: POST https://adt-consulting.openai.azure.com/openai/deployments/ada-002/embeddings?api-version=2025-01-01-preview
+2025-06-19 10:00:06,395 [DEBUG] httpcore.connection: connect_tcp.started host='adt-consulting.openai.azure.com' port=443 local_address=None timeout=None socket_options=None
+2025-06-19 10:00:06,437 [DEBUG] httpcore.connection: connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x10fab8050>
+2025-06-19 10:00:06,437 [DEBUG] httpcore.connection: start_tls.started ssl_context=<ssl.SSLContext object at 0x10f34e8d0> server_hostname='adt-consulting.openai.azure.com' timeout=None
+2025-06-19 10:00:06,511 [DEBUG] httpcore.connection: start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x10fa49bd0>
+2025-06-19 10:00:06,511 [DEBUG] httpcore.http11: send_request_headers.started request=<Request [b'POST']>
+2025-06-19 10:00:06,512 [DEBUG] httpcore.http11: send_request_headers.complete
+2025-06-19 10:00:06,512 [DEBUG] httpcore.http11: send_request_body.started request=<Request [b'POST']>
+2025-06-19 10:00:06,512 [DEBUG] httpcore.http11: send_request_body.complete
+2025-06-19 10:00:06,512 [DEBUG] httpcore.http11: receive_response_headers.started request=<Request [b'POST']>
+2025-06-19 10:00:06,585 [DEBUG] httpcore.http11: receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Content-Length', b'8416'), (b'Content-Type', b'application/json'), (b'access-control-allow-origin', b'*'), (b'apim-request-id', b'b756c553-61f6-48e9-99bf-c6afff79c104'), (b'Strict-Transport-Security', b'max-age=31536000; includeSubDomains; preload'), (b'x-content-type-options', b'nosniff'), (b'x-ms-region', b'Japan East'), (b'x-ratelimit-remaining-tokens', b'149974'), (b'x-ratelimit-limit-tokens', b'150000'), (b'x-request-id', b'72d2e400-23ad-40ed-bb53-e9be02117f07'), (b'x-ms-client-request-id', b'b756c553-61f6-48e9-99bf-c6afff79c104'), (b'azureml-model-session', b'd021-20250523095313'), (b'x-ms-deployment-name', b'ada-002'), (b'Date', b'Thu, 19 Jun 2025 01:00:05 GMT')])
+2025-06-19 10:00:06,585 [INFO] httpx: HTTP Request: POST https://adt-consulting.openai.azure.com/openai/deployments/ada-002/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2025-06-19 10:00:06,585 [DEBUG] httpcore.http11: receive_response_body.started request=<Request [b'POST']>
+2025-06-19 10:00:06,585 [DEBUG] httpcore.http11: receive_response_body.complete
+2025-06-19 10:00:06,586 [DEBUG] httpcore.http11: response_closed.started
+2025-06-19 10:00:06,586 [DEBUG] httpcore.http11: response_closed.complete
+2025-06-19 10:00:06,586 [DEBUG] openai._base_client: HTTP Response: POST https://adt-consulting.openai.azure.com/openai/deployments/ada-002/embeddings?api-version=2025-01-01-preview "200 OK" Headers({'content-length': '8416', 'content-type': 'application/json', 'access-control-allow-origin': '*', 'apim-request-id': 'b756c553-61f6-48e9-99bf-c6afff79c104', 'strict-transport-security': 'max-age=31536000; includeSubDomains; preload', 'x-content-type-options': 'nosniff', 'x-ms-region': 'Japan East', 'x-ratelimit-remaining-tokens': '149974', 'x-ratelimit-limit-tokens': '150000', 'x-request-id': '72d2e400-23ad-40ed-bb53-e9be02117f07', 'x-ms-client-request-id': 'b756c553-61f6-48e9-99bf-c6afff79c104', 'azureml-model-session': 'd021-20250523095313', 'x-ms-deployment-name': 'ada-002', 'date': 'Thu, 19 Jun 2025 01:00:05 GMT'})
+2025-06-19 10:00:06,586 [DEBUG] openai._base_client: request_id: 72d2e400-23ad-40ed-bb53-e9be02117f07
+2025-06-19 10:00:13,273 [DEBUG] openai._base_client: Request options: {'method': 'post', 'url': '/embeddings', 'headers': {'api-key': '<redacted>'}, 'files': None, 'idempotency_key': 'stainless-python-retry-585bc3b8-012f-4918-9595-6bf89dc8b7a2', 'post_parser': <function Embeddings.create.<locals>.parser at 0x1260a6c00>, 'json_data': {'input': [[13094, 54535, 41953, 18359, 48765, 94, 34961, 17835, 47419, 66338, 34983, 59269, 246]], 'model': 'text-embedding-ada-002', 'encoding_format': 'base64'}}
+2025-06-19 10:00:13,289 [DEBUG] openai._base_client: Sending HTTP Request: POST https://adt-consulting.openai.azure.com/openai/deployments/ada-002/embeddings?api-version=2025-01-01-preview
+2025-06-19 10:00:13,290 [DEBUG] httpcore.connection: connect_tcp.started host='adt-consulting.openai.azure.com' port=443 local_address=None timeout=None socket_options=None
+2025-06-19 10:00:13,367 [DEBUG] httpcore.connection: connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x1260d4050>
+2025-06-19 10:00:13,367 [DEBUG] httpcore.connection: start_tls.started ssl_context=<ssl.SSLContext object at 0x11714e8d0> server_hostname='adt-consulting.openai.azure.com' timeout=None
+2025-06-19 10:00:13,440 [DEBUG] httpcore.connection: start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x126065310>
+2025-06-19 10:00:13,440 [DEBUG] httpcore.http11: send_request_headers.started request=<Request [b'POST']>
+2025-06-19 10:00:13,440 [DEBUG] httpcore.http11: send_request_headers.complete
+2025-06-19 10:00:13,440 [DEBUG] httpcore.http11: send_request_body.started request=<Request [b'POST']>
+2025-06-19 10:00:13,441 [DEBUG] httpcore.http11: send_request_body.complete
+2025-06-19 10:00:13,441 [DEBUG] httpcore.http11: receive_response_headers.started request=<Request [b'POST']>
+2025-06-19 10:00:13,540 [DEBUG] httpcore.http11: receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Content-Length', b'8416'), (b'Content-Type', b'application/json'), (b'access-control-allow-origin', b'*'), (b'apim-request-id', b'ab016503-8a3d-459b-a9eb-068d504369ea'), (b'Strict-Transport-Security', b'max-age=31536000; includeSubDomains; preload'), (b'x-content-type-options', b'nosniff'), (b'x-ms-region', b'Japan East'), (b'x-ratelimit-remaining-tokens', b'149961'), (b'x-ratelimit-limit-tokens', b'150000'), (b'x-request-id', b'd136231f-96b5-42f7-9fd1-59232ae84275'), (b'x-ms-client-request-id', b'ab016503-8a3d-459b-a9eb-068d504369ea'), (b'azureml-model-session', b'd022-20250523105926'), (b'x-ms-deployment-name', b'ada-002'), (b'Date', b'Thu, 19 Jun 2025 01:00:12 GMT')])
+2025-06-19 10:00:13,541 [INFO] httpx: HTTP Request: POST https://adt-consulting.openai.azure.com/openai/deployments/ada-002/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2025-06-19 10:00:13,541 [DEBUG] httpcore.http11: receive_response_body.started request=<Request [b'POST']>
+2025-06-19 10:00:13,541 [DEBUG] httpcore.http11: receive_response_body.complete
+2025-06-19 10:00:13,541 [DEBUG] httpcore.http11: response_closed.started
+2025-06-19 10:00:13,541 [DEBUG] httpcore.http11: response_closed.complete
+2025-06-19 10:00:13,541 [DEBUG] openai._base_client: HTTP Response: POST https://adt-consulting.openai.azure.com/openai/deployments/ada-002/embeddings?api-version=2025-01-01-preview "200 OK" Headers({'content-length': '8416', 'content-type': 'application/json', 'access-control-allow-origin': '*', 'apim-request-id': 'ab016503-8a3d-459b-a9eb-068d504369ea', 'strict-transport-security': 'max-age=31536000; includeSubDomains; preload', 'x-content-type-options': 'nosniff', 'x-ms-region': 'Japan East', 'x-ratelimit-remaining-tokens': '149961', 'x-ratelimit-limit-tokens': '150000', 'x-request-id': 'd136231f-96b5-42f7-9fd1-59232ae84275', 'x-ms-client-request-id': 'ab016503-8a3d-459b-a9eb-068d504369ea', 'azureml-model-session': 'd022-20250523105926', 'x-ms-deployment-name': 'ada-002', 'date': 'Thu, 19 Jun 2025 01:00:12 GMT'})
+2025-06-19 10:00:13,541 [DEBUG] openai._base_client: request_id: d136231f-96b5-42f7-9fd1-59232ae84275
+2025-06-19 10:00:59,842 [DEBUG] openai._base_client: Request options: {'method': 'post', 'url': '/embeddings', 'headers': {'api-key': '<redacted>'}, 'files': None, 'idempotency_key': 'stainless-python-retry-596d2470-9e15-409b-8eff-485864b99eef', 'post_parser': <function Embeddings.create.<locals>.parser at 0x11fc8ac00>, 'json_data': {'input': [[13094, 54535, 41953, 18359, 48765, 94, 34961, 17835, 47419, 66338, 34983, 59269, 246]], 'model': 'text-embedding-ada-002', 'encoding_format': 'base64'}}
+2025-06-19 10:00:59,879 [DEBUG] openai._base_client: Sending HTTP Request: POST https://adt-consulting.openai.azure.com/openai/deployments/ada-002/embeddings?api-version=2025-01-01-preview
+2025-06-19 10:00:59,879 [DEBUG] httpcore.connection: connect_tcp.started host='adt-consulting.openai.azure.com' port=443 local_address=None timeout=None socket_options=None
+2025-06-19 10:00:59,968 [DEBUG] httpcore.connection: connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x11fcb4050>
+2025-06-19 10:00:59,968 [DEBUG] httpcore.connection: start_tls.started ssl_context=<ssl.SSLContext object at 0x11ec4e8d0> server_hostname='adt-consulting.openai.azure.com' timeout=None
+2025-06-19 10:01:00,043 [DEBUG] httpcore.connection: start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x11fc49310>
+2025-06-19 10:01:00,043 [DEBUG] httpcore.http11: send_request_headers.started request=<Request [b'POST']>
+2025-06-19 10:01:00,043 [DEBUG] httpcore.http11: send_request_headers.complete
+2025-06-19 10:01:00,043 [DEBUG] httpcore.http11: send_request_body.started request=<Request [b'POST']>
+2025-06-19 10:01:00,043 [DEBUG] httpcore.http11: send_request_body.complete
+2025-06-19 10:01:00,043 [DEBUG] httpcore.http11: receive_response_headers.started request=<Request [b'POST']>
+2025-06-19 10:01:00,125 [DEBUG] httpcore.http11: receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Content-Length', b'8416'), (b'Content-Type', b'application/json'), (b'access-control-allow-origin', b'*'), (b'apim-request-id', b'5978ae76-8e82-49d1-b75e-e31d636bcb30'), (b'Strict-Transport-Security', b'max-age=31536000; includeSubDomains; preload'), (b'x-content-type-options', b'nosniff'), (b'x-ms-region', b'Japan East'), (b'x-ratelimit-remaining-tokens', b'149961'), (b'x-ratelimit-limit-tokens', b'150000'), (b'x-request-id', b'ff085d08-c0ce-4833-9626-bd611effcc27'), (b'x-ms-client-request-id', b'5978ae76-8e82-49d1-b75e-e31d636bcb30'), (b'azureml-model-session', b'd022-20250523105926'), (b'x-ms-deployment-name', b'ada-002'), (b'Date', b'Thu, 19 Jun 2025 01:00:59 GMT')])
+2025-06-19 10:01:00,125 [INFO] httpx: HTTP Request: POST https://adt-consulting.openai.azure.com/openai/deployments/ada-002/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2025-06-19 10:01:00,125 [DEBUG] httpcore.http11: receive_response_body.started request=<Request [b'POST']>
+2025-06-19 10:01:00,125 [DEBUG] httpcore.http11: receive_response_body.complete
+2025-06-19 10:01:00,125 [DEBUG] httpcore.http11: response_closed.started
+2025-06-19 10:01:00,126 [DEBUG] httpcore.http11: response_closed.complete
+2025-06-19 10:01:00,126 [DEBUG] openai._base_client: HTTP Response: POST https://adt-consulting.openai.azure.com/openai/deployments/ada-002/embeddings?api-version=2025-01-01-preview "200 OK" Headers({'content-length': '8416', 'content-type': 'application/json', 'access-control-allow-origin': '*', 'apim-request-id': '5978ae76-8e82-49d1-b75e-e31d636bcb30', 'strict-transport-security': 'max-age=31536000; includeSubDomains; preload', 'x-content-type-options': 'nosniff', 'x-ms-region': 'Japan East', 'x-ratelimit-remaining-tokens': '149961', 'x-ratelimit-limit-tokens': '150000', 'x-request-id': 'ff085d08-c0ce-4833-9626-bd611effcc27', 'x-ms-client-request-id': '5978ae76-8e82-49d1-b75e-e31d636bcb30', 'azureml-model-session': 'd022-20250523105926', 'x-ms-deployment-name': 'ada-002', 'date': 'Thu, 19 Jun 2025 01:00:59 GMT'})
+2025-06-19 10:01:00,126 [DEBUG] openai._base_client: request_id: ff085d08-c0ce-4833-9626-bd611effcc27
+2025-06-19 10:01:03,467 [DEBUG] openai._base_client: Request options: {'method': 'post', 'url': '/embeddings', 'headers': {'api-key': '<redacted>'}, 'files': None, 'idempotency_key': 'stainless-python-retry-6951d8ce-6fff-4a66-b085-f60e6edca65c', 'post_parser': <function Embeddings.create.<locals>.parser at 0x11fc9ec00>, 'json_data': {'input': [[13094, 54535, 41953, 18359, 48765, 94, 34961, 17835, 47419, 66338, 34983, 59269, 246]], 'model': 'text-embedding-ada-002', 'encoding_format': 'base64'}}
+2025-06-19 10:01:03,520 [DEBUG] openai._base_client: Sending HTTP Request: POST https://adt-consulting.openai.azure.com/openai/deployments/ada-002/embeddings?api-version=2025-01-01-preview
+2025-06-19 10:01:03,521 [DEBUG] httpcore.connection: connect_tcp.started host='adt-consulting.openai.azure.com' port=443 local_address=None timeout=None socket_options=None
+2025-06-19 10:01:03,562 [DEBUG] httpcore.connection: connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x11fccc050>
+2025-06-19 10:01:03,562 [DEBUG] httpcore.connection: start_tls.started ssl_context=<ssl.SSLContext object at 0x11e94e8d0> server_hostname='adt-consulting.openai.azure.com' timeout=None
+2025-06-19 10:01:03,639 [DEBUG] httpcore.connection: start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x11fc61310>
+2025-06-19 10:01:03,640 [DEBUG] httpcore.http11: send_request_headers.started request=<Request [b'POST']>
+2025-06-19 10:01:03,640 [DEBUG] httpcore.http11: send_request_headers.complete
+2025-06-19 10:01:03,640 [DEBUG] httpcore.http11: send_request_body.started request=<Request [b'POST']>
+2025-06-19 10:01:03,640 [DEBUG] httpcore.http11: send_request_body.complete
+2025-06-19 10:01:03,640 [DEBUG] httpcore.http11: receive_response_headers.started request=<Request [b'POST']>
+2025-06-19 10:01:03,720 [DEBUG] httpcore.http11: receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Content-Length', b'8416'), (b'Content-Type', b'application/json'), (b'access-control-allow-origin', b'*'), (b'apim-request-id', b'4ba05611-024e-42cf-848b-9f742ad5122d'), (b'Strict-Transport-Security', b'max-age=31536000; includeSubDomains; preload'), (b'x-content-type-options', b'nosniff'), (b'x-ms-region', b'Japan East'), (b'x-ratelimit-remaining-tokens', b'149948'), (b'x-ratelimit-limit-tokens', b'150000'), (b'x-request-id', b'a96ff148-9511-4876-b4b9-0ad86d41614f'), (b'x-ms-client-request-id', b'4ba05611-024e-42cf-848b-9f742ad5122d'), (b'azureml-model-session', b'd022-20250523105926'), (b'x-ms-deployment-name', b'ada-002'), (b'Date', b'Thu, 19 Jun 2025 01:01:03 GMT')])
+2025-06-19 10:01:03,721 [INFO] httpx: HTTP Request: POST https://adt-consulting.openai.azure.com/openai/deployments/ada-002/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2025-06-19 10:01:03,721 [DEBUG] httpcore.http11: receive_response_body.started request=<Request [b'POST']>
+2025-06-19 10:01:03,721 [DEBUG] httpcore.http11: receive_response_body.complete
+2025-06-19 10:01:03,721 [DEBUG] httpcore.http11: response_closed.started
+2025-06-19 10:01:03,721 [DEBUG] httpcore.http11: response_closed.complete
+2025-06-19 10:01:03,721 [DEBUG] openai._base_client: HTTP Response: POST https://adt-consulting.openai.azure.com/openai/deployments/ada-002/embeddings?api-version=2025-01-01-preview "200 OK" Headers({'content-length': '8416', 'content-type': 'application/json', 'access-control-allow-origin': '*', 'apim-request-id': '4ba05611-024e-42cf-848b-9f742ad5122d', 'strict-transport-security': 'max-age=31536000; includeSubDomains; preload', 'x-content-type-options': 'nosniff', 'x-ms-region': 'Japan East', 'x-ratelimit-remaining-tokens': '149948', 'x-ratelimit-limit-tokens': '150000', 'x-request-id': 'a96ff148-9511-4876-b4b9-0ad86d41614f', 'x-ms-client-request-id': '4ba05611-024e-42cf-848b-9f742ad5122d', 'azureml-model-session': 'd022-20250523105926', 'x-ms-deployment-name': 'ada-002', 'date': 'Thu, 19 Jun 2025 01:01:03 GMT'})
+2025-06-19 10:01:03,722 [DEBUG] openai._base_client: request_id: a96ff148-9511-4876-b4b9-0ad86d41614f
+2025-06-19 10:01:05,273 [DEBUG] openai._base_client: Request options: {'method': 'post', 'url': '/embeddings', 'headers': {'api-key': '<redacted>'}, 'files': None, 'idempotency_key': 'stainless-python-retry-0bb8c8e9-bb41-49c5-b85c-2226fbd77f85', 'post_parser': <function Embeddings.create.<locals>.parser at 0x1276a6c00>, 'json_data': {'input': [[13094, 54535, 41953, 18359, 48765, 94, 34961, 17835, 47419, 66338, 34983, 59269, 246]], 'model': 'text-embedding-ada-002', 'encoding_format': 'base64'}}
+2025-06-19 10:01:05,322 [DEBUG] openai._base_client: Sending HTTP Request: POST https://adt-consulting.openai.azure.com/openai/deployments/ada-002/embeddings?api-version=2025-01-01-preview
+2025-06-19 10:01:05,322 [DEBUG] httpcore.connection: connect_tcp.started host='adt-consulting.openai.azure.com' port=443 local_address=None timeout=None socket_options=None
+2025-06-19 10:01:05,357 [DEBUG] httpcore.connection: connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x1276d4050>
+2025-06-19 10:01:05,357 [DEBUG] httpcore.connection: start_tls.started ssl_context=<ssl.SSLContext object at 0x126e4e8d0> server_hostname='adt-consulting.openai.azure.com' timeout=None
+2025-06-19 10:01:05,430 [DEBUG] httpcore.connection: start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x127665310>
+2025-06-19 10:01:05,430 [DEBUG] httpcore.http11: send_request_headers.started request=<Request [b'POST']>
+2025-06-19 10:01:05,431 [DEBUG] httpcore.http11: send_request_headers.complete
+2025-06-19 10:01:05,431 [DEBUG] httpcore.http11: send_request_body.started request=<Request [b'POST']>
+2025-06-19 10:01:05,431 [DEBUG] httpcore.http11: send_request_body.complete
+2025-06-19 10:01:05,431 [DEBUG] httpcore.http11: receive_response_headers.started request=<Request [b'POST']>
+2025-06-19 10:01:05,502 [DEBUG] httpcore.http11: receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Content-Length', b'8416'), (b'Content-Type', b'application/json'), (b'access-control-allow-origin', b'*'), (b'apim-request-id', b'74047d6b-1b9e-41cb-ba16-d636c8b7b332'), (b'Strict-Transport-Security', b'max-age=31536000; includeSubDomains; preload'), (b'x-content-type-options', b'nosniff'), (b'x-ms-region', b'Japan East'), (b'x-ratelimit-remaining-tokens', b'149935'), (b'x-ratelimit-limit-tokens', b'150000'), (b'x-request-id', b'a1fbf709-f466-4ac0-b302-5bfdf5c6891f'), (b'x-ms-client-request-id', b'74047d6b-1b9e-41cb-ba16-d636c8b7b332'), (b'azureml-model-session', b'd021-20250523095313'), (b'x-ms-deployment-name', b'ada-002'), (b'Date', b'Thu, 19 Jun 2025 01:01:05 GMT')])
+2025-06-19 10:01:05,502 [INFO] httpx: HTTP Request: POST https://adt-consulting.openai.azure.com/openai/deployments/ada-002/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2025-06-19 10:01:05,503 [DEBUG] httpcore.http11: receive_response_body.started request=<Request [b'POST']>
+2025-06-19 10:01:05,503 [DEBUG] httpcore.http11: receive_response_body.complete
+2025-06-19 10:01:05,503 [DEBUG] httpcore.http11: response_closed.started
+2025-06-19 10:01:05,503 [DEBUG] httpcore.http11: response_closed.complete
+2025-06-19 10:01:05,503 [DEBUG] openai._base_client: HTTP Response: POST https://adt-consulting.openai.azure.com/openai/deployments/ada-002/embeddings?api-version=2025-01-01-preview "200 OK" Headers({'content-length': '8416', 'content-type': 'application/json', 'access-control-allow-origin': '*', 'apim-request-id': '74047d6b-1b9e-41cb-ba16-d636c8b7b332', 'strict-transport-security': 'max-age=31536000; includeSubDomains; preload', 'x-content-type-options': 'nosniff', 'x-ms-region': 'Japan East', 'x-ratelimit-remaining-tokens': '149935', 'x-ratelimit-limit-tokens': '150000', 'x-request-id': 'a1fbf709-f466-4ac0-b302-5bfdf5c6891f', 'x-ms-client-request-id': '74047d6b-1b9e-41cb-ba16-d636c8b7b332', 'azureml-model-session': 'd021-20250523095313', 'x-ms-deployment-name': 'ada-002', 'date': 'Thu, 19 Jun 2025 01:01:05 GMT'})
+2025-06-19 10:01:05,503 [DEBUG] openai._base_client: request_id: a1fbf709-f466-4ac0-b302-5bfdf5c6891f
+2025-06-19 10:01:14,766 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:01:19,770 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:01:24,769 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:01:29,770 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:01:34,770 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:01:39,770 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:01:44,769 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:01:49,770 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:01:54,770 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:01:59,769 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:02:04,770 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:02:09,769 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:02:14,770 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:02:19,770 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:02:24,770 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:02:29,770 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:02:34,770 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:02:39,771 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:02:44,770 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:02:49,769 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:02:54,769 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:02:59,770 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:03:04,771 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:03:09,771 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:03:14,771 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:03:19,770 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:03:24,771 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:03:29,771 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:03:34,770 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:03:39,769 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:03:44,770 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:03:49,772 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:03:54,770 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:03:59,770 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:04:04,791 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:04:09,770 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:04:14,771 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:04:19,772 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:04:24,771 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:04:29,771 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:04:34,769 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:04:39,773 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:04:44,768 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:04:49,772 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:04:54,771 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:04:59,772 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:05:04,772 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:05:09,772 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:05:14,771 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:05:19,773 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:05:24,771 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:05:29,770 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:05:34,771 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:05:39,772 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:05:44,771 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:05:49,771 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:05:54,772 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:05:59,771 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:06:04,771 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:06:09,772 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:06:14,772 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:06:19,773 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:06:24,773 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:06:29,773 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:06:34,774 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:06:39,772 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:06:44,769 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:06:49,774 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:06:54,772 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:06:59,773 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:07:04,774 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:07:09,771 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:07:14,825 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:07:19,813 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:07:24,810 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:07:29,816 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:07:34,814 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:07:39,810 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:07:44,810 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:07:49,812 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:07:54,813 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:07:59,815 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:08:04,816 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:08:09,814 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:08:14,822 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:09:14,831 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:10:14,828 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:11:14,825 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:12:14,831 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:13:14,829 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:14:14,830 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:15:14,829 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:16:14,835 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:17:14,834 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:18:14,828 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:19:14,834 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:20:14,837 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:21:14,840 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:22:14,852 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:23:14,832 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:24:14,838 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:25:14,838 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:26:14,842 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:27:14,836 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:28:14,856 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:29:14,828 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:30:14,844 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:31:12,574 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:32:12,582 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:33:12,580 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:34:12,568 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:35:12,588 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:36:12,583 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:37:12,577 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:38:12,577 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:39:12,582 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:46:10,023 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:47:09,972 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:48:09,978 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:49:09,975 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:50:09,973 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:50:38,822 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:50:39,923 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:50:44,922 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:50:49,923 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:50:54,921 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:50:59,962 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:51:04,960 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:51:09,973 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:51:14,963 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:51:19,966 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:51:24,964 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:51:29,961 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:51:34,960 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:51:39,964 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:51:44,966 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:51:49,960 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:51:54,965 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:52:09,440 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:52:09,924 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:52:14,924 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:52:19,923 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:52:24,926 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:52:29,925 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:52:34,925 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:52:39,925 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:52:44,923 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:52:49,969 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:52:54,964 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:52:59,969 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:53:04,967 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:53:09,989 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:53:14,971 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:53:19,966 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:53:24,969 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:53:29,965 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:53:34,966 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:53:39,964 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:53:44,965 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:54:09,979 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:55:12,163 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:56:12,165 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:57:12,152 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:58:12,157 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 10:59:12,151 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:00:12,166 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:01:12,158 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:02:12,158 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:03:12,156 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:04:12,160 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:05:12,159 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:06:12,159 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:06:17,110 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:06:22,112 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:06:27,111 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:06:32,114 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:06:37,111 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:06:42,112 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:06:47,112 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:06:52,111 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:06:57,114 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:07:02,112 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:07:07,113 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:07:12,113 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:07:17,113 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:07:22,113 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:07:27,113 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:07:32,113 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:07:37,114 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:07:42,113 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:07:47,113 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:07:52,113 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:07:57,113 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:08:02,113 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:08:07,112 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:08:12,112 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:08:17,112 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:08:22,113 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:08:27,111 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:08:32,155 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:08:37,152 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:08:42,154 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:08:47,155 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:08:52,154 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:08:57,155 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:09:02,155 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:09:07,156 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:09:12,172 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:09:17,154 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:09:22,154 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:09:27,157 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:10:12,152 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:11:12,151 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:11:19,516 [DEBUG] openai._base_client: Request options: {'method': 'post', 'url': '/embeddings', 'headers': {'api-key': '<redacted>'}, 'files': None, 'idempotency_key': 'stainless-python-retry-8b2b08a3-e2cb-4b29-9fe6-f86767987d91', 'post_parser': <function Embeddings.create.<locals>.parser at 0x12fb9ec00>, 'json_data': {'input': [[13094, 54535, 41953, 18359, 48765, 94, 34961, 17835, 47419, 66338, 34983, 59269, 246]], 'model': 'text-embedding-ada-002', 'encoding_format': 'base64'}}
+2025-06-19 11:11:19,575 [DEBUG] openai._base_client: Sending HTTP Request: POST https://adt-consulting.openai.azure.com/openai/deployments/ada-002/embeddings?api-version=2025-01-01-preview
+2025-06-19 11:11:19,575 [DEBUG] httpcore.connection: connect_tcp.started host='adt-consulting.openai.azure.com' port=443 local_address=None timeout=None socket_options=None
+2025-06-19 11:11:19,650 [DEBUG] httpcore.connection: connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x12fbcc050>
+2025-06-19 11:11:19,650 [DEBUG] httpcore.connection: start_tls.started ssl_context=<ssl.SSLContext object at 0x12f34e8d0> server_hostname='adt-consulting.openai.azure.com' timeout=None
+2025-06-19 11:11:19,740 [DEBUG] httpcore.connection: start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x12fb59310>
+2025-06-19 11:11:19,740 [DEBUG] httpcore.http11: send_request_headers.started request=<Request [b'POST']>
+2025-06-19 11:11:19,740 [DEBUG] httpcore.http11: send_request_headers.complete
+2025-06-19 11:11:19,741 [DEBUG] httpcore.http11: send_request_body.started request=<Request [b'POST']>
+2025-06-19 11:11:19,741 [DEBUG] httpcore.http11: send_request_body.complete
+2025-06-19 11:11:19,741 [DEBUG] httpcore.http11: receive_response_headers.started request=<Request [b'POST']>
+2025-06-19 11:11:19,830 [DEBUG] httpcore.http11: receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Content-Length', b'8416'), (b'Content-Type', b'application/json'), (b'access-control-allow-origin', b'*'), (b'apim-request-id', b'85eb2c36-d0ea-4182-ac4f-92cbeb87af7f'), (b'Strict-Transport-Security', b'max-age=31536000; includeSubDomains; preload'), (b'x-content-type-options', b'nosniff'), (b'x-ms-region', b'Japan East'), (b'x-ratelimit-remaining-tokens', b'149987'), (b'x-ratelimit-limit-tokens', b'150000'), (b'x-request-id', b'f7f4d9d5-a922-4369-b7b4-3237cff28497'), (b'x-ms-client-request-id', b'85eb2c36-d0ea-4182-ac4f-92cbeb87af7f'), (b'azureml-model-session', b'd021-20250523095313'), (b'x-ms-deployment-name', b'ada-002'), (b'Date', b'Thu, 19 Jun 2025 02:11:19 GMT')])
+2025-06-19 11:11:19,831 [INFO] httpx: HTTP Request: POST https://adt-consulting.openai.azure.com/openai/deployments/ada-002/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2025-06-19 11:11:19,831 [DEBUG] httpcore.http11: receive_response_body.started request=<Request [b'POST']>
+2025-06-19 11:11:19,831 [DEBUG] httpcore.http11: receive_response_body.complete
+2025-06-19 11:11:19,831 [DEBUG] httpcore.http11: response_closed.started
+2025-06-19 11:11:19,831 [DEBUG] httpcore.http11: response_closed.complete
+2025-06-19 11:11:19,831 [DEBUG] openai._base_client: HTTP Response: POST https://adt-consulting.openai.azure.com/openai/deployments/ada-002/embeddings?api-version=2025-01-01-preview "200 OK" Headers({'content-length': '8416', 'content-type': 'application/json', 'access-control-allow-origin': '*', 'apim-request-id': '85eb2c36-d0ea-4182-ac4f-92cbeb87af7f', 'strict-transport-security': 'max-age=31536000; includeSubDomains; preload', 'x-content-type-options': 'nosniff', 'x-ms-region': 'Japan East', 'x-ratelimit-remaining-tokens': '149987', 'x-ratelimit-limit-tokens': '150000', 'x-request-id': 'f7f4d9d5-a922-4369-b7b4-3237cff28497', 'x-ms-client-request-id': '85eb2c36-d0ea-4182-ac4f-92cbeb87af7f', 'azureml-model-session': 'd021-20250523095313', 'x-ms-deployment-name': 'ada-002', 'date': 'Thu, 19 Jun 2025 02:11:19 GMT'})
+2025-06-19 11:11:19,831 [DEBUG] openai._base_client: request_id: f7f4d9d5-a922-4369-b7b4-3237cff28497
+2025-06-19 11:11:25,933 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:11:27,093 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:11:32,090 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:11:37,091 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:11:42,091 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:11:47,091 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:11:52,091 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:11:57,089 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:12:02,091 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:12:07,090 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:12:12,090 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:12:17,091 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:12:22,132 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:12:27,132 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:12:32,132 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:12:37,090 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:12:42,090 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:12:47,091 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:12:52,090 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:12:57,130 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:13:02,131 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:13:07,132 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:13:12,090 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:13:17,089 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:13:22,090 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:13:27,091 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:13:32,090 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:13:37,090 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:13:42,090 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:13:47,090 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:13:52,089 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:13:57,090 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:14:02,089 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:14:07,089 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:14:12,089 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:14:17,089 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:14:22,088 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:14:27,090 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:14:32,090 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:14:37,090 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:14:42,089 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:14:47,088 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:14:52,087 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:14:57,088 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:15:02,089 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:15:07,089 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:15:12,089 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:15:15,552 [DEBUG] python_multipart.multipart: Calling on_part_begin with no data
+2025-06-19 11:15:15,553 [DEBUG] python_multipart.multipart: Calling on_header_field with data[42:61]
+2025-06-19 11:15:15,553 [DEBUG] python_multipart.multipart: Calling on_header_value with data[63:93]
+2025-06-19 11:15:15,553 [DEBUG] python_multipart.multipart: Calling on_header_end with no data
+2025-06-19 11:15:15,553 [DEBUG] python_multipart.multipart: Calling on_headers_finished with no data
+2025-06-19 11:15:15,553 [DEBUG] python_multipart.multipart: Calling on_part_data with data[97:100]
+2025-06-19 11:15:15,553 [DEBUG] python_multipart.multipart: Calling on_part_end with no data
+2025-06-19 11:15:15,553 [DEBUG] python_multipart.multipart: Calling on_part_begin with no data
+2025-06-19 11:15:15,553 [DEBUG] python_multipart.multipart: Calling on_header_field with data[144:163]
+2025-06-19 11:15:15,553 [DEBUG] python_multipart.multipart: Calling on_header_value with data[165:193]
+2025-06-19 11:15:15,553 [DEBUG] python_multipart.multipart: Calling on_header_end with no data
+2025-06-19 11:15:15,553 [DEBUG] python_multipart.multipart: Calling on_headers_finished with no data
+2025-06-19 11:15:15,553 [DEBUG] python_multipart.multipart: Calling on_part_data with data[197:200]
+2025-06-19 11:15:15,553 [DEBUG] python_multipart.multipart: Calling on_part_end with no data
+2025-06-19 11:15:15,553 [DEBUG] python_multipart.multipart: Calling on_part_begin with no data
+2025-06-19 11:15:15,553 [DEBUG] python_multipart.multipart: Calling on_header_field with data[244:263]
+2025-06-19 11:15:15,554 [DEBUG] python_multipart.multipart: Calling on_header_value with data[265:297]
+2025-06-19 11:15:15,554 [DEBUG] python_multipart.multipart: Calling on_header_end with no data
+2025-06-19 11:15:15,554 [DEBUG] python_multipart.multipart: Calling on_headers_finished with no data
+2025-06-19 11:15:15,554 [DEBUG] python_multipart.multipart: Calling on_part_data with data[301:371]
+2025-06-19 11:15:15,554 [DEBUG] python_multipart.multipart: Calling on_part_end with no data
+2025-06-19 11:15:15,554 [DEBUG] python_multipart.multipart: Calling on_part_begin with no data
+2025-06-19 11:15:15,554 [DEBUG] python_multipart.multipart: Calling on_header_field with data[415:434]
+2025-06-19 11:15:15,554 [DEBUG] python_multipart.multipart: Calling on_header_value with data[436:463]
+2025-06-19 11:15:15,554 [DEBUG] python_multipart.multipart: Calling on_header_end with no data
+2025-06-19 11:15:15,554 [DEBUG] python_multipart.multipart: Calling on_headers_finished with no data
+2025-06-19 11:15:15,554 [DEBUG] python_multipart.multipart: Calling on_part_data with data[467:486]
+2025-06-19 11:15:15,554 [DEBUG] python_multipart.multipart: Calling on_part_end with no data
+2025-06-19 11:15:15,554 [DEBUG] python_multipart.multipart: Calling on_part_begin with no data
+2025-06-19 11:15:15,554 [DEBUG] python_multipart.multipart: Calling on_header_field with data[530:549]
+2025-06-19 11:15:15,554 [DEBUG] python_multipart.multipart: Calling on_header_value with data[551:580]
+2025-06-19 11:15:15,554 [DEBUG] python_multipart.multipart: Calling on_header_end with no data
+2025-06-19 11:15:15,554 [DEBUG] python_multipart.multipart: Calling on_headers_finished with no data
+2025-06-19 11:15:15,555 [DEBUG] python_multipart.multipart: Calling on_part_data with data[584:628]
+2025-06-19 11:15:15,555 [DEBUG] python_multipart.multipart: Calling on_part_end with no data
+2025-06-19 11:15:15,555 [DEBUG] python_multipart.multipart: Calling on_part_begin with no data
+2025-06-19 11:15:15,555 [DEBUG] python_multipart.multipart: Calling on_header_field with data[672:691]
+2025-06-19 11:15:15,555 [DEBUG] python_multipart.multipart: Calling on_header_value with data[693:753]
+2025-06-19 11:15:15,555 [DEBUG] python_multipart.multipart: Calling on_header_end with no data
+2025-06-19 11:15:15,555 [DEBUG] python_multipart.multipart: Calling on_header_field with data[755:767]
+2025-06-19 11:15:15,555 [DEBUG] python_multipart.multipart: Calling on_header_value with data[769:834]
+2025-06-19 11:15:15,555 [DEBUG] python_multipart.multipart: Calling on_header_end with no data
+2025-06-19 11:15:15,555 [DEBUG] python_multipart.multipart: Calling on_headers_finished with no data
+2025-06-19 11:15:15,555 [DEBUG] python_multipart.multipart: Calling on_part_data with data[838:11503]
+2025-06-19 11:15:15,555 [DEBUG] python_multipart.multipart: Calling on_part_end with no data
+2025-06-19 11:15:15,555 [DEBUG] python_multipart.multipart: Calling on_part_begin with no data
+2025-06-19 11:15:15,555 [DEBUG] python_multipart.multipart: Calling on_header_field with data[11547:11566]
+2025-06-19 11:15:15,555 [DEBUG] python_multipart.multipart: Calling on_header_value with data[11568:11626]
+2025-06-19 11:15:15,556 [DEBUG] python_multipart.multipart: Calling on_header_end with no data
+2025-06-19 11:15:15,556 [DEBUG] python_multipart.multipart: Calling on_header_field with data[11628:11640]
+2025-06-19 11:15:15,556 [DEBUG] python_multipart.multipart: Calling on_header_value with data[11642:11707]
+2025-06-19 11:15:15,556 [DEBUG] python_multipart.multipart: Calling on_header_end with no data
+2025-06-19 11:15:15,556 [DEBUG] python_multipart.multipart: Calling on_headers_finished with no data
+2025-06-19 11:15:15,556 [DEBUG] python_multipart.multipart: Calling on_part_data with data[11711:106234]
+2025-06-19 11:15:15,556 [DEBUG] python_multipart.multipart: Calling on_part_end with no data
+2025-06-19 11:15:15,556 [DEBUG] python_multipart.multipart: Calling on_end with no data
+2025-06-19 11:15:15,557 [ERROR] app: An unexpected error occurred
+Traceback (most recent call last):
+  File "/Users/taegyunkim/backup_wisenut_service/sub_lang/app.py", line 85, in create_upload_files
+    auto_generator.sentence_generator.initialize_azure_config(project_id)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "/Users/taegyunkim/backup_wisenut_service/sub_lang/auto_generator/sentence_generator.py", line 60, in initialize_azure_config
+    print(f"AZURE_OPENAI_KEY: {AZURE_OPENAI_KEY[:5]}...")
+                               ~~~~~~~~~~~~~~~~^^^^
+TypeError: 'NoneType' object is not subscriptable
+2025-06-19 11:15:17,088 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:15:22,089 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:15:25,657 [DEBUG] python_multipart.multipart: Calling on_part_begin with no data
+2025-06-19 11:15:25,657 [DEBUG] python_multipart.multipart: Calling on_header_field with data[42:61]
+2025-06-19 11:15:25,657 [DEBUG] python_multipart.multipart: Calling on_header_value with data[63:93]
+2025-06-19 11:15:25,657 [DEBUG] python_multipart.multipart: Calling on_header_end with no data
+2025-06-19 11:15:25,657 [DEBUG] python_multipart.multipart: Calling on_headers_finished with no data
+2025-06-19 11:15:25,657 [DEBUG] python_multipart.multipart: Calling on_part_data with data[97:100]
+2025-06-19 11:15:25,657 [DEBUG] python_multipart.multipart: Calling on_part_end with no data
+2025-06-19 11:15:25,658 [DEBUG] python_multipart.multipart: Calling on_part_begin with no data
+2025-06-19 11:15:25,658 [DEBUG] python_multipart.multipart: Calling on_header_field with data[144:163]
+2025-06-19 11:15:25,658 [DEBUG] python_multipart.multipart: Calling on_header_value with data[165:193]
+2025-06-19 11:15:25,658 [DEBUG] python_multipart.multipart: Calling on_header_end with no data
+2025-06-19 11:15:25,658 [DEBUG] python_multipart.multipart: Calling on_headers_finished with no data
+2025-06-19 11:15:25,658 [DEBUG] python_multipart.multipart: Calling on_part_data with data[197:200]
+2025-06-19 11:15:25,658 [DEBUG] python_multipart.multipart: Calling on_part_end with no data
+2025-06-19 11:15:25,658 [DEBUG] python_multipart.multipart: Calling on_part_begin with no data
+2025-06-19 11:15:25,658 [DEBUG] python_multipart.multipart: Calling on_header_field with data[244:263]
+2025-06-19 11:15:25,658 [DEBUG] python_multipart.multipart: Calling on_header_value with data[265:297]
+2025-06-19 11:15:25,658 [DEBUG] python_multipart.multipart: Calling on_header_end with no data
+2025-06-19 11:15:25,658 [DEBUG] python_multipart.multipart: Calling on_headers_finished with no data
+2025-06-19 11:15:25,658 [DEBUG] python_multipart.multipart: Calling on_part_data with data[301:371]
+2025-06-19 11:15:25,658 [DEBUG] python_multipart.multipart: Calling on_part_end with no data
+2025-06-19 11:15:25,658 [DEBUG] python_multipart.multipart: Calling on_part_begin with no data
+2025-06-19 11:15:25,658 [DEBUG] python_multipart.multipart: Calling on_header_field with data[415:434]
+2025-06-19 11:15:25,658 [DEBUG] python_multipart.multipart: Calling on_header_value with data[436:463]
+2025-06-19 11:15:25,659 [DEBUG] python_multipart.multipart: Calling on_header_end with no data
+2025-06-19 11:15:25,659 [DEBUG] python_multipart.multipart: Calling on_headers_finished with no data
+2025-06-19 11:15:25,659 [DEBUG] python_multipart.multipart: Calling on_part_data with data[467:486]
+2025-06-19 11:15:25,659 [DEBUG] python_multipart.multipart: Calling on_part_end with no data
+2025-06-19 11:15:25,659 [DEBUG] python_multipart.multipart: Calling on_part_begin with no data
+2025-06-19 11:15:25,659 [DEBUG] python_multipart.multipart: Calling on_header_field with data[530:549]
+2025-06-19 11:15:25,659 [DEBUG] python_multipart.multipart: Calling on_header_value with data[551:580]
+2025-06-19 11:15:25,659 [DEBUG] python_multipart.multipart: Calling on_header_end with no data
+2025-06-19 11:15:25,659 [DEBUG] python_multipart.multipart: Calling on_headers_finished with no data
+2025-06-19 11:15:25,659 [DEBUG] python_multipart.multipart: Calling on_part_data with data[584:628]
+2025-06-19 11:15:25,659 [DEBUG] python_multipart.multipart: Calling on_part_end with no data
+2025-06-19 11:15:25,659 [DEBUG] python_multipart.multipart: Calling on_part_begin with no data
+2025-06-19 11:15:25,659 [DEBUG] python_multipart.multipart: Calling on_header_field with data[672:691]
+2025-06-19 11:15:25,660 [DEBUG] python_multipart.multipart: Calling on_header_value with data[693:753]
+2025-06-19 11:15:25,660 [DEBUG] python_multipart.multipart: Calling on_header_end with no data
+2025-06-19 11:15:25,660 [DEBUG] python_multipart.multipart: Calling on_header_field with data[755:767]
+2025-06-19 11:15:25,660 [DEBUG] python_multipart.multipart: Calling on_header_value with data[769:834]
+2025-06-19 11:15:25,660 [DEBUG] python_multipart.multipart: Calling on_header_end with no data
+2025-06-19 11:15:25,660 [DEBUG] python_multipart.multipart: Calling on_headers_finished with no data
+2025-06-19 11:15:25,660 [DEBUG] python_multipart.multipart: Calling on_part_data with data[838:11503]
+2025-06-19 11:15:25,660 [DEBUG] python_multipart.multipart: Calling on_part_end with no data
+2025-06-19 11:15:25,660 [DEBUG] python_multipart.multipart: Calling on_part_begin with no data
+2025-06-19 11:15:25,660 [DEBUG] python_multipart.multipart: Calling on_header_field with data[11547:11566]
+2025-06-19 11:15:25,660 [DEBUG] python_multipart.multipart: Calling on_header_value with data[11568:11626]
+2025-06-19 11:15:25,660 [DEBUG] python_multipart.multipart: Calling on_header_end with no data
+2025-06-19 11:15:25,660 [DEBUG] python_multipart.multipart: Calling on_header_field with data[11628:11640]
+2025-06-19 11:15:25,660 [DEBUG] python_multipart.multipart: Calling on_header_value with data[11642:11707]
+2025-06-19 11:15:25,660 [DEBUG] python_multipart.multipart: Calling on_header_end with no data
+2025-06-19 11:15:25,660 [DEBUG] python_multipart.multipart: Calling on_headers_finished with no data
+2025-06-19 11:15:25,660 [DEBUG] python_multipart.multipart: Calling on_part_data with data[11711:106234]
+2025-06-19 11:15:25,661 [DEBUG] python_multipart.multipart: Calling on_part_end with no data
+2025-06-19 11:15:25,661 [DEBUG] python_multipart.multipart: Calling on_end with no data
+2025-06-19 11:15:25,661 [ERROR] app: An unexpected error occurred
+Traceback (most recent call last):
+  File "/Users/taegyunkim/backup_wisenut_service/sub_lang/app.py", line 85, in create_upload_files
+    auto_generator.sentence_generator.initialize_azure_config(project_id)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "/Users/taegyunkim/backup_wisenut_service/sub_lang/auto_generator/sentence_generator.py", line 60, in initialize_azure_config
+    print(f"AZURE_OPENAI_KEY: {AZURE_OPENAI_KEY[:5]}...")
+                               ~~~~~~~~~~~~~~~~^^^^
+TypeError: 'NoneType' object is not subscriptable
+2025-06-19 11:15:27,086 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:15:29,685 [DEBUG] python_multipart.multipart: Calling on_part_begin with no data
+2025-06-19 11:15:29,686 [DEBUG] python_multipart.multipart: Calling on_header_field with data[42:61]
+2025-06-19 11:15:29,686 [DEBUG] python_multipart.multipart: Calling on_header_value with data[63:93]
+2025-06-19 11:15:29,686 [DEBUG] python_multipart.multipart: Calling on_header_end with no data
+2025-06-19 11:15:29,686 [DEBUG] python_multipart.multipart: Calling on_headers_finished with no data
+2025-06-19 11:15:29,686 [DEBUG] python_multipart.multipart: Calling on_part_data with data[97:100]
+2025-06-19 11:15:29,686 [DEBUG] python_multipart.multipart: Calling on_part_end with no data
+2025-06-19 11:15:29,686 [DEBUG] python_multipart.multipart: Calling on_part_begin with no data
+2025-06-19 11:15:29,686 [DEBUG] python_multipart.multipart: Calling on_header_field with data[144:163]
+2025-06-19 11:15:29,686 [DEBUG] python_multipart.multipart: Calling on_header_value with data[165:193]
+2025-06-19 11:15:29,686 [DEBUG] python_multipart.multipart: Calling on_header_end with no data
+2025-06-19 11:15:29,686 [DEBUG] python_multipart.multipart: Calling on_headers_finished with no data
+2025-06-19 11:15:29,686 [DEBUG] python_multipart.multipart: Calling on_part_data with data[197:200]
+2025-06-19 11:15:29,686 [DEBUG] python_multipart.multipart: Calling on_part_end with no data
+2025-06-19 11:15:29,686 [DEBUG] python_multipart.multipart: Calling on_part_begin with no data
+2025-06-19 11:15:29,687 [DEBUG] python_multipart.multipart: Calling on_header_field with data[244:263]
+2025-06-19 11:15:29,687 [DEBUG] python_multipart.multipart: Calling on_header_value with data[265:297]
+2025-06-19 11:15:29,687 [DEBUG] python_multipart.multipart: Calling on_header_end with no data
+2025-06-19 11:15:29,687 [DEBUG] python_multipart.multipart: Calling on_headers_finished with no data
+2025-06-19 11:15:29,687 [DEBUG] python_multipart.multipart: Calling on_part_data with data[301:371]
+2025-06-19 11:15:29,687 [DEBUG] python_multipart.multipart: Calling on_part_end with no data
+2025-06-19 11:15:29,687 [DEBUG] python_multipart.multipart: Calling on_part_begin with no data
+2025-06-19 11:15:29,687 [DEBUG] python_multipart.multipart: Calling on_header_field with data[415:434]
+2025-06-19 11:15:29,687 [DEBUG] python_multipart.multipart: Calling on_header_value with data[436:463]
+2025-06-19 11:15:29,687 [DEBUG] python_multipart.multipart: Calling on_header_end with no data
+2025-06-19 11:15:29,687 [DEBUG] python_multipart.multipart: Calling on_headers_finished with no data
+2025-06-19 11:15:29,687 [DEBUG] python_multipart.multipart: Calling on_part_data with data[467:486]
+2025-06-19 11:15:29,687 [DEBUG] python_multipart.multipart: Calling on_part_end with no data
+2025-06-19 11:15:29,687 [DEBUG] python_multipart.multipart: Calling on_part_begin with no data
+2025-06-19 11:15:29,687 [DEBUG] python_multipart.multipart: Calling on_header_field with data[530:549]
+2025-06-19 11:15:29,687 [DEBUG] python_multipart.multipart: Calling on_header_value with data[551:580]
+2025-06-19 11:15:29,687 [DEBUG] python_multipart.multipart: Calling on_header_end with no data
+2025-06-19 11:15:29,687 [DEBUG] python_multipart.multipart: Calling on_headers_finished with no data
+2025-06-19 11:15:29,688 [DEBUG] python_multipart.multipart: Calling on_part_data with data[584:628]
+2025-06-19 11:15:29,688 [DEBUG] python_multipart.multipart: Calling on_part_end with no data
+2025-06-19 11:15:29,688 [DEBUG] python_multipart.multipart: Calling on_part_begin with no data
+2025-06-19 11:15:29,688 [DEBUG] python_multipart.multipart: Calling on_header_field with data[672:691]
+2025-06-19 11:15:29,688 [DEBUG] python_multipart.multipart: Calling on_header_value with data[693:753]
+2025-06-19 11:15:29,688 [DEBUG] python_multipart.multipart: Calling on_header_end with no data
+2025-06-19 11:15:29,688 [DEBUG] python_multipart.multipart: Calling on_header_field with data[755:767]
+2025-06-19 11:15:29,688 [DEBUG] python_multipart.multipart: Calling on_header_value with data[769:834]
+2025-06-19 11:15:29,688 [DEBUG] python_multipart.multipart: Calling on_header_end with no data
+2025-06-19 11:15:29,688 [DEBUG] python_multipart.multipart: Calling on_headers_finished with no data
+2025-06-19 11:15:29,688 [DEBUG] python_multipart.multipart: Calling on_part_data with data[838:11503]
+2025-06-19 11:15:29,688 [DEBUG] python_multipart.multipart: Calling on_part_end with no data
+2025-06-19 11:15:29,688 [DEBUG] python_multipart.multipart: Calling on_part_begin with no data
+2025-06-19 11:15:29,688 [DEBUG] python_multipart.multipart: Calling on_header_field with data[11547:11566]
+2025-06-19 11:15:29,688 [DEBUG] python_multipart.multipart: Calling on_header_value with data[11568:11626]
+2025-06-19 11:15:29,688 [DEBUG] python_multipart.multipart: Calling on_header_end with no data
+2025-06-19 11:15:29,689 [DEBUG] python_multipart.multipart: Calling on_header_field with data[11628:11640]
+2025-06-19 11:15:29,689 [DEBUG] python_multipart.multipart: Calling on_header_value with data[11642:11707]
+2025-06-19 11:15:29,689 [DEBUG] python_multipart.multipart: Calling on_header_end with no data
+2025-06-19 11:15:29,689 [DEBUG] python_multipart.multipart: Calling on_headers_finished with no data
+2025-06-19 11:15:29,689 [DEBUG] python_multipart.multipart: Calling on_part_data with data[11711:106234]
+2025-06-19 11:15:29,689 [DEBUG] python_multipart.multipart: Calling on_part_end with no data
+2025-06-19 11:15:29,689 [DEBUG] python_multipart.multipart: Calling on_end with no data
+2025-06-19 11:15:29,690 [ERROR] app: An unexpected error occurred
+Traceback (most recent call last):
+  File "/Users/taegyunkim/backup_wisenut_service/sub_lang/app.py", line 85, in create_upload_files
+    auto_generator.sentence_generator.initialize_azure_config(project_id)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "/Users/taegyunkim/backup_wisenut_service/sub_lang/auto_generator/sentence_generator.py", line 60, in initialize_azure_config
+    print(f"AZURE_OPENAI_KEY: {AZURE_OPENAI_KEY[:5]}...")
+                               ~~~~~~~~~~~~~~~~^^^^
+TypeError: 'NoneType' object is not subscriptable
+2025-06-19 11:15:32,089 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:15:37,086 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:15:42,090 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:15:47,086 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:15:52,087 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:15:57,087 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:16:02,087 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:16:07,085 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:16:12,097 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:16:17,089 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:16:22,088 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:16:27,087 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:16:32,088 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:16:37,087 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:16:42,088 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:16:47,088 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:16:52,089 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:16:57,087 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:17:02,086 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:17:07,089 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:17:12,088 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:17:17,085 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:17:22,085 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:17:27,086 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:17:32,086 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:17:37,086 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:17:42,087 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:17:47,087 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:17:52,087 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:17:57,085 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:18:02,088 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:18:07,086 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:18:12,087 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:18:17,086 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:18:22,086 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:18:27,088 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:18:32,087 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:18:37,087 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:18:42,086 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:18:47,086 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:18:52,086 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:18:57,086 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:19:02,086 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:19:07,085 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:19:12,086 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:19:17,086 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:19:22,084 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:19:27,088 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:19:32,086 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:19:37,087 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:19:42,086 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:19:47,086 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:19:52,085 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:19:57,086 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:20:02,084 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:20:07,084 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:20:12,086 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:20:17,086 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:20:22,084 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:20:27,086 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:20:32,085 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:20:37,085 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:20:42,084 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:20:47,083 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:20:52,088 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:20:57,083 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:21:00,850 [DEBUG] openai._base_client: Request options: {'method': 'post', 'url': '/embeddings', 'headers': {'api-key': '<redacted>'}, 'files': None, 'idempotency_key': 'stainless-python-retry-a7ddc8fb-6319-4be5-87b4-fad4770047db', 'post_parser': <function Embeddings.create.<locals>.parser at 0x14a2a6c00>, 'json_data': {'input': [[13094, 54535, 41953, 18359, 48765, 94, 34961, 17835, 47419, 66338, 34983, 59269, 246]], 'model': 'text-embedding-ada-002', 'encoding_format': 'base64'}}
+2025-06-19 11:21:00,868 [DEBUG] openai._base_client: Sending HTTP Request: POST https://adt-consulting.openai.azure.com/openai/deployments/ada-002/embeddings?api-version=2025-01-01-preview
+2025-06-19 11:21:00,869 [DEBUG] httpcore.connection: connect_tcp.started host='adt-consulting.openai.azure.com' port=443 local_address=None timeout=None socket_options=None
+2025-06-19 11:21:00,936 [DEBUG] httpcore.connection: connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x14a2d0050>
+2025-06-19 11:21:00,936 [DEBUG] httpcore.connection: start_tls.started ssl_context=<ssl.SSLContext object at 0x12fb4e8d0> server_hostname='adt-consulting.openai.azure.com' timeout=None
+2025-06-19 11:21:01,005 [DEBUG] httpcore.connection: start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x14a261310>
+2025-06-19 11:21:01,005 [DEBUG] httpcore.http11: send_request_headers.started request=<Request [b'POST']>
+2025-06-19 11:21:01,006 [DEBUG] httpcore.http11: send_request_headers.complete
+2025-06-19 11:21:01,006 [DEBUG] httpcore.http11: send_request_body.started request=<Request [b'POST']>
+2025-06-19 11:21:01,006 [DEBUG] httpcore.http11: send_request_body.complete
+2025-06-19 11:21:01,006 [DEBUG] httpcore.http11: receive_response_headers.started request=<Request [b'POST']>
+2025-06-19 11:21:01,077 [DEBUG] httpcore.http11: receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Content-Length', b'8416'), (b'Content-Type', b'application/json'), (b'access-control-allow-origin', b'*'), (b'apim-request-id', b'6bd1caea-9d2d-44bd-b09a-d8ab133d45dd'), (b'Strict-Transport-Security', b'max-age=31536000; includeSubDomains; preload'), (b'x-content-type-options', b'nosniff'), (b'x-ms-region', b'Japan East'), (b'x-ratelimit-remaining-tokens', b'149987'), (b'x-ratelimit-limit-tokens', b'150000'), (b'x-request-id', b'b57df08e-4646-41ec-a692-b5d85bf85a2b'), (b'x-ms-client-request-id', b'6bd1caea-9d2d-44bd-b09a-d8ab133d45dd'), (b'azureml-model-session', b'd021-20250523095313'), (b'x-ms-deployment-name', b'ada-002'), (b'Date', b'Thu, 19 Jun 2025 02:21:00 GMT')])
+2025-06-19 11:21:01,077 [INFO] httpx: HTTP Request: POST https://adt-consulting.openai.azure.com/openai/deployments/ada-002/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2025-06-19 11:21:01,077 [DEBUG] httpcore.http11: receive_response_body.started request=<Request [b'POST']>
+2025-06-19 11:21:01,078 [DEBUG] httpcore.http11: receive_response_body.complete
+2025-06-19 11:21:01,078 [DEBUG] httpcore.http11: response_closed.started
+2025-06-19 11:21:01,078 [DEBUG] httpcore.http11: response_closed.complete
+2025-06-19 11:21:01,078 [DEBUG] openai._base_client: HTTP Response: POST https://adt-consulting.openai.azure.com/openai/deployments/ada-002/embeddings?api-version=2025-01-01-preview "200 OK" Headers({'content-length': '8416', 'content-type': 'application/json', 'access-control-allow-origin': '*', 'apim-request-id': '6bd1caea-9d2d-44bd-b09a-d8ab133d45dd', 'strict-transport-security': 'max-age=31536000; includeSubDomains; preload', 'x-content-type-options': 'nosniff', 'x-ms-region': 'Japan East', 'x-ratelimit-remaining-tokens': '149987', 'x-ratelimit-limit-tokens': '150000', 'x-request-id': 'b57df08e-4646-41ec-a692-b5d85bf85a2b', 'x-ms-client-request-id': '6bd1caea-9d2d-44bd-b09a-d8ab133d45dd', 'azureml-model-session': 'd021-20250523095313', 'x-ms-deployment-name': 'ada-002', 'date': 'Thu, 19 Jun 2025 02:21:00 GMT'})
+2025-06-19 11:21:01,078 [DEBUG] openai._base_client: request_id: b57df08e-4646-41ec-a692-b5d85bf85a2b
+2025-06-19 11:21:02,084 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:21:07,086 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:21:10,023 [DEBUG] openai._base_client: Request options: {'method': 'post', 'url': '/embeddings', 'headers': {'api-key': '<redacted>'}, 'files': None, 'idempotency_key': 'stainless-python-retry-22e78156-4da3-4900-90d0-14a402592d92', 'post_parser': <function Embeddings.create.<locals>.parser at 0x136e96c00>, 'json_data': {'input': [[13094, 54535, 41953, 18359, 48765, 94, 34961, 17835, 47419, 66338, 34983, 59269, 246]], 'model': 'text-embedding-ada-002', 'encoding_format': 'base64'}}
+2025-06-19 11:21:10,039 [DEBUG] openai._base_client: Sending HTTP Request: POST https://adt-consulting.openai.azure.com/openai/deployments/ada-002/embeddings?api-version=2025-01-01-preview
+2025-06-19 11:21:10,040 [DEBUG] httpcore.connection: connect_tcp.started host='adt-consulting.openai.azure.com' port=443 local_address=None timeout=None socket_options=None
+2025-06-19 11:21:10,078 [DEBUG] httpcore.connection: connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x136ec4050>
+2025-06-19 11:21:10,078 [DEBUG] httpcore.connection: start_tls.started ssl_context=<ssl.SSLContext object at 0x133f4e8d0> server_hostname='adt-consulting.openai.azure.com' timeout=None
+2025-06-19 11:21:10,147 [DEBUG] httpcore.connection: start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x136e51bd0>
+2025-06-19 11:21:10,147 [DEBUG] httpcore.http11: send_request_headers.started request=<Request [b'POST']>
+2025-06-19 11:21:10,147 [DEBUG] httpcore.http11: send_request_headers.complete
+2025-06-19 11:21:10,147 [DEBUG] httpcore.http11: send_request_body.started request=<Request [b'POST']>
+2025-06-19 11:21:10,147 [DEBUG] httpcore.http11: send_request_body.complete
+2025-06-19 11:21:10,147 [DEBUG] httpcore.http11: receive_response_headers.started request=<Request [b'POST']>
+2025-06-19 11:21:10,218 [DEBUG] httpcore.http11: receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Content-Length', b'8416'), (b'Content-Type', b'application/json'), (b'access-control-allow-origin', b'*'), (b'apim-request-id', b'd718bec9-bf83-4016-892e-84dfd3a69b4c'), (b'Strict-Transport-Security', b'max-age=31536000; includeSubDomains; preload'), (b'x-content-type-options', b'nosniff'), (b'x-ms-region', b'Japan East'), (b'x-ratelimit-remaining-tokens', b'149974'), (b'x-ratelimit-limit-tokens', b'150000'), (b'x-request-id', b'f033e301-15d5-4157-ad2c-b5dc88e0bfc8'), (b'x-ms-client-request-id', b'd718bec9-bf83-4016-892e-84dfd3a69b4c'), (b'azureml-model-session', b'd021-20250523095313'), (b'x-ms-deployment-name', b'ada-002'), (b'Date', b'Thu, 19 Jun 2025 02:21:09 GMT')])
+2025-06-19 11:21:10,218 [INFO] httpx: HTTP Request: POST https://adt-consulting.openai.azure.com/openai/deployments/ada-002/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2025-06-19 11:21:10,219 [DEBUG] httpcore.http11: receive_response_body.started request=<Request [b'POST']>
+2025-06-19 11:21:10,240 [DEBUG] httpcore.http11: receive_response_body.complete
+2025-06-19 11:21:10,240 [DEBUG] httpcore.http11: response_closed.started
+2025-06-19 11:21:10,240 [DEBUG] httpcore.http11: response_closed.complete
+2025-06-19 11:21:10,240 [DEBUG] openai._base_client: HTTP Response: POST https://adt-consulting.openai.azure.com/openai/deployments/ada-002/embeddings?api-version=2025-01-01-preview "200 OK" Headers({'content-length': '8416', 'content-type': 'application/json', 'access-control-allow-origin': '*', 'apim-request-id': 'd718bec9-bf83-4016-892e-84dfd3a69b4c', 'strict-transport-security': 'max-age=31536000; includeSubDomains; preload', 'x-content-type-options': 'nosniff', 'x-ms-region': 'Japan East', 'x-ratelimit-remaining-tokens': '149974', 'x-ratelimit-limit-tokens': '150000', 'x-request-id': 'f033e301-15d5-4157-ad2c-b5dc88e0bfc8', 'x-ms-client-request-id': 'd718bec9-bf83-4016-892e-84dfd3a69b4c', 'azureml-model-session': 'd021-20250523095313', 'x-ms-deployment-name': 'ada-002', 'date': 'Thu, 19 Jun 2025 02:21:09 GMT'})
+2025-06-19 11:21:10,240 [DEBUG] openai._base_client: request_id: f033e301-15d5-4157-ad2c-b5dc88e0bfc8
+2025-06-19 11:21:12,083 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:21:13,724 [DEBUG] openai._base_client: Request options: {'method': 'post', 'url': '/embeddings', 'headers': {'api-key': '<redacted>'}, 'files': None, 'idempotency_key': 'stainless-python-retry-c6dd03d4-02bb-4226-8b8d-093c0e812988', 'post_parser': <function Embeddings.create.<locals>.parser at 0x117f66c00>, 'json_data': {'input': [[13094, 54535, 41953, 18359, 48765, 94, 34961, 17835, 47419, 66338, 34983, 59269, 246]], 'model': 'text-embedding-ada-002', 'encoding_format': 'base64'}}
+2025-06-19 11:21:13,741 [DEBUG] openai._base_client: Sending HTTP Request: POST https://adt-consulting.openai.azure.com/openai/deployments/ada-002/embeddings?api-version=2025-01-01-preview
+2025-06-19 11:21:13,741 [DEBUG] httpcore.connection: connect_tcp.started host='adt-consulting.openai.azure.com' port=443 local_address=None timeout=None socket_options=None
+2025-06-19 11:21:13,778 [DEBUG] httpcore.connection: connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x117f94050>
+2025-06-19 11:21:13,779 [DEBUG] httpcore.connection: start_tls.started ssl_context=<ssl.SSLContext object at 0x11794e8d0> server_hostname='adt-consulting.openai.azure.com' timeout=None
+2025-06-19 11:21:13,850 [DEBUG] httpcore.connection: start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x117f21bd0>
+2025-06-19 11:21:13,851 [DEBUG] httpcore.http11: send_request_headers.started request=<Request [b'POST']>
+2025-06-19 11:21:13,851 [DEBUG] httpcore.http11: send_request_headers.complete
+2025-06-19 11:21:13,851 [DEBUG] httpcore.http11: send_request_body.started request=<Request [b'POST']>
+2025-06-19 11:21:13,851 [DEBUG] httpcore.http11: send_request_body.complete
+2025-06-19 11:21:13,851 [DEBUG] httpcore.http11: receive_response_headers.started request=<Request [b'POST']>
+2025-06-19 11:21:13,939 [DEBUG] httpcore.http11: receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Content-Length', b'8416'), (b'Content-Type', b'application/json'), (b'access-control-allow-origin', b'*'), (b'apim-request-id', b'2e104936-3909-4169-9511-b842a46ba662'), (b'Strict-Transport-Security', b'max-age=31536000; includeSubDomains; preload'), (b'x-content-type-options', b'nosniff'), (b'x-ms-region', b'Japan East'), (b'x-ratelimit-remaining-tokens', b'149961'), (b'x-ratelimit-limit-tokens', b'150000'), (b'x-request-id', b'fdbecbc9-a287-45f4-a9f4-3b0d70a2cc68'), (b'x-ms-client-request-id', b'2e104936-3909-4169-9511-b842a46ba662'), (b'azureml-model-session', b'd021-20250523095313'), (b'x-ms-deployment-name', b'ada-002'), (b'Date', b'Thu, 19 Jun 2025 02:21:13 GMT')])
+2025-06-19 11:21:13,939 [INFO] httpx: HTTP Request: POST https://adt-consulting.openai.azure.com/openai/deployments/ada-002/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2025-06-19 11:21:13,940 [DEBUG] httpcore.http11: receive_response_body.started request=<Request [b'POST']>
+2025-06-19 11:21:13,940 [DEBUG] httpcore.http11: receive_response_body.complete
+2025-06-19 11:21:13,940 [DEBUG] httpcore.http11: response_closed.started
+2025-06-19 11:21:13,940 [DEBUG] httpcore.http11: response_closed.complete
+2025-06-19 11:21:13,940 [DEBUG] openai._base_client: HTTP Response: POST https://adt-consulting.openai.azure.com/openai/deployments/ada-002/embeddings?api-version=2025-01-01-preview "200 OK" Headers({'content-length': '8416', 'content-type': 'application/json', 'access-control-allow-origin': '*', 'apim-request-id': '2e104936-3909-4169-9511-b842a46ba662', 'strict-transport-security': 'max-age=31536000; includeSubDomains; preload', 'x-content-type-options': 'nosniff', 'x-ms-region': 'Japan East', 'x-ratelimit-remaining-tokens': '149961', 'x-ratelimit-limit-tokens': '150000', 'x-request-id': 'fdbecbc9-a287-45f4-a9f4-3b0d70a2cc68', 'x-ms-client-request-id': '2e104936-3909-4169-9511-b842a46ba662', 'azureml-model-session': 'd021-20250523095313', 'x-ms-deployment-name': 'ada-002', 'date': 'Thu, 19 Jun 2025 02:21:13 GMT'})
+2025-06-19 11:21:13,940 [DEBUG] openai._base_client: request_id: fdbecbc9-a287-45f4-a9f4-3b0d70a2cc68
+2025-06-19 11:21:17,087 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:21:22,084 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:21:27,085 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:21:32,084 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:21:37,084 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:21:42,083 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:21:47,085 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:21:52,084 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:21:57,085 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:22:02,084 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:22:07,085 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:22:07,461 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:22:12,464 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:22:17,465 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:22:22,464 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:22:27,461 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:22:32,463 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:22:37,464 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:22:38,394 [DEBUG] python_multipart.multipart: Calling on_part_begin with no data
+2025-06-19 11:22:38,394 [DEBUG] python_multipart.multipart: Calling on_header_field with data[42:61]
+2025-06-19 11:22:38,394 [DEBUG] python_multipart.multipart: Calling on_header_value with data[63:93]
+2025-06-19 11:22:38,394 [DEBUG] python_multipart.multipart: Calling on_header_end with no data
+2025-06-19 11:22:38,394 [DEBUG] python_multipart.multipart: Calling on_headers_finished with no data
+2025-06-19 11:22:38,395 [DEBUG] python_multipart.multipart: Calling on_part_data with data[97:100]
+2025-06-19 11:22:38,395 [DEBUG] python_multipart.multipart: Calling on_part_end with no data
+2025-06-19 11:22:38,395 [DEBUG] python_multipart.multipart: Calling on_part_begin with no data
+2025-06-19 11:22:38,395 [DEBUG] python_multipart.multipart: Calling on_header_field with data[144:163]
+2025-06-19 11:22:38,395 [DEBUG] python_multipart.multipart: Calling on_header_value with data[165:193]
+2025-06-19 11:22:38,395 [DEBUG] python_multipart.multipart: Calling on_header_end with no data
+2025-06-19 11:22:38,395 [DEBUG] python_multipart.multipart: Calling on_headers_finished with no data
+2025-06-19 11:22:38,396 [DEBUG] python_multipart.multipart: Calling on_part_data with data[197:200]
+2025-06-19 11:22:38,396 [DEBUG] python_multipart.multipart: Calling on_part_end with no data
+2025-06-19 11:22:38,396 [DEBUG] python_multipart.multipart: Calling on_part_begin with no data
+2025-06-19 11:22:38,396 [DEBUG] python_multipart.multipart: Calling on_header_field with data[244:263]
+2025-06-19 11:22:38,396 [DEBUG] python_multipart.multipart: Calling on_header_value with data[265:297]
+2025-06-19 11:22:38,396 [DEBUG] python_multipart.multipart: Calling on_header_end with no data
+2025-06-19 11:22:38,396 [DEBUG] python_multipart.multipart: Calling on_headers_finished with no data
+2025-06-19 11:22:38,396 [DEBUG] python_multipart.multipart: Calling on_part_data with data[301:371]
+2025-06-19 11:22:38,396 [DEBUG] python_multipart.multipart: Calling on_part_end with no data
+2025-06-19 11:22:38,396 [DEBUG] python_multipart.multipart: Calling on_part_begin with no data
+2025-06-19 11:22:38,396 [DEBUG] python_multipart.multipart: Calling on_header_field with data[415:434]
+2025-06-19 11:22:38,396 [DEBUG] python_multipart.multipart: Calling on_header_value with data[436:463]
+2025-06-19 11:22:38,396 [DEBUG] python_multipart.multipart: Calling on_header_end with no data
+2025-06-19 11:22:38,396 [DEBUG] python_multipart.multipart: Calling on_headers_finished with no data
+2025-06-19 11:22:38,396 [DEBUG] python_multipart.multipart: Calling on_part_data with data[467:486]
+2025-06-19 11:22:38,397 [DEBUG] python_multipart.multipart: Calling on_part_end with no data
+2025-06-19 11:22:38,397 [DEBUG] python_multipart.multipart: Calling on_part_begin with no data
+2025-06-19 11:22:38,397 [DEBUG] python_multipart.multipart: Calling on_header_field with data[530:549]
+2025-06-19 11:22:38,397 [DEBUG] python_multipart.multipart: Calling on_header_value with data[551:580]
+2025-06-19 11:22:38,397 [DEBUG] python_multipart.multipart: Calling on_header_end with no data
+2025-06-19 11:22:38,397 [DEBUG] python_multipart.multipart: Calling on_headers_finished with no data
+2025-06-19 11:22:38,397 [DEBUG] python_multipart.multipart: Calling on_part_data with data[584:626]
+2025-06-19 11:22:38,397 [DEBUG] python_multipart.multipart: Calling on_part_end with no data
+2025-06-19 11:22:38,397 [DEBUG] python_multipart.multipart: Calling on_part_begin with no data
+2025-06-19 11:22:38,397 [DEBUG] python_multipart.multipart: Calling on_header_field with data[670:689]
+2025-06-19 11:22:38,397 [DEBUG] python_multipart.multipart: Calling on_header_value with data[691:751]
+2025-06-19 11:22:38,397 [DEBUG] python_multipart.multipart: Calling on_header_end with no data
+2025-06-19 11:22:38,397 [DEBUG] python_multipart.multipart: Calling on_header_field with data[753:765]
+2025-06-19 11:22:38,397 [DEBUG] python_multipart.multipart: Calling on_header_value with data[767:832]
+2025-06-19 11:22:38,397 [DEBUG] python_multipart.multipart: Calling on_header_end with no data
+2025-06-19 11:22:38,397 [DEBUG] python_multipart.multipart: Calling on_headers_finished with no data
+2025-06-19 11:22:38,397 [DEBUG] python_multipart.multipart: Calling on_part_data with data[836:11501]
+2025-06-19 11:22:38,398 [DEBUG] python_multipart.multipart: Calling on_part_end with no data
+2025-06-19 11:22:38,398 [DEBUG] python_multipart.multipart: Calling on_part_begin with no data
+2025-06-19 11:22:38,398 [DEBUG] python_multipart.multipart: Calling on_header_field with data[11545:11564]
+2025-06-19 11:22:38,398 [DEBUG] python_multipart.multipart: Calling on_header_value with data[11566:11624]
+2025-06-19 11:22:38,398 [DEBUG] python_multipart.multipart: Calling on_header_end with no data
+2025-06-19 11:22:38,398 [DEBUG] python_multipart.multipart: Calling on_header_field with data[11626:11638]
+2025-06-19 11:22:38,398 [DEBUG] python_multipart.multipart: Calling on_header_value with data[11640:11705]
+2025-06-19 11:22:38,398 [DEBUG] python_multipart.multipart: Calling on_header_end with no data
+2025-06-19 11:22:38,398 [DEBUG] python_multipart.multipart: Calling on_headers_finished with no data
+2025-06-19 11:22:38,399 [DEBUG] python_multipart.multipart: Calling on_part_data with data[11709:106232]
+2025-06-19 11:22:38,399 [DEBUG] python_multipart.multipart: Calling on_part_end with no data
+2025-06-19 11:22:38,399 [DEBUG] python_multipart.multipart: Calling on_end with no data
+2025-06-19 11:22:38,402 [ERROR] app: An unexpected error occurred
+Traceback (most recent call last):
+  File "/Users/taegyunkim/backup_wisenut_service/sub_lang/app.py", line 85, in create_upload_files
+    auto_generator.sentence_generator.initialize_azure_config(project_id)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "/Users/taegyunkim/backup_wisenut_service/sub_lang/auto_generator/sentence_generator.py", line 60, in initialize_azure_config
+    print(f"AZURE_OPENAI_KEY: {AZURE_OPENAI_KEY[:5]}...")
+                               ~~~~~~~~~~~~~~~~^^^^
+TypeError: 'NoneType' object is not subscriptable
+2025-06-19 11:22:42,464 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:22:47,465 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:22:52,464 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:22:57,464 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:23:02,464 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:23:07,463 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:23:12,463 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:23:17,464 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:23:22,463 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:23:27,464 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:23:32,464 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:23:37,463 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:23:42,463 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:23:47,462 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:23:52,463 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:23:57,464 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:24:02,463 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:24:07,462 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:24:12,462 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:24:17,463 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:24:22,462 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:24:27,463 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:24:32,462 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:24:37,462 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:24:42,463 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:24:47,463 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:24:52,463 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:24:57,463 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:25:02,462 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:25:07,463 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:25:12,461 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:25:17,462 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:25:22,461 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:25:27,462 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:25:32,461 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:25:37,465 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:25:42,461 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:25:47,462 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:25:52,465 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:25:57,472 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:26:02,468 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:26:07,469 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:26:12,471 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:26:17,470 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:26:22,471 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:26:27,472 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:26:32,470 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:26:37,472 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:26:42,473 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:26:47,473 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:26:52,472 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:26:57,473 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:27:02,471 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:27:07,472 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:27:12,472 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:27:17,472 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:27:22,472 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:27:27,471 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:27:32,471 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:27:37,473 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:27:42,472 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:27:47,472 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:27:52,473 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:27:57,472 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:28:02,472 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:28:07,473 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:28:13,148 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:28:18,133 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:28:23,129 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:28:28,133 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:28:33,133 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:28:38,129 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:28:43,130 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:28:48,133 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:28:53,133 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:28:58,131 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:29:03,132 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:29:08,137 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:30:09,130 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:30:48,010 [DEBUG] openai._base_client: Request options: {'method': 'post', 'url': '/embeddings', 'headers': {'api-key': '<redacted>'}, 'files': None, 'idempotency_key': 'stainless-python-retry-e649611d-7598-4a10-a54b-55ed8bc4e5cd', 'post_parser': <function Embeddings.create.<locals>.parser at 0x10ff92c00>, 'json_data': {'input': [[13094, 54535, 41953, 18359, 48765, 94, 34961, 17835, 47419, 66338, 34983, 59269, 246]], 'model': 'text-embedding-ada-002', 'encoding_format': 'base64'}}
+2025-06-19 11:30:48,028 [DEBUG] openai._base_client: Sending HTTP Request: POST https://adt-consulting.openai.azure.com/openai/deployments/ada-002/embeddings?api-version=2025-01-01-preview
+2025-06-19 11:30:48,029 [DEBUG] httpcore.connection: connect_tcp.started host='adt-consulting.openai.azure.com' port=443 local_address=None timeout=None socket_options=None
+2025-06-19 11:30:48,104 [DEBUG] httpcore.connection: connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x10ffbc050>
+2025-06-19 11:30:48,104 [DEBUG] httpcore.connection: start_tls.started ssl_context=<ssl.SSLContext object at 0x10f74e8d0> server_hostname='adt-consulting.openai.azure.com' timeout=None
+2025-06-19 11:30:48,178 [DEBUG] httpcore.connection: start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x10ff4d310>
+2025-06-19 11:30:48,178 [DEBUG] httpcore.http11: send_request_headers.started request=<Request [b'POST']>
+2025-06-19 11:30:48,178 [DEBUG] httpcore.http11: send_request_headers.complete
+2025-06-19 11:30:48,178 [DEBUG] httpcore.http11: send_request_body.started request=<Request [b'POST']>
+2025-06-19 11:30:48,178 [DEBUG] httpcore.http11: send_request_body.complete
+2025-06-19 11:30:48,178 [DEBUG] httpcore.http11: receive_response_headers.started request=<Request [b'POST']>
+2025-06-19 11:30:48,261 [DEBUG] httpcore.http11: receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Content-Length', b'8416'), (b'Content-Type', b'application/json'), (b'access-control-allow-origin', b'*'), (b'apim-request-id', b'b768bc77-46db-499b-a14f-c8a378ddfbba'), (b'Strict-Transport-Security', b'max-age=31536000; includeSubDomains; preload'), (b'x-content-type-options', b'nosniff'), (b'x-ms-region', b'Japan East'), (b'x-ratelimit-remaining-tokens', b'149987'), (b'x-ratelimit-limit-tokens', b'150000'), (b'x-request-id', b'd9833412-cf20-4b47-b90d-1196ea4b2313'), (b'x-ms-client-request-id', b'b768bc77-46db-499b-a14f-c8a378ddfbba'), (b'azureml-model-session', b'd021-20250523095313'), (b'x-ms-deployment-name', b'ada-002'), (b'Date', b'Thu, 19 Jun 2025 02:30:48 GMT')])
+2025-06-19 11:30:48,261 [INFO] httpx: HTTP Request: POST https://adt-consulting.openai.azure.com/openai/deployments/ada-002/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2025-06-19 11:30:48,261 [DEBUG] httpcore.http11: receive_response_body.started request=<Request [b'POST']>
+2025-06-19 11:30:48,261 [DEBUG] httpcore.http11: receive_response_body.complete
+2025-06-19 11:30:48,261 [DEBUG] httpcore.http11: response_closed.started
+2025-06-19 11:30:48,261 [DEBUG] httpcore.http11: response_closed.complete
+2025-06-19 11:30:48,261 [DEBUG] openai._base_client: HTTP Response: POST https://adt-consulting.openai.azure.com/openai/deployments/ada-002/embeddings?api-version=2025-01-01-preview "200 OK" Headers({'content-length': '8416', 'content-type': 'application/json', 'access-control-allow-origin': '*', 'apim-request-id': 'b768bc77-46db-499b-a14f-c8a378ddfbba', 'strict-transport-security': 'max-age=31536000; includeSubDomains; preload', 'x-content-type-options': 'nosniff', 'x-ms-region': 'Japan East', 'x-ratelimit-remaining-tokens': '149987', 'x-ratelimit-limit-tokens': '150000', 'x-request-id': 'd9833412-cf20-4b47-b90d-1196ea4b2313', 'x-ms-client-request-id': 'b768bc77-46db-499b-a14f-c8a378ddfbba', 'azureml-model-session': 'd021-20250523095313', 'x-ms-deployment-name': 'ada-002', 'date': 'Thu, 19 Jun 2025 02:30:48 GMT'})
+2025-06-19 11:30:48,261 [DEBUG] openai._base_client: request_id: d9833412-cf20-4b47-b90d-1196ea4b2313
+2025-06-19 11:30:57,064 [DEBUG] openai._base_client: Request options: {'method': 'post', 'url': '/embeddings', 'headers': {'api-key': '<redacted>'}, 'files': None, 'idempotency_key': 'stainless-python-retry-3d13fdf0-ce52-448f-ace6-f6295cb32b5d', 'post_parser': <function Embeddings.create.<locals>.parser at 0x1221b6c00>, 'json_data': {'input': [[13094, 54535, 41953, 18359, 48765, 94, 34961, 17835, 47419, 66338, 34983, 59269, 246]], 'model': 'text-embedding-ada-002', 'encoding_format': 'base64'}}
+2025-06-19 11:30:57,081 [DEBUG] openai._base_client: Sending HTTP Request: POST https://adt-consulting.openai.azure.com/openai/deployments/ada-002/embeddings?api-version=2025-01-01-preview
+2025-06-19 11:30:57,082 [DEBUG] httpcore.connection: connect_tcp.started host='adt-consulting.openai.azure.com' port=443 local_address=None timeout=None socket_options=None
+2025-06-19 11:30:57,124 [DEBUG] httpcore.connection: connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x1221e0050>
+2025-06-19 11:30:57,124 [DEBUG] httpcore.connection: start_tls.started ssl_context=<ssl.SSLContext object at 0x11794e8d0> server_hostname='adt-consulting.openai.azure.com' timeout=None
+2025-06-19 11:30:57,208 [DEBUG] httpcore.connection: start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x122171bd0>
+2025-06-19 11:30:57,208 [DEBUG] httpcore.http11: send_request_headers.started request=<Request [b'POST']>
+2025-06-19 11:30:57,208 [DEBUG] httpcore.http11: send_request_headers.complete
+2025-06-19 11:30:57,208 [DEBUG] httpcore.http11: send_request_body.started request=<Request [b'POST']>
+2025-06-19 11:30:57,208 [DEBUG] httpcore.http11: send_request_body.complete
+2025-06-19 11:30:57,208 [DEBUG] httpcore.http11: receive_response_headers.started request=<Request [b'POST']>
+2025-06-19 11:30:57,290 [DEBUG] httpcore.http11: receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Content-Length', b'8416'), (b'Content-Type', b'application/json'), (b'access-control-allow-origin', b'*'), (b'apim-request-id', b'36eecd0e-1618-4e18-a221-0ed2b5d49061'), (b'Strict-Transport-Security', b'max-age=31536000; includeSubDomains; preload'), (b'x-content-type-options', b'nosniff'), (b'x-ms-region', b'Japan East'), (b'x-ratelimit-remaining-tokens', b'149974'), (b'x-ratelimit-limit-tokens', b'150000'), (b'x-request-id', b'16c76a12-5387-45f5-82dd-ad64d6878b5d'), (b'x-ms-client-request-id', b'36eecd0e-1618-4e18-a221-0ed2b5d49061'), (b'azureml-model-session', b'd022-20250523105926'), (b'x-ms-deployment-name', b'ada-002'), (b'Date', b'Thu, 19 Jun 2025 02:30:57 GMT')])
+2025-06-19 11:30:57,290 [INFO] httpx: HTTP Request: POST https://adt-consulting.openai.azure.com/openai/deployments/ada-002/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2025-06-19 11:30:57,291 [DEBUG] httpcore.http11: receive_response_body.started request=<Request [b'POST']>
+2025-06-19 11:30:57,291 [DEBUG] httpcore.http11: receive_response_body.complete
+2025-06-19 11:30:57,291 [DEBUG] httpcore.http11: response_closed.started
+2025-06-19 11:30:57,291 [DEBUG] httpcore.http11: response_closed.complete
+2025-06-19 11:30:57,291 [DEBUG] openai._base_client: HTTP Response: POST https://adt-consulting.openai.azure.com/openai/deployments/ada-002/embeddings?api-version=2025-01-01-preview "200 OK" Headers({'content-length': '8416', 'content-type': 'application/json', 'access-control-allow-origin': '*', 'apim-request-id': '36eecd0e-1618-4e18-a221-0ed2b5d49061', 'strict-transport-security': 'max-age=31536000; includeSubDomains; preload', 'x-content-type-options': 'nosniff', 'x-ms-region': 'Japan East', 'x-ratelimit-remaining-tokens': '149974', 'x-ratelimit-limit-tokens': '150000', 'x-request-id': '16c76a12-5387-45f5-82dd-ad64d6878b5d', 'x-ms-client-request-id': '36eecd0e-1618-4e18-a221-0ed2b5d49061', 'azureml-model-session': 'd022-20250523105926', 'x-ms-deployment-name': 'ada-002', 'date': 'Thu, 19 Jun 2025 02:30:57 GMT'})
+2025-06-19 11:30:57,291 [DEBUG] openai._base_client: request_id: 16c76a12-5387-45f5-82dd-ad64d6878b5d
+2025-06-19 11:30:59,526 [DEBUG] openai._base_client: Request options: {'method': 'post', 'url': '/embeddings', 'headers': {'api-key': '<redacted>'}, 'files': None, 'idempotency_key': 'stainless-python-retry-066fb314-e5b1-43ae-bf2f-2e73d9df0fe5', 'post_parser': <function Embeddings.create.<locals>.parser at 0x11b5aec00>, 'json_data': {'input': [[13094, 54535, 41953, 18359, 48765, 94, 34961, 17835, 47419, 66338, 34983, 59269, 246]], 'model': 'text-embedding-ada-002', 'encoding_format': 'base64'}}
+2025-06-19 11:30:59,542 [DEBUG] openai._base_client: Sending HTTP Request: POST https://adt-consulting.openai.azure.com/openai/deployments/ada-002/embeddings?api-version=2025-01-01-preview
+2025-06-19 11:30:59,543 [DEBUG] httpcore.connection: connect_tcp.started host='adt-consulting.openai.azure.com' port=443 local_address=None timeout=None socket_options=None
+2025-06-19 11:30:59,580 [DEBUG] httpcore.connection: connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x11b5d8050>
+2025-06-19 11:30:59,581 [DEBUG] httpcore.connection: start_tls.started ssl_context=<ssl.SSLContext object at 0x11a54e8d0> server_hostname='adt-consulting.openai.azure.com' timeout=None
+2025-06-19 11:30:59,660 [DEBUG] httpcore.connection: start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x11b569bd0>
+2025-06-19 11:30:59,660 [DEBUG] httpcore.http11: send_request_headers.started request=<Request [b'POST']>
+2025-06-19 11:30:59,661 [DEBUG] httpcore.http11: send_request_headers.complete
+2025-06-19 11:30:59,661 [DEBUG] httpcore.http11: send_request_body.started request=<Request [b'POST']>
+2025-06-19 11:30:59,661 [DEBUG] httpcore.http11: send_request_body.complete
+2025-06-19 11:30:59,661 [DEBUG] httpcore.http11: receive_response_headers.started request=<Request [b'POST']>
+2025-06-19 11:30:59,737 [DEBUG] httpcore.http11: receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Content-Length', b'8416'), (b'Content-Type', b'application/json'), (b'access-control-allow-origin', b'*'), (b'apim-request-id', b'3718653c-828f-44e1-84a6-5cb6981e6610'), (b'Strict-Transport-Security', b'max-age=31536000; includeSubDomains; preload'), (b'x-content-type-options', b'nosniff'), (b'x-ms-region', b'Japan East'), (b'x-ratelimit-remaining-tokens', b'149961'), (b'x-ratelimit-limit-tokens', b'150000'), (b'x-request-id', b'7cd6abcd-6b4f-41e0-8966-824dbdf46a0c'), (b'x-ms-client-request-id', b'3718653c-828f-44e1-84a6-5cb6981e6610'), (b'azureml-model-session', b'd022-20250523105926'), (b'x-ms-deployment-name', b'ada-002'), (b'Date', b'Thu, 19 Jun 2025 02:30:59 GMT')])
+2025-06-19 11:30:59,738 [INFO] httpx: HTTP Request: POST https://adt-consulting.openai.azure.com/openai/deployments/ada-002/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2025-06-19 11:30:59,738 [DEBUG] httpcore.http11: receive_response_body.started request=<Request [b'POST']>
+2025-06-19 11:30:59,738 [DEBUG] httpcore.http11: receive_response_body.complete
+2025-06-19 11:30:59,738 [DEBUG] httpcore.http11: response_closed.started
+2025-06-19 11:30:59,738 [DEBUG] httpcore.http11: response_closed.complete
+2025-06-19 11:30:59,738 [DEBUG] openai._base_client: HTTP Response: POST https://adt-consulting.openai.azure.com/openai/deployments/ada-002/embeddings?api-version=2025-01-01-preview "200 OK" Headers({'content-length': '8416', 'content-type': 'application/json', 'access-control-allow-origin': '*', 'apim-request-id': '3718653c-828f-44e1-84a6-5cb6981e6610', 'strict-transport-security': 'max-age=31536000; includeSubDomains; preload', 'x-content-type-options': 'nosniff', 'x-ms-region': 'Japan East', 'x-ratelimit-remaining-tokens': '149961', 'x-ratelimit-limit-tokens': '150000', 'x-request-id': '7cd6abcd-6b4f-41e0-8966-824dbdf46a0c', 'x-ms-client-request-id': '3718653c-828f-44e1-84a6-5cb6981e6610', 'azureml-model-session': 'd022-20250523105926', 'x-ms-deployment-name': 'ada-002', 'date': 'Thu, 19 Jun 2025 02:30:59 GMT'})
+2025-06-19 11:30:59,739 [DEBUG] openai._base_client: request_id: 7cd6abcd-6b4f-41e0-8966-824dbdf46a0c
+2025-06-19 11:31:02,351 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:31:05,260 [DEBUG] python_multipart.multipart: Calling on_part_begin with no data
+2025-06-19 11:31:05,260 [DEBUG] python_multipart.multipart: Calling on_header_field with data[42:61]
+2025-06-19 11:31:05,260 [DEBUG] python_multipart.multipart: Calling on_header_value with data[63:93]
+2025-06-19 11:31:05,260 [DEBUG] python_multipart.multipart: Calling on_header_end with no data
+2025-06-19 11:31:05,260 [DEBUG] python_multipart.multipart: Calling on_headers_finished with no data
+2025-06-19 11:31:05,260 [DEBUG] python_multipart.multipart: Calling on_part_data with data[97:100]
+2025-06-19 11:31:05,260 [DEBUG] python_multipart.multipart: Calling on_part_end with no data
+2025-06-19 11:31:05,260 [DEBUG] python_multipart.multipart: Calling on_part_begin with no data
+2025-06-19 11:31:05,260 [DEBUG] python_multipart.multipart: Calling on_header_field with data[144:163]
+2025-06-19 11:31:05,260 [DEBUG] python_multipart.multipart: Calling on_header_value with data[165:193]
+2025-06-19 11:31:05,260 [DEBUG] python_multipart.multipart: Calling on_header_end with no data
+2025-06-19 11:31:05,260 [DEBUG] python_multipart.multipart: Calling on_headers_finished with no data
+2025-06-19 11:31:05,261 [DEBUG] python_multipart.multipart: Calling on_part_data with data[197:200]
+2025-06-19 11:31:05,261 [DEBUG] python_multipart.multipart: Calling on_part_end with no data
+2025-06-19 11:31:05,261 [DEBUG] python_multipart.multipart: Calling on_part_begin with no data
+2025-06-19 11:31:05,261 [DEBUG] python_multipart.multipart: Calling on_header_field with data[244:263]
+2025-06-19 11:31:05,261 [DEBUG] python_multipart.multipart: Calling on_header_value with data[265:297]
+2025-06-19 11:31:05,261 [DEBUG] python_multipart.multipart: Calling on_header_end with no data
+2025-06-19 11:31:05,261 [DEBUG] python_multipart.multipart: Calling on_headers_finished with no data
+2025-06-19 11:31:05,261 [DEBUG] python_multipart.multipart: Calling on_part_data with data[301:371]
+2025-06-19 11:31:05,262 [DEBUG] python_multipart.multipart: Calling on_part_end with no data
+2025-06-19 11:31:05,262 [DEBUG] python_multipart.multipart: Calling on_part_begin with no data
+2025-06-19 11:31:05,262 [DEBUG] python_multipart.multipart: Calling on_header_field with data[415:434]
+2025-06-19 11:31:05,262 [DEBUG] python_multipart.multipart: Calling on_header_value with data[436:463]
+2025-06-19 11:31:05,262 [DEBUG] python_multipart.multipart: Calling on_header_end with no data
+2025-06-19 11:31:05,262 [DEBUG] python_multipart.multipart: Calling on_headers_finished with no data
+2025-06-19 11:31:05,262 [DEBUG] python_multipart.multipart: Calling on_part_data with data[467:486]
+2025-06-19 11:31:05,262 [DEBUG] python_multipart.multipart: Calling on_part_end with no data
+2025-06-19 11:31:05,262 [DEBUG] python_multipart.multipart: Calling on_part_begin with no data
+2025-06-19 11:31:05,262 [DEBUG] python_multipart.multipart: Calling on_header_field with data[530:549]
+2025-06-19 11:31:05,262 [DEBUG] python_multipart.multipart: Calling on_header_value with data[551:580]
+2025-06-19 11:31:05,262 [DEBUG] python_multipart.multipart: Calling on_header_end with no data
+2025-06-19 11:31:05,262 [DEBUG] python_multipart.multipart: Calling on_headers_finished with no data
+2025-06-19 11:31:05,262 [DEBUG] python_multipart.multipart: Calling on_part_data with data[584:626]
+2025-06-19 11:31:05,262 [DEBUG] python_multipart.multipart: Calling on_part_end with no data
+2025-06-19 11:31:05,262 [DEBUG] python_multipart.multipart: Calling on_part_begin with no data
+2025-06-19 11:31:05,262 [DEBUG] python_multipart.multipart: Calling on_header_field with data[670:689]
+2025-06-19 11:31:05,263 [DEBUG] python_multipart.multipart: Calling on_header_value with data[691:751]
+2025-06-19 11:31:05,263 [DEBUG] python_multipart.multipart: Calling on_header_end with no data
+2025-06-19 11:31:05,263 [DEBUG] python_multipart.multipart: Calling on_header_field with data[753:765]
+2025-06-19 11:31:05,263 [DEBUG] python_multipart.multipart: Calling on_header_value with data[767:832]
+2025-06-19 11:31:05,263 [DEBUG] python_multipart.multipart: Calling on_header_end with no data
+2025-06-19 11:31:05,263 [DEBUG] python_multipart.multipart: Calling on_headers_finished with no data
+2025-06-19 11:31:05,263 [DEBUG] python_multipart.multipart: Calling on_part_data with data[836:11501]
+2025-06-19 11:31:05,263 [DEBUG] python_multipart.multipart: Calling on_part_end with no data
+2025-06-19 11:31:05,263 [DEBUG] python_multipart.multipart: Calling on_part_begin with no data
+2025-06-19 11:31:05,263 [DEBUG] python_multipart.multipart: Calling on_header_field with data[11545:11564]
+2025-06-19 11:31:05,263 [DEBUG] python_multipart.multipart: Calling on_header_value with data[11566:11624]
+2025-06-19 11:31:05,263 [DEBUG] python_multipart.multipart: Calling on_header_end with no data
+2025-06-19 11:31:05,263 [DEBUG] python_multipart.multipart: Calling on_header_field with data[11626:11638]
+2025-06-19 11:31:05,263 [DEBUG] python_multipart.multipart: Calling on_header_value with data[11640:11705]
+2025-06-19 11:31:05,263 [DEBUG] python_multipart.multipart: Calling on_header_end with no data
+2025-06-19 11:31:05,263 [DEBUG] python_multipart.multipart: Calling on_headers_finished with no data
+2025-06-19 11:31:05,263 [DEBUG] python_multipart.multipart: Calling on_part_data with data[11709:106232]
+2025-06-19 11:31:05,264 [DEBUG] python_multipart.multipart: Calling on_part_end with no data
+2025-06-19 11:31:05,264 [DEBUG] python_multipart.multipart: Calling on_end with no data
+2025-06-19 11:31:05,265 [ERROR] app: An unexpected error occurred
+Traceback (most recent call last):
+  File "/Users/taegyunkim/backup_wisenut_service/sub_lang/app.py", line 85, in create_upload_files
+    auto_generator.sentence_generator.initialize_azure_config(project_id)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "/Users/taegyunkim/backup_wisenut_service/sub_lang/auto_generator/sentence_generator.py", line 60, in initialize_azure_config
+    print(f"AZURE_OPENAI_KEY: {AZURE_OPENAI_KEY[:5]}...")
+                               ~~~~~~~~~~~~~~~~^^^^
+TypeError: 'NoneType' object is not subscriptable
+2025-06-19 11:31:07,469 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:31:12,470 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:31:17,472 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:31:22,472 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:31:27,472 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:31:32,470 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:31:38,133 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:31:43,130 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:31:48,134 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:31:53,132 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:31:58,134 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:32:03,130 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:32:08,135 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:32:13,134 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:32:18,133 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:32:23,135 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:32:28,131 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:32:33,133 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:33:12,147 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:34:12,138 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:35:12,138 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:36:12,143 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:37:12,145 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:38:12,143 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:39:12,146 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:40:12,142 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:41:12,137 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:42:12,148 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:43:12,139 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:44:12,133 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:45:12,137 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:46:12,139 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:47:12,131 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:48:12,141 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:49:12,130 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:50:12,128 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 11:51:12,136 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 12:08:56,215 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 12:09:56,216 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 12:10:56,226 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 12:11:56,231 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 12:12:56,218 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 12:13:56,223 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 12:14:56,223 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 12:15:56,221 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 12:16:56,222 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 12:17:56,225 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 12:18:56,221 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 12:19:56,223 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 12:20:56,243 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 12:21:56,223 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 12:22:56,231 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 12:23:56,233 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 12:24:56,228 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 12:25:56,239 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 12:26:56,229 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 12:27:56,239 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 12:28:56,235 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 12:29:56,228 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 12:30:56,238 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 12:31:56,239 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 12:32:56,232 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 12:33:56,238 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 12:34:56,241 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 12:35:56,244 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 12:36:31,423 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 12:36:36,570 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 12:36:41,570 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 12:36:46,568 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 12:36:51,569 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 12:36:56,569 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 12:37:02,227 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 12:37:07,227 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 12:37:12,228 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 12:37:17,233 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 12:37:22,321 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 12:37:27,308 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 12:37:32,328 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 12:37:37,305 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 12:37:42,320 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 12:37:47,327 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 12:37:52,308 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 12:37:57,302 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 12:38:56,393 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 12:39:56,324 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 12:40:56,442 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 12:41:56,394 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 12:42:56,364 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 12:43:56,430 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 12:44:56,257 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 12:45:56,254 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 12:46:56,263 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 12:47:56,255 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 12:48:56,268 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 12:49:56,263 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 12:50:56,252 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 12:51:56,196 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 12:52:56,189 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 12:53:56,190 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 12:54:56,191 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 12:55:56,190 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 12:56:56,192 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 12:57:56,177 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 12:58:56,183 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 12:59:56,189 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 13:00:56,189 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 13:01:56,180 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 13:02:56,178 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 13:03:56,200 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 13:04:56,183 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 13:05:56,193 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 13:06:56,184 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 13:07:56,185 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 13:08:16,725 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 13:08:21,507 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 13:08:26,508 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 13:08:31,505 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 13:08:36,507 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 13:08:41,508 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 13:08:46,508 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 13:08:51,507 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 13:08:56,506 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 13:09:01,508 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 13:09:06,507 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 13:09:11,507 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 13:09:16,509 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 13:09:21,505 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 13:09:26,508 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 13:09:31,507 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 13:09:36,506 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 13:09:41,508 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 13:09:43,078 [DEBUG] openai._base_client: Request options: {'method': 'post', 'url': '/embeddings', 'headers': {'api-key': '<redacted>'}, 'files': None, 'idempotency_key': 'stainless-python-retry-4b9e79dc-240f-416a-a3eb-45116c85fc1b', 'post_parser': <function Embeddings.create.<locals>.parser at 0x12f09ec00>, 'json_data': {'input': [[13094, 54535, 41953, 18359, 48765, 94, 34961, 17835, 47419, 66338, 34983, 59269, 246]], 'model': 'text-embedding-ada-002', 'encoding_format': 'base64'}}
+2025-06-19 13:09:43,099 [DEBUG] openai._base_client: Sending HTTP Request: POST https://adt-consulting.openai.azure.com/openai/deployments/ada-002/embeddings?api-version=2025-01-01-preview
+2025-06-19 13:09:43,100 [DEBUG] httpcore.connection: connect_tcp.started host='adt-consulting.openai.azure.com' port=443 local_address=None timeout=None socket_options=None
+2025-06-19 13:09:43,176 [DEBUG] httpcore.connection: connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x12f0c8050>
+2025-06-19 13:09:43,176 [DEBUG] httpcore.connection: start_tls.started ssl_context=<ssl.SSLContext object at 0x12d84e8d0> server_hostname='adt-consulting.openai.azure.com' timeout=None
+2025-06-19 13:09:43,240 [DEBUG] httpcore.connection: start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x12f055310>
+2025-06-19 13:09:43,241 [DEBUG] httpcore.http11: send_request_headers.started request=<Request [b'POST']>
+2025-06-19 13:09:43,241 [DEBUG] httpcore.http11: send_request_headers.complete
+2025-06-19 13:09:43,241 [DEBUG] httpcore.http11: send_request_body.started request=<Request [b'POST']>
+2025-06-19 13:09:43,241 [DEBUG] httpcore.http11: send_request_body.complete
+2025-06-19 13:09:43,241 [DEBUG] httpcore.http11: receive_response_headers.started request=<Request [b'POST']>
+2025-06-19 13:09:43,342 [DEBUG] httpcore.http11: receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Content-Length', b'8416'), (b'Content-Type', b'application/json'), (b'access-control-allow-origin', b'*'), (b'apim-request-id', b'bab86d89-eb0c-42aa-ab72-b8c28cc321d8'), (b'Strict-Transport-Security', b'max-age=31536000; includeSubDomains; preload'), (b'x-content-type-options', b'nosniff'), (b'x-ms-region', b'Japan East'), (b'x-ratelimit-remaining-tokens', b'149987'), (b'x-ratelimit-limit-tokens', b'150000'), (b'x-request-id', b'4a176ed6-a93d-4e58-b370-0a5e33cf4d85'), (b'x-ms-client-request-id', b'bab86d89-eb0c-42aa-ab72-b8c28cc321d8'), (b'azureml-model-session', b'd022-20250523105926'), (b'x-ms-deployment-name', b'ada-002'), (b'Date', b'Thu, 19 Jun 2025 04:09:42 GMT')])
+2025-06-19 13:09:43,343 [INFO] httpx: HTTP Request: POST https://adt-consulting.openai.azure.com/openai/deployments/ada-002/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2025-06-19 13:09:43,343 [DEBUG] httpcore.http11: receive_response_body.started request=<Request [b'POST']>
+2025-06-19 13:09:43,344 [DEBUG] httpcore.http11: receive_response_body.complete
+2025-06-19 13:09:43,344 [DEBUG] httpcore.http11: response_closed.started
+2025-06-19 13:09:43,344 [DEBUG] httpcore.http11: response_closed.complete
+2025-06-19 13:09:43,344 [DEBUG] openai._base_client: HTTP Response: POST https://adt-consulting.openai.azure.com/openai/deployments/ada-002/embeddings?api-version=2025-01-01-preview "200 OK" Headers({'content-length': '8416', 'content-type': 'application/json', 'access-control-allow-origin': '*', 'apim-request-id': 'bab86d89-eb0c-42aa-ab72-b8c28cc321d8', 'strict-transport-security': 'max-age=31536000; includeSubDomains; preload', 'x-content-type-options': 'nosniff', 'x-ms-region': 'Japan East', 'x-ratelimit-remaining-tokens': '149987', 'x-ratelimit-limit-tokens': '150000', 'x-request-id': '4a176ed6-a93d-4e58-b370-0a5e33cf4d85', 'x-ms-client-request-id': 'bab86d89-eb0c-42aa-ab72-b8c28cc321d8', 'azureml-model-session': 'd022-20250523105926', 'x-ms-deployment-name': 'ada-002', 'date': 'Thu, 19 Jun 2025 04:09:42 GMT'})
+2025-06-19 13:09:43,344 [DEBUG] openai._base_client: request_id: 4a176ed6-a93d-4e58-b370-0a5e33cf4d85
+2025-06-19 13:09:46,508 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 13:09:51,508 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 13:09:51,769 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 13:09:56,771 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 13:10:01,773 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 13:10:06,769 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 13:10:07,182 [DEBUG] python_multipart.multipart: Calling on_part_begin with no data
+2025-06-19 13:10:07,182 [DEBUG] python_multipart.multipart: Calling on_header_field with data[42:61]
+2025-06-19 13:10:07,182 [DEBUG] python_multipart.multipart: Calling on_header_value with data[63:93]
+2025-06-19 13:10:07,183 [DEBUG] python_multipart.multipart: Calling on_header_end with no data
+2025-06-19 13:10:07,183 [DEBUG] python_multipart.multipart: Calling on_headers_finished with no data
+2025-06-19 13:10:07,183 [DEBUG] python_multipart.multipart: Calling on_part_data with data[97:100]
+2025-06-19 13:10:07,183 [DEBUG] python_multipart.multipart: Calling on_part_end with no data
+2025-06-19 13:10:07,183 [DEBUG] python_multipart.multipart: Calling on_part_begin with no data
+2025-06-19 13:10:07,183 [DEBUG] python_multipart.multipart: Calling on_header_field with data[144:163]
+2025-06-19 13:10:07,183 [DEBUG] python_multipart.multipart: Calling on_header_value with data[165:193]
+2025-06-19 13:10:07,183 [DEBUG] python_multipart.multipart: Calling on_header_end with no data
+2025-06-19 13:10:07,183 [DEBUG] python_multipart.multipart: Calling on_headers_finished with no data
+2025-06-19 13:10:07,183 [DEBUG] python_multipart.multipart: Calling on_part_data with data[197:200]
+2025-06-19 13:10:07,183 [DEBUG] python_multipart.multipart: Calling on_part_end with no data
+2025-06-19 13:10:07,183 [DEBUG] python_multipart.multipart: Calling on_part_begin with no data
+2025-06-19 13:10:07,183 [DEBUG] python_multipart.multipart: Calling on_header_field with data[244:263]
+2025-06-19 13:10:07,184 [DEBUG] python_multipart.multipart: Calling on_header_value with data[265:297]
+2025-06-19 13:10:07,184 [DEBUG] python_multipart.multipart: Calling on_header_end with no data
+2025-06-19 13:10:07,184 [DEBUG] python_multipart.multipart: Calling on_headers_finished with no data
+2025-06-19 13:10:07,184 [DEBUG] python_multipart.multipart: Calling on_part_data with data[301:371]
+2025-06-19 13:10:07,184 [DEBUG] python_multipart.multipart: Calling on_part_end with no data
+2025-06-19 13:10:07,184 [DEBUG] python_multipart.multipart: Calling on_part_begin with no data
+2025-06-19 13:10:07,184 [DEBUG] python_multipart.multipart: Calling on_header_field with data[415:434]
+2025-06-19 13:10:07,184 [DEBUG] python_multipart.multipart: Calling on_header_value with data[436:463]
+2025-06-19 13:10:07,184 [DEBUG] python_multipart.multipart: Calling on_header_end with no data
+2025-06-19 13:10:07,184 [DEBUG] python_multipart.multipart: Calling on_headers_finished with no data
+2025-06-19 13:10:07,184 [DEBUG] python_multipart.multipart: Calling on_part_data with data[467:486]
+2025-06-19 13:10:07,184 [DEBUG] python_multipart.multipart: Calling on_part_end with no data
+2025-06-19 13:10:07,184 [DEBUG] python_multipart.multipart: Calling on_part_begin with no data
+2025-06-19 13:10:07,184 [DEBUG] python_multipart.multipart: Calling on_header_field with data[530:549]
+2025-06-19 13:10:07,184 [DEBUG] python_multipart.multipart: Calling on_header_value with data[551:580]
+2025-06-19 13:10:07,184 [DEBUG] python_multipart.multipart: Calling on_header_end with no data
+2025-06-19 13:10:07,184 [DEBUG] python_multipart.multipart: Calling on_headers_finished with no data
+2025-06-19 13:10:07,184 [DEBUG] python_multipart.multipart: Calling on_part_data with data[584:626]
+2025-06-19 13:10:07,185 [DEBUG] python_multipart.multipart: Calling on_part_end with no data
+2025-06-19 13:10:07,185 [DEBUG] python_multipart.multipart: Calling on_part_begin with no data
+2025-06-19 13:10:07,185 [DEBUG] python_multipart.multipart: Calling on_header_field with data[670:689]
+2025-06-19 13:10:07,185 [DEBUG] python_multipart.multipart: Calling on_header_value with data[691:751]
+2025-06-19 13:10:07,185 [DEBUG] python_multipart.multipart: Calling on_header_end with no data
+2025-06-19 13:10:07,185 [DEBUG] python_multipart.multipart: Calling on_header_field with data[753:765]
+2025-06-19 13:10:07,185 [DEBUG] python_multipart.multipart: Calling on_header_value with data[767:832]
+2025-06-19 13:10:07,185 [DEBUG] python_multipart.multipart: Calling on_header_end with no data
+2025-06-19 13:10:07,185 [DEBUG] python_multipart.multipart: Calling on_headers_finished with no data
+2025-06-19 13:10:07,185 [DEBUG] python_multipart.multipart: Calling on_part_data with data[836:11501]
+2025-06-19 13:10:07,185 [DEBUG] python_multipart.multipart: Calling on_part_end with no data
+2025-06-19 13:10:07,185 [DEBUG] python_multipart.multipart: Calling on_part_begin with no data
+2025-06-19 13:10:07,185 [DEBUG] python_multipart.multipart: Calling on_header_field with data[11545:11564]
+2025-06-19 13:10:07,185 [DEBUG] python_multipart.multipart: Calling on_header_value with data[11566:11624]
+2025-06-19 13:10:07,185 [DEBUG] python_multipart.multipart: Calling on_header_end with no data
+2025-06-19 13:10:07,185 [DEBUG] python_multipart.multipart: Calling on_header_field with data[11626:11638]
+2025-06-19 13:10:07,185 [DEBUG] python_multipart.multipart: Calling on_header_value with data[11640:11705]
+2025-06-19 13:10:07,185 [DEBUG] python_multipart.multipart: Calling on_header_end with no data
+2025-06-19 13:10:07,185 [DEBUG] python_multipart.multipart: Calling on_headers_finished with no data
+2025-06-19 13:10:07,185 [DEBUG] python_multipart.multipart: Calling on_part_data with data[11709:16384]
+2025-06-19 13:10:07,186 [DEBUG] python_multipart.multipart: Calling on_part_data with data[0:89848]
+2025-06-19 13:10:07,186 [DEBUG] python_multipart.multipart: Calling on_part_end with no data
+2025-06-19 13:10:07,186 [DEBUG] python_multipart.multipart: Calling on_end with no data
+2025-06-19 13:10:07,187 [ERROR] app: An unexpected error occurred
+Traceback (most recent call last):
+  File "/Users/taegyunkim/backup_wisenut_service/sub_lang/app.py", line 85, in create_upload_files
+    auto_generator.sentence_generator.initialize_azure_config(project_id)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "/Users/taegyunkim/backup_wisenut_service/sub_lang/auto_generator/sentence_generator.py", line 64, in initialize_azure_config
+    print(f"AZURE_OPENAI_KEY: {AZURE_OPENAI_KEY[:5]}...")
+                               ~~~~~~~~~~~~~~~~^^^^
+TypeError: 'NoneType' object is not subscriptable
+2025-06-19 13:10:11,771 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 13:10:17,165 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 13:10:22,166 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 13:10:27,169 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 13:10:32,167 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 13:10:36,769 [INFO] app: Log data requested, returning 100 lines
+2025-06-19 13:10:41,772 [INFO] app: Log data requested, returning 100 lines
