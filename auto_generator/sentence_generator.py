@@ -34,10 +34,10 @@ def get_azure_config(project_id):
         }
     elif project_id == "CLT":
         config = {
-            "key": os.getenv("Private_AZURE_OPENAI_KEY"),
-            "endpoint": os.getenv("Private_AZURE_OPENAI_ENDPOINT"),
-            "deployment": os.getenv("Private_DEPLOYMENT_CHAT"),
-            "api_version": os.getenv("Private_AZURE_OPENAI_API_VERSION")
+            "key": os.getenv("AZURE_OPENAI_API_KEY"),
+            "endpoint": os.getenv("AZURE_OPENAI_ENDPOINT"),
+            "deployment": os.getenv("DEPLOYMENT_CHAT"),
+            "api_version": os.getenv("AZURE_OPENAI_API_VERSION")
         }
     else:
         raise ValueError("Invalid project_id. Use 'Public' or 'Corporate'")
@@ -218,7 +218,7 @@ def conversational_synonym(main_sent,Ed_data):
 
         답변 형식은 리스트([])로 출력해주세요.
         답변 형식 :
-        ["Question 1", "Question 2", "Question 3" , ... , "Question 10"]
+        ["Question 1","Question 2","Question 3",..,"Question 10"]
 
         답변 :
 
@@ -264,7 +264,7 @@ def conversational_summary(main_sent):
 
             답변 형식은 리스트([])로 출력해주세요.
             답변 형식 :
-            ["Question 1", "Question 2", "Question 3" , ... , "Question 10"]
+            ["Question1","Question2","Question3",..,"Question 10"]
 
             답변: 
             '''
@@ -306,7 +306,7 @@ def conversational_retrieval(field_business, user_type, d_data, Constraints):
             - 아래 예시들을 참고하여 작성해 주세요.
 
             # Output:
-            - 무조건 해당 리스트 형식으로 출력하세요. ["문장1", "문장2", ..., "문장10"]
+            - 무조건 해당 리스트 형식으로 출력하세요. ["문장1","문장2",..,"문장10"]
 
             # 예시1
             work: "노루컴퓨터 문의"
@@ -372,7 +372,7 @@ def conversational_exchange(d_data):
 
         답변 형식은 리스트([])로 출력해주세요.
         답변 형식 :
-        ["Question 1", "Question 2", "Question 3" , ... , "Question 10"]
+        ["Question1","Question2","Question3",..,"Question10"]
 
         답변 :
 

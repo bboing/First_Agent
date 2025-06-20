@@ -14,6 +14,7 @@ import test
 import random
 import ast
 import auto_generator.sentence_generator
+import auto_generator.pdf_question_generator
 from starlette.middleware.sessions import SessionMiddleware
 from fastapi import FastAPI, File, Form, UploadFile, HTTPException, Request, BackgroundTasks
 from fastapi.responses import JSONResponse
@@ -69,6 +70,64 @@ async def RAG_Management(request: Request):
 async def get_learning_data(request: Request):
     return templates.TemplateResponse("learning-data.html",{"request" : request, "title" : "Learning Data Input"})
 
+@app.get("/pdf-question-generator", response_class=HTMLResponse)
+async def get_pdf_question_generator(request: Request):
+    return templates.TemplateResponse("pdf_question_generator.html", {"request": request, "title": "PDF 기반 질문 생성"})
+
+
+# 학습 데이터 업로드 Form (PDF 기반 질문 생성)
+@app.post("/uploadfiles/pdf")
+async def create_upload_pdfs(
+    project_id: str = Form(...),
+    file1: UploadFile = File(...),
+    file2: UploadFile = File(...)
+):
+    
+    async def save_file_to_temp(upload_file: UploadFile):
+        if not upload_file.filename.endswith(".pdf"):
+            logger.error(f"File with invalid extension uploaded: {upload_file.filename}")
+            raise ValueError(f"Invalid file extension for {upload_file.filename}, must be .pdf")
+        
+        temp_file = NamedTemporaryFile(delete=False, suffix=".pdf")
+        with open(temp_file.name, 'wb') as f:
+            content = await upload_file.read()
+            f.write(content)
+        
+        logger.info(f"File saved to temporary location: {temp_file.name}")
+        return temp_file.name
+
+    file_path1 = None
+    file_path2 = None
+    try:
+        file_path1 = await save_file_to_temp(file1)
+        file_path2 = await save_file_to_temp(file2)
+
+        result = auto_generator.pdf_question_generator.generate_questions_from_documents(
+            pdf_path1=file_path1,
+            pdf_path2=file_path2,
+            project_id=project_id
+        )
+
+        if not result or 'file_name' not in result:
+            logger.error(f"Question generation failed or returned an invalid result: {result}")
+            raise HTTPException(status_code=500, detail="질문 생성에 실패했습니다.")
+        
+        logger.info(f"Successfully generated questions. Result: {result}")
+        return result
+
+    except ValueError as e:
+        logger.exception("A value error occurred during PDF processing")
+        raise HTTPException(status_code=400, detail=str(e))
+    except Exception as e:
+        logger.exception("An unexpected error occurred during PDF processing")
+        raise HTTPException(status_code=500, detail=str(e))
+    finally:
+        if file_path1 and os.path.exists(file_path1):
+            os.remove(file_path1)
+            logger.info(f"Temporary file {file_path1} deleted.")
+        if file_path2 and os.path.exists(file_path2):
+            os.remove(file_path2)
+            logger.info(f"Temporary file {file_path2} deleted.")
 
 # 학습 데이터 업로드 Form
 @app.post("/uploadfiles/sentence")
@@ -138,19 +197,32 @@ async def create_upload_files(
 
 
 # 학습데이터 결과 파일 다운로드
-@app.get("/downloadfiles/sentence/{filename}/")
-def download_files(filename: str):
-    logger.info(f"Download request received for file: {filename}")
+@app.get("/downloadfiles/{folder}/{filename}/")
+def download_files(folder: str, filename: str):
+    logger.info(f"Download request received for file: {filename} in folder: {folder}")
     
-    base_directory = os.getenv('DOWNLOAD_DIRECTORY', 'save_result/sentence')
-    filenames = os.path.basename(filename)
-    file_path = os.path.join(base_directory, filenames)  # 안전한 파일 경로 생성
+    # 허용된 폴더 목록으로 보안 강화
+    allowed_folders = ['sentence', 'pdf_questions']
+    if folder not in allowed_folders:
+        logger.error(f"Forbidden folder access attempt: {folder}")
+        raise HTTPException(status_code=403, detail="Forbidden folder")
+
+    base_directory = os.getenv('DOWNLOAD_DIRECTORY', f'save_result/{folder}')
+    # 경로 조작 공격 방지
+    safe_filename = os.path.basename(filename)
+    file_path = os.path.join(base_directory, safe_filename)
     
     logger.info(f"Attempting to download file from path: {file_path}")
     
     if not os.path.isfile(file_path):
-        logger.error(f"File not found at path: {file_path}")
-        raise HTTPException(status_code=404, detail="File not found")
+        # 만약 기본 경로에 파일이 없다면, 프로젝트 루트 기준으로 재시도
+        # (save_result가 아닌 docs/save_result 등에 저장되는 경우 대비)
+        alt_base_directory = os.path.join('docs', 'save_result', folder)
+        file_path = os.path.join(alt_base_directory, safe_filename)
+        logger.info(f"File not in primary path, trying alternative: {file_path}")
+        if not os.path.isfile(file_path):
+             logger.error(f"File not found at path: {file_path}")
+             raise HTTPException(status_code=404, detail="File not found")
 
     return FileResponse(file_path, media_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', filename=filename)
 

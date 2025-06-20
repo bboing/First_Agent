@@ -50,6 +50,7 @@ body {
     padding: 0;
 }
 .chat-container {
+    margin-top: 400px;
     max-width: 600px;
     width: 100%;
     margin: 40px auto;
@@ -334,25 +335,6 @@ body {
 
 /* style.css의 grid 레이아웃(.help-area, .helper, .graph-area, .down-sent 등) 관련 스타일 추가 */
 
-.help-area {
-    display: grid;
-    grid-template-columns: 1fr 5fr;
-    grid-template-rows: auto auto 1fr;
-    grid-column-gap: 0px;
-    grid-row-gap: 0px;
-}
-.helper { grid-area: 1 / 2 / 2 / 3; }
-.helper {
-    margin: 0;
-    text-align: left;
-    white-space: pre-wrap;
-    background-color: #f8f9fa;
-    color: #333;
-    border: 1px solid #1f12dd;
-    padding: 20px;
-    max-width: 650px;
-}
-
 .graph-area {
     display: grid;
     grid-template-columns: repeat(9, 1fr);
@@ -388,4 +370,41 @@ body {
     border-radius: 5px;
     margin-bottom: 10px;
     display: inline;
+}
+
+/* 실시간 로그 영역 스타일 (learning-data.html에서 병합) */
+.log-section {
+    margin-top: 80px;
+    margin-right: 120px;
+    margin-left: 200px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 15px;
+    background-color: #f9f9f9;
+    min-width: 350px;
+    max-width: 400px;
+    height: fit-content;
+}
+
+.log-section h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.log-container {
+    height: 300px;
+    overflow-y: auto;
+    background-color: #1e1e1e;
+    color: #ffffff;
+    padding: 10px;
+    border-radius: 3px;
+    font-family: 'Courier New', monospace;
+    font-size: 12px;
+    line-height: 1.4;
+}
+
+.log-entry {
+    margin-bottom: 2px;
+    word-wrap: break-word;
 }
