@@ -191,7 +191,7 @@ body {
 /* 메뉴, 헤더, 푸터, content, input-group 등 style.css에서 필요한 부분 추가 */
 
 .header-container {
-    font-family: 'Abril_Font', 'Hahmlet', sans-serif;
+    font-family: 'Abril_Font';
     position: fixed;
     top: 0;
     left: 0;
@@ -376,7 +376,6 @@ body {
 .log-section {
     margin-top: 80px;
     margin-right: 120px;
-    margin-left: 200px;
     border: 1px solid #ddd;
     border-radius: 5px;
     padding: 15px;

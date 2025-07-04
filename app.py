@@ -75,20 +75,24 @@ async def get_pdf_question_generator(request: Request):
     return templates.TemplateResponse("pdf_question_generator.html", {"request": request, "title": "PDF 기반 질문 생성"})
 
 
-# 학습 데이터 업로드 Form (PDF 기반 질문 생성)
+# 학습 데이터 업로드 Form (PDF, 이미지, XML 기반 질문 생성)
 @app.post("/uploadfiles/pdf")
-async def create_upload_pdfs(
+async def create_upload_documents(
     project_id: str = Form(...),
     file1: UploadFile = File(...),
     file2: UploadFile = File(...)
 ):
     
     async def save_file_to_temp(upload_file: UploadFile):
-        if not upload_file.filename.endswith(".pdf"):
-            logger.error(f"File with invalid extension uploaded: {upload_file.filename}")
-            raise ValueError(f"Invalid file extension for {upload_file.filename}, must be .pdf")
+        # 지원하는 파일 확장자
+        supported_extensions = ['.pdf', '.jpg', '.jpeg', '.png', '.bmp', '.tiff', '.tif', '.xml']
+        file_extension = os.path.splitext(upload_file.filename)[1].lower()
         
-        temp_file = NamedTemporaryFile(delete=False, suffix=".pdf")
+        if file_extension not in supported_extensions:
+            logger.error(f"File with invalid extension uploaded: {upload_file.filename}")
+            raise ValueError(f"지원하지 않는 파일 형식입니다: {file_extension}. 지원 형식: {', '.join(supported_extensions)}")
+        
+        temp_file = NamedTemporaryFile(delete=False, suffix=file_extension)
         with open(temp_file.name, 'wb') as f:
             content = await upload_file.read()
             f.write(content)
@@ -103,8 +107,8 @@ async def create_upload_pdfs(
         file_path2 = await save_file_to_temp(file2)
 
         result = auto_generator.pdf_question_generator.generate_questions_from_documents(
-            pdf_path1=file_path1,
-            pdf_path2=file_path2,
+            file_path1=file_path1,
+            file_path2=file_path2,
             project_id=project_id
         )
 
@@ -116,10 +120,10 @@ async def create_upload_pdfs(
         return result
 
     except ValueError as e:
-        logger.exception("A value error occurred during PDF processing")
+        logger.exception("A value error occurred during document processing")
         raise HTTPException(status_code=400, detail=str(e))
     except Exception as e:
-        logger.exception("An unexpected error occurred during PDF processing")
+        logger.exception("An unexpected error occurred during document processing")
         raise HTTPException(status_code=500, detail=str(e))
     finally:
         if file_path1 and os.path.exists(file_path1):

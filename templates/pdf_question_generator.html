@@ -141,7 +141,10 @@
 
         <main class="main-content">
             <div class="form-container">
-                <h1>PDF 기반 질문 생성</h1>
+                <h1>문서 기반 질문 생성</h1>
+                <p style="text-align: center; color: #666; margin-bottom: 30px;">
+                    PDF, 이미지(JPG, PNG, BMP, TIFF), XML 파일을 업로드하여 질문을 생성
+                </p>
                 <form id="upload-form" action="/uploadfiles/pdf" method="post" enctype="multipart/form-data">
                     <div class="form-group">
                         <label for="project-id-select">사업부 선택:</label>
@@ -149,13 +152,13 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="file1">PDF 파일 1:</label>
-                        <input type="file" name="file1" id="file1" accept=".pdf" required>
+                        <label for="file1">워크 플로우(PDF, 이미지, XML):</label>
+                        <input type="file" name="file1" id="file1" accept=".pdf,.jpg,.jpeg,.png,.bmp,.tiff,.tif,.xml" required>
                     </div>
 
                     <div class="form-group">
-                        <label for="file2">PDF 파일 2:</label>
-                        <input type="file" name="file2" id="file2" accept=".pdf" required>
+                        <label for="file2">상세 Task(PDF, 이미지, XML):</label>
+                        <input type="file" name="file2" id="file2" accept=".pdf,.jpg,.jpeg,.png,.bmp,.tiff,.tif,.xml" required>
                     </div>
 
                     <button class="submit-btn" type="submit">질문 생성 시작</button>

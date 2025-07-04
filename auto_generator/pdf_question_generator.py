@@ -16,9 +16,8 @@ if os.path.exists(dotenv_path):
     load_dotenv(dotenv_path)
 
 # --- Azure OpenAI 및 DI 환경 변수 설정 ---
-
 def get_azure_config(project_id):
-    """프로젝트 ID에 따라 Azure OpenAI 설정을 가져옵니다."""
+
     if project_id == "Public":
         config = {
             "key": os.getenv("Public_AZURE_OPENAI_KEY"),
@@ -54,28 +53,133 @@ def initialize_azure_config(project_id):
     azure_config = get_azure_config(project_id)
     logging.info(f"Azure config initialized for project_id: {project_id}")
 
+
+# 파일 형식에 따라 텍스트를 추출
+def extract_text_from_file(file_path: str) -> str:
+
+    try:
+        file_extension = os.path.splitext(file_path)[1].lower()
+        
+        if file_extension == '.pdf':
+            return extract_text_from_pdf(file_path)
+        elif file_extension in ['.jpg', '.jpeg', '.png', '.bmp', '.tiff', '.tif']:
+            return extract_text_from_image(file_path)
+        elif file_extension == '.xml':
+            return extract_text_from_xml(file_path)
+        else:
+            raise ValueError(f"지원하지 않는 파일 형식입니다: {file_extension}")
+            
+    except Exception as e:
+        logging.error(f"Error extracting text from file {file_path}: {e}")
+        raise
+
+# PDF 파일에서 텍스트를 추출
 def extract_text_from_pdf(file_path: str) -> str:
-    """Azure Document Intelligence를 사용해 PDF에서 텍스트를 추출합니다."""
+    """
+    Azure Document Intelligence를 사용하여 PDF에서 텍스트를 추출합니다.
+    """
     try:
         endpoint = os.getenv("AZURE_DI_ENDPOINT")
         key = os.getenv("AZURE_DI_KEY")
-        if not endpoint or not key:
-            raise ValueError("AZURE_DI_ENDPOINT and AZURE_DI_KEY must be set in .env file.")
         
+        if not endpoint or not key:
+            raise ValueError("AZURE_DI_ENDPOINT와 AZURE_DI_KEY가 .env 파일에 설정되지 않았습니다.")
+        
+        # Azure Document Intelligence 클라이언트 초기화
         client = DocumentAnalysisClient(endpoint=endpoint, credential=AzureKeyCredential(key))
-
+        
+        print(f"📄 PDF 분석 시작: {os.path.basename(file_path)}")
+        
+        # PDF 파일을 바이너리로 읽기
         with open(file_path, "rb") as f:
+            # Document Intelligence로 문서 분석
             poller = client.begin_analyze_document("prebuilt-document", f)
             result = poller.result()
         
-        logging.info(f"Successfully extracted text from {os.path.basename(file_path)}.")
-        return result.content
+        # 추출된 텍스트 가져오기
+        extracted_text = result.content
+        
+        if not extracted_text or not extracted_text.strip():
+            print(f"⚠️ 경고: {os.path.basename(file_path)}에서 텍스트를 추출할 수 없습니다.")
+            return ""
+        
+        print(f"✅ PDF 텍스트 추출 완료: {os.path.basename(file_path)} ({len(extracted_text)} 문자)")
+        return extracted_text
+        
     except Exception as e:
-        logging.error(f"Error extracting text from PDF {file_path}: {e}")
+        print(f"❌ PDF 텍스트 추출 실패 ({os.path.basename(file_path)}): {e}")
         raise
 
+
+# 이미지 파일에서 텍스트를 추출
+def extract_text_from_image(file_path: str) -> str:
+
+    try:
+        endpoint = os.getenv("AZURE_DI_ENDPOINT")
+        key = os.getenv("AZURE_DI_KEY")
+        
+        if not endpoint or not key:
+            raise ValueError("AZURE_DI_ENDPOINT와 AZURE_DI_KEY가 .env 파일에 설정되지 않았습니다.")
+        
+        # Azure Document Intelligence 클라이언트 초기화
+        client = DocumentAnalysisClient(endpoint=endpoint, credential=AzureKeyCredential(key))
+        
+        print(f"🖼️ 이미지 분석 시작: {os.path.basename(file_path)}")
+        
+        # 이미지 파일을 바이너리로 읽기
+        with open(file_path, "rb") as f:
+            # Document Intelligence로 문서 분석
+            poller = client.begin_analyze_document("prebuilt-document", f)
+            result = poller.result()
+        
+        # 추출된 텍스트 가져오기
+        extracted_text = result.content
+        
+        if not extracted_text or not extracted_text.strip():
+            print(f"⚠️ 경고: {os.path.basename(file_path)}에서 텍스트를 추출할 수 없습니다.")
+            return ""
+        
+        print(f"✅ 이미지 텍스트 추출 완료: {os.path.basename(file_path)} ({len(extracted_text)} 문자)")
+        return extracted_text
+        
+    except Exception as e:
+        print(f"❌ 이미지 텍스트 추출 실패 ({os.path.basename(file_path)}): {e}")
+        raise
+
+# XML 파일에서 텍스트를 추출
+def extract_text_from_xml(file_path: str) -> str:
+
+    try:
+        import xml.etree.ElementTree as ET
+        
+        tree = ET.parse(file_path)
+        root = tree.getroot()
+        
+        # XML의 모든 텍스트 내용을 추출
+        text_content = []
+        
+        def extract_text_from_element(element):
+            if element.text and element.text.strip():
+                text_content.append(element.text.strip())
+            for child in element:
+                extract_text_from_element(child)
+            if element.tail and element.tail.strip():
+                text_content.append(element.tail.strip())
+        
+        extract_text_from_element(root)
+        
+        extracted_text = ' '.join(text_content)
+        logging.info(f"Successfully extracted text from XML {os.path.basename(file_path)}.")
+        return extracted_text
+        
+    except Exception as e:
+        logging.error(f"Error extracting text from XML {file_path}: {e}")
+        raise
+
+
+# Azure OpenAI를 호출 > 응답
 def get_completion_from_messages(messages, temperature=0.5):
-    """Azure OpenAI를 호출하여 응답을 받습니다."""
+
     payload = {
         "temperature": temperature,
         "messages": messages
@@ -91,25 +195,54 @@ def get_completion_from_messages(messages, temperature=0.5):
     return response_json['choices'][0]['message']['content']
 
 def create_synthesis_questions(text1: str, text2: str) -> list:
-    """두 문서 내용을 기반으로 10개의 종합 질문을 생성합니다."""
+
     text1_snippet = text1[:4000]
     text2_snippet = text2[:4000]
 
     prompt_template = f'''
-# 첫 번째 문서 (일부):
+# 첫 번째 문서 내용:
 {text1_snippet}
 ---
-# 두 번째 문서 (일부):
+# 두 번째 문서 내용:
 {text2_snippet}
 
 # 지시사항:
-- 위 두 문서의 내용을 종합적으로 분석하여, 사용자가 두 문서를 모두 깊이 이해했는지 확인할 수 있는 **질문 10개**를 생성해주세요.
-- 질문은 두 문서를 비교/대조하거나, 한 문서의 개념을 다른 문서의 사례에 적용하는 등 종합적인 사고를 요구해야 합니다.
+- 첫 번째 문서는 업무 프로세스 정보를 담고 있습니다.
+- 두 번째 문서는 첫 번째 문서의 bpmn으로 task를 구분한 내용을 담고 있습니다.
+- 위 두 문서의 내용을 종합적으로 분석하여, 질문자가 두 문서를 모두 깊이 이해했는지 확인할 수 있는 **질문 30개**를 생성해주세요.
 - 질문은 구체적이고 명확해야 합니다.
 
+# 예시:
+'Create General BKG' 프로세스 관련 질문:
+* 'General BKG' 프로세스의 목적은 무엇인가요? 
+* 예약 변경 요청은 어떻게 접수되나요? 
+* 수동으로 예약을 생성하는 과정은 어떻게 되나요? 
+* E-Booking 업로드 과정은 어떻게 되나요? 
+* Booking Status가 'Firm'으로 확정되는 조건은 무엇인가요? 
+* Booking Status를 변경하는 방법에는 어떤 것들이 있나요? 
+* 예약 취소는 어떻게 이루어지나요? 
+* Empty Pick-up Order는 어떻게 전송되나요? 
+* Booking Receipt Notice는 어떻게 발송되나요? 
+* 'Create General BKG' 프로세스와 관련된 주요 프로그램은 무엇인가요? 
+데이터 및 시스템 연동 관련 질문:
+* 'Empty Pick-up' 서브 프로세스에서 외부 포털은 어떤 정보를 연동하나요?
+* 'Customer' 서브 프로세스에서 E-Service, E-Mail, FAX는 어떤 역할을 하나요?
+* 'Customer' (EDI) 서브 프로세스에서 EDI는 어떤 역할을 하나요?
+* EDI 설정은 어떤 역할을 하며, 어떤 정보가 포함되나요?
+* Booking Master 프로그램은 어떤 외부 시스템과 연동되나요? 
+* Empty Container Release Order 발송 시 EDI 연결 여부에 따라 어떤 차이가 있나요? 
+* Booking Receipt Notice 발송 시 고객에게 EDI를 보내려면 어떤 설정이 필요한가요? 
+* Booking Status가 'Firm'이 되면 재무 모듈로 어떤 정보가 전달되나요? 
+* 터미널로 IFTMBC 또는 COPARN 메시지가 전송될 수 있나요? 
+* 'Empty Pick-up Order' 및 'Booking Notice'와 관련된 외부 인터페이스 항목은 무엇인가요? 
+기타 질문:
+* 이 프로세스의 전체적인 문서화 목표는 무엇인가요?
+* Special Cargo Process는 어떤 역할을 하며, 어떤 주의사항이 있나요?
+* Inland Transport 준비는 어떤 상황에서 이루어지나요?
+* Vessel Space Control, Update Schedule, Create Schedule, Service Network 이벤트는 어떤 트리거 역할을 하나요?
+
 # 출력 형식:
-- 반드시 Python 리스트 형식으로만 반환해주세요.
-- 예시: ["문서 1의 A와 문서 2의 B는 어떤 차이점이 있나요?", "문서 2의 사례를 문서 1의 이론에 적용하면 어떻게 설명할 수 있나요?"]
+- 예시:["question1","question2","question3","question4","question5","question6","question7","question8","question9",..,"question30"]
 '''
     messages = [{'role': 'user', 'content': prompt_template}]
     
@@ -126,8 +259,10 @@ def create_synthesis_questions(text1: str, text2: str) -> list:
         logging.error(f"Failed to parse LLM response into a list: {raw_response}. Error: {e}")
         return [raw_response]
 
+
+# 질문 리스트를 Excel 파일로 저장
 def save_questions_to_excel(questions: list) -> dict:
-    """질문 리스트를 Excel 파일로 저장하고 파일명을 반환합니다."""
+
     try:
         df = pd.DataFrame(questions, columns=["Generated_Questions"])
         
@@ -146,55 +281,54 @@ def save_questions_to_excel(questions: list) -> dict:
         logging.error(f"Error in save_questions_to_excel: {e}")
         return None
 
-def generate_questions_from_documents(pdf_path1: str, pdf_path2: str, project_id: str) -> dict:
-    """두 PDF 파일로부터 질문을 생성하고 파일로 저장하는 메인 함수"""
+# 문서 기반 질문 생성
+def generate_questions_from_documents(file_path1: str, file_path2: str, project_id: str) -> dict:
+
     try:
-        logging.info("Starting question generation from PDF documents.")
+        print("🚀 문서 기반 질문 생성 시작...")
         
         # 1. Azure 설정 초기화
+        print(f"⚙️ Azure 설정 초기화 중... (프로젝트: {project_id})")
         initialize_azure_config(project_id)
 
-        # 2. 두 PDF에서 텍스트 추출
-        text1 = extract_text_from_pdf(pdf_path1)
-        text2 = extract_text_from_pdf(pdf_path2)
+        # 2. 두 파일에서 텍스트 추출
+        print("📖 문서에서 텍스트 추출 중...")
+        print(f"📄 파일 1: {os.path.basename(file_path1)}")
+        text1 = extract_text_from_file(file_path1)
+        
+        print(f"📄 파일 2: {os.path.basename(file_path2)}")
+        text2 = extract_text_from_file(file_path2)
+
+        # 텍스트 검증
+        if not text1.strip() or not text2.strip():
+            raise ValueError("하나 이상의 파일에서 텍스트를 추출할 수 없습니다.")
+
+        print(f"✅ 텍스트 추출 완료 - 파일1: {len(text1)}자, 파일2: {len(text2)}자")
 
         # 3. 텍스트를 기반으로 질문 생성
+        print("🤖 Azure OpenAI로 질문 생성 중...")
         questions = create_synthesis_questions(text1, text2)
 
         if not questions:
-            raise ValueError("Question generation failed, received no questions.")
+            raise ValueError("질문 생성에 실패했습니다. 빈 결과를 받았습니다.")
+
+        print(f"✅ {len(questions)}개의 질문 생성 완료")
 
         # 4. 질문을 Excel 파일로 저장
+        print("💾 Excel 파일로 저장 중...")
         result = save_questions_to_excel(questions)
         
-        logging.info("Question generation process completed successfully.")
+        if not result:
+            raise ValueError("파일 저장에 실패했습니다.")
+        
+        print("🎉 질문 생성 프로세스 완료!")
         return result
 
     except Exception as e:
+        print(f"❌ 오류 발생: {e}")
         logging.error(f"An error occurred in generate_questions_from_documents: {e}", exc_info=True)
         return None
 
 if __name__ == '__main__':
-    # 테스트용 코드
-    # 이 스크립트를 직접 실행하려면, 아래 경로에 테스트용 PDF 파일을 위치시키세요.
-    # 예: sub_lang/docs/test_doc1.pdf, sub_lang/docs/test_doc2.pdf
-    
-    logging.basicConfig(level=logging.INFO)
-    
-    # PDF 파일 경로 (실제 파일 경로로 수정 필요)
-    test_pdf1 = os.path.join(os.path.dirname(__file__), '..', 'docs', 'test_doc1.pdf')
-    test_pdf2 = os.path.join(os.path.dirname(__file__), '..', 'docs', 'test_doc2.pdf')
 
-    if not os.path.exists(test_pdf1) or not os.path.exists(test_pdf2):
-        print("="*50)
-        print("테스트를 위해 아래 경로에 PDF 파일이 필요합니다:")
-        print(f"1. {test_pdf1}")
-        print(f"2. {test_pdf2}")
-        print("="*50)
-    else:
-        # 'CLT' 프로젝트 ID로 테스트 실행
-        result = generate_questions_from_documents(test_pdf1, test_pdf2, 'CLT')
-        if result:
-            print(f"테스트 성공! 생성된 파일: {result['file_name']}")
-        else:
-            print("테스트 실패. 로그를 확인하세요.") 
+    print("🌐 브라우저에서 /pdf-question-generator 페이지에 접속하여 파일을 업로드하세요.") 

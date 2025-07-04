@@ -25,10 +25,17 @@ def get_embedding(text: str):
     return embedding_model.embed_query(text)
 
 # 4. Milvus 연결
-connections.connect(
-    host=os.getenv("MILVUS_HOST", "localhost"),
-    port=os.getenv("MILVUS_PORT", "19530")
-)
+try:
+    connections.connect(
+        host=os.getenv("MILVUS_HOST", "localhost"),
+        port=os.getenv("MILVUS_PORT", "19530")
+    )
+    print("✅ Milvus 연결 성공!")
+    MILVUS_AVAILABLE = True
+except Exception as e:
+    print(f"⚠️ Milvus 연결 실패: {e}")
+    print("Milvus 없이 애플리케이션을 실행합니다.")
+    MILVUS_AVAILABLE = False
 
 # 5. Milvus 컬렉션 생성 (없으면)
 def recreate_collection_if_needed(name: str, vector_dim: int):
@@ -69,7 +76,11 @@ def extract_topic(text: str) -> str:
 
 collection_name = "embedding_test"
 vector = get_embedding("이 문장을 벡터로 변환해줘")
-collection = recreate_collection_if_needed(collection_name, len(vector))
+
+if MILVUS_AVAILABLE:
+    collection = recreate_collection_if_needed(collection_name, len(vector))
+else:
+    collection = None
 
 # 6. Milvus에 벡터 삽입
 def insert_text_and_embedding(text: str, page: int, category: str, topic: str):
@@ -100,6 +111,10 @@ def search_similar_texts(query: str, limit: int = 3, similarity_threshold: float
     Returns:
         list: 임계값을 만족하는 검색 결과들
     """
+    if not MILVUS_AVAILABLE:
+        print("⚠️ Milvus가 연결되지 않아 검색을 수행할 수 없습니다.")
+        return []
+    
     query_vector = get_embedding(query)
     search_params = {"metric_type": "COSINE", 
                      "params": {"nprobe": 10}}

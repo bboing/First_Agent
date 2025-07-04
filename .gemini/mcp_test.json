@@ -1,0 +1,9 @@
+
+{
+    "mcp_id": "test_001",
+    "user": "gemini",
+    "data": {
+        "key1": "value1",
+        "key2": "value2"
+    }
+}

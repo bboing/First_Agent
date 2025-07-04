@@ -16,8 +16,8 @@ def handle_rag(query: str) -> str:
     Returns:
         str: RAG 에이전트의 응답
     """
-    # 1. Milvus에서 유사 문서 검색 (유사도 임계값 0.7 적용)
-    results = search_similar_texts(query, limit=3, similarity_threshold=0.7)
+    # 1. Milvus에서 유사 문서 검색 (유사도 임계값 0.3 적용)
+    results = search_similar_texts(query, limit=3, similarity_threshold=0.5)
     
     # 필터링된 결과가 없으면 관련 문서 없음 메시지 반환
     if not results:

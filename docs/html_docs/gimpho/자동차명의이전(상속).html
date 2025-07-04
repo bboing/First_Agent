@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>자동차명의이전(상속)</title>
+</head>
+<body>
+<table style="height: 1575px;" cellspacing="0"><colgroup><col width="95">      <
+col width="81">      <col width="81">      <col width="81">      <col width="104
+">      <col width="81">      <col width="81">      <col width="81">      <col w
+idth="81">      <tbody><tr><td style="height: 40px; text-align: center; color: r
+gb(51, 51, 51); font-size: 18pt; font-weight: bold; -ms-word-wrap: break-word; b
+ackground-color: rgb(255, 255, 255);" colspan="9"><span style="line-height: norm
+al; font-family: 맑은 고딕; font-size: 18pt; margin-top: 0px; margin-bottom: 0px;">공
+통업무&nbsp;작성서식</span></td></tr><tr><td style="height: 40px; color: rgb(51, 51, 51
+); font-size: 10pt; border-bottom-color: rgb(0, 0, 0); border-bottom-width: 2px;
+ border-bottom-style: solid; -ms-word-wrap: break-word; background-color: rgb(25
+5, 255, 255);"><div style="width: 95px !important; line-height: normal; font-fam
+ily: 굴림; font-size: 10pt; margin-top: 0px; margin-bottom: 0px;">&nbsp;</div></td
+><td style="height: 40px; color: rgb(51, 51, 51); font-size: 10pt; border-bottom
+-color: rgb(0, 0, 0); border-bottom-width: 2px; border-bottom-style: solid; -ms-
+word-wrap: break-word; background-color: rgb(255, 255, 255);"><div style="width:
+ 81px !important; line-height: normal; font-family: 굴림; font-size: 10pt; margin-
+top: 0px; margin-bottom: 0px;">&nbsp;</div></td><td style="height: 40px; color:
+rgb(51, 51, 51); font-size: 10pt; border-bottom-color: rgb(0, 0, 0); border-bott
+om-width: 2px; border-bottom-style: solid; -ms-word-wrap: break-word; background
+-color: rgb(255, 255, 255);"><div style="width: 81px !important; line-height: no
+rmal; font-family: 굴림; font-size: 10pt; margin-top: 0px; margin-bottom: 0px;">&n
+bsp;</div></td><td style="height: 40px; color: rgb(51, 51, 51); font-size: 10pt;
+ border-bottom-color: rgb(0, 0, 0); border-bottom-width: 2px; border-bottom-styl
+e: solid; -ms-word-wrap: break-word; background-color: rgb(255, 255, 255);"><div
+ style="width: 81px !important; line-height: normal; font-family: 굴림; font-size:
+ 10pt; margin-top: 0px; margin-bottom: 0px;">&nbsp;</div></td><td style="height:
+ 40px; color: rgb(51, 51, 51); font-size: 10pt; border-bottom-color: rgb(0, 0, 0
+); border-bottom-width: 2px; border-bottom-style: solid; -ms-word-wrap: break-wo
+rd; background-color: rgb(255, 255, 255);"><div style="width: 104px !important;
+line-height: normal; font-family: 굴림; font-size: 10pt; margin-top: 0px; margin-b
+ottom: 0px;">&nbsp;</div></td><td style="height: 40px; color: rgb(51, 51, 51); f
+ont-size: 10pt; border-bottom-color: rgb(0, 0, 0); border-bottom-width: 2px; bor
+der-bottom-style: solid; -ms-word-wrap: break-word; background-color: rgb(255, 2
+55, 255);"><div style="width: 81px !important; line-height: normal; font-family:
+ 굴림; font-size: 10pt; margin-top: 0px; margin-bottom: 0px;">&nbsp;</div></td><td
+ style="height: 40px; color: rgb(51, 51, 51); font-size: 10pt; border-bottom-col
+or: rgb(0, 0, 0); border-bottom-width: 2px; border-bottom-style: solid; -ms-word
+-wrap: break-word; background-color: rgb(255, 255, 255);"><div style="width: 81p
+x !important; line-height: normal; font-family: 굴림; font-size: 10pt; margin-top:
+ 0px; margin-bottom: 0px;">&nbsp;</div></td><td style="height: 40px; color: rgb(
+51, 51, 51); font-size: 10pt; border-bottom-color: rgb(0, 0, 0); border-bottom-w
+idth: 2px; border-bottom-style: solid; -ms-word-wrap: break-word; background-col
+or: rgb(255, 255, 255);"><div style="width: 81px !important; line-height: normal
+; font-family: 굴림; font-size: 10pt; margin-top: 0px; margin-bottom: 0px;">&nbsp;
+</div></td><td style="height: 40px; color: rgb(51, 51, 51); font-size: 10pt; bor
+der-bottom-color: rgb(0, 0, 0); border-bottom-width: 2px; border-bottom-style: s
+olid; -ms-word-wrap: break-word; background-color: rgb(255, 255, 255);"><div sty
+le="width: 81px !important; line-height: normal; font-family: 굴림; font-size: 10p
+t; margin-top: 0px; margin-bottom: 0px;">&nbsp;</div></td></tr><tr><td style="bo
+rder-width: 2px 1px 1px 2px; border-style: solid; border-color: rgb(0, 0, 0); he
+ight: 33px; text-align: center; color: rgb(51, 51, 51); font-size: 10pt; font-we
+ight: bold; -ms-word-wrap: break-word; background-color: rgb(153, 204, 255);" ro
+wspan="2"><span style="line-height: normal; font-family: 맑은 고딕; font-size: 10pt;
+ margin-top: 0px; margin-bottom: 0px;">소&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;속</span></
+td><td style="border-width: 2px 1px 1px; border-style: solid; border-color: rgb(
+0, 0, 0); height: 33px; text-align: center; color: rgb(51, 51, 51); font-size: 9
+pt; font-weight: bold; -ms-word-wrap: break-word; background-color: rgb(255, 255
+, 153);" colspan="2"><span style="line-height: normal; font-family: 맑은 고딕; font-
+size: 9pt; margin-top: 0px; margin-bottom: 0px;">시</span></td><td style="border-
+width: 2px 1px 1px; border-style: solid; border-color: rgb(0, 0, 0); height: 33p
+x; text-align: center; color: rgb(51, 51, 51); font-size: 9pt; font-weight: bold
+; -ms-word-wrap: break-word; background-color: rgb(255, 255, 153);" colspan="2">
+<span style="line-height: normal; font-family: 맑은 고딕; font-size: 9pt; margin-top
+: 0px; margin-bottom: 0px;">국</span></td><td style="border-width: 2px 1px 1px; b
+order-style: solid; border-color: rgb(0, 0, 0); height: 33px; text-align: center
+; color: rgb(51, 51, 51); font-size: 9pt; font-weight: bold; -ms-word-wrap: brea
+k-word; background-color: rgb(255, 255, 153);" colspan="2"><span style="line-hei
+ght: normal; font-family: 맑은 고딕; font-size: 9pt; margin-top: 0px; margin-bottom:
+ 0px;">과</span></td><td style="border-width: 2px 1px 1px; border-style: solid; b
+order-color: rgb(0, 0, 0); height: 33px; text-align: center; color: rgb(51, 51,
+51); font-size: 9pt; font-weight: bold; -ms-word-wrap: break-word; background-co
+lor: rgb(255, 255, 153);" colspan="2"><span style="line-height: normal; font-fam
+ily: 맑은 고딕; font-size: 9pt; margin-top: 0px; margin-bottom: 0px;">팀</span></td><
+/tr><tr><td style="border: 1px solid rgb(0, 0, 0); border-image: none; height: 4
+0px; text-align: center; font-size: 10pt; -ms-word-wrap: break-word; background-
+color: rgb(255, 255, 255);" colspan="2"><span style="line-height: normal; font-f
+amily: 맑은 고딕; font-size: 10pt; margin-top: 0px; margin-bottom: 0px;">김포시</span><
+/td><td style="border: 1px solid rgb(0, 0, 0); border-image: none; height: 40px;
+ text-align: center; color: rgb(51, 51, 51); font-size: 10pt; -ms-word-wrap: bre
+ak-word; background-color: rgb(255, 255, 255);" colspan="2"><p style="line-heigh
+t: 1.2; font-family: 굴림; font-size: 10pt; margin-top: 0px; margin-bottom: 0px;">
+교통건설국<br></p></td><td style="border: 1px solid rgb(0, 0, 0); border-image: none;
+ height: 40px; text-align: center; color: rgb(51, 51, 51); font-size: 10pt; -ms-
+word-wrap: break-word; background-color: rgb(255, 255, 255);" colspan="2"><span
+style="line-height: normal; font-family: 맑은 고딕; font-size: 10pt; margin-top: 0px
+; margin-bottom: 0px;">차량등록과</span></td><td style="border: 1px solid rgb(0, 0, 0
+); border-image: none; height: 40px; text-align: center; color: rgb(51, 51, 51);
+ font-size: 10pt; -ms-word-wrap: break-word; background-color: rgb(255, 255, 255
+);" colspan="2"><span style="line-height: normal; font-family: 맑은 고딕; font-size:
+ 10pt; margin-top: 0px; margin-bottom: 0px;">차량등록팀</span></td></tr><tr><td style
+="border-width: 1px 1px 1px 2px; border-style: solid; border-color: rgb(0, 0, 0)
+; height: 33px; text-align: center; color: rgb(51, 51, 51); font-size: 10pt; fon
+t-weight: bold; -ms-word-wrap: break-word; background-color: rgb(153, 204, 255);
+" rowspan="2"><span style="line-height: normal; font-family: 맑은 고딕; font-size: 1
+0pt; margin-top: 0px; margin-bottom: 0px;">민원분류</span></td><td style="border: 1p
+x solid rgb(0, 0, 0); border-image: none; height: 33px; text-align: center; colo
+r: rgb(51, 51, 51); font-size: 9pt; font-weight: bold; -ms-word-wrap: break-word
+; background-color: rgb(255, 255, 153);" colspan="2"><span style="line-height: n
+ormal; font-family: 맑은 고딕; font-size: 9pt; margin-top: 0px; margin-bottom: 0px;"
+>대</span></td><td style="border: 1px solid rgb(0, 0, 0); border-image: none; hei
+ght: 33px; text-align: center; color: rgb(51, 51, 51); font-size: 9pt; font-weig
+ht: bold; -ms-word-wrap: break-word; background-color: rgb(255, 255, 153);" cols
+pan="2"><span style="line-height: normal; font-family: 맑은 고딕; font-size: 9pt; ma
+rgin-top: 0px; margin-bottom: 0px;">중</span></td><td style="border: 1px solid rg
+b(0, 0, 0); border-image: none; height: 33px; text-align: center; color: rgb(51,
+ 51, 51); font-size: 10pt; font-weight: bold; -ms-word-wrap: break-word; backgro
+und-color: rgb(255, 255, 153);" colspan="4"><span style="line-height: normal; fo
+nt-family: 맑은 고딕; font-size: 10pt; margin-top: 0px; margin-bottom: 0px;">소</span
+></td></tr><tr><td style="border: 1px solid rgb(0, 0, 0); border-image: none; he
+ight: 40px; text-align: center; color: rgb(51, 51, 51); font-size: 10pt; -ms-wor
+d-wrap: break-word; background-color: rgb(255, 255, 255);" colspan="2"><span sty
+le="line-height: normal; font-family: 맑은 고딕; font-size: 10pt; margin-top: 0px; m
+argin-bottom: 0px;">교통</span></td><td style="border: 1px solid rgb(0, 0, 0); bor
+der-image: none; height: 40px; text-align: center; color: rgb(51, 51, 51); font-
+size: 10pt; -ms-word-wrap: break-word; background-color: rgb(255, 255, 255);" co
+lspan="2"><span style="line-height: normal; font-family: 맑은 고딕; font-size: 10pt;
+ margin-top: 0px; margin-bottom: 0px;">차량등록</span></td><td style="border: 1px so
+lid rgb(0, 0, 0); border-image: none; height: 40px; text-align: center; color: r
+gb(51, 51, 51); font-size: 10pt; -ms-word-wrap: break-word; background-color: rg
+b(255, 255, 255);" colspan="4"><span style="line-height: normal; font-family: 맑은
+ 고딕; font-size: 10pt; margin-top: 0px; margin-bottom: 0px;">자동차명의이전(상속이전)</span>
+</td></tr><tr><td style="border-width: 1px 1px 1px 2px; border-style: solid; bor
+der-color: rgb(0, 0, 0); height: 40px; text-align: center; color: rgb(51, 51, 51
+); font-size: 10pt; font-weight: bold; -ms-word-wrap: break-word; background-col
+or: rgb(153, 204, 255);"><div style="width: 95px; line-height: normal; font-fami
+ly: 굴림; font-size: 10pt; margin-top: 0px; margin-bottom: 0px;"><span style="line
+-height: normal; font-family: 맑은 고딕; font-size: 10pt; margin-top: 0px; margin-bo
+ttom: 0px;">업무명</span></div></td><td style="border: 1px solid rgb(0, 0, 0); bord
+er-image: none; height: 40px; text-align: left; color: rgb(51, 51, 51); font-siz
+e: 10pt; -ms-word-wrap: break-word; background-color: rgb(255, 255, 255);" colsp
+an="8"><span style="line-height: normal; font-family: 맑은 고딕; font-size: 10pt; ma
+rgin-top: 0px; margin-bottom: 0px;">자동차명의이전(상속)</span></td></tr><tr><td style="b
+order-width: 1px 1px 1px 2px; border-style: solid; border-color: rgb(0, 0, 0); h
+eight: 40px; text-align: center; color: rgb(51, 51, 51); font-size: 10pt; font-w
+eight: bold; -ms-word-wrap: break-word; background-color: rgb(153, 204, 255);"><
+div style="width: 95px; line-height: normal; font-family: 굴림; font-size: 10pt; m
+argin-top: 0px; margin-bottom: 0px;"><span style="line-height: normal; font-fami
+ly: 맑은 고딕; font-size: 10pt; margin-top: 0px; margin-bottom: 0px;">업무개요</span></d
+iv></td><td style="border: 1px solid rgb(0, 0, 0); border-image: none; height: 4
+0px; text-align: left; color: rgb(51, 51, 51); font-size: 10pt; -ms-word-wrap: b
+reak-word; background-color: rgb(255, 255, 255);" colspan="8"><span style="line-
+height: normal; font-family: 맑은 고딕; font-size: 10pt; margin-top: 0px; margin-bot
+tom: 0px;">차주가&nbsp;사망한&nbsp;후,&nbsp;상속&nbsp;순위자가&nbsp;차량을&nbsp;상속받는&nbsp;업무</sp
+an></td></tr><tr><td style="border-width: 1px 1px 1px 2px; border-style: solid;
+border-color: rgb(0, 0, 0); height: 40px; text-align: center; color: rgb(51, 51,
+ 51); font-size: 10pt; font-weight: bold; -ms-word-wrap: break-word; background-
+color: rgb(153, 204, 255);"><div style="width: 95px; line-height: normal; font-f
+amily: 굴림; font-size: 10pt; margin-top: 0px; margin-bottom: 0px;"><span style="l
+ine-height: normal; font-family: 맑은 고딕; font-size: 10pt; margin-top: 0px; margin
+-bottom: 0px;">접수처</span></div></td><td style="border: 1px solid rgb(0, 0, 0); b
+order-image: none; height: 40px; text-align: left; color: rgb(51, 51, 51); font-
+size: 10pt; -ms-word-wrap: break-word; background-color: rgb(255, 255, 255);" co
+lspan="3"><span style="line-height: normal; font-family: 맑은 고딕; font-size: 10pt;
+ margin-top: 0px; margin-bottom: 0px;">전국&nbsp;관할&nbsp;업무</span></td><td style="
+border: 1px solid rgb(0, 0, 0); border-image: none; height: 40px; text-align: ce
+nter; color: rgb(51, 51, 51); font-size: 10pt; font-weight: bold; -ms-word-wrap:
+ break-word; background-color: rgb(153, 204, 255);"><div style="width: 104px; li
+ne-height: normal; font-family: 굴림; font-size: 10pt; margin-top: 0px; margin-bot
+tom: 0px;"><span style="line-height: normal; font-family: 맑은 고딕; font-size: 10pt
+; margin-top: 0px; margin-bottom: 0px;">대상자</span></div></td><td style="border:
+1px solid rgb(0, 0, 0); border-image: none; height: 40px; text-align: left; colo
+r: rgb(51, 51, 51); font-size: 10pt; -ms-word-wrap: break-word; background-color
+: rgb(255, 255, 255);" colspan="4"><span style="line-height: normal; font-family
+: 맑은 고딕; font-size: 10pt; margin-top: 0px; margin-bottom: 0px;">&nbsp;차주가&nbsp;사
+망한&nbsp;경우</span></td></tr><tr><td style="border-width: 1px 1px 1px 2px; border-
+style: solid; border-color: rgb(0, 0, 0); height: 62px; text-align: center; colo
+r: rgb(51, 51, 51); font-size: 10pt; font-weight: bold; -ms-word-wrap: break-wor
+d; background-color: rgb(153, 204, 255);"><div style="width: 95px; line-height:
+normal; font-family: 굴림; font-size: 10pt; margin-top: 0px; margin-bottom: 0px;">
+<span style="line-height: normal; font-family: 맑은 고딕; font-size: 10pt; margin-to
+p: 0px; margin-bottom: 0px;">신고기한</span></div></td><td style="border: 1px solid
+rgb(0, 0, 0); border-image: none; height: 62px; text-align: left; color: rgb(51,
+ 51, 51); font-size: 10pt; -ms-word-wrap: break-word; background-color: rgb(255,
+ 255, 255);" colspan="3"><span style="line-height: normal; font-family: 맑은 고딕; f
+ont-size: 10pt; margin-top: 0px; margin-bottom: 0px;">상속:차주&nbsp;사망일이&nbsp;속한&nb
+sp;달의&nbsp;마지막날로부터&nbsp;6개월이내</span></td><td style="border: 1px solid rgb(0, 0,
+0); border-image: none; height: 62px; text-align: center; color: rgb(51, 51, 51)
+; font-size: 10pt; font-weight: bold; -ms-word-wrap: break-word; background-colo
+r: rgb(153, 204, 255);"><div style="width: 104px; line-height: normal; font-fami
+ly: 굴림; font-size: 10pt; margin-top: 0px; margin-bottom: 0px;"><span style="line
+-height: normal; font-family: 맑은 고딕; font-size: 10pt; margin-top: 0px; margin-bo
+ttom: 0px;">과태료</span></div></td><td style="border: 1px solid rgb(0, 0, 0); bord
+er-image: none; height: 62px; text-align: left; color: rgb(51, 51, 51); font-siz
+e: 10pt; -ms-word-wrap: break-word; background-color: rgb(255, 255, 255);" colsp
+an="4"><span style="line-height: normal; font-family: 맑은 고딕; font-size: 10pt; ma
+rgin-top: 0px; margin-bottom: 0px;">&nbsp;최초&nbsp;10일이내&nbsp;10만원,&nbsp;10일을&nbs
+p;초과한경우&nbsp;1일초과시마다&nbsp;1만원</span><br><span style="line-height: normal; font-f
+amily: 맑은 고딕; font-size: 10pt; margin-top: 0px; margin-bottom: 0px;">&nbsp;최대50만
+원</span></td></tr><tr><td style="border-width: 1px 1px 1px 2px; border-style: so
+lid; border-color: rgb(0, 0, 0); height: 329px; text-align: center; color: rgb(5
+1, 51, 51); font-size: 10pt; font-weight: bold; -ms-word-wrap: break-word; backg
+round-color: rgb(153, 204, 255);"><div style="width: 95px; line-height: normal;
+font-family: 굴림; font-size: 10pt; margin-top: 0px; margin-bottom: 0px;"><span st
+yle="line-height: normal; font-family: 맑은 고딕; font-size: 10pt; margin-top: 0px;
+margin-bottom: 0px;">구비서류</span></div></td><td style="border: 1px solid rgb(0, 0
+, 0); border-image: none; height: 329px; text-align: left; color: rgb(51, 51, 15
+3); font-size: 10pt; font-weight: bold; -ms-word-wrap: break-word; background-co
+lor: rgb(255, 255, 255);" colspan="8"><span style="line-height: normal; font-fam
+ily: 맑은 고딕; font-size: 10pt; margin-top: 0px; margin-bottom: 0px;" face="굴림" col
+or="#333399">*&nbsp;상속&nbsp;순위&nbsp;&nbsp;1순위&nbsp;:&nbsp;자,&nbsp;배우자&nbsp;-&gt;
+&nbsp;2순위&nbsp;:&nbsp;부모,&nbsp;배우자&nbsp;-&gt;&nbsp;3순위&nbsp;:&nbsp;형제자매&nbsp;등<b
+r>앞&nbsp;순위자가&nbsp;존재&nbsp;하지&nbsp;않을&nbsp;때&nbsp;다음&nbsp;순위자로&nbsp;넘어감<br><br>*
+&nbsp;사망자인&nbsp;차주의&nbsp;가족&nbsp;중&nbsp;누가&nbsp;상속받을지&nbsp;물어본&nbsp;뒤,&nbsp;상속순위
+에&nbsp;맞게&nbsp;상속포기서를&nbsp;작성해&nbsp;와야&nbsp;함<br>예를&nbsp;들어,&nbsp;자식이&nbsp;없는&nb
+sp;사망자의&nbsp;배우자가&nbsp;상속&nbsp;받고&nbsp;싶다면,&nbsp;부모가&nbsp;상속&nbsp;포기&nbsp;해야함.&n
+bsp;혹은&nbsp;자식과&nbsp;부모와&nbsp;배우자&nbsp;모두가&nbsp;없는&nbsp;사망자라면&nbsp;망자의&nbsp;형제&n
+bsp;자매&nbsp;중&nbsp;하나가&nbsp;상속받고,&nbsp;나머지가&nbsp;상속&nbsp;포기&nbsp;해야함.<br><br>1)<
+/span><span style="line-height: normal; font-family: 맑은 고딕; font-size: 10pt; mar
+gin-top: 0px; margin-bottom: 0px;"><b><span style="line-height: normal; font-fam
+ily: 맑은 고딕; font-size: 10pt; margin-top: 0px; margin-bottom: 0px;" face="굴림" col
+or="#333399">&nbsp;망자&nbsp;기준</span></b><span style="line-height: normal; font-f
+amily: 맑은 고딕; font-size: 10pt; margin-top: 0px; margin-bottom: 0px;" face="굴림" c
+olor="#333399">&nbsp;기본증명서와&nbsp;가족관계증명서&nbsp;(둘다&nbsp;행정복지센터&nbsp;발급, 상세 &amp;
+폐쇄로 발급)<br>2)&nbsp;자동차&nbsp;등록증<br>3)&nbsp;상속포기서&nbsp;(직접&nbsp;등록하러&nbsp;오면,&nbs
+p;서명&nbsp;가능하지만&nbsp;그렇지&nbsp;않다면&nbsp;(막)도장&nbsp;찍혀있어야함&nbsp;/&nbsp;차량등록사업소&nbs
+p;홈페이지에서&nbsp;서식&nbsp;다운&nbsp;가능)<br>4)&nbsp;상속포기자들의&nbsp;신분증&nbsp;사본<br>5)&nbsp
+;상속인&nbsp;직접&nbsp;방문시&nbsp;신분증&nbsp;/&nbsp;대리인이&nbsp;올시&nbsp;상속인&nbsp;신분증과&nbsp;
+(막)도장,&nbsp;대리인&nbsp;신분증<br>6)&nbsp;상속인이&nbsp;상속&nbsp;받기&nbsp;전&nbsp;먼저&nbsp;자동차
+&nbsp;보험&nbsp;가입되어야&nbsp;함<br></span></span></td></tr><tr><td style="border-widt
+h: 1px 1px 1px 2px; border-style: solid; border-color: rgb(0, 0, 0); height: 40p
+x; text-align: center; color: rgb(51, 51, 51); font-size: 10pt; font-weight: bol
+d; -ms-word-wrap: break-word; background-color: rgb(153, 204, 255);"><div style=
+"width: 95px; line-height: normal; font-family: 굴림; font-size: 10pt; margin-top:
+ 0px; margin-bottom: 0px;"><span style="line-height: normal; font-family: 맑은 고딕;
+ font-size: 10pt; margin-top: 0px; margin-bottom: 0px;">처리기간</span></div></td><t
+d style="border: 1px solid rgb(0, 0, 0); border-image: none; height: 40px; text-
+align: left; color: rgb(51, 51, 51); font-size: 10pt; -ms-word-wrap: break-word;
+ background-color: rgb(255, 255, 255);" colspan="3"><span style="line-height: no
+rmal; font-family: 맑은 고딕; font-size: 10pt; margin-top: 0px; margin-bottom: 0px;"
+>즉시</span></td><td style="border: 1px solid rgb(0, 0, 0); border-image: none; he
+ight: 40px; text-align: center; color: rgb(51, 51, 51); font-size: 10pt; font-we
+ight: bold; -ms-word-wrap: break-word; background-color: rgb(153, 204, 255);"><d
+iv style="width: 104px; line-height: normal; font-family: 굴림; font-size: 10pt; m
+argin-top: 0px; margin-bottom: 0px;"><span style="line-height: normal; font-fami
+ly: 맑은 고딕; font-size: 10pt; margin-top: 0px; margin-bottom: 0px;">처리비용</span></d
+iv></td><td style="border: 1px solid rgb(0, 0, 0); border-image: none; height: 4
+0px; text-align: left; color: rgb(51, 51, 51); font-size: 10pt; -ms-word-wrap: b
+reak-word; background-color: rgb(255, 255, 255);" colspan="4"><span style="line-
+height: normal; font-family: 맑은 고딕; font-size: 10pt; margin-top: 0px; margin-bot
+tom: 0px;">증지:1,000원~1,500원,&nbsp;등록세,취득세,채권</span></td></tr><tr><td style="bord
+er-width: 1px 1px 1px 2px; border-style: solid; border-color: rgb(0, 0, 0); heig
+ht: 40px; text-align: center; color: rgb(51, 51, 51); font-size: 10pt; font-weig
+ht: bold; -ms-word-wrap: break-word; background-color: rgb(153, 204, 255);"><div
+ style="width: 95px; line-height: normal; font-family: 굴림; font-size: 10pt; marg
+in-top: 0px; margin-bottom: 0px;"><span style="line-height: normal; font-family:
+ 맑은 고딕; font-size: 10pt; margin-top: 0px; margin-bottom: 0px;">신청방법</span></div>
+</td><td style="border: 1px solid rgb(0, 0, 0); border-image: none; height: 40px
+; text-align: left; color: rgb(51, 51, 51); font-size: 10pt; -ms-word-wrap: brea
+k-word; background-color: rgb(255, 255, 255);" colspan="8"><span style="line-hei
+ght: normal; font-family: 맑은 고딕; font-size: 10pt; margin-top: 0px; margin-bottom
+: 0px;">신고인이&nbsp;직접&nbsp;방문하여&nbsp;신청</span></td></tr><tr><td style="border-wid
+th: 1px 1px 1px 2px; border-style: solid; border-color: rgb(0, 0, 0); height: 40
+px; text-align: center; color: rgb(51, 51, 51); font-size: 10pt; font-weight: bo
+ld; -ms-word-wrap: break-word; background-color: rgb(153, 204, 255);"><div style
+="width: 95px; line-height: normal; font-family: 굴림; font-size: 10pt; margin-top
+: 0px; margin-bottom: 0px;"><span style="line-height: normal; font-family: 맑은 고딕
+; font-size: 10pt; margin-top: 0px; margin-bottom: 0px;">교부방법</span></div></td><
+td style="border: 1px solid rgb(0, 0, 0); border-image: none; height: 40px; text
+-align: left; color: rgb(51, 51, 51); font-size: 10pt; -ms-word-wrap: break-word
+; background-color: rgb(255, 255, 255);" colspan="8"><div style="width: 79px !im
+portant; line-height: normal; font-family: 굴림; font-size: 10pt; margin-top: 0px;
+ margin-bottom: 0px;">&nbsp;</div></td></tr><tr><td style="border-width: 1px 1px
+ 1px 2px; border-style: solid; border-color: rgb(0, 0, 0); height: 40px; text-al
+ign: center; color: rgb(51, 51, 51); font-size: 10pt; font-weight: bold; -ms-wor
+d-wrap: break-word; background-color: rgb(153, 204, 255);"><div style="width: 95
+px; line-height: normal; font-family: 굴림; font-size: 10pt; margin-top: 0px; marg
+in-bottom: 0px;"><span style="line-height: normal; font-family: 맑은 고딕; font-size
+: 10pt; margin-top: 0px; margin-bottom: 0px;">처리절차</span></div></td><td style="b
+order: 1px solid rgb(0, 0, 0); border-image: none; height: 40px; text-align: lef
+t; color: rgb(51, 51, 51); font-size: 10pt; -ms-word-wrap: break-word; backgroun
+d-color: rgb(255, 255, 255);" colspan="8"><span style="line-height: normal; font
+-family: 맑은 고딕; font-size: 10pt; margin-top: 0px; margin-bottom: 0px;">신청서&nbsp;
+접수&nbsp;및&nbsp;검토(담당자)→증지수수료 납부(민원인)→취등록세고지서발급(담당자)→취등록세납부및채권(민원인)→서류접수(담당자)→전산입
+력후&nbsp;등록증발급(담당자)→번호판&nbsp;변경인&nbsp;경우&nbsp;번호판&nbsp;부착및&nbsp;봉인</span></td></t
+r><tr><td style="border-width: 1px 1px 1px 2px; border-style: solid; border-colo
+r: rgb(0, 0, 0); height: 40px; text-align: center; color: rgb(51, 51, 51); font-
+size: 10pt; font-weight: bold; -ms-word-wrap: break-word; background-color: rgb(
+153, 204, 255);"><div style="width: 95px; line-height: normal; font-family: 굴림;
+font-size: 10pt; margin-top: 0px; margin-bottom: 0px;"><span style="line-height:
+ normal; font-family: 맑은 고딕; font-size: 10pt; margin-top: 0px; margin-bottom: 0p
+x;">처리방법</span></div></td><td style="border: 1px solid rgb(0, 0, 0); border-imag
+e: none; height: 40px; color: rgb(51, 51, 51); font-size: 10pt; -ms-word-wrap: b
+reak-word; background-color: rgb(255, 255, 255);" colspan="8"><span style="line-
+height: normal; font-family: 맑은 고딕; font-size: 10pt; margin-top: 0px; margin-bot
+tom: 0px;">*양도양수인&nbsp;서류확인:신청서,양도증명서,자동차등록증&nbsp;등&nbsp;기재사항&nbsp;맞는지&nbsp;확인.<
+/span><br><span style="line-height: normal; font-family: 맑은 고딕; font-size: 10pt;
+ margin-top: 0px; margin-bottom: 0px;">*양도인관련하여&nbsp;과태료와&nbsp;관련된&nbsp;주소(사용본거지
+)의&nbsp;변경사항확인&nbsp;후&nbsp;과태료&nbsp;사항이면&nbsp;과태료부과.</span></td></tr><tr><td sty
+le="border-width: 1px 1px 1px 2px; border-style: solid; border-color: rgb(0, 0,
+0); height: 40px; text-align: center; color: rgb(51, 51, 51); font-size: 10pt; f
+ont-weight: bold; -ms-word-wrap: break-word; background-color: rgb(153, 204, 255
+);"><div style="width: 95px; line-height: normal; font-family: 굴림; font-size: 10
+pt; margin-top: 0px; margin-bottom: 0px;"><span style="line-height: normal; font
+-family: 맑은 고딕; font-size: 10pt; margin-top: 0px; margin-bottom: 0px;">업무설명</spa
+n></div></td><td style="border: 1px solid rgb(0, 0, 0); border-image: none; heig
+ht: 40px; color: rgb(51, 51, 51); font-size: 10pt; -ms-word-wrap: break-word; ba
+ckground-color: rgb(255, 255, 255);" colspan="8"><div style="width: 79px !import
+ant; line-height: normal; font-family: 굴림; font-size: 10pt; margin-top: 0px; mar
+gin-bottom: 0px;">&nbsp;</div></td></tr><tr><td style="border-width: 1px 1px 1px
+ 2px; border-style: solid; border-color: rgb(0, 0, 0); height: 165px; text-align
+: center; color: rgb(51, 51, 51); font-size: 10pt; font-weight: bold; -ms-word-w
+rap: break-word; background-color: rgb(153, 204, 255);"><div style="width: 95px;
+ line-height: normal; font-family: 굴림; font-size: 10pt; margin-top: 0px; margin-
+bottom: 0px;"><span style="line-height: normal; font-family: 맑은 고딕; font-size: 1
+0pt; margin-top: 0px; margin-bottom: 0px;">주의사항</span><br><span style="line-heig
+ht: normal; font-family: 맑은 고딕; font-size: 10pt; margin-top: 0px; margin-bottom:
+ 0px;">특이사항</span></div></td><td style="border: 1px solid rgb(0, 0, 0); border-i
+mage: none; height: 165px; text-align: left; color: rgb(51, 51, 51); font-size:
+10pt; -ms-word-wrap: break-word; background-color: rgb(255, 255, 255);" colspan=
+"8"><span style="line-height: normal; font-family: 맑은 고딕; font-size: 10pt; margi
+n-top: 0px; margin-bottom: 0px;">*&nbsp;상속&nbsp;포기자가&nbsp;실종자인&nbsp;경우&nbsp;법원의&
+nbsp;'실종선고&nbsp;판결문'&nbsp;원본&nbsp;첨부</span><br><span style="line-height: normal;
+ font-family: 맑은 고딕; font-size: 10pt; margin-top: 0px; margin-bottom: 0px;">*&nb
+sp;상속포기자가&nbsp;국외거주자인&nbsp;경우,&nbsp;상속포기서&nbsp;작성한&nbsp;후&nbsp;재외공관확인서(대사관에서&nbs
+p;받아야함)&nbsp;첨부</span></td></tr><tr><td style="border-width: 1px 1px 1px 2px; bo
+rder-style: solid; border-color: rgb(0, 0, 0); height: 83px; text-align: center;
+ color: rgb(51, 51, 51); font-size: 10pt; font-weight: bold; -ms-word-wrap: brea
+k-word; background-color: rgb(153, 204, 255);"><div style="width: 95px; line-hei
+ght: normal; font-family: 굴림; font-size: 10pt; margin-top: 0px; margin-bottom: 0
+px;"><span style="line-height: normal; font-family: 맑은 고딕; font-size: 10pt; marg
+in-top: 0px; margin-bottom: 0px;">관련법규</span></div></td><td style="border: 1px s
+olid rgb(0, 0, 0); border-image: none; height: 83px; text-align: left; color: rg
+b(51, 51, 51); font-size: 10pt; -ms-word-wrap: break-word; background-color: rgb
+(255, 255, 255);" colspan="8"><span style="line-height: normal; font-family: 맑은
+고딕; font-size: 10pt; margin-top: 0px; margin-bottom: 0px;">*자동차관리법&nbsp;제12조&nbs
+p;<span style="line-height: normal; font-family: 맑은 고딕; font-size: 10pt; margin-
+top: 0px; margin-bottom: 0px;" face="굴림" color="#333399">제1항</span><span style="
+line-height: normal; font-family: 맑은 고딕; font-size: 10pt; margin-top: 0px; margi
+n-bottom: 0px;" face="굴림" color="#333333">(이전등록)<br>*자동차등록령&nbsp;제26조(이전등록신청)&nb
+sp;</span><span style="line-height: normal; font-family: 맑은 고딕; font-size: 10pt;
+ margin-top: 0px; margin-bottom: 0px;" face="굴림" color="#333399">자동차등록령&nbsp;제27
+조제1항&nbsp;&gt;</span><span style="line-height: normal; font-family: 맑은 고딕; font-
+size: 10pt; margin-top: 0px; margin-bottom: 0px;" face="굴림" color="#333333"><br>
+*자동차등록규칙&nbsp;제33조&nbsp;</span><span style="line-height: normal; font-family: 맑은
+ 고딕; font-size: 10pt; margin-top: 0px; margin-bottom: 0px;" face="굴림" color="#33
+3399">제1항</span><span style="line-height: normal; font-family: 맑은 고딕; font-size:
+ 10pt; margin-top: 0px; margin-bottom: 0px;" face="굴림" color="#333333">(이전등록신청)<
+/span></span></td></tr><tr><td style="border-width: 1px 1px 1px 2px; border-styl
+e: solid; border-color: rgb(0, 0, 0); height: 76px; text-align: center; color: r
+gb(51, 51, 51); font-size: 10pt; font-weight: bold; -ms-word-wrap: break-word; b
+ackground-color: rgb(153, 204, 255);"><div style="width: 95px; line-height: norm
+al; font-family: 굴림; font-size: 10pt; margin-top: 0px; margin-bottom: 0px;"><spa
+n style="line-height: normal; font-family: 맑은 고딕; font-size: 10pt; margin-top: 0
+px; margin-bottom: 0px;">첨부서식</span></div></td><td style="border: 1px solid rgb(
+0, 0, 0); border-image: none; height: 76px; text-align: left; color: rgb(51, 51,
+ 51); font-size: 10pt; -ms-word-wrap: break-word; background-color: rgb(255, 255
+, 255);" colspan="8"><span style="line-height: normal; font-family: 맑은 고딕; font-
+size: 10pt; margin-top: 0px; margin-bottom: 0px;">*자동차양도증명서(등록규칙&nbsp;별지&nbsp;제1
+5호&nbsp;서식)</span><br><span style="line-height: normal; font-family: 맑은 고딕; font
+-size: 10pt; margin-top: 0px; margin-bottom: 0px;">*이전등록신청서(등록규칙&nbsp;별지&nbsp;제1
+4호&nbsp;서식)</span><br><span style="line-height: normal; font-family: 맑은 고딕; font
+-size: 10pt; margin-top: 0px; margin-bottom: 0px;">*자동차상속포기각서(자동차상속의경우)</span></
+td></tr><tr><td style="border-width: 1px 1px 1px 2px; border-style: solid; borde
+r-color: rgb(0, 0, 0); height: 62px; text-align: center; color: rgb(51, 51, 51);
+ font-size: 10pt; font-weight: bold; -ms-word-wrap: break-word; background-color
+: rgb(153, 204, 255);"><div style="width: 95px; line-height: normal; font-family
+: 굴림; font-size: 10pt; margin-top: 0px; margin-bottom: 0px;"><span style="line-h
+eight: normal; font-family: 맑은 고딕; font-size: 10pt; margin-top: 0px; margin-bott
+om: 0px;">담당자</span></div></td><td style="border: 1px solid rgb(0, 0, 0); border
+-image: none; height: 62px; text-align: center; font-size: 10pt; -ms-word-wrap:
+break-word; background-color: rgb(255, 255, 255);" colspan="3"><p style="line-he
+ight: 1.2; font-family: 굴림; font-size: 10pt; margin-top: 0px; margin-bottom: 0px
+;">김희경<br></p></td><td style="border: 1px solid rgb(0, 0, 0); border-image: none
+; height: 62px; text-align: center; color: rgb(51, 51, 51); font-size: 10pt; fon
+t-weight: bold; -ms-word-wrap: break-word; background-color: rgb(153, 204, 255);
+"><div style="width: 104px; line-height: normal; font-family: 굴림; font-size: 10p
+t; margin-top: 0px; margin-bottom: 0px;"><span style="line-height: normal; font-
+family: 맑은 고딕; font-size: 10pt; margin-top: 0px; margin-bottom: 0px;">사무실연락처</sp
+an></div></td><td style="border-width: 1px 2px 1px 1px; border-style: solid; bor
+der-color: rgb(0, 0, 0); height: 62px; text-align: center; font-size: 10pt; -ms-
+word-wrap: break-word; background-color: rgb(255, 255, 255);" colspan="4"><p sty
+le="line-height: 1.2; font-family: 굴림; font-size: 10pt; margin-top: 0px; margin-
+bottom: 0px;">031-5186-4918<br></p></td></tr><tr><td style="border-width: 1px 1p
+x 1px 2px; border-style: solid; border-color: rgb(0, 0, 0); height: 54px; text-a
+lign: center; color: rgb(51, 51, 51); font-size: 10pt; font-weight: bold; -ms-wo
+rd-wrap: break-word; background-color: rgb(153, 204, 255);"><div style="width: 9
+5px; line-height: normal; font-family: 굴림; font-size: 10pt; margin-top: 0px; mar
+gin-bottom: 0px;"><span style="line-height: normal; font-family: 맑은 고딕; font-siz
+e: 10pt; margin-top: 0px; margin-bottom: 0px;">대직자</span></div></td><td style="b
+order: 1px solid rgb(0, 0, 0); border-image: none; height: 54px; text-align: cen
+ter; color: rgb(255, 0, 0); font-size: 10pt; -ms-word-wrap: break-word; backgrou
+nd-color: rgb(255, 255, 255);" colspan="3"><div style="width: 80px !important; l
+ine-height: normal; font-family: 굴림; font-size: 10pt; margin-top: 0px; margin-bo
+ttom: 0px;">&nbsp;</div></td><td style="border: 1px solid rgb(0, 0, 0); border-i
+mage: none; height: 54px; text-align: center; color: rgb(51, 51, 51); font-size:
+ 10pt; font-weight: bold; -ms-word-wrap: break-word; background-color: rgb(153,
+204, 255);"><div style="width: 104px; line-height: normal; font-family: 굴림; font
+-size: 10pt; margin-top: 0px; margin-bottom: 0px;"><span style="line-height: nor
+mal; font-family: 맑은 고딕; font-size: 10pt; margin-top: 0px; margin-bottom: 0px;">
+사무실연락처</span></div></td><td style="border-width: 1px 2px 1px 1px; border-style:
+solid; border-color: rgb(0, 0, 0); height: 54px; text-align: center; color: rgb(
+255, 0, 0); font-size: 10pt; -ms-word-wrap: break-word; background-color: rgb(25
+5, 255, 255);" colspan="4"><div style="width: 80px !important; line-height: norm
+al; font-family: 굴림; font-size: 10pt; margin-top: 0px; margin-bottom: 0px;">&nbs
+p;</div></td></tr><tr><td style="border-width: 1px 1px 2px 2px; border-style: so
+lid; border-color: rgb(0, 0, 0); height: 55px; text-align: center; color: rgb(51
+, 51, 51); font-size: 10pt; font-weight: bold; -ms-word-wrap: break-word; backgr
+ound-color: rgb(153, 204, 255);"><div style="width: 95px; line-height: normal; f
+ont-family: 굴림; font-size: 10pt; margin-top: 0px; margin-bottom: 0px;"><span sty
+le="line-height: normal; font-family: 맑은 고딕; font-size: 10pt; margin-top: 0px; m
+argin-bottom: 0px;">동주민센터</span><br><span style="line-height: normal; font-famil
+y: 맑은 고딕; font-size: 10pt; margin-top: 0px; margin-bottom: 0px;">담당자</span></div
+></td><td style="border-width: 1px 1px 2px; border-style: solid; border-color: r
+gb(0, 0, 0); height: 55px; text-align: center; color: rgb(51, 51, 51); font-size
+: 10pt; -ms-word-wrap: break-word; background-color: rgb(255, 255, 255);" colspa
+n="3"><div style="width: 80px !important; line-height: normal; font-family: 굴림;
+font-size: 10pt; margin-top: 0px; margin-bottom: 0px;">&nbsp;</div></td><td styl
+e="border-width: 1px 1px 2px; border-style: solid; border-color: rgb(0, 0, 0); h
+eight: 55px; text-align: center; color: rgb(51, 51, 51); font-size: 10pt; font-w
+eight: bold; -ms-word-wrap: break-word; background-color: rgb(153, 204, 255);"><
+div style="width: 104px; line-height: normal; font-family: 굴림; font-size: 10pt;
+margin-top: 0px; margin-bottom: 0px;"><span style="line-height: normal; font-fam
+ily: 맑은 고딕; font-size: 10pt; margin-top: 0px; margin-bottom: 0px;">사무실연락처</span>
+</div></td><td style="border-width: 1px 2px 2px 1px; border-style: solid; border
+-color: rgb(0, 0, 0); height: 55px; text-align: center; color: rgb(51, 51, 51);
+font-size: 10pt; font-weight: bold; -ms-word-wrap: break-word; background-color:
+ rgb(255, 255, 255);" colspan="4"><div style="width: 80px !important; line-heigh
+t: normal; font-family: 굴림; font-size: 10pt; margin-top: 0px; margin-bottom: 0px
+;">&nbsp;</div></td></tr><tr><td style="height: 32px; color: rgb(51, 51, 51); fo
+nt-family: 굴림; font-size: 10pt; border-top-color: rgb(0, 0, 0); border-top-width
+: 2px; border-top-style: solid; -ms-word-wrap: break-word; background-color: rgb
+(255, 255, 255);"><div style="width: 95px !important; line-height: normal; font-
+family: 굴림; font-size: 10pt; margin-top: 0px; margin-bottom: 0px;">&nbsp;</div><
+/td><td style="height: 32px; color: rgb(51, 51, 51); font-family: 굴림; font-size:
+ 10pt; border-top-color: rgb(0, 0, 0); border-top-width: 2px; border-top-style:
+solid; -ms-word-wrap: break-word; background-color: rgb(255, 255, 255);"><div st
+yle="width: 81px !important; line-height: normal; font-family: 굴림; font-size: 10
+pt; margin-top: 0px; margin-bottom: 0px;">&nbsp;</div></td><td style="height: 32
+px; color: rgb(51, 51, 51); font-family: 굴림; font-size: 10pt; border-top-color:
+rgb(0, 0, 0); border-top-width: 2px; border-top-style: solid; -ms-word-wrap: bre
+ak-word; background-color: rgb(255, 255, 255);"><div style="width: 81px !importa
+nt; line-height: normal; font-family: 굴림; font-size: 10pt; margin-top: 0px; marg
+in-bottom: 0px;">&nbsp;</div></td><td style="height: 32px; color: rgb(51, 51, 51
+); font-family: 굴림; font-size: 10pt; border-top-color: rgb(0, 0, 0); border-top-
+width: 2px; border-top-style: solid; -ms-word-wrap: break-word; background-color
+: rgb(255, 255, 255);"><div style="width: 81px !important; line-height: normal;
+font-family: 굴림; font-size: 10pt; margin-top: 0px; margin-bottom: 0px;">&nbsp;</
+div></td><td style="height: 32px; color: rgb(51, 51, 51); font-family: 굴림; font-
+size: 10pt; border-top-color: rgb(0, 0, 0); border-top-width: 2px; border-top-st
+yle: solid; -ms-word-wrap: break-word; background-color: rgb(255, 255, 255);"><d
+iv style="width: 104px !important; line-height: normal; font-family: 굴림; font-si
+ze: 10pt; margin-top: 0px; margin-bottom: 0px;">&nbsp;</div></td><td style="heig
+ht: 32px; color: rgb(51, 51, 51); font-family: 굴림; font-size: 10pt; border-top-c
+olor: rgb(0, 0, 0); border-top-width: 2px; border-top-style: solid; -ms-word-wra
+p: break-word; background-color: rgb(255, 255, 255);"><div style="width: 81px !i
+mportant; line-height: normal; font-family: 굴림; font-size: 10pt; margin-top: 0px
+; margin-bottom: 0px;">&nbsp;</div></td><td style="height: 32px; color: rgb(51,
+51, 51); font-family: 굴림; font-size: 10pt; border-top-color: rgb(0, 0, 0); borde
+r-top-width: 2px; border-top-style: solid; -ms-word-wrap: break-word; background
+-color: rgb(255, 255, 255);"><div style="width: 81px !important; line-height: no
+rmal; font-family: 굴림; font-size: 10pt; margin-top: 0px; margin-bottom: 0px;">&n
+bsp;</div></td><td style="height: 32px; color: rgb(51, 51, 51); font-family: 굴림;
+ font-size: 10pt; border-top-color: rgb(0, 0, 0); border-top-width: 2px; border-
+top-style: solid; -ms-word-wrap: break-word; background-color: rgb(255, 255, 255
+);"><div style="width: 81px !important; line-height: normal; font-family: 굴림; fo
+nt-size: 10pt; margin-top: 0px; margin-bottom: 0px;">&nbsp;</div></td><td style=
+"height: 32px; color: rgb(51, 51, 51); font-family: 굴림; font-size: 10pt; border-
+top-color: rgb(0, 0, 0); border-top-width: 2px; border-top-style: solid; -ms-wor
+d-wrap: break-word; background-color: rgb(255, 255, 255);"><div style="width: 81
+px !important; line-height: normal; font-family: 굴림; font-size: 10pt; margin-top
+: 0px; margin-bottom: 0px;">&nbsp;</div></td></tr><tr><td style="height: 16px; c
+olor: rgb(51, 51, 51); font-family: 굴림; font-size: 10pt; -ms-word-wrap: break-wo
+rd; background-color: rgb(255, 255, 255);"><div style="width: 95px !important; l
+ine-height: normal; font-family: 굴림; font-size: 10pt; margin-top: 0px; margin-bo
+ttom: 0px;">&nbsp;</div></td><td style="height: 16px; color: rgb(51, 51, 51); fo
+nt-family: 굴림; font-size: 10pt; -ms-word-wrap: break-word; background-color: rgb
+(255, 255, 255);"><div style="width: 81px !important; line-height: normal; font-
+family: 굴림; font-size: 10pt; margin-top: 0px; margin-bottom: 0px;">&nbsp;</div><
+/td><td style="height: 16px; color: rgb(51, 51, 51); font-family: 굴림; font-size:
+ 10pt; -ms-word-wrap: break-word; background-color: rgb(255, 255, 255);"><div st
+yle="width: 81px !important; line-height: normal; font-family: 굴림; font-size: 10
+pt; margin-top: 0px; margin-bottom: 0px;">&nbsp;</div></td><td style="height: 16
+px; color: rgb(51, 51, 51); font-family: 굴림; font-size: 10pt; -ms-word-wrap: bre
+ak-word; background-color: rgb(255, 255, 255);"><div style="width: 81px !importa
+nt; line-height: normal; font-family: 굴림; font-size: 10pt; margin-top: 0px; marg
+in-bottom: 0px;">&nbsp;</div></td><td style="height: 16px; color: rgb(51, 51, 51
+); font-family: 굴림; font-size: 10pt; -ms-word-wrap: break-word; background-color
+: rgb(255, 255, 255);"><div style="width: 104px !important; line-height: normal;
+ font-family: 굴림; font-size: 10pt; margin-top: 0px; margin-bottom: 0px;">&nbsp;<
+/div></td><td style="height: 16px; color: rgb(51, 51, 51); font-family: 굴림; font
+-size: 10pt; -ms-word-wrap: break-word; background-color: rgb(255, 255, 255);"><
+div style="width: 81px !important; line-height: normal; font-family: 굴림; font-si
+ze: 10pt; margin-top: 0px; margin-bottom: 0px;">&nbsp;</div></td><td style="heig
+ht: 16px; color: rgb(51, 51, 51); font-family: 굴림; font-size: 10pt; -ms-word-wra
+p: break-word; background-color: rgb(255, 255, 255);"><div style="width: 81px !i
+mportant; line-height: normal; font-family: 굴림; font-size: 10pt; margin-top: 0px
+; margin-bottom: 0px;">&nbsp;</div></td><td style="height: 16px; color: rgb(51,
+51, 51); font-family: 굴림; font-size: 10pt; -ms-word-wrap: break-word; background
+-color: rgb(255, 255, 255);"><div style="width: 81px !important; line-height: no
+rmal; font-family: 굴림; font-size: 10pt; margin-top: 0px; margin-bottom: 0px;">&n
+bsp;</div></td><td style="height: 16px; color: rgb(51, 51, 51); font-family: 굴림;
+ font-size: 10pt; -ms-word-wrap: break-word; background-color: rgb(255, 255, 255
+);"><div style="width: 81px !important; line-height: normal; font-family: 굴림; fo
+nt-size: 10pt; margin-top: 0px; margin-bottom: 0px;">&nbsp;</div></td></tr><tr><
+td style="height: 16px; color: rgb(51, 51, 51); font-family: 굴림; font-size: 10pt
+; -ms-word-wrap: break-word; background-color: rgb(255, 255, 255);"><div style="
+width: 95px !important; line-height: normal; font-family: 굴림; font-size: 10pt; m
+argin-top: 0px; margin-bottom: 0px;">&nbsp;</div></td><td style="height: 16px; c
+olor: rgb(51, 51, 51); font-family: 굴림; font-size: 10pt; -ms-word-wrap: break-wo
+rd; background-color: rgb(255, 255, 255);"><div style="width: 81px !important; l
+ine-height: normal; font-family: 굴림; font-size: 10pt; margin-top: 0px; margin-bo
+ttom: 0px;">&nbsp;</div></td><td style="height: 16px; color: rgb(51, 51, 51); fo
+nt-family: 굴림; font-size: 10pt; -ms-word-wrap: break-word; background-color: rgb
+(255, 255, 255);"><div style="width: 81px !important; line-height: normal; font-
+family: 굴림; font-size: 10pt; margin-top: 0px; margin-bottom: 0px;">&nbsp;</div><
+/td><td style="height: 16px; color: rgb(51, 51, 51); font-family: 굴림; font-size:
+ 10pt; -ms-word-wrap: break-word; background-color: rgb(255, 255, 255);"><div st
+yle="width: 81px !important; line-height: normal; font-family: 굴림; font-size: 10
+pt; margin-top: 0px; margin-bottom: 0px;">&nbsp;</div></td><td style="height: 16
+px; color: rgb(51, 51, 51); font-family: 굴림; font-size: 10pt; -ms-word-wrap: bre
+ak-word; background-color: rgb(255, 255, 255);"><div style="width: 104px !import
+ant; line-height: normal; font-family: 굴림; font-size: 10pt; margin-top: 0px; mar
+gin-bottom: 0px;">&nbsp;</div></td><td style="height: 16px; color: rgb(51, 51, 5
+1); font-family: 굴림; font-size: 10pt; -ms-word-wrap: break-word; background-colo
+r: rgb(255, 255, 255);"><div style="width: 81px !important; line-height: normal;
+ font-family: 굴림; font-size: 10pt; margin-top: 0px; margin-bottom: 0px;">&nbsp;<
+/div></td><td style="height: 16px; color: rgb(51, 51, 51); font-family: 굴림; font
+-size: 10pt; -ms-word-wrap: break-word; background-color: rgb(255, 255, 255);"><
+div style="width: 81px !important; line-height: normal; font-family: 굴림; font-si
+ze: 10pt; margin-top: 0px; margin-bottom: 0px;">&nbsp;</div></td><td style="heig
+ht: 16px; color: rgb(51, 51, 51); font-family: 굴림; font-size: 10pt; -ms-word-wra
+p: break-word; background-color: rgb(255, 255, 255);"><div style="width: 81px !i
+mportant; line-height: normal; font-family: 굴림; font-size: 10pt; margin-top: 0px
+; margin-bottom: 0px;">&nbsp;</div></td><td style="height: 16px; color: rgb(51,
+51, 51); font-family: 굴림; font-size: 10pt; -ms-word-wrap: break-word; background
+-color: rgb(255, 255, 255);"><div style="width: 81px !important; line-height: no
+rmal; font-family: 굴림; font-size: 10pt; margin-top: 0px; margin-bottom: 0px;">&n
+bsp;</div></td></tr><tr><td style="height: 37px; color: rgb(51, 51, 51); font-fa
+mily: 굴림; font-size: 10pt; -ms-word-wrap: break-word; background-color: rgb(255,
+ 255, 255);"><div style="width: 95px !important; line-height: normal; font-famil
+y: 굴림; font-size: 10pt; margin-top: 0px; margin-bottom: 0px;">&nbsp;</div></td><
+td style="height: 37px; color: rgb(51, 51, 51); font-family: 굴림; font-size: 10pt
+; -ms-word-wrap: break-word; background-color: rgb(255, 255, 255);"><div style="
+width: 81px !important; line-height: normal; font-family: 굴림; font-size: 10pt; m
+argin-top: 0px; margin-bottom: 0px;">&nbsp;</div></td><td style="height: 37px; c
+olor: rgb(51, 51, 51); font-family: 굴림; font-size: 10pt; -ms-word-wrap: break-wo
+rd; background-color: rgb(255, 255, 255);"><div style="width: 81px !important; l
+ine-height: normal; font-family: 굴림; font-size: 10pt; margin-top: 0px; margin-bo
+ttom: 0px;">&nbsp;</div></td><td style="height: 37px; color: rgb(51, 51, 51); fo
+nt-family: 굴림; font-size: 10pt; -ms-word-wrap: break-word; background-color: rgb
+(255, 255, 255);"><div style="width: 81px !important; line-height: normal; font-
+family: 굴림; font-size: 10pt; margin-top: 0px; margin-bottom: 0px;">&nbsp;</div><
+/td><td style="height: 37px; color: rgb(51, 51, 51); font-family: 굴림; font-size:
+ 10pt; -ms-word-wrap: break-word; background-color: rgb(255, 255, 255);"><div st
+yle="width: 104px !important; line-height: normal; font-family: 굴림; font-size: 1
+0pt; margin-top: 0px; margin-bottom: 0px;">&nbsp;</div></td><td style="height: 3
+7px; color: rgb(51, 51, 51); font-family: 굴림; font-size: 10pt; -ms-word-wrap: br
+eak-word; background-color: rgb(255, 255, 255);"><div style="width: 81px !import
+ant; line-height: normal; font-family: 굴림; font-size: 10pt; margin-top: 0px; mar
+gin-bottom: 0px;">&nbsp;</div></td><td style="height: 37px; color: rgb(51, 51, 5
+1); font-family: 굴림; font-size: 10pt; -ms-word-wrap: break-word; background-colo
+r: rgb(255, 255, 255);"><div style="width: 81px !important; line-height: normal;
+ font-family: 굴림; font-size: 10pt; margin-top: 0px; margin-bottom: 0px;">&nbsp;<
+/div></td><td style="height: 37px; color: rgb(51, 51, 51); font-family: 굴림; font
+-size: 10pt; -ms-word-wrap: break-word; background-color: rgb(255, 255, 255);"><
+div style="width: 81px !important; line-height: normal; font-family: 굴림; font-si
+ze: 10pt; margin-top: 0px; margin-bottom: 0px;">&nbsp;</div></td><td style="heig
+ht: 37px; color: rgb(51, 51, 51); font-family: 굴림; font-size: 10pt; -ms-word-wra
+p: break-word; background-color: rgb(255, 255, 255);"><div style="width: 81px !i
+mportant; line-height: normal; font-family: 굴림; font-size: 10pt; margin-top: 0px
+; margin-bottom: 0px;">&nbsp;</div></td></tr></tbody></table>
+
+</body>
+</html>
