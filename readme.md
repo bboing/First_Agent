@@ -157,7 +157,7 @@ python app.py
 
 ### 4. 웹 접속
 - 챗봇: http://localhost:8000/chat-ui
-- RAG 관리: http://localhost:8000/RAG_Management
+- RAG 관리: http://localhost:8000/RAG_Chat
 - Milvus 관리: http://localhost:3000
 
 ## 📝 사용법

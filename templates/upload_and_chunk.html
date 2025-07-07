@@ -1,101 +1,221 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>문서 업로드 및 청킹</title>
-    <link rel="stylesheet" href="/static/chat.css">
+    <link rel="stylesheet" type="text/css" href="/static/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
-        .upload-container {
-            max-width: 480px;
-            margin: 60px auto;
-            background: #fff;
-            border-radius: 12px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.07);
-            padding: 32px 28px 24px 28px;
-            display: flex;
-            flex-direction: column;
-            gap: 18px;
+        /* Code added by Gemini: Styles for the new grid layout */
+        .grid-container {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr; /* 오른쪽 컬럼을 더 넓게 설정 */
+            grid-template-rows: auto 1fr; /* 첫 번째 행은 내용에 맞게, 두 번째 행은 남은 공간 차지 */
+            gap: 20px; /* 그리드 아이템 사이의 간격 */
+            align-items: start; /* 아이템들을 위쪽으로 정렬 */
         }
-        .upload-container h2 {
-            margin-bottom: 8px;
+
+        .grid-item-form {
+            grid-column: 1 / 2;
+            grid-row: 1 / 2;
         }
-        .form-group {
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
+
+        .grid-item-help {
+            grid-column: 2 / 3;
+            grid-row: 1 / 2;
         }
-        .form-group label {
-            font-weight: bold;
+
+        .grid-item-logs {
+            grid-column: 1 / 3; /* 두 컬럼을 모두 차지 */
+            grid-row: 2 / 3;
         }
-        .form-group input[type="text"],
-        .form-group input[type="file"] {
-            padding: 8px;
-            border-radius: 6px;
-            border: 1px solid #e5e7eb;
+
+        /* 기존 로그 스타일 */
+        .log-section {
+            margin-top: 0; /* 그리드 간격이 있으므로 마진 리셋 */
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 15px;
+            background-color: #f9f9f9;
         }
-        .form-group input[type="file"] {
-            background: #f3f4f6;
+        
+        .log-section h3 {
+            margin-top: 0;
+            margin-bottom: 10px;
+            color: #333;
         }
-        .upload-btn {
-            margin-top: 16px;
-            padding: 12px 0;
-            background: #10a37f;
-            color: #fff;
-            border: none;
-            border-radius: 8px;
-            font-weight: bold;
-            font-size: 16px;
-            cursor: pointer;
-        }
-        .result-area {
-            margin-top: 18px;
-            background: #f3f4f6;
-            border-radius: 8px;
-            padding: 14px 12px;
-            font-size: 15px;
-            min-height: 40px;
+        
+        .log-container {
+            height: 300px;
+            overflow-y: auto;
+            background-color: #1e1e1e;
+            color: #ffffff;
+            padding: 10px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            line-height: 1.4;
         }
     </style>
 </head>
 <body>
-    <div class="upload-container">
-        <h2>문서 업로드 및 청킹</h2>
-        <form id="upload-form">
-            <div class="form-group">
-                <label for="file">문서 파일 (PDF 등)</label>
-                <input type="file" id="file" name="file" accept=".pdf,.docx,.txt" required />
-            </div>
-            <div class="form-group">
-                <label for="category">카테고리 (문서 전체에 적용)</label>
-                <input type="text" id="category" name="category" placeholder="예: 예약, 고객문의 등" required />
-            </div>
-            <button type="submit" class="upload-btn">청킹</button>
-        </form>
-        <div class="result-area" id="result-area"></div>
+    <div class="header-container">
+        <a href="http://localhost:8000/learning-data">
+            <img src="/static/logo/clt_logo.jpg" alt="clt_logo" class="header-image">
+            </a>
+        <h1 class="header-title">AITech Automatic Query Generator</h1>
     </div>
+    <div class="menu">
+        <ul>
+            <li><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-book icon" viewBox="0 0 16 16">
+                <path d="M1 2.828c.885-.37 2.154-.769 3.388-.893 1.33-.134 2.458.063 3.112.752v9.746c-.935-.53-2.12-.603-3.213-.493-1.18.12-2.37.461-3.287.811zm7.5-.141c.654-.689 1.782-.886 3.112-.752 1.234.124 2.503.523 3.388.893v9.923c-.918-.35-2.107-.692-3.287-.81-1.094-.111-2.278-.039-3.213.492zM8 1.783C7.015.936 5.587.81 4.287.94c-1.514.153-3.042.672-3.994 1.105A.5.5 0 0 0 0 2.5v11a.5.5 0 0 0 .707.455c.882-.4 2.303-.881 3.68-1.02 1.409-.142 2.59.087 3.223.877a.5.5 0 0 0 .78 0c.633-.79 1.814-1.019 3.222-.877 1.378.139 2.8.62 3.681 1.02A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.293-.455c-.952-.433-2.48-.952-3.994-1.105C10.413.809 8.985.936 8 1.783"/>
+                </svg>
+                <a href="/RAG_Chat">RAG Test</a></li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-chat-left-text icon" viewBox="0 0 24 24">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M10 1C9.73478 1 9.48043 1.10536 9.29289 1.29289L3.29289 7.29289C3.10536 7.48043 3 7.73478 3 8V20C3 21.6569 4.34315 23 6 23H7C7.55228 23 8 22.5523 8 22C8 21.4477 7.55228 21 7 21H6C5.44772 21 5 20.5523 5 20V9H10C10.5523 9 11 8.55228 11 8V3H18C18.5523 3 19 3.44772 19 4V7C19 7.55228 19.4477 8 20 8C20.5523 8 21 7.55228 21 7V4C21 2.34315 19.6569 1 18 1H10ZM9 7H6.41421L9 4.41421V7ZM22.1213 10.7071C20.9497 9.53553 19.0503 9.53553 17.8787 10.7071L16.1989 12.3869L11.2929 17.2929C11.1647 17.4211 11.0738 17.5816 11.0299 17.7575L10.0299 21.7575C9.94466 22.0982 10.0445 22.4587 10.2929 22.7071C10.5413 22.9555 10.9018 23.0553 11.2425 22.9701L15.2425 21.9701C15.4184 21.9262 15.5789 21.8353 15.7071 21.7071L20.5556 16.8586L22.2929 15.1213C23.4645 13.9497 23.4645 12.0503 22.2929 10.8787L22.1213 10.7071ZM18.3068 13.1074L19.2929 12.1213C19.6834 11.7308 20.3166 11.7308 20.7071 12.1213L20.8787 12.2929C21.2692 12.6834 21.2692 13.3166 20.8787 13.7071L19.8622 14.7236L18.3068 13.1074ZM16.8923 14.5219L18.4477 16.1381L14.4888 20.097L12.3744 20.6256L12.903 18.5112L16.8923 14.5219Z" fill="#000000"/>
+                </svg>
+                <a href="/learning-data">CSV Question Generation</a></li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-file-earmark-text-fill" viewBox="0 0 16 16">
+                <path d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0M9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1M4.5 9a.5.5 0 0 1 0-1h7a.5.5 0 0 1 0 1zM4 10.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5m.5 2.5a.5.5 0 0 1 0-1h4a.5.5 0 0 1 0 1z"/>
+                </svg>
+                <a href="/pdf-question-generator">PDF Question Generation</a></li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-cloud-arrow-up-fill" viewBox="0 0 16 16">
+                <path d="M8 2a5.53 5.53 0 0 0-3.594 1.342c-.766.66-1.321 1.52-1.464 2.383C1.266 6.095 0 7.555 0 9.318 0 11.366 1.708 13 3.781 13h8.906C14.502 13 16 11.57 16 9.773c0-1.636-1.242-2.969-2.834-3.194C12.923 3.999 10.69 2 8 2zm2.354 5.146a.5.5 0 0 1-.708.708L8.5 6.707V10.5a.5.5 0 0 1-1 0V6.707L6.354 7.854a.5.5 0 1 1-.708-.708l2-2a.5.5 0 0 1 .708 0l2 2z"/>
+                </svg>
+                <a href="/upload-and-chunk">Document chunking</a></li>
+        </ul>
+    </div>
+
+    <div class="content">
+        <div class="grid-container">
+            
+            <!-- Top-left item: Form -->
+            <div class="grid-item-form">
+                <form id="uploadForm" action="/upload-chunk" method="post" enctype="multipart/form-data">
+                    <div style="font-size: 20px; margin-bottom: 5px;">
+                        <div class="arrow-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-caret-right-fill" viewBox="0 0 16 16">
+                                <path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/>
+                            </svg>
+                        </div>
+                        <strong class="subheading-text">문서 업로드 및 청킹</strong>
+                    </div>
+                    <div class="input-group">
+                        <label for="file"><strong>문서 파일 : </strong></label>
+                        <input type="file" id="file" name="file" accept=".pdf,.docx,.txt" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="category"><strong>카테고리 : </strong></label>
+                        <input type="text" id="category" name="category" placeholder="예: 예약, 고객문의 등" required>
+                    </div>
+                    <input type="submit" value="청킹 시작">
+                </form>
+            </div>
+
+            <!-- Top-right item: Help Area -->
+            <div class="grid-item-help">
+                <div class="help-area" style="margin:0;">
+                    <div class="helper">
+                                        <span style="font-size: 18px;"><strong>※ 사용 시 유의사항</strong></span><br>
+<b>1.</b> PDF, DOCX, TXT 형식의 문서를 업로드할 수 있습니다.<br>
+<b>2.</b> 문서는 자동으로 문단 단위로 나뉘어(Chunking) 벡터 데이터베이스에 저장됩니다.<br>
+<b>3.</b> 카테고리를 입력하면, 해당 문서의 모든 청크에 동일한 카테고리가 적용됩니다.<br>
+<b>4.</b> 청킹 작업은 문서 크기에 따라 시간이 걸릴 수 있습니다. 완료 메시지가 나타날 때까지 기다려주세요.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom item: Logs -->
+            <div class="grid-item-logs">
+                <div class="log-section">
+                    <h3>실시간 로그</h3>
+                    <div id="log-container" class="log-container"></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
-        const form = document.getElementById('upload-form');
-        const resultArea = document.getElementById('result-area');
-        form.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            resultArea.textContent = '청킹 중...';
-            const formData = new FormData(form);
+        // 로그 표시 함수
+        async function loadAndDisplayLogs() {
             try {
-                const res = await fetch('/upload-chunk', {
-                    method: 'POST',
-                    body: formData
-                });
-                const data = await res.json();
-                if (data.success) {
-                    resultArea.textContent = `청킹 완료! 청크 수: ${data.chunk_count}`;
-                } else {
-                    resultArea.textContent = '청킹 실패: ' + (data.error || '알 수 없는 오류');
+                const response = await fetch('/api/log');
+                const data = await response.json();
+                
+                if (data.logs && data.logs.length > 0) {
+                    const logContainer = document.getElementById('log-container');
+                    if (logContainer) {
+                        logContainer.innerHTML = '';
+                        data.logs.forEach(log => {
+                            const logEntry = document.createElement('div');
+                            logEntry.className = 'log-entry';
+                            logEntry.textContent = log;
+                            logContainer.appendChild(logEntry);
+                        });
+                        logContainer.scrollTop = logContainer.scrollHeight;
+                    }
                 }
-            } catch (err) {
-                resultArea.textContent = '오류 발생: ' + err;
+            } catch (error) {
+                console.error('로그 로드 실패:', error);
             }
+        }
+
+        // 페이지 로드 시 로그 표시
+        document.addEventListener('DOMContentLoaded', function() {
+            loadAndDisplayLogs();
+            // 5초마다 로그 새로고침
+            setInterval(loadAndDisplayLogs, 5000);
+        });
+
+        // 폼 제출 처리
+        $("#uploadForm").on("submit", function(event) {
+            event.preventDefault();
+
+            Swal.fire({
+                title: '문서 청킹',
+                text: '문서를 청킹하여 데이터베이스에 저장하시겠습니까?',
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonText: '예',
+                cancelButtonText: '아니오'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    var formData = new FormData(this);
+                    
+                    Swal.fire({
+                        title: '청킹 중...',
+                        text: '문서를 처리하고 있습니다. 잠시만 기다려주세요.',
+                        allowOutsideClick: false,
+                        didOpen: () => {
+                            Swal.showLoading();
+                        }
+                    });
+
+                    fetch('/upload-chunk', {
+                        method: 'POST',
+                        body: formData
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            Swal.fire('성공', `청킹이 완료되었습니다! 총 ${data.chunk_count}개의 청크가 생성되었습니다.`, 'success');
+                        } else {
+                            Swal.fire('오류', `청킹 실패: ${data.error || '알 수 없는 오류'}`, 'error');
+                        }
+                    })
+                    .catch(error => {
+                        console.error("업로드 에러:", error);
+                        Swal.fire('오류', '네트워크 오류가 발생했습니다: ' + error, 'error');
+                    });
+                }
+            });
         });
     </script>
+    <footer class="footer">
+        <p>© 2025 WiseNut AI Technologies. All rights reserved.</p>
+        <p>Contact us: <a href="mailto:bboing@cyberlogitec.com">bboing@cyberlogitec.com</a></p>
+    </footer>
 </body>
-</html> 
+</html>

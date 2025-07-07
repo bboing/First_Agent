@@ -62,9 +62,9 @@ async def root():
 async def chat_ui(request: Request):
     return templates.TemplateResponse("chat.html", {"request": request}) 
 
-@app.get("/RAG_Management", response_class=HTMLResponse)
-async def RAG_Management(request: Request):
-    return templates.TemplateResponse("RAG_Management.html", {"request": request})
+@app.get("/RAG_Chat", response_class=HTMLResponse)
+async def RAG_Chat(request: Request):
+    return templates.TemplateResponse("RAG_Chat.html", {"request": request})
 
 @app.get("/learning-data", response_class=HTMLResponse)
 async def get_learning_data(request: Request):
@@ -73,6 +73,10 @@ async def get_learning_data(request: Request):
 @app.get("/pdf-question-generator", response_class=HTMLResponse)
 async def get_pdf_question_generator(request: Request):
     return templates.TemplateResponse("pdf_question_generator.html", {"request": request, "title": "PDF 기반 질문 생성"})
+
+@app.get("/upload-and-chunk", response_class=HTMLResponse)
+async def get_upload_and_chunk(request: Request):
+    return templates.TemplateResponse("upload_and_chunk.html", {"request": request, "title": "문서 업로드 및 청킹"})
 
 
 # 학습 데이터 업로드 Form (PDF, 이미지, XML 기반 질문 생성)
@@ -263,3 +267,19 @@ async def get_logs():
     except Exception as e:
         logger.error(f"Error reading log file: {e}")
         return {"logs": [], "error": str(e)}
+
+# mcp 연동 테스트 API
+@app.get("/api/mcp")
+async def get_mcp_data():
+    mcp_file_path = os.path.join(os.path.dirname(__file__), ".gemini", "mcp_test.json")
+    try:
+        with open(mcp_file_path, 'r', encoding='utf-8') as f:
+            mcp_data = json.load(f)
+        logger.info(f"Successfully loaded MCP data from {mcp_file_path}")
+        return JSONResponse(content=mcp_data)
+    except FileNotFoundError:
+        logger.error(f"MCP data file not found at: {mcp_file_path}")
+        raise HTTPException(status_code=404, detail="MCP data file not found")
+    except Exception as e:
+        logger.exception("An error occurred while processing MCP data")
+        raise HTTPException(status_code=500, detail=str(e))
