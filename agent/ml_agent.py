@@ -9,4 +9,4 @@ def handle_ml(query: str) -> str:
         str: ML 에이전트의 응답
     """
     # TODO: ML 로직 구현
-    return f"ML 에이전트가 처리 중입니다: {query}" 
+    return f"ML 에이전트가 처리 중입니다: {query}"

@@ -66,17 +66,21 @@ async def chat_ui(request: Request):
 async def RAG_Chat(request: Request):
     return templates.TemplateResponse("RAG_Chat.html", {"request": request})
 
-@app.get("/learning-data", response_class=HTMLResponse)
+@app.get("/csv-question-generator", response_class=HTMLResponse)
 async def get_learning_data(request: Request):
-    return templates.TemplateResponse("learning-data.html",{"request" : request, "title" : "Learning Data Input"})
+    return templates.TemplateResponse("csv_question_generator.html",{"request" : request, "title" : "Learning Data Input"})
 
 @app.get("/pdf-question-generator", response_class=HTMLResponse)
 async def get_pdf_question_generator(request: Request):
-    return templates.TemplateResponse("pdf_question_generator.html", {"request": request, "title": "PDF 기반 질문 생성"})
+    return templates.TemplateResponse("pdf_question_generator.html", {"request": request, "title": "PDF question generator"})
 
-@app.get("/upload-and-chunk", response_class=HTMLResponse)
+@app.get("/document-chunking", response_class=HTMLResponse)
 async def get_upload_and_chunk(request: Request):
-    return templates.TemplateResponse("upload_and_chunk.html", {"request": request, "title": "문서 업로드 및 청킹"})
+    return templates.TemplateResponse("document-chunking.html", {"request": request, "title": "document chunking"})
+
+@app.get("/node-editor", response_class=HTMLResponse)
+async def get_node_editor(request: Request):
+    return templates.TemplateResponse("node_editor.html", {"request": request, "title": "Node Editor"})
 
 
 # 학습 데이터 업로드 Form (PDF, 이미지, XML 기반 질문 생성)
@@ -258,11 +262,24 @@ async def get_logs():
         with open(log_file_path, 'r', encoding='utf-8') as f:
             log_lines = f.readlines()
         
-        # 최근 100줄만 반환 (성능 고려)
-        recent_logs = log_lines[-100:] if len(log_lines) > 100 else log_lines
+        # 최근 500줄 반환 (더 많은 로그 표시)
+        recent_logs = log_lines[-500:] if len(log_lines) > 500 else log_lines
         
-        logger.info(f"Log data requested, returning {len(recent_logs)} lines")
-        return {"logs": recent_logs}
+        # 실제 로그 내용이 있는지 확인 (중요한 로그만 필터링)
+        valid_logs = []
+        for line in recent_logs:
+            line = line.strip()
+            if line and not line.startswith("returning"):
+                # HTTP 디버그 로그 제외하고 중요한 로그만 포함
+                if any(keyword in line for keyword in [
+                    "INFO", "ERROR", "WARNING", "SUCCESS", "FAILED", 
+                    "Milvus", "Azure", "RAG", "Question", "File", "Upload"
+                ]):
+                    valid_logs.append(line)
+        
+        # 로그 API 호출 메시지는 DEBUG 레벨로 변경 (화면에 표시되지 않음)
+        logger.debug(f"Log data requested, returning {len(valid_logs)} filtered log lines")
+        return {"logs": valid_logs}
         
     except Exception as e:
         logger.error(f"Error reading log file: {e}")

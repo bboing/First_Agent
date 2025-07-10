@@ -4,6 +4,7 @@ from dotenv import load_dotenv
 import os
 import sys
 import re
+import time
 
 # 1. 환경변수 로드
 dotenv_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "..",  ".env"))
@@ -50,10 +51,52 @@ def recreate_collection_if_needed(name: str, vector_dim: int):
         ]
         schema = CollectionSchema(fields, description="임베딩 테스트용 컬렉션")
         collection = Collection(name=name, schema=schema)
-        collection.create_index(
-            field_name="embedding",
-            index_params={"index_type": "IVF_FLAT", "metric_type": "COSINE", "params": {"nlist": 128}}
-        )
+        
+        # 압축 알고리즘 선택 (환경 변수로 설정 가능)
+        index_type = os.getenv("MILVUS_INDEX_TYPE", "IVF_FLAT")
+        
+        # 인덱스 파라미터 설정
+        if index_type == "IVF_FLAT":
+            index_params = {
+                "index_type": "IVF_FLAT",
+                "metric_type": "COSINE",
+                "params": {"nlist": int(os.getenv("MILVUS_NLIST", "128"))}
+            }
+        elif index_type == "IVF_SQ8":
+            index_params = {
+                "index_type": "IVF_SQ8",
+                "metric_type": "COSINE",
+                "params": {"nlist": int(os.getenv("MILVUS_NLIST", "128"))}
+            }
+        elif index_type == "IVF_PQ":
+            index_params = {
+                "index_type": "IVF_PQ",
+                "metric_type": "COSINE",
+                "params": {
+                    "nlist": int(os.getenv("MILVUS_NLIST", "128")),
+                    "m": int(os.getenv("MILVUS_PQ_M", "8")),  # 서브벡터 개수
+                    "nbits": int(os.getenv("MILVUS_PQ_NBITS", "8"))  # 비트 수
+                }
+            }
+        elif index_type == "HNSW":
+            index_params = {
+                "index_type": "HNSW",
+                "metric_type": "COSINE",
+                "params": {
+                    "M": int(os.getenv("MILVUS_HNSW_M", "16")),
+                    "efConstruction": int(os.getenv("MILVUS_HNSW_EF_CONSTRUCTION", "200"))
+                }
+            }
+        else:
+            # 기본값
+            index_params = {
+                "index_type": "IVF_FLAT",
+                "metric_type": "COSINE",
+                "params": {"nlist": 128}
+            }
+        
+        print(f"🔧 Milvus 인덱스 생성: {index_type}")
+        collection.create_index(field_name="embedding", index_params=index_params)
         collection.load()
         return collection
     else:

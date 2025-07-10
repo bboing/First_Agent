@@ -9,6 +9,8 @@ faiss-cpu            # 로컬 벡터 DB (또는 chromadb 대체 가능)
 tiktoken             # Token 계산용
 unstructured         # PDF, HTML 등 전처리할 경우 사용
 pymilvus
+sentence-transformers # BGE-M3 등 로컬 임베딩 모델
+torch                # sentence-transformers 의존성
 
 # ML Agent (sklearn or torch 등 상황에 따라)
 scikit-learn         # 간단한 ML 파이프라인용

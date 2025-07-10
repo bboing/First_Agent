@@ -1,12 +1,20 @@
 from typing import Dict, Any
 from pathlib import Path
+from dotenv import load_dotenv
+import os
+
+# .env 파일 로드
+dotenv_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "..",  ".env"))
+print(f".env path: {dotenv_path}  exists: {os.path.exists(dotenv_path)}")
+load_dotenv(dotenv_path)
+
 
 # 기본 설정
 BASE_DIR = Path(__file__).parent.parent
 
 # RAG 에이전트 설정
 RAG_CONFIG = {
-    "model_name": "gpt-3.5-turbo",  # 기본 모델
+    "model_name": os.getenv("AZURE_OPENAI_DEPLOYMENT_CHAT"),  # 기본 모델
     "temperature": 0.7,
     "max_tokens": 1000,
     "chunk_size": 1000,

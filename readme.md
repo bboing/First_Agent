@@ -73,9 +73,7 @@ sub_lang/
   - 콘솔 기반 챗봇 인터페이스
 
 ### 🔧 유틸리티 스크립트
-- **htmlload.py** (7.1KB): HTML 문서 처리 및 Azure OpenAI 연동
-- **test_di_pdf.py** (3.1KB): Azure Document Intelligence PDF 테스트
-- **merge_temp_files.py** (2.6KB): 임시 파일 병합 유틸리티
+- **test_azure_di.py** (8.5KB): Azure Document Intelligence 종합 테스트
 - **logger_config.py** (453B): 로깅 설정
 
 ### 📋 설정 파일
@@ -194,12 +192,50 @@ AZURE_DI_ENDPOINT=your_di_endpoint
 AZURE_DI_KEY=your_di_key
 ```
 
+### 임베딩 모델 선택
+다양한 임베딩 모델을 선택할 수 있습니다:
+
+```bash
+# .env 파일에 추가
+EMBEDDING_MODEL_TYPE=azure_openai  # Azure OpenAI (기본)
+EMBEDDING_MODEL_TYPE=bge_m3        # BGE-M3 (로컬)
+```
+
+#### 모델별 특징
+- **Azure OpenAI (text-embedding-ada-002)**: 1536차원, 높은 정확도, API 비용 발생
+- **BGE-M3**: 1024차원, 멀티모달 지원, 무료 로컬 실행, 다국어 최적화
+
 ## 📊 성능 최적화
 
 ### 벡터 검색 최적화
 - Milvus 인덱스 설정 조정
 - 청크 크기 및 오버랩 최적화
 - 배치 처리 구현
+
+### 압축 알고리즘 선택
+Milvus에서 다양한 압축 알고리즘을 지원합니다:
+
+#### 환경 변수 설정
+```bash
+# .env 파일에 추가
+MILVUS_INDEX_TYPE=IVF_SQ8        # IVF_FLAT, IVF_SQ8, IVF_PQ, HNSW
+MILVUS_NLIST=128                 # IVF 클러스터 개수
+MILVUS_PQ_M=8                    # PQ 서브벡터 개수
+MILVUS_PQ_NBITS=8                # PQ 비트 수
+MILVUS_HNSW_M=16                 # HNSW 연결 수
+MILVUS_HNSW_EF_CONSTRUCTION=200  # HNSW 구축 탐색 범위
+```
+
+#### 알고리즘별 특징
+- **IVF_FLAT**: 무압축, 최고 정밀도, 높은 메모리 사용량
+- **IVF_SQ8**: 4배 압축, 95-98% 정밀도, 균형잡힌 성능
+- **IVF_PQ**: 16-64배 압축, 85-95% 정밀도, 메모리 효율적
+- **HNSW**: 그래프 기반, 매우 빠른 검색, 중간 메모리 사용량
+
+#### 성능 테스트
+```bash
+python agent/embedding.py --test-compression
+```
 
 ### 캐싱 전략
 - Redis를 활용한 검색 결과 캐싱
@@ -217,6 +253,17 @@ AZURE_DI_KEY=your_di_key
 ```bash
 tail -f logs/debug.log
 ```
+
+### Azure Document Intelligence 테스트 (비용 절약 모드)
+```bash
+python test_azure_di.py
+```
+
+💡 **비용 절약**: 실제 API 호출은 생략되어 비용이 발생하지 않습니다.
+- 설정 및 환경 변수 검증
+- 파일 구조 및 지원 형식 확인
+- 의존성 라이브러리 설치 상태 확인
+- 코드 통합 상태 검증
 
 ## 📈 향후 개발 계획
 
