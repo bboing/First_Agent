@@ -6,23 +6,37 @@
 
 ```
 sub_lang/
-├── 📁 agent/                    # RAG 에이전트 및 AI 관련 모듈
-├── 📁 auto_generator/           # 자동 질문/문장 생성 모듈
-├── 📁 docs/                     # 문서 저장소 및 결과물
+├── 📁 backend/                  # 백엔드 서비스
+│   ├── 📁 agent/                # RAG 에이전트 및 AI 관련 모듈
+│   ├── 📁 auto_generator/       # 자동 질문/문장 생성 모듈
+│   ├── 📁 router/               # 요청 라우팅 및 오케스트레이션
+│   ├── 📁 dst/                  # 상태 추적 및 관리
+│   ├── 📁 logs/                 # 로그 파일
+│   ├── 📄 app.py                # FastAPI 메인 애플리케이션
+│   ├── 📄 main.py               # CLI 진입점
+│   ├── 📄 requirements.txt      # Python 의존성
+│   └── 📄 Dockerfile            # 백엔드 컨테이너 설정
+├── 📁 frontend/                 # 프론트엔드 서비스
+│   ├── 📁 templates/            # 웹 UI 템플릿
+│   ├── 📁 static/               # 정적 파일 (CSS, JS)
+│   ├── 📁 public/               # 공개 문서 및 설정
+│   ├── 📄 server.js             # Express 정적 서버
+│   ├── 📄 package.json          # Node.js 의존성
+│   └── 📄 Dockerfile            # 프론트엔드 컨테이너 설정
 ├── 📁 infra/                    # 인프라 설정 (Docker, Redis)
-├── 📁 router/                   # 요청 라우팅 및 오케스트레이션
-├── 📁 templates/                # 웹 UI 템플릿
-├── 📁 static/                   # 정적 파일 (CSS, JS)
-├── 📁 logs/                     # 로그 파일
-├── 📁 dst/                      # 상태 추적 및 관리
-├── 📄 app.py                    # FastAPI 메인 애플리케이션
-├── 📄 main.py                   # CLI 진입점
-└── 📄 requirements.txt          # Python 의존성
+├── 📄 readme.md                 # 프로젝트 문서
+└── 📄 .env                      # 환경 변수
 ```
 
 ## 📁 디렉토리 상세 설명
 
-### 🤖 agent/ - AI 에이전트 모듈
+### 🔧 backend/ - 백엔드 서비스
+- **app.py** (12KB): FastAPI 웹 서버 메인 애플리케이션
+- **main.py** (302B): CLI 애플리케이션 진입점
+- **requirements.txt** (1KB): Python 패키지 의존성
+- **Dockerfile**: 백엔드 컨테이너 설정
+
+#### 🤖 agent/ - AI 에이전트 모듈
 - **rag_agent.py** (1.7KB): RAG 쿼리 처리 및 Azure OpenAI 연동
 - **embedding.py** (8.0KB): 벡터 임베딩 생성 및 Milvus 검색 기능
 - **chunking.py** (6.2KB): 문서 청킹 및 텍스트 처리
@@ -31,55 +45,42 @@ sub_lang/
 - **admin.py** (535B): 관리자 기능
 - **ping.py** (1.3KB): 시스템 상태 확인
 
-### 🔧 auto_generator/ - 자동 생성 모듈
+#### 🔧 auto_generator/ - 자동 생성 모듈
 - **pdf_question_generator.py** (13KB): PDF/이미지/XML 기반 질문 자동 생성
 - **sentence_generator.py** (21KB): 문장 및 학습 데이터 자동 생성
-- **docs/**: 생성된 문서 저장소
 
-### 📚 docs/ - 문서 및 데이터
-- **Customer Service_Booking_Manual.pdf**: 샘플 매뉴얼 문서
-- **save_result/**: 생성된 결과물 저장
-- **html_docs/**: HTML 문서 저장소
-- **public/**: 공개 문서 및 설정
-
-### 🏗️ infra/ - 인프라 설정
-- **docker-compose.yml** (2.3KB): Milvus, Redis, PostgreSQL 컨테이너 설정
-- **redis_client.py** (621B): Redis 연결 및 캐싱
-- **env_test.py** (922B): 환경 변수 테스트
-
-### 🛣️ router/ - 라우팅
+#### 🛣️ router/ - 라우팅
 - **agent_orchestrator.py** (781B): 쿼리 라우팅 및 에이전트 오케스트레이션
 
-### 🎨 templates/ - 웹 UI
-- **chat.html** (4.4KB): RAG 챗봇 인터페이스
-- **RAG_Management.html** (11KB): RAG 데이터 관리 화면
-- **learning-data.html** (15KB): 학습 데이터 입력 화면
-- **pdf_question_generator.html** (8.0KB): PDF 질문 생성 화면
-- **upload_and_chunk.html** (3.3KB): 문서 업로드 및 청킹 화면
-
-### 📊 dst/ - 데이터 상태 관리
+#### 📊 dst/ - 데이터 상태 관리
 - **state_tracker.py** (625B): 사용자 의도 추적 및 상태 관리
 
-## 📄 주요 파일 설명
+### 🎨 frontend/ - 프론트엔드 서비스
+- **server.js** (1.2KB): Express 정적 파일 서버
+- **package.json** (500B): Node.js 의존성
+- **Dockerfile**: 프론트엔드 컨테이너 설정
 
-### 🚀 핵심 애플리케이션
-- **app.py** (10KB): FastAPI 웹 서버 메인 애플리케이션
-  - RAG 챗봇 API 엔드포인트
-  - 파일 업로드 및 처리
-  - 웹 UI 라우팅
-  - 결과 파일 다운로드
+#### 🎨 templates/ - 웹 UI
+- **RAG_Chat.html** (4.4KB): RAG 챗봇 인터페이스
+- **pdf_question_generator.html** (8.0KB): PDF 질문 생성 화면
+- **csv_question_generator.html** (15KB): 학습 데이터 입력 화면
+- **document-chunking.html** (3.3KB): 문서 업로드 및 청킹 화면
+- **node_editor.html** (5.2KB): React Flow 노드 편집기
 
-- **main.py** (302B): CLI 애플리케이션 진입점
-  - 콘솔 기반 챗봇 인터페이스
+#### 📊 static/ - 정적 파일
+- **chat.css**: 챗봇 스타일
+- **style.css**: 공통 스타일
+- **Hahmlet_Font/**: 폰트 파일
+- **logo/**: 로고 이미지
 
-### 🔧 유틸리티 스크립트
-- **test_azure_di.py** (8.5KB): Azure Document Intelligence 종합 테스트
-- **logger_config.py** (453B): 로깅 설정
+#### 📚 public/ - 공개 문서
+- **docs/**: 문서 저장소 및 결과물
+- **save_result/**: 생성된 결과물 저장
 
-### 📋 설정 파일
-- **requirements.txt** (889B): Python 패키지 의존성
-- **.gitignore** (5.0B): Git 무시 파일 설정
-- **Example_meta.json**: Azure Cognitive Search 인덱스 스키마 예시
+### 🏗️ infra/ - 인프라 설정
+- **docker-compose.yml** (3.2KB): 멀티 컨테이너 설정 (백엔드, 프론트엔드, Milvus, Redis, PostgreSQL)
+- **redis_client.py** (621B): Redis 연결 및 캐싱
+- **env_test.py** (922B): 환경 변수 테스트
 
 ## 🚀 주요 기능
 
@@ -110,6 +111,11 @@ sub_lang/
 - 실시간 로그 모니터링
 - 파일 업로드/다운로드
 
+### 6. 노드 편집기
+- React Flow 기반 시각적 워크플로우 편집
+- 드래그 앤 드롭 노드 생성
+- 커스텀 노드 타입 지원
+
 ## 🛠️ 기술 스택
 
 ### 백엔드
@@ -120,11 +126,14 @@ sub_lang/
 - **PostgreSQL**: 관계형 데이터베이스
 
 ### 프론트엔드
+- **Express.js**: 정적 파일 서버
 - **HTML/CSS/JavaScript**: 웹 인터페이스
 - **Bootstrap**: UI 프레임워크
+- **React Flow**: 노드 편집기
 
 ### 인프라
 - **Docker**: 컨테이너화
+- **Docker Compose**: 멀티 컨테이너 오케스트레이션
 - **Azure Document Intelligence**: 문서 분석
 - **Azure Cognitive Search**: 검색 엔진 (예시)
 
@@ -132,9 +141,6 @@ sub_lang/
 
 ### 1. 환경 설정
 ```bash
-# 의존성 설치
-pip install -r requirements.txt
-
 # 환경 변수 설정 (.env 파일)
 AZURE_OPENAI_API_KEY=your_key
 AZURE_OPENAI_ENDPOINT=your_endpoint
@@ -148,38 +154,56 @@ cd infra
 docker-compose up -d
 ```
 
-### 3. 애플리케이션 실행
-```bash
-python app.py
-```
+### 3. 서비스 접속
+- **백엔드 API**: http://localhost:8000
+- **프론트엔드**: http://localhost:3000
+- **Milvus 관리**: http://localhost:3001
+- **MinIO 관리**: http://localhost:9001
 
-### 4. 웹 접속
-- 챗봇: http://localhost:8000/chat-ui
-- RAG 관리: http://localhost:8000/RAG_Chat
-- Milvus 관리: http://localhost:3000
+### 4. 개발 모드 실행
+```bash
+# 백엔드 개발
+cd backend
+pip install -r requirements.txt
+python app.py
+
+# 프론트엔드 개발
+cd frontend
+npm install
+npm run dev
+```
 
 ## 📝 사용법
 
 ### 문서 업로드 및 임베딩
-1. RAG 관리 페이지 접속
-2. 문서 업로드 (PDF, 이미지, XML)
-3. 자동 청킹 및 임베딩 처리
-4. 벡터 데이터베이스 저장
+1. 프론트엔드 접속: http://localhost:3000
+2. "Document Chunking" 페이지 접속
+3. 문서 업로드 (PDF, 이미지, XML)
+4. 자동 청킹 및 임베딩 처리
+5. 벡터 데이터베이스 저장
 
 ### 챗봇 사용
-1. 챗봇 페이지 접속
-2. 문서 관련 질문 입력
-3. RAG 기반 답변 확인
+1. 프론트엔드 접속: http://localhost:3000
+2. "RAG Chat" 페이지 접속
+3. 문서 관련 질문 입력
+4. RAG 기반 답변 확인
 
 ### 질문 자동 생성
-1. PDF 질문 생성 페이지 접속
-2. 워크플로우 및 상세 Task 문서 업로드
-3. 자동 질문 생성 및 Excel 다운로드
+1. 프론트엔드 접속: http://localhost:3000
+2. "PDF Question Generator" 페이지 접속
+3. 워크플로우 및 상세 Task 문서 업로드
+4. 자동 질문 생성 및 Excel 다운로드
+
+### 노드 편집기 사용
+1. 프론트엔드 접속: http://localhost:3000
+2. "Node Editor" 페이지 접속
+3. 드래그 앤 드롭으로 노드 생성
+4. 커스텀 노드 타입 추가
 
 ## 🔧 설정 및 커스터마이징
 
 ### 유사도 임계값 조정
-`agent/rag_agent.py`에서 `similarity_threshold` 값을 조정:
+`backend/agent/rag_agent.py`에서 `similarity_threshold` 값을 조정:
 - 높은 값 (0.7+): 정확한 답변, 적은 결과
 - 낮은 값 (0.3-): 다양한 답변, 많은 결과
 
@@ -201,84 +225,123 @@ EMBEDDING_MODEL_TYPE=azure_openai  # Azure OpenAI (기본)
 EMBEDDING_MODEL_TYPE=bge_m3        # BGE-M3 (로컬)
 ```
 
-#### 모델별 특징
-- **Azure OpenAI (text-embedding-ada-002)**: 1536차원, 높은 정확도, API 비용 발생
-- **BGE-M3**: 1024차원, 멀티모달 지원, 무료 로컬 실행, 다국어 최적화
+### 벡터 압축 알고리즘 설정
+Milvus 벡터 압축 알고리즘을 환경 변수로 설정:
 
-## 📊 성능 최적화
-
-### 벡터 검색 최적화
-- Milvus 인덱스 설정 조정
-- 청크 크기 및 오버랩 최적화
-- 배치 처리 구현
-
-### 압축 알고리즘 선택
-Milvus에서 다양한 압축 알고리즘을 지원합니다:
-
-#### 환경 변수 설정
 ```bash
 # .env 파일에 추가
-MILVUS_INDEX_TYPE=IVF_SQ8        # IVF_FLAT, IVF_SQ8, IVF_PQ, HNSW
-MILVUS_NLIST=128                 # IVF 클러스터 개수
-MILVUS_PQ_M=8                    # PQ 서브벡터 개수
-MILVUS_PQ_NBITS=8                # PQ 비트 수
-MILVUS_HNSW_M=16                 # HNSW 연결 수
-MILVUS_HNSW_EF_CONSTRUCTION=200  # HNSW 구축 탐색 범위
+MILVUS_INDEX_TYPE=IVF_FLAT        # 기본 (정확도 우선)
+MILVUS_INDEX_TYPE=IVF_SQ8         # 메모리 효율적
+MILVUS_INDEX_TYPE=IVF_PQ          # 균형
+MILVUS_INDEX_TYPE=HNSW            # 고속 검색
 ```
 
-#### 알고리즘별 특징
-- **IVF_FLAT**: 무압축, 최고 정밀도, 높은 메모리 사용량
-- **IVF_SQ8**: 4배 압축, 95-98% 정밀도, 균형잡힌 성능
-- **IVF_PQ**: 16-64배 압축, 85-95% 정밀도, 메모리 효율적
-- **HNSW**: 그래프 기반, 매우 빠른 검색, 중간 메모리 사용량
+## 🐳 Docker 컨테이너 구조
 
-#### 성능 테스트
+### 서비스 구성
+- **backend**: FastAPI 백엔드 서비스 (포트 8000)
+- **frontend**: Express.js 프론트엔드 서비스 (포트 3000)
+- **postgres**: PostgreSQL 데이터베이스 (포트 5432)
+- **redis**: Redis 캐시 (포트 6379)
+- **milvus-standalone**: Milvus 벡터 데이터베이스 (포트 19530)
+- **milvus-etcd**: Milvus 메타데이터 저장소
+- **milvus-minio**: Milvus 객체 저장소 (포트 9000, 9001)
+- **milvus-attu**: Milvus 관리 UI (포트 3001)
+
+### 볼륨 마운트
+- **pgdata**: PostgreSQL 데이터
+- **milvus_data**: Milvus 벡터 데이터
+- **etcd_data**: Milvus 메타데이터
+- **minio_data**: MinIO 객체 저장소
+
+## 🔍 API 엔드포인트
+
+### 백엔드 API (포트 8000)
+- `GET /`: 루트 엔드포인트
+- `GET /health`: 헬스체크
+- `POST /chat`: RAG 챗봇 API
+- `POST /uploadfiles/pdf`: PDF 질문 생성
+- `POST /uploadfiles/sentence`: 문장 생성
+- `GET /downloadfiles/{folder}/{filename}`: 파일 다운로드
+- `GET /api/log`: 로그 조회
+- `GET /api/mcp`: MCP 데이터 조회
+
+### 프론트엔드 (포트 3000)
+- `GET /`: RAG 챗봇 페이지
+- `GET /pdf_question_generator`: PDF 질문 생성 페이지
+- `GET /csv_question_generator`: CSV 질문 생성 페이지
+- `GET /document-chunking`: 문서 청킹 페이지
+- `GET /node_editor`: 노드 편집기 페이지
+- `GET /health`: 헬스체크
+
+## 📊 모니터링 및 로깅
+
+### 로그 관리
+- 백엔드 로그: `backend/logs/`
+- 실시간 로그 조회: `GET /api/log`
+- 로그 레벨: DEBUG, INFO, WARNING, ERROR
+
+### 헬스체크
+- 백엔드: `http://localhost:8000/health`
+- 프론트엔드: `http://localhost:3000/health`
+- Milvus: `http://localhost:9091/healthz`
+
+## 🚀 배포
+
+### Docker Compose로 전체 서비스 실행
 ```bash
-python agent/embedding.py --test-compression
+cd infra
+docker-compose up -d
 ```
 
-### 캐싱 전략
-- Redis를 활용한 검색 결과 캐싱
-- 임베딩 벡터 캐싱
-- 세션 관리
-
-## 🐛 문제 해결
-
-### 일반적인 문제
-1. **Milvus 연결 실패**: Docker 컨테이너 상태 확인
-2. **Azure API 오류**: API 키 및 엔드포인트 확인
-3. **메모리 부족**: 청크 크기 조정
-
-### 로그 확인
+### 개별 서비스 실행
 ```bash
-tail -f logs/debug.log
+# 백엔드만 실행
+cd backend
+docker build -t sub-lang-backend .
+docker run -p 8000:8000 sub-lang-backend
+
+# 프론트엔드만 실행
+cd frontend
+docker build -t sub-lang-frontend .
+docker run -p 3000:3000 sub-lang-frontend
 ```
 
-### Azure Document Intelligence 테스트 (비용 절약 모드)
+## 🔧 개발 가이드
+
+### 백엔드 개발
 ```bash
-python test_azure_di.py
+cd backend
+pip install -r requirements.txt
+python app.py
 ```
 
-💡 **비용 절약**: 실제 API 호출은 생략되어 비용이 발생하지 않습니다.
-- 설정 및 환경 변수 검증
-- 파일 구조 및 지원 형식 확인
-- 의존성 라이브러리 설치 상태 확인
-- 코드 통합 상태 검증
+### 프론트엔드 개발
+```bash
+cd frontend
+npm install
+npm run dev
+```
 
-## 📈 향후 개발 계획
+### 테스트
+```bash
+# 백엔드 테스트
+cd backend
+python -m pytest
 
-- [ ] 다중 언어 지원 확장
-- [ ] 실시간 협업 기능
-- [ ] 고급 분석 대시보드
-- [ ] API 문서화 개선
-- [ ] 성능 모니터링 도구
+# 프론트엔드 테스트
+cd frontend
+npm test
+```
 
-## 📄 라이선스
+## 📝 라이센스
 
-이 프로젝트는 내부 사용을 위한 프로토타입입니다.
+MIT License
 
-## 👥 기여자
+## 🤝 기여
 
-- 개발팀: RAG 시스템 개발
-- 인프라팀: Docker 및 클라우드 설정
-- 데이터팀: 문서 처리 및 임베딩 최적화
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request

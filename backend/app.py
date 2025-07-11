@@ -1,10 +1,19 @@
+import os
+import sys
+from pathlib import Path
+
+# 상위 디렉토리의 .env 파일을 로드하기 위해 경로 추가
+sys.path.append(str(Path(__file__).parent.parent))
+
+from dotenv import load_dotenv
+load_dotenv("/app/.env")
+
 from logger_config import setup_logging
 import logging
 setup_logging()
 logger = logging.getLogger(__name__)
 
 from agent.rag_agent import handle_rag
-import os
 import re
 import openpyxl
 import json
@@ -18,9 +27,6 @@ import auto_generator.pdf_question_generator
 from starlette.middleware.sessions import SessionMiddleware
 from fastapi import FastAPI, File, Form, UploadFile, HTTPException, Request, BackgroundTasks
 from fastapi.responses import JSONResponse
-from fastapi.responses import HTMLResponse
-from fastapi.templating import Jinja2Templates
-from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
 from starlette.responses import FileResponse
 from typing import Union
@@ -32,10 +38,8 @@ if __name__ == "__main__" :
     uvicorn.run("app:app", host = "0.0.0.0", port=8000, reload = True)
 
 app = FastAPI()
-templates = Jinja2Templates(directory="templates")
-app.mount("/static", StaticFiles(directory="static"), name="static")
 
-# CORS 허용 (로컬 프론트엔드 개발 시 필요)
+# CORS 허용 (프론트엔드와의 통신을 위해)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],  # 실제 서비스 시에는 도메인 제한 권장
@@ -43,8 +47,6 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
-templates = Jinja2Templates(directory="templates")
 
 class ChatRequest(BaseModel):
     question: str
@@ -58,29 +60,12 @@ async def chat_endpoint(req: ChatRequest):
 async def root():
     return {"message": "RAG Chatbot API is running!"}
 
-@app.get("/chat-ui", response_class=HTMLResponse)
-async def chat_ui(request: Request):
-    return templates.TemplateResponse("chat.html", {"request": request}) 
+@app.get("/health")
+async def health_check():
+    return {"status": "healthy", "service": "backend"}
 
-@app.get("/RAG_Chat", response_class=HTMLResponse)
-async def RAG_Chat(request: Request):
-    return templates.TemplateResponse("RAG_Chat.html", {"request": request})
-
-@app.get("/csv-question-generator", response_class=HTMLResponse)
-async def get_learning_data(request: Request):
-    return templates.TemplateResponse("csv_question_generator.html",{"request" : request, "title" : "Learning Data Input"})
-
-@app.get("/pdf-question-generator", response_class=HTMLResponse)
-async def get_pdf_question_generator(request: Request):
-    return templates.TemplateResponse("pdf_question_generator.html", {"request": request, "title": "PDF question generator"})
-
-@app.get("/document-chunking", response_class=HTMLResponse)
-async def get_upload_and_chunk(request: Request):
-    return templates.TemplateResponse("document-chunking.html", {"request": request, "title": "document chunking"})
-
-@app.get("/node-editor", response_class=HTMLResponse)
-async def get_node_editor(request: Request):
-    return templates.TemplateResponse("node_editor.html", {"request": request, "title": "Node Editor"})
+# HTML 템플릿 엔드포인트들은 프론트엔드에서 처리하므로 제거
+# 프론트엔드: http://localhost:3000 에서 웹 페이지 서빙
 
 
 # 학습 데이터 업로드 Form (PDF, 이미지, XML 기반 질문 생성)

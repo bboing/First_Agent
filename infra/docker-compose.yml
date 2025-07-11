@@ -1,4 +1,47 @@
 services:
+  # Backend Service
+  backend:
+    build:
+      context: ../backend
+      dockerfile: Dockerfile
+    container_name: sub_lang_backend
+    ports:
+      - "8000:8000"
+    environment:
+      - POSTGRES_HOST=postgres
+      - REDIS_HOST=redis
+      - MILVUS_HOST=standalone
+      - MILVUS_PORT=19530
+      - MINIO_HOST=minio
+      - MINIO_PORT=9000
+    volumes:
+      - ../backend:/app
+      - ../logs:/app/logs
+      - ../.env:/app/.env
+    depends_on:
+      - postgres
+      - redis
+      - standalone
+      - minio
+    networks:
+      - custom-net
+
+  # Frontend Service
+  frontend:
+    build:
+      context: ../frontend
+      dockerfile: Dockerfile
+    container_name: sub_lang_frontend
+    ports:
+      - "3000:3000"
+    volumes:
+      - ../frontend:/app
+      - ../.env:/app/.env
+    depends_on:
+      - backend
+    networks:
+      - custom-net
+
   postgres:
     image: postgres:15
     container_name: pg
@@ -11,6 +54,8 @@ services:
       - "5432:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
+    networks:
+      - custom-net
 
   redis:
     image: redis:7
@@ -18,6 +63,8 @@ services:
     # restart: always
     ports:
       - "6379:6379"
+    networks:
+      - custom-net
 
   etcd:
     container_name: milvus-etcd
@@ -35,6 +82,8 @@ services:
       interval: 30s
       timeout: 20s
       retries: 3
+    networks:
+      - custom-net
 
   minio:
     container_name: milvus-minio
@@ -53,6 +102,8 @@ services:
       interval: 30s
       timeout: 20s
       retries: 3
+    networks:
+      - custom-net
 
   standalone:
     container_name: milvus-standalone
@@ -77,6 +128,8 @@ services:
     depends_on:
       - "etcd"
       - "minio"
+    networks:
+      - custom-net
 
   attu:
     container_name: milvus-attu
@@ -84,9 +137,11 @@ services:
     environment:
       MILVUS_URL: standalone:19530
     ports:
-      - "3000:3000"
+      - "3001:3000"
     depends_on:
       - "standalone"
+    networks:
+      - custom-net
 
 volumes:
   pgdata:

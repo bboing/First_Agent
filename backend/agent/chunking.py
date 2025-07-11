@@ -3,9 +3,9 @@ import tempfile
 from azure.ai.formrecognizer import DocumentAnalysisClient
 from azure.core.credentials import AzureKeyCredential
 import sys  
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-import dotenv
-dotenv.load_dotenv()
+from pathlib import Path
+from dotenv import load_dotenv
+load_dotenv("/app/.env")
 
 def extract_text_from_document(file_path: str) -> str:
     """

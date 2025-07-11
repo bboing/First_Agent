@@ -1,1 +1,48 @@
+# OS/에디터 임시 파일
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*.bak
+*.tmp
+*.log
+
+# 환경 변수 파일
 .env
+.env.*
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+env/
+
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Docker
+*.pid
+
+# 빌드/배포
+/dist/
+/build/
+/coverage/
+
+# IDE/에디터
+.vscode/
+.idea/
+*.iml
+
+# Jupyter
+.ipynb_checkpoints/
+
+# 기타
+logs/
+logs/*
+backend/logs/
+frontend/node_modules/

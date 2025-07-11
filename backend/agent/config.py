@@ -3,10 +3,11 @@ from pathlib import Path
 from dotenv import load_dotenv
 import os
 
-# .env 파일 로드
-dotenv_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "..",  ".env"))
-print(f".env path: {dotenv_path}  exists: {os.path.exists(dotenv_path)}")
+# .env 파일 로드 (상위 디렉토리의 .env 파일)
+dotenv_path = Path(__file__).parent.parent.parent / '.env'
+print(f".env path: {dotenv_path}  exists: {dotenv_path.exists()}")
 load_dotenv(dotenv_path)
+load_dotenv("/app/.env")
 
 
 # 기본 설정

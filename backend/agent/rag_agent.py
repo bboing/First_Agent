@@ -2,9 +2,12 @@ from agent.embedding import search_similar_texts
 from langchain_openai import AzureChatOpenAI
 from langchain.schema import SystemMessage, HumanMessage
 import os
-import dotenv   
+import sys
+from pathlib import Path
+from dotenv import load_dotenv
 
-dotenv.load_dotenv()
+# 상위 디렉토리의 .env 파일 로드
+load_dotenv("/app/.env")
 
 def handle_rag(query: str) -> str:
     """

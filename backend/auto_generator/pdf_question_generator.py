@@ -4,15 +4,17 @@ import requests
 import pandas as pd
 import json
 from dotenv import load_dotenv
+load_dotenv("/app/.env")
 from datetime import datetime
 import logging
 from azure.ai.formrecognizer import DocumentAnalysisClient
 from azure.core.credentials import AzureKeyCredential
 from ast import literal_eval
+from pathlib import Path
 
-# .env 파일 로드
-dotenv_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".env"))
-if os.path.exists(dotenv_path):
+# .env 파일 로드 (상위 디렉토리의 .env 파일)
+dotenv_path = Path(__file__).parent.parent.parent / '.env'
+if dotenv_path.exists():
     load_dotenv(dotenv_path)
 
 # --- Azure OpenAI 및 DI 환경 변수 설정 ---

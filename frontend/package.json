@@ -1,0 +1,26 @@
+{
+  "name": "sub-lang-frontend",
+  "version": "1.0.0",
+  "description": "Frontend for Sub Language Service",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js",
+    "build": "echo 'Static files already built'"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "http-proxy-middleware": "^3.0.5",
+    "path": "^0.12.7"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  },
+  "keywords": [
+    "frontend",
+    "static",
+    "express"
+  ],
+  "author": "Taegyun Kim",
+  "license": "MIT"
+}
