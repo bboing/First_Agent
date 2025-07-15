@@ -5,7 +5,10 @@ from azure.core.credentials import AzureKeyCredential
 import sys  
 from pathlib import Path
 from dotenv import load_dotenv
-load_dotenv("/app/.env")
+# load_dotenv("/app/.env")
+# Code added by Gemini
+dotenv_path = Path(__file__).parent.parent.parent / '.env'
+load_dotenv(dotenv_path=dotenv_path)
 
 def extract_text_from_document(file_path: str) -> str:
     """

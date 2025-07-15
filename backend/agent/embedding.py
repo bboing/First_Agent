@@ -10,7 +10,7 @@ from pathlib import Path
 # 1. 환경변수 로드 (상위 디렉토리의 .env 파일)
 dotenv_path = Path(__file__).parent.parent.parent / '.env'
 print(f".env path: {dotenv_path}  exists: {dotenv_path.exists()}")
-load_dotenv("/app/.env")
+
 
 # 2. Azure OpenAI 임베딩 모델 준비
 embedding_model = AzureOpenAIEmbeddings(

@@ -2,7 +2,7 @@ import os
 import sys
 import time
 from dotenv import load_dotenv
-load_dotenv("/app/.env")
+
 from pathlib import Path
 
 # 프로젝트 루트 경로 설정 (상위 디렉토리)

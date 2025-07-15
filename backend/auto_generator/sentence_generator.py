@@ -6,7 +6,7 @@ import json
 import random
 from ast import literal_eval
 from dotenv import load_dotenv
-load_dotenv("/app/.env")
+
 from datetime import datetime
 import logging
 from pathlib import Path

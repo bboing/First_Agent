@@ -4,7 +4,7 @@ import requests
 import pandas as pd
 import json
 from dotenv import load_dotenv
-load_dotenv("/app/.env")
+
 from datetime import datetime
 import logging
 from azure.ai.formrecognizer import DocumentAnalysisClient

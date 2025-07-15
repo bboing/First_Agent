@@ -6,7 +6,10 @@ from pathlib import Path
 sys.path.append(str(Path(__file__).parent.parent))
 
 from dotenv import load_dotenv
-load_dotenv("/app/.env")
+# load_dotenv("/app/.env")
+# Code added by Gemini
+dotenv_path = Path(__file__).parent.parent / '.env'
+load_dotenv(dotenv_path=dotenv_path)
 
 from logger_config import setup_logging
 import logging
@@ -19,7 +22,6 @@ import openpyxl
 import json
 import pandas as pd
 import uvicorn
-import test
 import random
 import ast
 import auto_generator.sentence_generator

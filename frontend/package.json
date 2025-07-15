@@ -1,7 +1,7 @@
 {
   "name": "sub-lang-frontend",
   "version": "1.0.0",
-  "description": "Frontend for Sub Language Service",
+  "description": "Frontend for Sub Langchain Service",
   "main": "index.js",
   "scripts": {
     "start": "node server.js",

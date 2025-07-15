@@ -1,46 +1,51 @@
 # Core LLM and orchestration
 openai
 langchain
+langchain-openai
+langchain-core
 langchainhub
 langgraph
 
 # Vector Store & RAG
-faiss-cpu            # 로컬 벡터 DB (또는 chromadb 대체 가능)
-tiktoken             # Token 계산용
-unstructured         # PDF, HTML 등 전처리할 경우 사용
+faiss-cpu
+tiktoken
+unstructured
 pymilvus
-sentence-transformers # BGE-M3 등 로컬 임베딩 모델
-torch                # sentence-transformers 의존성
+sentence-transformers
+torch
 
-# ML Agent (sklearn or torch 등 상황에 따라)
-scikit-learn         # 간단한 ML 파이프라인용
+# Azure
+azure-ai-formrecognizer
+azure-core
+
+# ML Agent
+scikit-learn
 pandas
 numpy
+openpyxl
 
-# LLM 기반 DST (의도분류 등)
+# LLM 기반 DST
 transformers
-torch                # 모델 쓸 경우
-sentence-transformers
 
 # Env & HTTP
-python-dotenv        # .env 관리
-requests             # API 요청용
-
-# Dev tools (선택)
-rich                 # 터미널 출력 이쁘게
-ipykernel            # 노트북 환경에서도 실행 가능하게
-
-# FastAPI
+python-dotenv
+requests
 fastapi
 uvicorn
+pydantic
+starlette
+itsdangerous
 
-# Langchain
-langchain
-langchain-openai
+# Dev tools
+rich
+ipykernel
+python-multipart
+python-dateutil
+python-dotenv
 
 # Database
 psycopg2-binary
 sqlalchemy
 redis
-alembic             # (선택) DB 마이그레이션
-pgvector            # (선택) 벡터 검색 기능
+alembic
+pgvector

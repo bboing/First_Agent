@@ -37,6 +37,8 @@ services:
     volumes:
       - ../frontend:/app
       - ../.env:/app/.env
+    environment:
+      - BACKEND_API_URL=http://backend:8000
     depends_on:
       - backend
     networks:

@@ -7,7 +7,7 @@ import os
 dotenv_path = Path(__file__).parent.parent.parent / '.env'
 print(f".env path: {dotenv_path}  exists: {dotenv_path.exists()}")
 load_dotenv(dotenv_path)
-load_dotenv("/app/.env")
+
 
 
 # 기본 설정

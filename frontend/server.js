@@ -4,7 +4,7 @@ const path = require('path');
 const app = express();
 const PORT = process.env.PORT || 3000;
 const { createProxyMiddleware } = require('http-proxy-middleware');
-
+const backendApiUrl = process.env.BACKEND_API_URL || 'http://localhost:8000';
 
 // Serve static files from static directory
 app.use('/static', express.static(path.join(__dirname, 'static')));
@@ -14,7 +14,7 @@ app.use('/public', express.static(path.join(__dirname, 'public')));
 
 
 app.use('/api/log', createProxyMiddleware({
-  target: 'http://localhost:8000',
+  target: backendApiUrl,
   changeOrigin: true
 }))
 
