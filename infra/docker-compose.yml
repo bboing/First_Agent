@@ -14,10 +14,11 @@ services:
       - MILVUS_PORT=19530
       - MINIO_HOST=minio
       - MINIO_PORT=9000
+    env_file:
+      - ../.env
     volumes:
       - ../backend:/app
       - ../logs:/app/logs
-      - ../.env:/app/.env
     depends_on:
       - postgres
       - redis
@@ -34,9 +35,10 @@ services:
     container_name: sub_lang_frontend
     ports:
       - "3000:3000"
+    env_file:
+      - ../.env
     volumes:
       - ../frontend:/app
-      - ../.env:/app/.env
     environment:
       - BACKEND_API_URL=http://backend:8000
     depends_on:
