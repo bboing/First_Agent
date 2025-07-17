@@ -111,7 +111,7 @@ def extract_texts_by_page(file_path: str):
     client = DocumentAnalysisClient(endpoint, AzureKeyCredential(key))
 
     with open(file_path, "rb") as f:
-        poller = client.begin_analyze_document("prebuilt-document", document=f, pages="1-9")
+        poller = client.begin_analyze_document("prebuilt-document", document=f)
         result = poller.result()
 
     page_texts = []

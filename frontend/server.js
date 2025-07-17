@@ -16,7 +16,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 
-
 // API 프록시 설정 (모든 라우트보다 위에 위치해야 함)
 app.use('/api', createProxyMiddleware({
   target: backendApiUrl,
