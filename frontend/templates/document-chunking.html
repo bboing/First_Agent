@@ -90,7 +90,7 @@
             
             <!-- Top-left item: Form -->
             <div class="grid-item-form">
-                <form id="uploadForm" action="/upload-chunk" method="post" enctype="multipart/form-data">
+                <form id="uploadForm" action="/process-pdf" method="post" enctype="multipart/form-data">
                     <div style="font-size: 20px; margin-bottom: 5px;">
                         <div class="arrow-icon">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-caret-right-fill" viewBox="0 0 16 16">
@@ -100,12 +100,8 @@
                         <strong class="subheading-text">문서 업로드 및 청킹</strong>
                     </div>
                     <div class="input-group">
-                        <label for="file"><strong>문서 파일 : </strong></label>
-                        <input type="file" id="file" name="file" accept=".pdf,.docx,.txt" required>
-                    </div>
-                    <div class="input-group">
-                        <label for="category"><strong>카테고리 : </strong></label>
-                        <input type="text" id="category" name="category" placeholder="예: 예약, 고객문의 등" required>
+                        <label for="file"><strong>PDF 파일 : </strong></label>
+                        <input type="file" id="file" name="file" accept=".pdf" required>
                     </div>
                     <input type="submit" value="청킹 시작">
                 </form>
@@ -192,7 +188,7 @@
                         }
                     });
 
-                    fetch('/upload-chunk', {
+                    fetch('/process-pdf', {
                         method: 'POST',
                         body: formData
                     })

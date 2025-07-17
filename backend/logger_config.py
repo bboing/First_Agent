@@ -2,13 +2,13 @@ import logging
 import os
 
 def setup_logging():
-    log_dir = os.path.join(os.path.dirname(__file__), "logs")
+    log_dir = "logs"
     os.makedirs(log_dir, exist_ok=True)
     log_file = os.path.join(log_dir, "debug.log")
     
     # 루트 로거 설정
     logging.basicConfig(
-        level=logging.INFO,  # DEBUG에서 INFO로 변경
+        level=logging.DEBUG,  # DEBUG로 임시 변경
         format="%(asctime)s [%(levelname)s] %(name)s: %(message)s",
         handlers=[
             logging.FileHandler(log_file, encoding="utf-8"),

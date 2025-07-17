@@ -1,18 +1,7 @@
 import os
 import sys
 import time
-from dotenv import load_dotenv
 
-from pathlib import Path
-
-# 프로젝트 루트 경로 설정 (상위 디렉토리)
-PROJECT_ROOT = Path(__file__).parent.parent
-DOCS_DIR = PROJECT_ROOT / "frontend" / "public" / "docs"
-
-# .env 파일 로드 (상위 디렉토리의 .env 파일)
-dotenv_path = PROJECT_ROOT / ".env"
-if dotenv_path.exists():
-    load_dotenv(dotenv_path)
 
 class AzureDITester:
     """Azure Document Intelligence 설정 검증 클래스 (비용 절약용)"""

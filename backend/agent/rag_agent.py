@@ -4,12 +4,7 @@ from langchain.schema import SystemMessage, HumanMessage
 import os
 import sys
 from pathlib import Path
-from dotenv import load_dotenv
 
-# 상위 디렉토리의 .env 파일 로드
-# load_dotenv("/app/.env")
-dotenv_path = Path(__file__).parent.parent.parent / '.env'
-load_dotenv(dotenv_path=dotenv_path)
 
 def handle_rag(query: str) -> str:
     """

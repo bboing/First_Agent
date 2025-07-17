@@ -4,11 +4,7 @@ from azure.ai.formrecognizer import DocumentAnalysisClient
 from azure.core.credentials import AzureKeyCredential
 import sys  
 from pathlib import Path
-from dotenv import load_dotenv
-# load_dotenv("/app/.env")
-# Code added by Gemini
-dotenv_path = Path(__file__).parent.parent.parent / '.env'
-load_dotenv(dotenv_path=dotenv_path)
+
 
 def extract_text_from_document(file_path: str) -> str:
     """
@@ -23,7 +19,7 @@ def extract_text_from_document(file_path: str) -> str:
     client = DocumentAnalysisClient(endpoint, AzureKeyCredential(key))
 
     with open(file_path, "rb") as f:
-        poller = client.begin_analyze_document("prebuilt-document", document=f)
+        poller = client.begin_analyze_document("prebuilt-document", document=f, pages="1-9")
         result = poller.result()
 
     # 모든 페이지의 텍스트를 합침
@@ -67,10 +63,10 @@ def save_chunks_to_temp_file(chunks):
         for i, chunk in enumerate(chunks):
             temp_file.write(f"--- Chunk {i+1} ---\n{chunk}\n\n")
         temp_file.close()
-        print(f"✅ 청킹 결과가 임시 파일에 저장되었습니다: {temp_file_path}")
+        print(f"chunking.py: ✅ 청킹 결과가 임시 파일에 저장되었습니다: {temp_file_path}")
         return temp_file_path
     except Exception as e:
-        print(f"❌ 임시 파일 저장 중 오류: {e}")
+        print(f"chunking.py: ❌ 임시 파일 저장 중 오류: {e}")
         if os.path.exists(temp_file_path):
             os.unlink(temp_file_path)
         raise
@@ -85,23 +81,23 @@ def process_document_to_temp_file(file_path: str, chunk_size: int = 1000, overla
     Returns:
         str: 임시 파일 경로
     """
-    print(f"📄 문서 처리 시작: {file_path}")
+    print(f"chunking.py: 📄 문서 처리 시작: {file_path}")
     
     # 1. 텍스트 추출
-    print("🔍 텍스트 추출 중...")
+    print("chunking.py: 🔍 텍스트 추출 중...")
     text = extract_text_from_document(file_path)
-    print(f"✅ 텍스트 추출 완료 (총 {len(text)} 문자)")
+    print(f"chunking.py: ✅ 텍스트 추출 완료 (총 {len(text)} 문자)")
     
     # 2. 청킹
-    print("✂️ 텍스트 청킹 중...")
+    print("chunking.py: ✂️ 텍스트 청킹 중...")
     chunks = chunk_text(text, chunk_size, overlap)
-    print(f"✅ 청킹 완료 (총 {len(chunks)}개 청크)")
+    print(f"chunking.py: ✅ 청킹 완료 (총 {len(chunks)}개 청크)")
     
     # 3. 임시 파일로 저장
-    print("💾 임시 파일로 저장 중...")
+    print("chunking.py: 💾 임시 파일로 저장 중...")
     temp_file_path = save_chunks_to_temp_file(chunks)
     
-    print(f"🎉 청킹 완료! 임시 파일: {temp_file_path}")
+    print(f"chunking.py: 🎉 청킹 완료! 임시 파일: {temp_file_path}")
     return temp_file_path
 
 def extract_texts_by_page(file_path: str):
@@ -115,7 +111,7 @@ def extract_texts_by_page(file_path: str):
     client = DocumentAnalysisClient(endpoint, AzureKeyCredential(key))
 
     with open(file_path, "rb") as f:
-        poller = client.begin_analyze_document("prebuilt-document", document=f)
+        poller = client.begin_analyze_document("prebuilt-document", document=f, pages="1-9")
         result = poller.result()
 
     page_texts = []
@@ -169,15 +165,16 @@ if __name__ == "__main__":
     
     # 파일 존재 여부 확인
     if not os.path.exists(file_path):
-        print(f"❌ 파일을 찾을 수 없습니다: {file_path}")
-        print(f"현재 작업 디렉토리: {os.getcwd()}")
-        print(f"절대 경로: {os.path.abspath(file_path)}")
+        print(f"chunking.py: ❌ 파일을 찾을 수 없습니다: {file_path}")
+        print(f"chunking.py: 현재 작업 디렉토리: {os.getcwd()}")
+        print(f"chunking.py: 절대 경로: {os.path.abspath(file_path)}")
         exit(1)
     
-    print(f"✅ 파일을 찾았습니다: {file_path}")
+    print(f"chunking.py: ✅ 파일을 찾았습니다: {file_path}")
     
     # 문서 처리 및 임시 파일 저장
     temp_file_path = process_document_to_temp_file(file_path, chunk_size=1000, overlap=200)
     
-    print(f"\n📝 다음 명령어로 임베딩을 진행하세요:")
-    print(f"python sub_lang/agent/embedding.py {temp_file_path}")
+    print(f"chunking.py: 
+📝 다음 명령어로 임베딩을 진행하세요:")
+    print(f"chunking.py: python sub_lang/agent/embedding.py {temp_file_path}")

@@ -3,19 +3,7 @@ import openai
 import requests
 import pandas as pd
 import json
-from dotenv import load_dotenv
 
-from datetime import datetime
-import logging
-from azure.ai.formrecognizer import DocumentAnalysisClient
-from azure.core.credentials import AzureKeyCredential
-from ast import literal_eval
-from pathlib import Path
-
-# .env 파일 로드 (상위 디렉토리의 .env 파일)
-dotenv_path = Path(__file__).parent.parent.parent / '.env'
-if dotenv_path.exists():
-    load_dotenv(dotenv_path)
 
 # --- Azure OpenAI 및 DI 환경 변수 설정 ---
 def get_azure_config(project_id):
@@ -53,7 +41,7 @@ def initialize_azure_config(project_id):
     """전역 Azure 설정을 초기화합니다."""
     global azure_config
     azure_config = get_azure_config(project_id)
-    logging.info(f"Azure config initialized for project_id: {project_id}")
+    logging.info(f"pdf_question_generator.py: Azure config initialized for project_id: {project_id}")
 
 
 # 파일 형식에 따라 텍스트를 추출
@@ -72,7 +60,7 @@ def extract_text_from_file(file_path: str) -> str:
             raise ValueError(f"지원하지 않는 파일 형식입니다: {file_extension}")
             
     except Exception as e:
-        logging.error(f"Error extracting text from file {file_path}: {e}")
+        logging.error(f"pdf_question_generator.py: Error extracting text from file {file_path}: {e}")
         raise
 
 # PDF 파일에서 텍스트를 추출
@@ -94,8 +82,8 @@ def extract_text_from_pdf(file_path: str) -> str:
         
         # PDF 파일을 바이너리로 읽기
         with open(file_path, "rb") as f:
-            # Document Intelligence로 문서 분석
-            poller = client.begin_analyze_document("prebuilt-document", f)
+            # Document Intelligence로 문서 분석 (테스트용: 9페이지로 제한)
+            poller = client.begin_analyze_document("prebuilt-document", f, pages="1-9")
             result = poller.result()
         
         # 추출된 텍스트 가져오기
@@ -130,8 +118,8 @@ def extract_text_from_image(file_path: str) -> str:
         
         # 이미지 파일을 바이너리로 읽기
         with open(file_path, "rb") as f:
-            # Document Intelligence로 문서 분석
-            poller = client.begin_analyze_document("prebuilt-document", f)
+            # Document Intelligence로 문서 분석 (테스트용: 9페이지로 제한)
+            poller = client.begin_analyze_document("prebuilt-document", f, pages="1-9")
             result = poller.result()
         
         # 추출된 텍스트 가져오기
@@ -171,11 +159,11 @@ def extract_text_from_xml(file_path: str) -> str:
         extract_text_from_element(root)
         
         extracted_text = ' '.join(text_content)
-        logging.info(f"Successfully extracted text from XML {os.path.basename(file_path)}.")
+        logging.info(f"pdf_question_generator.py: Successfully extracted text from XML {os.path.basename(file_path)}.")
         return extracted_text
         
     except Exception as e:
-        logging.error(f"Error extracting text from XML {file_path}: {e}")
+        logging.error(f"pdf_question_generator.py: Error extracting text from XML {file_path}: {e}")
         raise
 
 
@@ -255,10 +243,10 @@ def create_synthesis_questions(text1: str, text2: str) -> list:
         if isinstance(question_list, list) and len(question_list) > 0:
             return question_list
         else:
-            logging.warning("LLM response was not a valid list. Returning raw response as a single-item list.")
+            logging.warning("pdf_question_generator.py: LLM response was not a valid list. Returning raw response as a single-item list.")
             return [raw_response]
     except (ValueError, SyntaxError) as e:
-        logging.error(f"Failed to parse LLM response into a list: {raw_response}. Error: {e}")
+        logging.error(f"pdf_question_generator.py: Failed to parse LLM response into a list: {raw_response}. Error: {e}")
         return [raw_response]
 
 
@@ -276,11 +264,11 @@ def save_questions_to_excel(questions: list) -> dict:
         full_path = os.path.join(directory_path, file_name)
 
         df.to_excel(full_path, index=False)
-        logging.info(f"Successfully saved questions to {full_path}")
+        logging.info(f"pdf_question_generator.py: Successfully saved questions to {full_path}")
 
         return {'file_name': file_name}
     except Exception as e:
-        logging.error(f"Error in save_questions_to_excel: {e}")
+        logging.error(f"pdf_question_generator.py: Error in save_questions_to_excel: {e}")
         return None
 
 # 문서 기반 질문 생성
@@ -328,7 +316,7 @@ def generate_questions_from_documents(file_path1: str, file_path2: str, project_
 
     except Exception as e:
         print(f"❌ 오류 발생: {e}")
-        logging.error(f"An error occurred in generate_questions_from_documents: {e}", exc_info=True)
+        logging.error(f"pdf_question_generator.py: An error occurred in generate_questions_from_documents: {e}", exc_info=True)
         return None
 
 if __name__ == '__main__':

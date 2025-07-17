@@ -8,6 +8,6 @@ def drop_embedding_collection():
     collection_name = "embedding_test"
     if collection_name in utility.list_collections():
         utility.drop_collection(collection_name)
-        print(f"{collection_name} 컬렉션 삭제 완료!")
+        print(f"admin.py: {collection_name} 컬렉션 삭제 완료!")
     else:
-        print(f"{collection_name} 컬렉션이 존재하지 않습니다.") 
+        print(f"admin.py: {collection_name} 컬렉션이 존재하지 않습니다.") 

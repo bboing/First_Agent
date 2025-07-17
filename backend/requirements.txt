@@ -15,7 +15,7 @@ sentence-transformers
 torch
 
 # Azure
-azure-ai-formrecognizer
+azure-ai-documentintelligence
 azure-core
 
 # ML Agent

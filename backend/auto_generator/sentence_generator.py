@@ -5,16 +5,7 @@ import pandas as pd
 import json
 import random
 from ast import literal_eval
-from dotenv import load_dotenv
 
-from datetime import datetime
-import logging
-from pathlib import Path
-
-# .env 파일 로드 (상위 디렉토리의 .env 파일)
-dotenv_path = Path(__file__).parent.parent.parent / '.env'
-print(f".env path: {dotenv_path}  exists: {dotenv_path.exists()}")
-load_dotenv(dotenv_path)
 
 
 
@@ -158,7 +149,7 @@ def Save_data(field_business, user_type, df, edf, Constraints):
         return result
     except Exception as e:
         print(f"Error in Save_data: {e}")
-        logging.error(f"Error in Save_data: {e}")
+        logging.error(f"sentence_generator.py: Error in Save_data: {e}")
         return None
 
 
@@ -185,7 +176,7 @@ def Read_json(field_business, user_type, Jdata, EJdata, Constraints):
         return storage_center
     except Exception as e:
         print(f"Error in Read_json: {e}")
-        logging.error(f"Error in Read_json: {e}")
+        logging.error(f"sentence_generator.py: Error in Read_json: {e}")
         return None
 
 
@@ -243,7 +234,7 @@ def conversational_synonym(main_sent,Ed_data):
 def conversational_summary(main_sent):
     
     conv_result_list = []
-    logging.info(f'main_sent: {main_sent}')
+    logging.info(f'sentence_generator.py: main_sent: {main_sent}')
     for i in range(len(main_sent)):
         result = literal_eval(main_sent[i])
 
@@ -463,5 +454,5 @@ def storage(d_data, main_sent, contraction_sent, nounform_sent, synonym_sent):
         return result
     except Exception as e:
         print(f"Error in storage function: {e}")
-        logging.error(f"Error in storage function: {e}")
+        logging.error(f"sentence_generator.py: Error in storage function: {e}")
         return None

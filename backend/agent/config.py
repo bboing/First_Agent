@@ -1,12 +1,5 @@
 from typing import Dict, Any
-from pathlib import Path
-from dotenv import load_dotenv
-import os
 
-# .env 파일 로드 (상위 디렉토리의 .env 파일)
-dotenv_path = Path(__file__).parent.parent.parent / '.env'
-print(f".env path: {dotenv_path}  exists: {dotenv_path.exists()}")
-load_dotenv(dotenv_path)
 
 
 
