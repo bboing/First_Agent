@@ -14094,3 +14094,511 @@ Custom...
 2025-07-18 02:31:51,400 [DEBUG] app: app.py: Log data requested, returning 232 filtered log lines
 2025-07-18 02:32:25,412 [DEBUG] app: app.py: Log data requested, returning 231 filtered log lines
 2025-07-18 02:32:25,423 [DEBUG] app: app.py: Log data requested, returning 231 filtered log lines
+2025-07-18 02:33:25,416 [DEBUG] app: app.py: Log data requested, returning 230 filtered log lines
+2025-07-18 02:33:25,426 [DEBUG] app: app.py: Log data requested, returning 229 filtered log lines
+2025-07-18 02:34:25,407 [DEBUG] app: app.py: Log data requested, returning 228 filtered log lines
+2025-07-18 02:34:25,416 [DEBUG] app: app.py: Log data requested, returning 228 filtered log lines
+2025-07-18 02:35:25,405 [DEBUG] app: app.py: Log data requested, returning 227 filtered log lines
+2025-07-18 02:35:25,419 [DEBUG] app: app.py: Log data requested, returning 226 filtered log lines
+2025-07-18 02:36:25,401 [DEBUG] app: app.py: Log data requested, returning 225 filtered log lines
+2025-07-18 02:36:25,414 [DEBUG] app: app.py: Log data requested, returning 225 filtered log lines
+2025-07-18 02:37:25,391 [DEBUG] app: app.py: Log data requested, returning 224 filtered log lines
+2025-07-18 02:37:25,401 [DEBUG] app: app.py: Log data requested, returning 223 filtered log lines
+2025-07-18 02:38:25,399 [DEBUG] app: app.py: Log data requested, returning 223 filtered log lines
+2025-07-18 02:38:25,409 [DEBUG] app: app.py: Log data requested, returning 223 filtered log lines
+2025-07-18 02:39:25,411 [DEBUG] app: app.py: Log data requested, returning 222 filtered log lines
+2025-07-18 02:39:25,421 [DEBUG] app: app.py: Log data requested, returning 221 filtered log lines
+2025-07-18 02:40:25,441 [DEBUG] app: app.py: Log data requested, returning 220 filtered log lines
+2025-07-18 02:40:25,450 [DEBUG] app: app.py: Log data requested, returning 220 filtered log lines
+2025-07-18 02:41:25,412 [DEBUG] app: app.py: Log data requested, returning 220 filtered log lines
+2025-07-18 02:41:25,418 [DEBUG] app: app.py: Log data requested, returning 219 filtered log lines
+2025-07-18 02:42:25,403 [DEBUG] app: app.py: Log data requested, returning 218 filtered log lines
+2025-07-18 02:42:25,418 [DEBUG] app: app.py: Log data requested, returning 218 filtered log lines
+2025-07-18 02:43:25,409 [DEBUG] app: app.py: Log data requested, returning 218 filtered log lines
+2025-07-18 02:43:25,417 [DEBUG] app: app.py: Log data requested, returning 217 filtered log lines
+2025-07-18 02:44:25,390 [DEBUG] app: app.py: Log data requested, returning 216 filtered log lines
+2025-07-18 02:44:25,399 [DEBUG] app: app.py: Log data requested, returning 215 filtered log lines
+2025-07-18 02:45:25,395 [DEBUG] app: app.py: Log data requested, returning 215 filtered log lines
+2025-07-18 02:45:25,407 [DEBUG] app: app.py: Log data requested, returning 215 filtered log lines
+2025-07-18 02:46:25,400 [DEBUG] app: app.py: Log data requested, returning 214 filtered log lines
+2025-07-18 02:46:25,412 [DEBUG] app: app.py: Log data requested, returning 213 filtered log lines
+2025-07-18 02:47:25,399 [DEBUG] app: app.py: Log data requested, returning 212 filtered log lines
+2025-07-18 02:47:25,411 [DEBUG] app: app.py: Log data requested, returning 212 filtered log lines
+2025-07-18 03:30:15,656 [DEBUG] app: app.py: Log data requested, returning 212 filtered log lines
+2025-07-18 03:30:15,664 [DEBUG] app: app.py: Log data requested, returning 211 filtered log lines
+2025-07-18 03:30:48,434 [DEBUG] app: app.py: Log data requested, returning 210 filtered log lines
+2025-07-18 03:30:49,887 [DEBUG] app: app.py: Log data requested, returning 209 filtered log lines
+2025-07-18 03:30:54,892 [DEBUG] app: app.py: Log data requested, returning 209 filtered log lines
+2025-07-18 03:30:59,896 [DEBUG] app: app.py: Log data requested, returning 209 filtered log lines
+2025-07-18 03:31:04,894 [DEBUG] app: app.py: Log data requested, returning 208 filtered log lines
+2025-07-18 03:31:09,898 [DEBUG] app: app.py: Log data requested, returning 207 filtered log lines
+2025-07-18 03:31:14,899 [DEBUG] app: app.py: Log data requested, returning 206 filtered log lines
+2025-07-18 03:31:15,652 [DEBUG] app: app.py: Log data requested, returning 206 filtered log lines
+2025-07-18 03:31:19,892 [DEBUG] app: app.py: Log data requested, returning 206 filtered log lines
+2025-07-18 03:31:24,899 [DEBUG] app: app.py: Log data requested, returning 206 filtered log lines
+2025-07-18 03:31:29,899 [DEBUG] app: app.py: Log data requested, returning 205 filtered log lines
+2025-07-18 03:31:34,895 [DEBUG] app: app.py: Log data requested, returning 204 filtered log lines
+2025-07-18 03:31:39,895 [DEBUG] app: app.py: Log data requested, returning 204 filtered log lines
+2025-07-18 03:31:44,901 [DEBUG] app: app.py: Log data requested, returning 204 filtered log lines
+2025-07-18 03:31:49,893 [DEBUG] app: app.py: Log data requested, returning 203 filtered log lines
+2025-07-18 03:31:54,898 [DEBUG] app: app.py: Log data requested, returning 202 filtered log lines
+2025-07-18 03:31:59,894 [DEBUG] app: app.py: Log data requested, returning 202 filtered log lines
+2025-07-18 03:32:04,895 [DEBUG] app: app.py: Log data requested, returning 202 filtered log lines
+2025-07-18 03:32:09,896 [DEBUG] app: app.py: Log data requested, returning 201 filtered log lines
+2025-07-18 03:32:14,902 [DEBUG] app: app.py: Log data requested, returning 200 filtered log lines
+2025-07-18 03:32:15,651 [DEBUG] app: app.py: Log data requested, returning 200 filtered log lines
+2025-07-18 03:32:19,893 [DEBUG] app: app.py: Log data requested, returning 200 filtered log lines
+2025-07-18 03:32:24,899 [DEBUG] app: app.py: Log data requested, returning 199 filtered log lines
+2025-07-18 03:32:29,898 [DEBUG] app: app.py: Log data requested, returning 198 filtered log lines
+2025-07-18 03:32:34,898 [DEBUG] app: app.py: Log data requested, returning 197 filtered log lines
+2025-07-18 03:32:39,897 [DEBUG] app: app.py: Log data requested, returning 197 filtered log lines
+2025-07-18 03:32:44,899 [DEBUG] app: app.py: Log data requested, returning 197 filtered log lines
+2025-07-18 03:32:49,892 [DEBUG] app: app.py: Log data requested, returning 196 filtered log lines
+2025-07-18 03:32:54,899 [DEBUG] app: app.py: Log data requested, returning 195 filtered log lines
+2025-07-18 03:32:59,898 [DEBUG] app: app.py: Log data requested, returning 194 filtered log lines
+2025-07-18 03:33:04,895 [DEBUG] app: app.py: Log data requested, returning 194 filtered log lines
+2025-07-18 03:33:09,896 [DEBUG] app: app.py: Log data requested, returning 194 filtered log lines
+2025-07-18 03:33:14,899 [DEBUG] app: app.py: Log data requested, returning 193 filtered log lines
+2025-07-18 03:33:15,651 [DEBUG] app: app.py: Log data requested, returning 192 filtered log lines
+2025-07-18 03:33:19,900 [DEBUG] app: app.py: Log data requested, returning 191 filtered log lines
+2025-07-18 03:33:24,896 [DEBUG] app: app.py: Log data requested, returning 191 filtered log lines
+2025-07-18 03:33:29,894 [DEBUG] app: app.py: Log data requested, returning 191 filtered log lines
+2025-07-18 03:33:34,894 [DEBUG] app: app.py: Log data requested, returning 190 filtered log lines
+2025-07-18 03:33:39,896 [DEBUG] app: app.py: Log data requested, returning 189 filtered log lines
+2025-07-18 03:33:44,900 [DEBUG] app: app.py: Log data requested, returning 188 filtered log lines
+2025-07-18 03:33:49,894 [DEBUG] app: app.py: Log data requested, returning 188 filtered log lines
+2025-07-18 03:33:54,900 [DEBUG] app: app.py: Log data requested, returning 188 filtered log lines
+2025-07-18 03:33:59,890 [DEBUG] app: app.py: Log data requested, returning 187 filtered log lines
+2025-07-18 03:34:04,897 [DEBUG] app: app.py: Log data requested, returning 186 filtered log lines
+2025-07-18 03:34:07,753 [INFO] app: embedding.py: ✅ Milvus 연결 성공!
+2025-07-18 03:34:08,033 [INFO] app: embedding.py: ✅ 컬렉션 'embedding_test' 준비 완료
+2025-07-18 03:34:09,927 [DEBUG] app: app.py: Log data requested, returning 187 filtered log lines
+2025-07-18 03:34:10,740 [DEBUG] app: app.py: Log data requested, returning 186 filtered log lines
+2025-07-18 03:34:15,654 [DEBUG] app: app.py: Log data requested, returning 186 filtered log lines
+2025-07-18 03:34:15,727 [DEBUG] app: app.py: Log data requested, returning 186 filtered log lines
+2025-07-18 03:34:20,726 [DEBUG] app: app.py: Log data requested, returning 185 filtered log lines
+2025-07-18 03:34:25,728 [DEBUG] app: app.py: Log data requested, returning 184 filtered log lines
+2025-07-18 03:34:30,731 [DEBUG] app: app.py: Log data requested, returning 184 filtered log lines
+2025-07-18 03:34:35,729 [DEBUG] app: app.py: Log data requested, returning 184 filtered log lines
+2025-07-18 03:34:40,733 [DEBUG] app: app.py: Log data requested, returning 183 filtered log lines
+2025-07-18 03:34:45,726 [DEBUG] app: app.py: Log data requested, returning 182 filtered log lines
+2025-07-18 03:34:47,812 [DEBUG] app: app.py: Log data requested, returning 181 filtered log lines
+2025-07-18 03:34:50,077 [DEBUG] app: app.py: Log data requested, returning 181 filtered log lines
+2025-07-18 03:34:55,088 [DEBUG] app: app.py: Log data requested, returning 181 filtered log lines
+2025-07-18 03:35:00,082 [DEBUG] app: app.py: Log data requested, returning 180 filtered log lines
+2025-07-18 03:35:05,092 [DEBUG] app: app.py: Log data requested, returning 179 filtered log lines
+2025-07-18 03:35:10,081 [DEBUG] app: app.py: Log data requested, returning 178 filtered log lines
+2025-07-18 03:35:15,090 [DEBUG] app: app.py: Log data requested, returning 178 filtered log lines
+2025-07-18 03:35:15,657 [DEBUG] app: app.py: Log data requested, returning 178 filtered log lines
+2025-07-18 03:35:20,081 [DEBUG] app: app.py: Log data requested, returning 177 filtered log lines
+2025-07-18 03:35:25,086 [DEBUG] app: app.py: Log data requested, returning 176 filtered log lines
+2025-07-18 03:35:30,082 [DEBUG] app: app.py: Log data requested, returning 175 filtered log lines
+2025-07-18 03:35:35,092 [DEBUG] app: app.py: Log data requested, returning 175 filtered log lines
+2025-07-18 03:35:40,081 [DEBUG] app: app.py: Log data requested, returning 175 filtered log lines
+2025-07-18 03:35:45,091 [DEBUG] app: app.py: Log data requested, returning 174 filtered log lines
+2025-07-18 03:35:50,084 [DEBUG] app: app.py: Log data requested, returning 173 filtered log lines
+2025-07-18 03:35:55,089 [DEBUG] app: app.py: Log data requested, returning 173 filtered log lines
+2025-07-18 03:36:00,087 [DEBUG] app: app.py: Log data requested, returning 173 filtered log lines
+2025-07-18 03:36:05,093 [DEBUG] app: app.py: Log data requested, returning 172 filtered log lines
+2025-07-18 03:36:10,089 [DEBUG] app: app.py: Log data requested, returning 171 filtered log lines
+2025-07-18 03:36:15,091 [DEBUG] app: app.py: Log data requested, returning 171 filtered log lines
+2025-07-18 03:36:15,651 [DEBUG] app: app.py: Log data requested, returning 171 filtered log lines
+2025-07-18 03:36:20,086 [DEBUG] app: app.py: Log data requested, returning 170 filtered log lines
+2025-07-18 03:36:25,091 [DEBUG] app: app.py: Log data requested, returning 169 filtered log lines
+2025-07-18 03:36:27,653 [DEBUG] app: app.py: Log data requested, returning 169 filtered log lines
+2025-07-18 03:36:32,664 [DEBUG] app: app.py: Log data requested, returning 169 filtered log lines
+2025-07-18 03:36:37,664 [DEBUG] app: app.py: Log data requested, returning 168 filtered log lines
+2025-07-18 03:36:42,660 [DEBUG] app: app.py: Log data requested, returning 167 filtered log lines
+2025-07-18 03:36:47,664 [DEBUG] app: app.py: Log data requested, returning 166 filtered log lines
+2025-07-18 03:36:49,347 [INFO] app: embedding.py: ✅ Milvus 연결 성공!
+2025-07-18 03:36:49,626 [INFO] app: embedding.py: ✅ 컬렉션 'embedding_test' 준비 완료
+2025-07-18 03:36:52,200 [DEBUG] app: app.py: Log data requested, returning 167 filtered log lines
+2025-07-18 03:36:57,156 [DEBUG] app: app.py: Log data requested, returning 166 filtered log lines
+2025-07-18 03:37:02,157 [DEBUG] app: app.py: Log data requested, returning 165 filtered log lines
+2025-07-18 03:37:07,159 [DEBUG] app: app.py: Log data requested, returning 165 filtered log lines
+2025-07-18 03:37:12,156 [DEBUG] app: app.py: Log data requested, returning 165 filtered log lines
+2025-07-18 03:37:15,650 [DEBUG] app: app.py: Log data requested, returning 164 filtered log lines
+2025-07-18 03:37:17,158 [DEBUG] app: app.py: Log data requested, returning 163 filtered log lines
+2025-07-18 03:37:22,161 [DEBUG] app: app.py: Log data requested, returning 162 filtered log lines
+2025-07-18 03:37:27,154 [DEBUG] app: app.py: Log data requested, returning 162 filtered log lines
+2025-07-18 03:37:32,162 [DEBUG] app: app.py: Log data requested, returning 162 filtered log lines
+2025-07-18 03:37:37,157 [DEBUG] app: app.py: Log data requested, returning 161 filtered log lines
+2025-07-18 03:37:42,154 [DEBUG] app: app.py: Log data requested, returning 160 filtered log lines
+2025-07-18 03:37:47,158 [DEBUG] app: app.py: Log data requested, returning 160 filtered log lines
+2025-07-18 03:37:52,154 [DEBUG] app: app.py: Log data requested, returning 160 filtered log lines
+2025-07-18 03:37:57,155 [DEBUG] app: app.py: Log data requested, returning 159 filtered log lines
+2025-07-18 03:38:02,742 [INFO] app: embedding.py: ✅ Milvus 연결 성공!
+2025-07-18 03:38:03,026 [INFO] app: embedding.py: ✅ 컬렉션 'embedding_test' 준비 완료
+2025-07-18 03:38:07,200 [DEBUG] app: app.py: Log data requested, returning 160 filtered log lines
+2025-07-18 03:38:07,958 [DEBUG] app: app.py: Log data requested, returning 159 filtered log lines
+2025-07-18 03:38:12,945 [DEBUG] app: app.py: Log data requested, returning 158 filtered log lines
+2025-07-18 03:38:15,663 [DEBUG] app: app.py: Log data requested, returning 158 filtered log lines
+2025-07-18 03:38:17,947 [DEBUG] app: app.py: Log data requested, returning 158 filtered log lines
+2025-07-18 03:38:22,946 [DEBUG] app: app.py: Log data requested, returning 157 filtered log lines
+2025-07-18 03:38:27,953 [DEBUG] app: app.py: Log data requested, returning 156 filtered log lines
+2025-07-18 03:38:32,944 [DEBUG] app: app.py: Log data requested, returning 155 filtered log lines
+2025-07-18 03:38:37,950 [DEBUG] app: app.py: Log data requested, returning 155 filtered log lines
+2025-07-18 03:38:42,945 [DEBUG] app: app.py: Log data requested, returning 155 filtered log lines
+2025-07-18 03:38:47,945 [DEBUG] app: app.py: Log data requested, returning 154 filtered log lines
+2025-07-18 03:38:52,943 [DEBUG] app: app.py: Log data requested, returning 153 filtered log lines
+2025-07-18 03:38:57,950 [DEBUG] app: app.py: Log data requested, returning 152 filtered log lines
+2025-07-18 03:39:02,942 [DEBUG] app: app.py: Log data requested, returning 152 filtered log lines
+2025-07-18 03:39:07,946 [DEBUG] app: app.py: Log data requested, returning 152 filtered log lines
+2025-07-18 03:39:10,575 [INFO] app: embedding.py: ✅ Milvus 연결 성공!
+2025-07-18 03:39:10,835 [INFO] app: embedding.py: ✅ 컬렉션 'embedding_test' 준비 완료
+2025-07-18 03:39:12,397 [DEBUG] app: app.py: Log data requested, returning 151 filtered log lines
+2025-07-18 03:39:15,648 [DEBUG] app: app.py: Log data requested, returning 151 filtered log lines
+2025-07-18 03:39:17,352 [DEBUG] app: app.py: Log data requested, returning 151 filtered log lines
+2025-07-18 03:39:22,355 [DEBUG] app: app.py: Log data requested, returning 150 filtered log lines
+2025-07-18 03:39:27,350 [DEBUG] app: app.py: Log data requested, returning 149 filtered log lines
+2025-07-18 03:39:32,356 [DEBUG] app: app.py: Log data requested, returning 149 filtered log lines
+2025-07-18 03:39:37,354 [DEBUG] app: app.py: Log data requested, returning 149 filtered log lines
+2025-07-18 03:39:42,356 [DEBUG] app: app.py: Log data requested, returning 148 filtered log lines
+2025-07-18 03:39:47,355 [DEBUG] app: app.py: Log data requested, returning 147 filtered log lines
+2025-07-18 03:39:52,350 [DEBUG] app: app.py: Log data requested, returning 147 filtered log lines
+2025-07-18 03:39:58,318 [INFO] app: embedding.py: ✅ Milvus 연결 성공!
+2025-07-18 03:39:58,612 [INFO] app: embedding.py: ✅ 컬렉션 'embedding_test' 준비 완료
+2025-07-18 03:40:01,217 [DEBUG] app: app.py: Log data requested, returning 147 filtered log lines
+2025-07-18 03:40:06,169 [DEBUG] app: app.py: Log data requested, returning 147 filtered log lines
+2025-07-18 03:40:11,169 [DEBUG] app: app.py: Log data requested, returning 147 filtered log lines
+2025-07-18 03:40:13,884 [INFO] app: embedding.py: ✅ Milvus 연결 성공!
+2025-07-18 03:40:14,151 [INFO] app: embedding.py: ✅ 컬렉션 'embedding_test' 준비 완료
+2025-07-18 03:40:15,688 [DEBUG] app: app.py: Log data requested, returning 146 filtered log lines
+2025-07-18 03:40:15,965 [DEBUG] app: app.py: Log data requested, returning 146 filtered log lines
+2025-07-18 03:40:20,966 [DEBUG] app: app.py: Log data requested, returning 146 filtered log lines
+2025-07-18 03:40:25,954 [DEBUG] app: app.py: Log data requested, returning 145 filtered log lines
+2025-07-18 03:40:30,957 [DEBUG] app: app.py: Log data requested, returning 144 filtered log lines
+2025-07-18 03:40:35,956 [DEBUG] app: app.py: Log data requested, returning 143 filtered log lines
+2025-07-18 03:40:40,963 [DEBUG] app: app.py: Log data requested, returning 142 filtered log lines
+2025-07-18 03:40:45,960 [DEBUG] app: app.py: Log data requested, returning 141 filtered log lines
+2025-07-18 03:40:47,472 [INFO] app: embedding.py: ✅ Milvus 연결 성공!
+2025-07-18 03:40:47,778 [INFO] app: embedding.py: ✅ 컬렉션 'embedding_test' 준비 완료
+2025-07-18 03:40:49,303 [DEBUG] app: app.py: Log data requested, returning 140 filtered log lines
+2025-07-18 03:40:54,262 [DEBUG] app: app.py: Log data requested, returning 140 filtered log lines
+2025-07-18 03:40:59,275 [DEBUG] app: app.py: Log data requested, returning 140 filtered log lines
+2025-07-18 03:41:02,414 [INFO] app: embedding.py: ✅ Milvus 연결 성공!
+2025-07-18 03:41:02,651 [INFO] app: embedding.py: ✅ 컬렉션 'embedding_test' 준비 완료
+2025-07-18 03:41:03,980 [DEBUG] app: app.py: Log data requested, returning 139 filtered log lines
+2025-07-18 03:41:08,954 [DEBUG] app: app.py: Log data requested, returning 139 filtered log lines
+2025-07-18 03:41:13,953 [DEBUG] app: app.py: Log data requested, returning 139 filtered log lines
+2025-07-18 03:41:15,656 [DEBUG] app: app.py: Log data requested, returning 138 filtered log lines
+2025-07-18 03:41:18,954 [DEBUG] app: app.py: Log data requested, returning 137 filtered log lines
+2025-07-18 03:41:20,695 [INFO] app: embedding.py: ✅ Milvus 연결 성공!
+2025-07-18 03:41:20,971 [INFO] app: embedding.py: ✅ 컬렉션 'embedding_test' 준비 완료
+2025-07-18 03:41:22,596 [DEBUG] app: app.py: Log data requested, returning 138 filtered log lines
+2025-07-18 03:41:27,555 [DEBUG] app: app.py: Log data requested, returning 137 filtered log lines
+2025-07-18 03:41:28,266 [DEBUG] app: app.py: Log data requested, returning 136 filtered log lines
+2025-07-18 03:41:28,271 [INFO] agent.document_processing.clear_collection: ✅ Milvus 연결 성공!
+2025-07-18 03:41:28,273 [INFO] agent.document_processing.clear_collection: 📋 현재 컬렉션 목록 (1개):
+2025-07-18 03:41:28,273 [INFO] agent.document_processing.clear_collection:   1. embedding_test
+2025-07-18 03:41:33,268 [DEBUG] app: app.py: Log data requested, returning 138 filtered log lines
+2025-07-18 03:41:38,273 [DEBUG] app: app.py: Log data requested, returning 137 filtered log lines
+2025-07-18 03:41:43,272 [DEBUG] app: app.py: Log data requested, returning 137 filtered log lines
+2025-07-18 03:41:48,273 [DEBUG] app: app.py: Log data requested, returning 137 filtered log lines
+2025-07-18 03:41:53,270 [DEBUG] app: app.py: Log data requested, returning 136 filtered log lines
+2025-07-18 03:41:58,262 [DEBUG] app: app.py: Log data requested, returning 135 filtered log lines
+2025-07-18 03:42:03,535 [INFO] app: embedding.py: ✅ Milvus 연결 성공!
+2025-07-18 03:42:03,832 [INFO] app: embedding.py: ✅ 컬렉션 'embedding_test' 준비 완료
+2025-07-18 03:42:05,045 [DEBUG] app: app.py: Log data requested, returning 136 filtered log lines
+2025-07-18 03:42:05,049 [INFO] agent.document_processing.clear_collection: ✅ Milvus 연결 성공!
+2025-07-18 03:42:05,050 [INFO] agent.document_processing.clear_collection: 📋 현재 컬렉션 목록 (1개):
+2025-07-18 03:42:05,050 [INFO] agent.document_processing.clear_collection:   1. embedding_test
+2025-07-18 03:42:09,995 [DEBUG] app: app.py: Log data requested, returning 136 filtered log lines
+2025-07-18 03:42:14,999 [DEBUG] app: app.py: Log data requested, returning 136 filtered log lines
+2025-07-18 03:42:15,648 [DEBUG] app: app.py: Log data requested, returning 136 filtered log lines
+2025-07-18 03:42:19,327 [INFO] app: embedding.py: ✅ Milvus 연결 성공!
+2025-07-18 03:42:19,614 [INFO] app: embedding.py: ✅ 컬렉션 'embedding_test' 준비 완료
+2025-07-18 03:42:20,032 [DEBUG] app: app.py: Log data requested, returning 135 filtered log lines
+2025-07-18 03:42:24,367 [INFO] agent.document_processing.clear_collection: ✅ Milvus 연결 성공!
+2025-07-18 03:42:24,369 [INFO] agent.document_processing.clear_collection: 📋 현재 컬렉션 목록 (1개):
+2025-07-18 03:42:24,369 [INFO] agent.document_processing.clear_collection:   1. embedding_test
+2025-07-18 03:42:24,382 [DEBUG] app: app.py: Log data requested, returning 136 filtered log lines
+2025-07-18 03:42:29,378 [DEBUG] app: app.py: Log data requested, returning 135 filtered log lines
+2025-07-18 03:42:34,374 [DEBUG] app: app.py: Log data requested, returning 135 filtered log lines
+2025-07-18 03:42:39,373 [DEBUG] app: app.py: Log data requested, returning 135 filtered log lines
+2025-07-18 03:42:41,977 [INFO] app: embedding.py: ✅ Milvus 연결 성공!
+2025-07-18 03:42:42,249 [INFO] app: embedding.py: ✅ 컬렉션 'embedding_test' 준비 완료
+2025-07-18 03:42:43,897 [DEBUG] app: app.py: Log data requested, returning 134 filtered log lines
+2025-07-18 03:42:43,903 [INFO] agent.document_processing.clear_collection: ✅ Milvus 연결 성공!
+2025-07-18 03:42:43,904 [INFO] agent.document_processing.clear_collection: 📋 현재 컬렉션 목록 (1개):
+2025-07-18 03:42:43,904 [INFO] agent.document_processing.clear_collection:   1. embedding_test
+2025-07-18 03:42:48,861 [DEBUG] app: app.py: Log data requested, returning 133 filtered log lines
+2025-07-18 03:42:53,860 [DEBUG] app: app.py: Log data requested, returning 132 filtered log lines
+2025-07-18 03:42:59,058 [INFO] app: embedding.py: ✅ Milvus 연결 성공!
+2025-07-18 03:42:59,360 [INFO] app: embedding.py: ✅ 컬렉션 'embedding_test' 준비 완료
+2025-07-18 03:43:00,922 [INFO] agent.document_processing.clear_collection: ✅ Milvus 연결 성공!
+2025-07-18 03:43:00,925 [INFO] agent.document_processing.clear_collection: 📋 현재 컬렉션 목록 (1개):
+2025-07-18 03:43:00,926 [INFO] agent.document_processing.clear_collection:   1. embedding_test
+2025-07-18 03:43:00,934 [DEBUG] app: app.py: Log data requested, returning 131 filtered log lines
+2025-07-18 03:43:05,890 [DEBUG] app: app.py: Log data requested, returning 130 filtered log lines
+2025-07-18 03:43:10,891 [DEBUG] app: app.py: Log data requested, returning 129 filtered log lines
+2025-07-18 03:43:15,654 [DEBUG] app: app.py: Log data requested, returning 128 filtered log lines
+2025-07-18 03:43:15,880 [DEBUG] app: app.py: Log data requested, returning 127 filtered log lines
+2025-07-18 03:43:20,889 [DEBUG] app: app.py: Log data requested, returning 126 filtered log lines
+2025-07-18 03:43:25,888 [DEBUG] app: app.py: Log data requested, returning 125 filtered log lines
+2025-07-18 03:43:30,884 [DEBUG] app: app.py: Log data requested, returning 124 filtered log lines
+2025-07-18 03:43:35,888 [DEBUG] app: app.py: Log data requested, returning 123 filtered log lines
+2025-07-18 03:43:40,891 [DEBUG] app: app.py: Log data requested, returning 122 filtered log lines
+2025-07-18 03:43:45,882 [DEBUG] app: app.py: Log data requested, returning 121 filtered log lines
+2025-07-18 03:43:50,889 [DEBUG] app: app.py: Log data requested, returning 120 filtered log lines
+2025-07-18 03:43:55,892 [DEBUG] app: app.py: Log data requested, returning 119 filtered log lines
+2025-07-18 03:44:00,888 [DEBUG] app: app.py: Log data requested, returning 118 filtered log lines
+2025-07-18 03:44:05,886 [DEBUG] app: app.py: Log data requested, returning 117 filtered log lines
+2025-07-18 03:44:10,888 [DEBUG] app: app.py: Log data requested, returning 116 filtered log lines
+2025-07-18 03:44:15,652 [DEBUG] app: app.py: Log data requested, returning 115 filtered log lines
+2025-07-18 03:44:15,888 [DEBUG] app: app.py: Log data requested, returning 114 filtered log lines
+2025-07-18 03:44:20,892 [DEBUG] app: app.py: Log data requested, returning 113 filtered log lines
+2025-07-18 03:44:25,888 [DEBUG] app: app.py: Log data requested, returning 112 filtered log lines
+2025-07-18 03:44:30,882 [DEBUG] app: app.py: Log data requested, returning 111 filtered log lines
+2025-07-18 03:44:35,888 [DEBUG] app: app.py: Log data requested, returning 110 filtered log lines
+2025-07-18 03:44:40,893 [DEBUG] app: app.py: Log data requested, returning 109 filtered log lines
+2025-07-18 03:44:45,888 [DEBUG] app: app.py: Log data requested, returning 108 filtered log lines
+2025-07-18 03:44:50,889 [DEBUG] app: app.py: Log data requested, returning 108 filtered log lines
+2025-07-18 03:44:55,892 [DEBUG] app: app.py: Log data requested, returning 108 filtered log lines
+2025-07-18 03:45:00,888 [DEBUG] app: app.py: Log data requested, returning 107 filtered log lines
+2025-07-18 03:45:05,889 [DEBUG] app: app.py: Log data requested, returning 107 filtered log lines
+2025-07-18 03:45:10,889 [DEBUG] app: app.py: Log data requested, returning 107 filtered log lines
+2025-07-18 03:45:15,642 [DEBUG] app: app.py: Log data requested, returning 107 filtered log lines
+2025-07-18 03:45:15,890 [DEBUG] app: app.py: Log data requested, returning 106 filtered log lines
+2025-07-18 03:45:20,887 [DEBUG] app: app.py: Log data requested, returning 106 filtered log lines
+2025-07-18 03:45:25,889 [DEBUG] app: app.py: Log data requested, returning 106 filtered log lines
+2025-07-18 03:45:30,883 [DEBUG] app: app.py: Log data requested, returning 105 filtered log lines
+2025-07-18 03:45:35,888 [DEBUG] app: app.py: Log data requested, returning 104 filtered log lines
+2025-07-18 03:45:40,892 [DEBUG] app: app.py: Log data requested, returning 103 filtered log lines
+2025-07-18 03:45:45,885 [DEBUG] app: app.py: Log data requested, returning 102 filtered log lines
+2025-07-18 03:45:50,891 [DEBUG] app: app.py: Log data requested, returning 102 filtered log lines
+2025-07-18 03:45:55,889 [DEBUG] app: app.py: Log data requested, returning 102 filtered log lines
+2025-07-18 03:46:00,887 [DEBUG] app: app.py: Log data requested, returning 101 filtered log lines
+2025-07-18 03:46:05,890 [DEBUG] app: app.py: Log data requested, returning 101 filtered log lines
+2025-07-18 03:46:10,893 [DEBUG] app: app.py: Log data requested, returning 101 filtered log lines
+2025-07-18 03:46:15,646 [DEBUG] app: app.py: Log data requested, returning 101 filtered log lines
+2025-07-18 03:46:15,893 [DEBUG] app: app.py: Log data requested, returning 100 filtered log lines
+2025-07-18 03:46:20,887 [DEBUG] app: app.py: Log data requested, returning 100 filtered log lines
+2025-07-18 03:46:25,891 [DEBUG] app: app.py: Log data requested, returning 100 filtered log lines
+2025-07-18 03:46:30,893 [DEBUG] app: app.py: Log data requested, returning 99 filtered log lines
+2025-07-18 03:46:35,888 [DEBUG] app: app.py: Log data requested, returning 98 filtered log lines
+2025-07-18 03:46:40,889 [DEBUG] app: app.py: Log data requested, returning 98 filtered log lines
+2025-07-18 03:46:45,890 [DEBUG] app: app.py: Log data requested, returning 98 filtered log lines
+2025-07-18 03:46:50,888 [DEBUG] app: app.py: Log data requested, returning 97 filtered log lines
+2025-07-18 03:46:55,888 [DEBUG] app: app.py: Log data requested, returning 97 filtered log lines
+2025-07-18 03:47:00,893 [DEBUG] app: app.py: Log data requested, returning 97 filtered log lines
+2025-07-18 03:47:05,887 [DEBUG] app: app.py: Log data requested, returning 97 filtered log lines
+2025-07-18 03:47:10,889 [DEBUG] app: app.py: Log data requested, returning 96 filtered log lines
+2025-07-18 03:47:15,656 [DEBUG] app: app.py: Log data requested, returning 96 filtered log lines
+2025-07-18 03:47:15,885 [DEBUG] app: app.py: Log data requested, returning 96 filtered log lines
+2025-07-18 03:47:20,890 [DEBUG] app: app.py: Log data requested, returning 95 filtered log lines
+2025-07-18 03:47:25,886 [DEBUG] app: app.py: Log data requested, returning 94 filtered log lines
+2025-07-18 03:47:30,884 [DEBUG] app: app.py: Log data requested, returning 93 filtered log lines
+2025-07-18 03:47:35,888 [DEBUG] app: app.py: Log data requested, returning 92 filtered log lines
+2025-07-18 03:47:40,893 [DEBUG] app: app.py: Log data requested, returning 91 filtered log lines
+2025-07-18 03:47:45,885 [DEBUG] app: app.py: Log data requested, returning 90 filtered log lines
+2025-07-18 03:47:50,891 [DEBUG] app: app.py: Log data requested, returning 89 filtered log lines
+2025-07-18 03:47:55,889 [DEBUG] app: app.py: Log data requested, returning 88 filtered log lines
+2025-07-18 03:48:00,886 [DEBUG] app: app.py: Log data requested, returning 88 filtered log lines
+2025-07-18 03:48:05,887 [DEBUG] app: app.py: Log data requested, returning 88 filtered log lines
+2025-07-18 03:48:10,892 [DEBUG] app: app.py: Log data requested, returning 87 filtered log lines
+2025-07-18 03:48:15,662 [DEBUG] app: app.py: Log data requested, returning 87 filtered log lines
+2025-07-18 03:48:15,887 [DEBUG] app: app.py: Log data requested, returning 87 filtered log lines
+2025-07-18 03:48:20,891 [DEBUG] app: app.py: Log data requested, returning 87 filtered log lines
+2025-07-18 03:48:25,888 [DEBUG] app: app.py: Log data requested, returning 86 filtered log lines
+2025-07-18 03:48:30,888 [DEBUG] app: app.py: Log data requested, returning 86 filtered log lines
+2025-07-18 03:48:35,892 [DEBUG] app: app.py: Log data requested, returning 86 filtered log lines
+2025-07-18 03:48:40,896 [DEBUG] app: app.py: Log data requested, returning 85 filtered log lines
+2025-07-18 03:48:45,890 [DEBUG] app: app.py: Log data requested, returning 84 filtered log lines
+2025-07-18 03:48:50,894 [DEBUG] app: app.py: Log data requested, returning 83 filtered log lines
+2025-07-18 03:48:55,890 [DEBUG] app: app.py: Log data requested, returning 82 filtered log lines
+2025-07-18 03:49:00,889 [DEBUG] app: app.py: Log data requested, returning 81 filtered log lines
+2025-07-18 03:49:05,888 [DEBUG] app: app.py: Log data requested, returning 80 filtered log lines
+2025-07-18 03:49:10,888 [DEBUG] app: app.py: Log data requested, returning 79 filtered log lines
+2025-07-18 03:49:15,656 [DEBUG] app: app.py: Log data requested, returning 78 filtered log lines
+2025-07-18 03:49:15,883 [DEBUG] app: app.py: Log data requested, returning 78 filtered log lines
+2025-07-18 03:49:20,894 [DEBUG] app: app.py: Log data requested, returning 78 filtered log lines
+2025-07-18 03:49:25,886 [DEBUG] app: app.py: Log data requested, returning 77 filtered log lines
+2025-07-18 03:49:30,892 [DEBUG] app: app.py: Log data requested, returning 77 filtered log lines
+2025-07-18 03:49:35,887 [DEBUG] app: app.py: Log data requested, returning 77 filtered log lines
+2025-07-18 03:49:40,884 [DEBUG] app: app.py: Log data requested, returning 77 filtered log lines
+2025-07-18 03:49:45,889 [DEBUG] app: app.py: Log data requested, returning 76 filtered log lines
+2025-07-18 03:49:50,891 [DEBUG] app: app.py: Log data requested, returning 76 filtered log lines
+2025-07-18 03:49:55,798 [INFO] app: embedding.py: ✅ Milvus 연결 성공!
+2025-07-18 03:49:56,090 [INFO] app: embedding.py: ✅ 컬렉션 'embedding_test' 준비 완료
+2025-07-18 03:49:57,231 [DEBUG] app: app.py: Log data requested, returning 76 filtered log lines
+2025-07-18 03:49:57,235 [INFO] agent.document_processing.clear_collection: ✅ Milvus 연결 성공!
+2025-07-18 03:49:57,236 [INFO] agent.document_processing.clear_collection: 📋 현재 컬렉션 목록 (1개):
+2025-07-18 03:49:57,236 [INFO] agent.document_processing.clear_collection:   1. embedding_test
+2025-07-18 03:50:02,211 [DEBUG] app: app.py: Log data requested, returning 78 filtered log lines
+2025-07-18 03:50:04,244 [DEBUG] app: app.py: Log data requested, returning 78 filtered log lines
+2025-07-18 03:50:09,254 [DEBUG] app: app.py: Log data requested, returning 78 filtered log lines
+2025-07-18 03:50:14,249 [DEBUG] app: app.py: Log data requested, returning 77 filtered log lines
+2025-07-18 03:50:15,661 [DEBUG] app: app.py: Log data requested, returning 77 filtered log lines
+2025-07-18 03:50:20,002 [INFO] app: embedding.py: ✅ Milvus 연결 성공!
+2025-07-18 03:50:20,332 [INFO] app: embedding.py: ✅ 컬렉션 'embedding_test' 준비 완료
+2025-07-18 03:50:21,520 [DEBUG] app: app.py: Log data requested, returning 77 filtered log lines
+2025-07-18 03:50:21,523 [INFO] agent.document_processing.clear_collection: ✅ Milvus 연결 성공!
+2025-07-18 03:50:21,525 [INFO] agent.document_processing.clear_collection: 📋 현재 컬렉션 목록 (1개):
+2025-07-18 03:50:21,525 [INFO] agent.document_processing.clear_collection:   1. embedding_test
+2025-07-18 03:50:23,426 [DEBUG] app: app.py: Log data requested, returning 76 filtered log lines
+2025-07-18 03:50:27,087 [DEBUG] app: app.py: Log data requested, returning 75 filtered log lines
+2025-07-18 03:50:32,097 [DEBUG] app: app.py: Log data requested, returning 74 filtered log lines
+2025-07-18 03:50:34,148 [INFO] agent.document_processing.clear_collection: ✅ Milvus 연결 성공!
+2025-07-18 03:50:34,149 [INFO] agent.document_processing.clear_collection: 📋 현재 컬렉션 목록 (1개):
+2025-07-18 03:50:34,149 [INFO] agent.document_processing.clear_collection:   1. embedding_test
+2025-07-18 03:50:34,155 [DEBUG] app: app.py: Log data requested, returning 75 filtered log lines
+2025-07-18 03:50:34,663 [DEBUG] app: app.py: Log data requested, returning 74 filtered log lines
+2025-07-18 03:50:35,317 [DEBUG] app: app.py: Log data requested, returning 74 filtered log lines
+2025-07-18 03:50:37,497 [DEBUG] app: app.py: Log data requested, returning 74 filtered log lines
+2025-07-18 03:50:37,873 [DEBUG] app: app.py: Log data requested, returning 74 filtered log lines
+2025-07-18 03:50:42,881 [DEBUG] app: app.py: Log data requested, returning 73 filtered log lines
+2025-07-18 03:50:47,881 [DEBUG] app: app.py: Log data requested, returning 73 filtered log lines
+2025-07-18 03:50:52,876 [DEBUG] app: app.py: Log data requested, returning 73 filtered log lines
+2025-07-18 03:50:57,882 [DEBUG] app: app.py: Log data requested, returning 72 filtered log lines
+2025-07-18 03:51:02,877 [DEBUG] app: app.py: Log data requested, returning 71 filtered log lines
+2025-07-18 03:51:07,882 [DEBUG] app: app.py: Log data requested, returning 70 filtered log lines
+2025-07-18 03:51:12,887 [DEBUG] app: app.py: Log data requested, returning 69 filtered log lines
+2025-07-18 03:51:15,657 [DEBUG] app: app.py: Log data requested, returning 68 filtered log lines
+2025-07-18 03:51:17,881 [DEBUG] app: app.py: Log data requested, returning 68 filtered log lines
+2025-07-18 03:51:22,879 [DEBUG] app: app.py: Log data requested, returning 68 filtered log lines
+2025-07-18 03:51:27,881 [DEBUG] app: app.py: Log data requested, returning 68 filtered log lines
+2025-07-18 03:51:32,875 [DEBUG] app: app.py: Log data requested, returning 68 filtered log lines
+2025-07-18 03:51:37,883 [DEBUG] app: app.py: Log data requested, returning 68 filtered log lines
+2025-07-18 03:51:42,882 [DEBUG] app: app.py: Log data requested, returning 68 filtered log lines
+2025-07-18 03:51:47,877 [DEBUG] app: app.py: Log data requested, returning 68 filtered log lines
+2025-07-18 03:51:52,880 [DEBUG] app: app.py: Log data requested, returning 68 filtered log lines
+2025-07-18 03:51:57,883 [DEBUG] app: app.py: Log data requested, returning 68 filtered log lines
+2025-07-18 03:52:02,880 [DEBUG] app: app.py: Log data requested, returning 68 filtered log lines
+2025-07-18 03:52:04,475 [INFO] app: embedding.py: ✅ Milvus 연결 성공!
+2025-07-18 03:52:04,756 [INFO] app: embedding.py: ✅ 컬렉션 'embedding_test' 준비 완료
+2025-07-18 03:52:05,617 [DEBUG] app: app.py: Log data requested, returning 70 filtered log lines
+2025-07-18 03:52:05,621 [INFO] agent.document_processing.clear_collection: ✅ Milvus 연결 성공!
+2025-07-18 03:52:05,624 [INFO] agent.document_processing.clear_collection: 📋 현재 컬렉션 목록 (1개):
+2025-07-18 03:52:05,624 [INFO] agent.document_processing.clear_collection:   1. embedding_test
+2025-07-18 03:52:06,868 [DEBUG] app: app.py: Log data requested, returning 73 filtered log lines
+2025-07-18 03:52:08,169 [DEBUG] app: app.py: Log data requested, returning 73 filtered log lines
+2025-07-18 03:52:13,171 [DEBUG] app: app.py: Log data requested, returning 73 filtered log lines
+2025-07-18 03:52:15,655 [DEBUG] app: app.py: Log data requested, returning 73 filtered log lines
+2025-07-18 03:52:18,174 [DEBUG] app: app.py: Log data requested, returning 73 filtered log lines
+2025-07-18 03:52:23,170 [DEBUG] app: app.py: Log data requested, returning 73 filtered log lines
+2025-07-18 03:52:28,177 [DEBUG] app: app.py: Log data requested, returning 73 filtered log lines
+2025-07-18 03:52:33,169 [DEBUG] app: app.py: Log data requested, returning 73 filtered log lines
+2025-07-18 03:52:38,179 [DEBUG] app: app.py: Log data requested, returning 73 filtered log lines
+2025-07-18 03:52:43,169 [DEBUG] app: app.py: Log data requested, returning 73 filtered log lines
+2025-07-18 03:52:48,176 [DEBUG] app: app.py: Log data requested, returning 73 filtered log lines
+2025-07-18 03:52:53,170 [DEBUG] app: app.py: Log data requested, returning 73 filtered log lines
+2025-07-18 03:52:58,175 [DEBUG] app: app.py: Log data requested, returning 73 filtered log lines
+2025-07-18 03:53:03,168 [DEBUG] app: app.py: Log data requested, returning 73 filtered log lines
+2025-07-18 03:53:08,178 [DEBUG] app: app.py: Log data requested, returning 73 filtered log lines
+2025-07-18 03:53:13,170 [DEBUG] app: app.py: Log data requested, returning 73 filtered log lines
+2025-07-18 03:53:15,661 [DEBUG] app: app.py: Log data requested, returning 73 filtered log lines
+2025-07-18 03:53:18,173 [DEBUG] app: app.py: Log data requested, returning 73 filtered log lines
+2025-07-18 03:53:23,169 [DEBUG] app: app.py: Log data requested, returning 73 filtered log lines
+2025-07-18 03:53:28,174 [DEBUG] app: app.py: Log data requested, returning 73 filtered log lines
+2025-07-18 03:53:33,169 [DEBUG] app: app.py: Log data requested, returning 73 filtered log lines
+2025-07-18 03:53:38,175 [DEBUG] app: app.py: Log data requested, returning 73 filtered log lines
+2025-07-18 03:53:43,169 [DEBUG] app: app.py: Log data requested, returning 73 filtered log lines
+2025-07-18 03:53:48,177 [DEBUG] app: app.py: Log data requested, returning 73 filtered log lines
+2025-07-18 03:53:51,600 [DEBUG] app: app.py: Log data requested, returning 73 filtered log lines
+2025-07-18 03:53:51,605 [INFO] agent.document_processing.clear_collection: ✅ Milvus 연결 성공!
+2025-07-18 03:53:51,605 [INFO] agent.document_processing.clear_collection: 📋 현재 컬렉션 목록 (1개):
+2025-07-18 03:53:51,606 [INFO] agent.document_processing.clear_collection:   1. embedding_test
+2025-07-18 03:53:56,614 [DEBUG] app: app.py: Log data requested, returning 73 filtered log lines
+2025-07-18 03:54:01,607 [DEBUG] app: app.py: Log data requested, returning 73 filtered log lines
+2025-07-18 03:54:06,610 [DEBUG] app: app.py: Log data requested, returning 73 filtered log lines
+2025-07-18 03:54:11,610 [DEBUG] app: app.py: Log data requested, returning 73 filtered log lines
+2025-07-18 03:54:15,655 [DEBUG] app: app.py: Log data requested, returning 73 filtered log lines
+2025-07-18 03:54:16,602 [DEBUG] app: app.py: Log data requested, returning 73 filtered log lines
+2025-07-18 03:54:21,604 [DEBUG] app: app.py: Log data requested, returning 73 filtered log lines
+2025-07-18 03:54:26,610 [DEBUG] app: app.py: Log data requested, returning 73 filtered log lines
+2025-07-18 03:54:31,600 [DEBUG] app: app.py: Log data requested, returning 73 filtered log lines
+2025-07-18 03:54:36,605 [DEBUG] app: app.py: Log data requested, returning 73 filtered log lines
+2025-07-18 03:54:41,604 [DEBUG] app: app.py: Log data requested, returning 73 filtered log lines
+2025-07-18 03:54:46,600 [DEBUG] app: app.py: Log data requested, returning 73 filtered log lines
+2025-07-18 03:54:51,603 [DEBUG] app: app.py: Log data requested, returning 73 filtered log lines
+2025-07-18 03:54:56,604 [DEBUG] app: app.py: Log data requested, returning 73 filtered log lines
+2025-07-18 03:55:01,597 [DEBUG] app: app.py: Log data requested, returning 73 filtered log lines
+2025-07-18 03:55:06,600 [DEBUG] app: app.py: Log data requested, returning 73 filtered log lines
+2025-07-18 03:55:11,599 [DEBUG] app: app.py: Log data requested, returning 73 filtered log lines
+2025-07-18 03:55:15,655 [DEBUG] app: app.py: Log data requested, returning 73 filtered log lines
+2025-07-18 03:55:16,598 [DEBUG] app: app.py: Log data requested, returning 73 filtered log lines
+2025-07-18 03:55:21,601 [DEBUG] app: app.py: Log data requested, returning 73 filtered log lines
+2025-07-18 03:55:26,602 [DEBUG] app: app.py: Log data requested, returning 73 filtered log lines
+2025-07-18 03:55:31,601 [DEBUG] app: app.py: Log data requested, returning 73 filtered log lines
+2025-07-18 03:55:36,605 [DEBUG] app: app.py: Log data requested, returning 72 filtered log lines
+2025-07-18 03:55:40,639 [DEBUG] app: app.py: Log data requested, returning 71 filtered log lines
+2025-07-18 03:55:41,270 [DEBUG] app: app.py: Log data requested, returning 71 filtered log lines
+2025-07-18 03:55:46,271 [DEBUG] app: app.py: Log data requested, returning 71 filtered log lines
+2025-07-18 03:55:51,269 [DEBUG] app: app.py: Log data requested, returning 71 filtered log lines
+2025-07-18 03:55:56,272 [DEBUG] app: app.py: Log data requested, returning 71 filtered log lines
+2025-07-18 03:56:01,275 [DEBUG] app: app.py: Log data requested, returning 70 filtered log lines
+2025-07-18 03:56:02,476 [INFO] app: embedding.py: ✅ Milvus 연결 성공!
+2025-07-18 03:56:02,758 [INFO] app: embedding.py: ✅ 컬렉션 'embedding_test' 준비 완료
+2025-07-18 03:56:03,610 [DEBUG] app: app.py: Log data requested, returning 70 filtered log lines
+2025-07-18 03:56:08,572 [DEBUG] app: app.py: Log data requested, returning 70 filtered log lines
+2025-07-18 03:56:13,578 [DEBUG] app: app.py: Log data requested, returning 70 filtered log lines
+2025-07-18 03:56:15,657 [DEBUG] app: app.py: Log data requested, returning 70 filtered log lines
+2025-07-18 03:56:18,577 [DEBUG] app: app.py: Log data requested, returning 70 filtered log lines
+2025-07-18 03:56:23,571 [DEBUG] app: app.py: Log data requested, returning 70 filtered log lines
+2025-07-18 03:56:28,575 [DEBUG] app: app.py: Log data requested, returning 70 filtered log lines
+2025-07-18 03:56:33,577 [DEBUG] app: app.py: Log data requested, returning 70 filtered log lines
+2025-07-18 03:56:38,572 [DEBUG] app: app.py: Log data requested, returning 70 filtered log lines
+2025-07-18 03:56:43,576 [DEBUG] app: app.py: Log data requested, returning 69 filtered log lines
+2025-07-18 03:56:48,577 [DEBUG] app: app.py: Log data requested, returning 68 filtered log lines
+2025-07-18 03:56:53,582 [DEBUG] app: app.py: Log data requested, returning 67 filtered log lines
+2025-07-18 03:56:58,575 [DEBUG] app: app.py: Log data requested, returning 67 filtered log lines
+2025-07-18 03:57:03,578 [DEBUG] app: app.py: Log data requested, returning 67 filtered log lines
+2025-07-18 03:57:08,571 [DEBUG] app: app.py: Log data requested, returning 67 filtered log lines
+2025-07-18 03:57:13,577 [DEBUG] app: app.py: Log data requested, returning 66 filtered log lines
+2025-07-18 03:57:15,646 [DEBUG] app: app.py: Log data requested, returning 65 filtered log lines
+2025-07-18 03:57:18,575 [DEBUG] app: app.py: Log data requested, returning 64 filtered log lines
+2025-07-18 03:57:23,571 [DEBUG] app: app.py: Log data requested, returning 64 filtered log lines
+2025-07-18 03:57:28,579 [DEBUG] app: app.py: Log data requested, returning 64 filtered log lines
+2025-07-18 03:57:33,570 [DEBUG] app: app.py: Log data requested, returning 64 filtered log lines
+2025-07-18 03:57:38,578 [DEBUG] app: app.py: Log data requested, returning 64 filtered log lines
+2025-07-18 03:57:43,575 [DEBUG] app: app.py: Log data requested, returning 64 filtered log lines
+2025-07-18 03:57:48,569 [DEBUG] app: app.py: Log data requested, returning 64 filtered log lines
+2025-07-18 03:57:53,577 [DEBUG] app: app.py: Log data requested, returning 64 filtered log lines
+2025-07-18 03:57:58,578 [DEBUG] app: app.py: Log data requested, returning 64 filtered log lines
+2025-07-18 03:58:03,571 [DEBUG] app: app.py: Log data requested, returning 64 filtered log lines
+2025-07-18 03:58:08,575 [DEBUG] app: app.py: Log data requested, returning 64 filtered log lines
+2025-07-18 03:58:13,582 [DEBUG] app: app.py: Log data requested, returning 64 filtered log lines
+2025-07-18 03:58:15,648 [DEBUG] app: app.py: Log data requested, returning 64 filtered log lines
+2025-07-18 03:58:18,572 [DEBUG] app: app.py: Log data requested, returning 64 filtered log lines
+2025-07-18 03:58:23,571 [DEBUG] app: app.py: Log data requested, returning 64 filtered log lines
+2025-07-18 03:58:28,573 [DEBUG] app: app.py: Log data requested, returning 64 filtered log lines
+2025-07-18 03:58:33,577 [DEBUG] app: app.py: Log data requested, returning 64 filtered log lines
+2025-07-18 03:58:38,573 [DEBUG] app: app.py: Log data requested, returning 64 filtered log lines
+2025-07-18 03:58:43,577 [DEBUG] app: app.py: Log data requested, returning 64 filtered log lines
+2025-07-18 03:58:48,577 [DEBUG] app: app.py: Log data requested, returning 64 filtered log lines
+2025-07-18 03:58:53,571 [DEBUG] app: app.py: Log data requested, returning 64 filtered log lines
+2025-07-18 03:58:58,572 [DEBUG] app: app.py: Log data requested, returning 64 filtered log lines
+2025-07-18 03:59:03,578 [DEBUG] app: app.py: Log data requested, returning 64 filtered log lines
+2025-07-18 03:59:08,572 [DEBUG] app: app.py: Log data requested, returning 64 filtered log lines
+2025-07-18 03:59:13,577 [DEBUG] app: app.py: Log data requested, returning 64 filtered log lines
+2025-07-18 03:59:15,652 [DEBUG] app: app.py: Log data requested, returning 64 filtered log lines
+2025-07-18 03:59:18,577 [DEBUG] app: app.py: Log data requested, returning 64 filtered log lines
+2025-07-18 03:59:23,573 [DEBUG] app: app.py: Log data requested, returning 64 filtered log lines
+2025-07-18 03:59:28,577 [DEBUG] app: app.py: Log data requested, returning 64 filtered log lines
+2025-07-18 03:59:33,577 [DEBUG] app: app.py: Log data requested, returning 64 filtered log lines
+2025-07-18 03:59:38,572 [DEBUG] app: app.py: Log data requested, returning 64 filtered log lines
+2025-07-18 03:59:43,578 [DEBUG] app: app.py: Log data requested, returning 64 filtered log lines
+2025-07-18 03:59:48,578 [DEBUG] app: app.py: Log data requested, returning 64 filtered log lines
+2025-07-18 03:59:53,574 [DEBUG] app: app.py: Log data requested, returning 64 filtered log lines
+2025-07-18 03:59:58,573 [DEBUG] app: app.py: Log data requested, returning 64 filtered log lines
+2025-07-18 04:00:03,579 [DEBUG] app: app.py: Log data requested, returning 64 filtered log lines
+2025-07-18 04:00:08,572 [DEBUG] app: app.py: Log data requested, returning 64 filtered log lines
+2025-07-18 04:00:13,578 [DEBUG] app: app.py: Log data requested, returning 64 filtered log lines
+2025-07-18 04:00:15,645 [DEBUG] app: app.py: Log data requested, returning 64 filtered log lines
+2025-07-18 04:00:18,577 [DEBUG] app: app.py: Log data requested, returning 64 filtered log lines
+2025-07-18 04:00:23,573 [DEBUG] app: app.py: Log data requested, returning 64 filtered log lines
+2025-07-18 04:00:28,576 [DEBUG] app: app.py: Log data requested, returning 64 filtered log lines
+2025-07-18 04:00:33,575 [DEBUG] app: app.py: Log data requested, returning 64 filtered log lines
+2025-07-18 04:00:38,573 [DEBUG] app: app.py: Log data requested, returning 64 filtered log lines
+2025-07-18 04:00:43,576 [DEBUG] app: app.py: Log data requested, returning 64 filtered log lines
+2025-07-18 04:00:48,578 [DEBUG] app: app.py: Log data requested, returning 64 filtered log lines
+2025-07-18 04:00:53,571 [DEBUG] app: app.py: Log data requested, returning 64 filtered log lines
+2025-07-18 04:00:58,577 [DEBUG] app: app.py: Log data requested, returning 64 filtered log lines
+2025-07-18 04:01:03,576 [DEBUG] app: app.py: Log data requested, returning 64 filtered log lines
+2025-07-18 04:01:08,580 [DEBUG] app: app.py: Log data requested, returning 64 filtered log lines
+2025-07-18 04:01:13,575 [DEBUG] app: app.py: Log data requested, returning 64 filtered log lines
+2025-07-18 04:01:15,650 [DEBUG] app: app.py: Log data requested, returning 64 filtered log lines
+2025-07-18 04:01:18,578 [DEBUG] app: app.py: Log data requested, returning 64 filtered log lines
+2025-07-18 04:01:23,578 [DEBUG] app: app.py: Log data requested, returning 64 filtered log lines
+2025-07-18 04:01:28,572 [DEBUG] app: app.py: Log data requested, returning 64 filtered log lines
