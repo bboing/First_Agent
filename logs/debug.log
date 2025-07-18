@@ -13838,3 +13838,259 @@ Inp...)
 2025-07-18 01:42:43,715 [INFO] app: embedding.py: ✅ 컬렉션 'embedding_test' 준비 완료
 2025-07-18 01:43:03,239 [INFO] app: embedding.py: ✅ Milvus 연결 성공!
 2025-07-18 01:43:03,596 [INFO] app: embedding.py: ✅ 컬렉션 'embedding_test' 준비 완료
+2025-07-18 01:43:12,990 [INFO] app: embedding.py: ✅ Milvus 연결 성공!
+2025-07-18 01:43:13,237 [INFO] app: embedding.py: ✅ 컬렉션 'embedding_test' 준비 완료
+2025-07-18 01:50:18,120 [INFO] app: embedding.py: ✅ Milvus 연결 성공!
+2025-07-18 01:50:18,421 [INFO] app: embedding.py: ✅ 컬렉션 'embedding_test' 준비 완료
+2025-07-18 01:50:43,677 [INFO] app: embedding.py: ✅ Milvus 연결 성공!
+2025-07-18 01:50:43,980 [INFO] app: embedding.py: ✅ 컬렉션 'embedding_test' 준비 완료
+2025-07-18 01:50:55,364 [INFO] app: embedding.py: ✅ Milvus 연결 성공!
+2025-07-18 01:50:55,610 [INFO] app: embedding.py: ✅ 컬렉션 'embedding_test' 준비 완료
+2025-07-18 01:51:05,326 [INFO] app: embedding.py: ✅ Milvus 연결 성공!
+2025-07-18 01:51:05,625 [INFO] app: embedding.py: ✅ 컬렉션 'embedding_test' 준비 완료
+2025-07-18 02:02:42,104 [INFO] app: embedding.py: ✅ Milvus 연결 성공!
+2025-07-18 02:02:42,410 [INFO] app: embedding.py: ✅ 컬렉션 'embedding_test' 준비 완료
+2025-07-18 02:09:12,032 [INFO] app: embedding.py: 🔍 검색 결과: 3개 중 3개가 임계값(0.5) 이상
+2025-07-18 02:09:12,032 [INFO] app: embedding.py:   - 유사도: 0.773, 텍스트: 2. BOOKING
+
+## 25. 6. 10. 오후 1:42...
+2025-07-18 02:09:12,032 [INFO] app: embedding.py:   - 유사도: 0.763, 텍스트: 2. BOOKING
+2.6. Booking Split
+1) Navigation
+Custom...
+2025-07-18 02:09:12,033 [INFO] app: embedding.py:   - 유사도: 0.753, 텍스트: 2. BOOKING
+2.3. Booking Master
+2.3.3. Vessel SKD &...
+2025-07-18 02:10:33,952 [INFO] app: embedding.py: ✅ Milvus 연결 성공!
+2025-07-18 02:10:34,274 [INFO] app: embedding.py: ✅ 컬렉션 'embedding_test' 준비 완료
+2025-07-18 02:10:42,062 [INFO] app: embedding.py: 🔍 검색 결과: 3개 중 3개가 임계값(0.5) 이상
+2025-07-18 02:10:42,062 [INFO] app: embedding.py:   - 유사도: 0.763, 텍스트: 2. BOOKING
+
+## 25. 6. 10. 오후 1:42...
+2025-07-18 02:10:42,062 [INFO] app: embedding.py:   - 유사도: 0.743, 텍스트: 2. BOOKING
+2.6. Booking Split
+1) Navigation
+Custom...
+2025-07-18 02:10:42,062 [INFO] app: embedding.py:   - 유사도: 0.731, 텍스트: 2. BOOKING
+2.3. Booking Master
+2.3.3. Vessel SKD &...
+2025-07-18 02:10:57,488 [INFO] app: embedding.py: 🔍 검색 결과: 3개 중 3개가 임계값(0.5) 이상
+2025-07-18 02:10:57,488 [INFO] app: embedding.py:   - 유사도: 0.824, 텍스트: 2. BOOKING
+
+## 25. 6. 10. 오후 1:42...
+2025-07-18 02:10:57,489 [INFO] app: embedding.py:   - 유사도: 0.811, 텍스트: 2. BOOKING
+2.6. Booking Split
+1) Navigation
+Custom...
+2025-07-18 02:10:57,489 [INFO] app: embedding.py:   - 유사도: 0.786, 텍스트: 2. BOOKING
+2.3. Booking Master
+2.3.3. Vessel SKD &...
+2025-07-18 02:12:59,486 [INFO] app: embedding.py: ✅ Milvus 연결 성공!
+2025-07-18 02:12:59,803 [INFO] app: embedding.py: ✅ 컬렉션 'embedding_test' 준비 완료
+2025-07-18 02:13:01,296 [INFO] app: embedding.py: ✅ Milvus 연결 성공!
+2025-07-18 02:13:01,537 [INFO] app: embedding.py: ✅ 컬렉션 'embedding_test' 준비 완료
+2025-07-18 02:13:03,979 [INFO] app: embedding.py: ✅ Milvus 연결 성공!
+2025-07-18 02:13:04,222 [INFO] app: embedding.py: ✅ 컬렉션 'embedding_test' 준비 완료
+2025-07-18 02:13:22,468 [INFO] app: embedding.py: 🔍 검색 결과: 3개 중 3개가 임계값(0.5) 이상
+2025-07-18 02:13:22,469 [INFO] app: embedding.py:   - 유사도: 0.763, 텍스트: 2. BOOKING
+
+## 25. 6. 10. 오후 1:42...
+2025-07-18 02:13:22,469 [INFO] app: embedding.py:   - 유사도: 0.744, 텍스트: 2. BOOKING
+2.6. Booking Split
+1) Navigation
+Custom...
+2025-07-18 02:13:22,469 [INFO] app: embedding.py:   - 유사도: 0.736, 텍스트: 2. BOOKING
+2.3. Booking Master
+2.3.3. Vessel SKD &...
+2025-07-18 02:13:33,637 [INFO] app: embedding.py: ✅ Milvus 연결 성공!
+2025-07-18 02:13:33,902 [INFO] app: embedding.py: ✅ 컬렉션 'embedding_test' 준비 완료
+2025-07-18 02:13:34,566 [INFO] app: embedding.py: ✅ Milvus 연결 성공!
+2025-07-18 02:13:34,832 [INFO] app: embedding.py: ✅ 컬렉션 'embedding_test' 준비 완료
+2025-07-18 02:13:37,469 [INFO] app: embedding.py: ✅ Milvus 연결 성공!
+2025-07-18 02:13:37,781 [INFO] app: embedding.py: ✅ 컬렉션 'embedding_test' 준비 완료
+2025-07-18 02:13:44,526 [INFO] app: embedding.py: 🔍 검색 결과: 3개 중 3개가 임계값(0.5) 이상
+2025-07-18 02:13:44,526 [INFO] app: embedding.py:   - 유사도: 0.763, 텍스트: 2. BOOKING
+
+## 25. 6. 10. 오후 1:42...
+2025-07-18 02:13:44,526 [INFO] app: embedding.py:   - 유사도: 0.744, 텍스트: 2. BOOKING
+2.6. Booking Split
+1) Navigation
+Custom...
+2025-07-18 02:13:44,526 [INFO] app: embedding.py:   - 유사도: 0.736, 텍스트: 2. BOOKING
+2.3. Booking Master
+2.3.3. Vessel SKD &...
+2025-07-18 02:14:02,540 [INFO] app: embedding.py: 🔍 검색 결과: 3개 중 3개가 임계값(0.5) 이상
+2025-07-18 02:14:02,541 [INFO] app: embedding.py:   - 유사도: 0.799, 텍스트: 2. BOOKING
+
+## 25. 6. 10. 오후 1:42...
+2025-07-18 02:14:02,541 [INFO] app: embedding.py:   - 유사도: 0.796, 텍스트: 2. BOOKING
+2.6. Booking Split
+1) Navigation
+Custom...
+2025-07-18 02:14:02,541 [INFO] app: embedding.py:   - 유사도: 0.786, 텍스트: 2. BOOKING
+2.3. Booking Master
+2.3.3. Vessel SKD &...
+2025-07-18 02:15:37,085 [INFO] app: embedding.py: ✅ Milvus 연결 성공!
+2025-07-18 02:15:37,465 [INFO] app: embedding.py: ✅ 컬렉션 'embedding_test' 준비 완료
+2025-07-18 02:15:38,119 [INFO] app: embedding.py: ✅ Milvus 연결 성공!
+2025-07-18 02:15:38,366 [INFO] app: embedding.py: ✅ 컬렉션 'embedding_test' 준비 완료
+2025-07-18 02:15:39,016 [INFO] app: embedding.py: ✅ Milvus 연결 성공!
+2025-07-18 02:15:39,272 [INFO] app: embedding.py: ✅ 컬렉션 'embedding_test' 준비 완료
+2025-07-18 02:15:46,410 [INFO] app: embedding.py: ✅ Milvus 연결 성공!
+2025-07-18 02:15:46,659 [INFO] app: embedding.py: ✅ 컬렉션 'embedding_test' 준비 완료
+2025-07-18 02:16:02,366 [INFO] app: embedding.py: 🔍 검색 결과: 3개 중 3개가 임계값(0.2) 이상
+2025-07-18 02:16:02,366 [INFO] app: embedding.py:   - 유사도: 0.807, 텍스트: 2. BOOKING
+
+## 25. 6. 10. 오후 1:42...
+2025-07-18 02:16:02,367 [INFO] app: embedding.py:   - 유사도: 0.807, 텍스트: 2. BOOKING
+2.6. Booking Split
+1) Navigation
+Custom...
+2025-07-18 02:16:02,367 [INFO] app: embedding.py:   - 유사도: 0.804, 텍스트: 2. BOOKING
+2.3. Booking Master
+2.3.1. Booking Mast...
+2025-07-18 02:16:23,503 [INFO] agent.document_processing.clear_collection: ✅ Milvus 연결 성공!
+2025-07-18 02:16:23,505 [INFO] agent.document_processing.clear_collection: 📋 현재 컬렉션 목록 (1개):
+2025-07-18 02:16:23,505 [INFO] agent.document_processing.clear_collection:   1. embedding_test
+2025-07-18 02:19:39,657 [INFO] app: embedding.py: ✅ Milvus 연결 성공!
+2025-07-18 02:20:05,931 [INFO] app: embedding.py: ✅ 컬렉션 'embedding_test' 준비 완료
+2025-07-18 02:20:12,012 [DEBUG] app: app.py: Log data requested, returning 301 filtered log lines
+2025-07-18 02:21:05,261 [DEBUG] app: app.py: Log data requested, returning 301 filtered log lines
+2025-07-18 02:21:40,642 [DEBUG] app: app.py: Log data requested, returning 300 filtered log lines
+2025-07-18 02:23:45,228 [DEBUG] app: app.py: Log data requested, returning 299 filtered log lines
+2025-07-18 02:24:45,949 [DEBUG] app: app.py: Log data requested, returning 298 filtered log lines
+2025-07-18 02:24:50,920 [DEBUG] app: app.py: Log data requested, returning 298 filtered log lines
+2025-07-18 02:24:55,924 [DEBUG] app: app.py: Log data requested, returning 298 filtered log lines
+2025-07-18 02:25:00,918 [DEBUG] app: app.py: Log data requested, returning 297 filtered log lines
+2025-07-18 02:25:05,923 [DEBUG] app: app.py: Log data requested, returning 296 filtered log lines
+2025-07-18 02:25:10,920 [DEBUG] app: app.py: Log data requested, returning 296 filtered log lines
+2025-07-18 02:25:15,913 [DEBUG] app: app.py: Log data requested, returning 296 filtered log lines
+2025-07-18 02:25:20,922 [DEBUG] app: app.py: Log data requested, returning 295 filtered log lines
+2025-07-18 02:25:25,922 [DEBUG] app: app.py: Log data requested, returning 294 filtered log lines
+2025-07-18 02:25:27,089 [DEBUG] app: app.py: Log data requested, returning 294 filtered log lines
+2025-07-18 02:25:30,918 [DEBUG] app: app.py: Log data requested, returning 294 filtered log lines
+2025-07-18 02:25:35,920 [DEBUG] app: app.py: Log data requested, returning 293 filtered log lines
+2025-07-18 02:25:40,887 [DEBUG] app: app.py: Log data requested, returning 292 filtered log lines
+2025-07-18 02:25:45,890 [DEBUG] app: app.py: Log data requested, returning 292 filtered log lines
+2025-07-18 02:25:48,053 [DEBUG] app: app.py: Log data requested, returning 292 filtered log lines
+2025-07-18 02:25:51,409 [DEBUG] app: app.py: Log data requested, returning 291 filtered log lines
+2025-07-18 02:25:53,061 [DEBUG] app: app.py: Log data requested, returning 290 filtered log lines
+2025-07-18 02:25:56,407 [DEBUG] app: app.py: Log data requested, returning 289 filtered log lines
+2025-07-18 02:25:58,061 [DEBUG] app: app.py: Log data requested, returning 289 filtered log lines
+2025-07-18 02:26:01,409 [DEBUG] app: app.py: Log data requested, returning 289 filtered log lines
+2025-07-18 02:26:03,067 [DEBUG] app: app.py: Log data requested, returning 288 filtered log lines
+2025-07-18 02:26:06,403 [DEBUG] app: app.py: Log data requested, returning 287 filtered log lines
+2025-07-18 02:26:08,062 [DEBUG] app: app.py: Log data requested, returning 286 filtered log lines
+2025-07-18 02:26:11,405 [DEBUG] app: app.py: Log data requested, returning 286 filtered log lines
+2025-07-18 02:26:13,062 [DEBUG] app: app.py: Log data requested, returning 286 filtered log lines
+2025-07-18 02:26:16,402 [DEBUG] app: app.py: Log data requested, returning 285 filtered log lines
+2025-07-18 02:26:18,061 [DEBUG] app: app.py: Log data requested, returning 284 filtered log lines
+2025-07-18 02:26:21,404 [DEBUG] app: app.py: Log data requested, returning 283 filtered log lines
+2025-07-18 02:26:23,062 [DEBUG] app: app.py: Log data requested, returning 283 filtered log lines
+2025-07-18 02:26:26,403 [DEBUG] app: app.py: Log data requested, returning 283 filtered log lines
+2025-07-18 02:26:28,059 [DEBUG] app: app.py: Log data requested, returning 282 filtered log lines
+2025-07-18 02:26:31,406 [DEBUG] app: app.py: Log data requested, returning 281 filtered log lines
+2025-07-18 02:26:33,054 [DEBUG] app: app.py: Log data requested, returning 280 filtered log lines
+2025-07-18 02:26:36,401 [DEBUG] app: app.py: Log data requested, returning 280 filtered log lines
+2025-07-18 02:26:38,055 [DEBUG] app: app.py: Log data requested, returning 280 filtered log lines
+2025-07-18 02:26:40,707 [DEBUG] app: app.py: Log data requested, returning 279 filtered log lines
+2025-07-18 02:26:41,404 [DEBUG] app: app.py: Log data requested, returning 278 filtered log lines
+2025-07-18 02:26:43,069 [DEBUG] app: app.py: Log data requested, returning 278 filtered log lines
+2025-07-18 02:26:44,008 [INFO] agent.document_processing.clear_collection: ✅ Milvus 연결 성공!
+2025-07-18 02:26:44,010 [INFO] agent.document_processing.clear_collection: 📋 현재 컬렉션 목록 (1개):
+2025-07-18 02:26:44,010 [INFO] agent.document_processing.clear_collection:   1. embedding_test
+2025-07-18 02:26:44,017 [DEBUG] app: app.py: Log data requested, returning 279 filtered log lines
+2025-07-18 02:26:44,889 [DEBUG] app: app.py: Log data requested, returning 279 filtered log lines
+2025-07-18 02:26:45,227 [DEBUG] app: app.py: Log data requested, returning 278 filtered log lines
+2025-07-18 02:26:45,543 [DEBUG] app: app.py: Log data requested, returning 277 filtered log lines
+2025-07-18 02:26:46,399 [DEBUG] app: app.py: Log data requested, returning 277 filtered log lines
+2025-07-18 02:26:50,544 [DEBUG] app: app.py: Log data requested, returning 277 filtered log lines
+2025-07-18 02:26:55,554 [DEBUG] app: app.py: Log data requested, returning 276 filtered log lines
+2025-07-18 02:27:00,547 [DEBUG] app: app.py: Log data requested, returning 275 filtered log lines
+2025-07-18 02:27:05,553 [DEBUG] app: app.py: Log data requested, returning 274 filtered log lines
+2025-07-18 02:27:10,544 [DEBUG] app: app.py: Log data requested, returning 274 filtered log lines
+2025-07-18 02:27:15,556 [DEBUG] app: app.py: Log data requested, returning 274 filtered log lines
+2025-07-18 02:27:20,546 [DEBUG] app: app.py: Log data requested, returning 273 filtered log lines
+2025-07-18 02:27:25,407 [DEBUG] app: app.py: Log data requested, returning 272 filtered log lines
+2025-07-18 02:27:25,549 [DEBUG] app: app.py: Log data requested, returning 271 filtered log lines
+2025-07-18 02:27:30,546 [DEBUG] app: app.py: Log data requested, returning 270 filtered log lines
+2025-07-18 02:27:35,558 [DEBUG] app: app.py: Log data requested, returning 269 filtered log lines
+2025-07-18 02:27:40,545 [DEBUG] app: app.py: Log data requested, returning 268 filtered log lines
+2025-07-18 02:27:45,555 [DEBUG] app: app.py: Log data requested, returning 267 filtered log lines
+2025-07-18 02:27:50,546 [DEBUG] app: app.py: Log data requested, returning 266 filtered log lines
+2025-07-18 02:27:55,556 [DEBUG] app: app.py: Log data requested, returning 266 filtered log lines
+2025-07-18 02:28:00,545 [DEBUG] app: app.py: Log data requested, returning 266 filtered log lines
+2025-07-18 02:28:02,436 [INFO] app: embedding.py: ✅ Milvus 연결 성공!
+2025-07-18 02:28:02,752 [INFO] app: embedding.py: ✅ 컬렉션 'embedding_test' 준비 완료
+2025-07-18 02:28:04,064 [DEBUG] app: app.py: Log data requested, returning 265 filtered log lines
+2025-07-18 02:28:08,336 [DEBUG] app: app.py: Log data requested, returning 265 filtered log lines
+2025-07-18 02:28:10,547 [DEBUG] app: app.py: Log data requested, returning 265 filtered log lines
+2025-07-18 02:28:11,746 [DEBUG] app: app.py: Log data requested, returning 264 filtered log lines
+2025-07-18 02:28:11,751 [INFO] agent.document_processing.clear_collection: ✅ Milvus 연결 성공!
+2025-07-18 02:28:11,752 [INFO] agent.document_processing.clear_collection: 📋 현재 컬렉션 목록 (1개):
+2025-07-18 02:28:11,752 [INFO] agent.document_processing.clear_collection:   1. embedding_test
+2025-07-18 02:28:12,515 [DEBUG] app: app.py: Log data requested, returning 265 filtered log lines
+2025-07-18 02:28:12,988 [DEBUG] app: app.py: Log data requested, returning 264 filtered log lines
+2025-07-18 02:28:14,003 [DEBUG] app: app.py: Log data requested, returning 264 filtered log lines
+2025-07-18 02:28:19,012 [DEBUG] app: app.py: Log data requested, returning 264 filtered log lines
+2025-07-18 02:28:19,303 [DEBUG] app: app.py: Log data requested, returning 263 filtered log lines
+2025-07-18 02:28:20,653 [DEBUG] app: app.py: Log data requested, returning 262 filtered log lines
+2025-07-18 02:28:21,886 [DEBUG] app: app.py: Log data requested, returning 261 filtered log lines
+2025-07-18 02:28:22,607 [DEBUG] app: app.py: Log data requested, returning 261 filtered log lines
+2025-07-18 02:28:23,314 [DEBUG] app: app.py: Log data requested, returning 261 filtered log lines
+2025-07-18 02:28:23,319 [INFO] agent.document_processing.clear_collection: ✅ Milvus 연결 성공!
+2025-07-18 02:28:23,320 [INFO] agent.document_processing.clear_collection: 📋 현재 컬렉션 목록 (1개):
+2025-07-18 02:28:23,320 [INFO] agent.document_processing.clear_collection:   1. embedding_test
+2025-07-18 02:28:24,929 [DEBUG] app: app.py: Log data requested, returning 261 filtered log lines
+2025-07-18 02:28:25,410 [DEBUG] app: app.py: Log data requested, returning 261 filtered log lines
+2025-07-18 02:28:27,242 [DEBUG] app: app.py: Log data requested, returning 260 filtered log lines
+2025-07-18 02:28:27,248 [INFO] agent.document_processing.clear_collection: ✅ Milvus 연결 성공!
+2025-07-18 02:28:27,249 [INFO] agent.document_processing.clear_collection: 📋 현재 컬렉션 목록 (1개):
+2025-07-18 02:28:27,249 [INFO] agent.document_processing.clear_collection:   1. embedding_test
+2025-07-18 02:28:27,853 [DEBUG] app: app.py: Log data requested, returning 259 filtered log lines
+2025-07-18 02:28:30,692 [DEBUG] app: app.py: Log data requested, returning 258 filtered log lines
+2025-07-18 02:28:35,697 [DEBUG] app: app.py: Log data requested, returning 257 filtered log lines
+2025-07-18 02:28:40,700 [DEBUG] app: app.py: Log data requested, returning 256 filtered log lines
+2025-07-18 02:28:45,700 [DEBUG] app: app.py: Log data requested, returning 256 filtered log lines
+2025-07-18 02:28:50,698 [DEBUG] app: app.py: Log data requested, returning 256 filtered log lines
+2025-07-18 02:28:55,705 [DEBUG] app: app.py: Log data requested, returning 255 filtered log lines
+2025-07-18 02:29:00,698 [DEBUG] app: app.py: Log data requested, returning 254 filtered log lines
+2025-07-18 02:29:05,694 [DEBUG] app: app.py: Log data requested, returning 253 filtered log lines
+2025-07-18 02:29:10,697 [DEBUG] app: app.py: Log data requested, returning 253 filtered log lines
+2025-07-18 02:29:15,706 [DEBUG] app: app.py: Log data requested, returning 253 filtered log lines
+2025-07-18 02:29:20,695 [DEBUG] app: app.py: Log data requested, returning 252 filtered log lines
+2025-07-18 02:29:25,409 [DEBUG] app: app.py: Log data requested, returning 251 filtered log lines
+2025-07-18 02:29:25,696 [DEBUG] app: app.py: Log data requested, returning 251 filtered log lines
+2025-07-18 02:29:30,697 [DEBUG] app: app.py: Log data requested, returning 251 filtered log lines
+2025-07-18 02:29:35,700 [DEBUG] app: app.py: Log data requested, returning 250 filtered log lines
+2025-07-18 02:29:40,695 [DEBUG] app: app.py: Log data requested, returning 249 filtered log lines
+2025-07-18 02:29:45,701 [DEBUG] app: app.py: Log data requested, returning 249 filtered log lines
+2025-07-18 02:29:50,699 [DEBUG] app: app.py: Log data requested, returning 249 filtered log lines
+2025-07-18 02:29:55,702 [DEBUG] app: app.py: Log data requested, returning 248 filtered log lines
+2025-07-18 02:30:00,698 [DEBUG] app: app.py: Log data requested, returning 247 filtered log lines
+2025-07-18 02:30:05,703 [DEBUG] app: app.py: Log data requested, returning 247 filtered log lines
+2025-07-18 02:30:10,698 [DEBUG] app: app.py: Log data requested, returning 247 filtered log lines
+2025-07-18 02:30:15,705 [DEBUG] app: app.py: Log data requested, returning 246 filtered log lines
+2025-07-18 02:30:20,695 [DEBUG] app: app.py: Log data requested, returning 245 filtered log lines
+2025-07-18 02:30:25,414 [DEBUG] app: app.py: Log data requested, returning 244 filtered log lines
+2025-07-18 02:30:25,699 [DEBUG] app: app.py: Log data requested, returning 244 filtered log lines
+2025-07-18 02:30:30,697 [DEBUG] app: app.py: Log data requested, returning 244 filtered log lines
+2025-07-18 02:30:35,697 [DEBUG] app: app.py: Log data requested, returning 243 filtered log lines
+2025-07-18 02:30:40,697 [DEBUG] app: app.py: Log data requested, returning 242 filtered log lines
+2025-07-18 02:30:45,707 [DEBUG] app: app.py: Log data requested, returning 241 filtered log lines
+2025-07-18 02:30:50,694 [DEBUG] app: app.py: Log data requested, returning 241 filtered log lines
+2025-07-18 02:30:56,399 [DEBUG] app: app.py: Log data requested, returning 241 filtered log lines
+2025-07-18 02:31:01,401 [DEBUG] app: app.py: Log data requested, returning 240 filtered log lines
+2025-07-18 02:31:06,409 [DEBUG] app: app.py: Log data requested, returning 239 filtered log lines
+2025-07-18 02:31:11,397 [DEBUG] app: app.py: Log data requested, returning 239 filtered log lines
+2025-07-18 02:31:16,402 [DEBUG] app: app.py: Log data requested, returning 238 filtered log lines
+2025-07-18 02:31:21,402 [DEBUG] app: app.py: Log data requested, returning 237 filtered log lines
+2025-07-18 02:31:25,421 [DEBUG] app: app.py: Log data requested, returning 237 filtered log lines
+2025-07-18 02:31:26,399 [DEBUG] app: app.py: Log data requested, returning 236 filtered log lines
+2025-07-18 02:31:31,402 [DEBUG] app: app.py: Log data requested, returning 235 filtered log lines
+2025-07-18 02:31:36,396 [DEBUG] app: app.py: Log data requested, returning 234 filtered log lines
+2025-07-18 02:31:41,402 [DEBUG] app: app.py: Log data requested, returning 234 filtered log lines
+2025-07-18 02:31:46,401 [DEBUG] app: app.py: Log data requested, returning 233 filtered log lines
+2025-07-18 02:31:51,400 [DEBUG] app: app.py: Log data requested, returning 232 filtered log lines
+2025-07-18 02:32:25,412 [DEBUG] app: app.py: Log data requested, returning 231 filtered log lines
+2025-07-18 02:32:25,423 [DEBUG] app: app.py: Log data requested, returning 231 filtered log lines

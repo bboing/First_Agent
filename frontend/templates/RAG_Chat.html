@@ -63,14 +63,15 @@
             height: fit-content;
         }
         .log-container {
-            background: #fff;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.07);
-            padding: 20px;
-            min-height: 500px;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
+            height: 300px;
+            overflow-y: auto;
+            background-color: #1e1e1e;
+            color: #ffffff;
+            padding: 10px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            line-height: 1.4;
         }
     </style>
 </head>
@@ -124,7 +125,7 @@
         // 실시간 로그 표시 함수
         async function loadAndDisplayLogs() {
             try {
-                const response = await fetch('/log');
+                const response = await fetch('/api/log');
                 const data = await response.json();
                 if (data.logs && data.logs.length > 0) {
                     const logContainer = document.getElementById('log-container');

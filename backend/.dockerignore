@@ -1,0 +1,75 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# 가상환경
+.venv/
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# 환경변수
+.env
+.env.*
+!.env.example
+
+# Git
+.git/
+.gitignore
+
+# IDE/에디터
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# 로그/임시파일
+logs/
+*.log
+*.tmp
+*.temp
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# 테스트/개발
+test_azure_di.py
+*.test.py
+.pytest_cache/
+.coverage
+htmlcov/
+
+# 문서/결과물 (빌드 시 불필요)
+docs/save_result/
+docs/error_image/
+docs/public/
+result/
+
+# Docker
+Dockerfile
+.dockerignore 

@@ -39,6 +39,7 @@ services:
       - ../.env
     volumes:
       - ../frontend:/app
+      - ../logs:/app/logs  # 로그 볼륨 마운트 추가
     environment:
       - BACKEND_API_URL=http://backend:8000
     depends_on:

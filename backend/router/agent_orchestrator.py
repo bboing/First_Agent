@@ -7,8 +7,8 @@ def route_query(user_input):
     if results and len(results[0]) > 0:
         best_hit = results[0][0]
         score = best_hit.distance  # L2 거리(작을수록 유사)
-        # 예시: 0.2 이하(유사도 높음)면 ML, 아니면 RAG
-        if score < 0.2:
+        # 예시: 0.1 이하(유사도 높음)면 ML, 아니면 RAG
+        if score < 0.05:
             print("router/agent_orchestrator.py: ML 에이전트 호출")
             return handle_ml(user_input)
         else:

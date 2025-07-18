@@ -67,7 +67,7 @@ def process_files_in_directory(directory_path):
                     # 버그 수정 (Windows 호환되도록 수정함)
                     filename_wo_ext = os.path.splitext(os.path.basename(file_path))[0]
                     # 25.07.17 timestamp 제거 
-                    output_file = os.path.join(BASE_DIR, "result", "md", f"{filename_wo_ext}.md")
+                    output_file = os.path.join(BASE_DIR, "docs", "save_result", "save", f"{filename_wo_ext}.md")
                     md_files.append(output_file)
                 except Exception as e:
                     logging.error(f"allegronx_chunker: 파일 처리 중 에러 발생: {file_path}, 에러: {str(e)}")
@@ -96,8 +96,8 @@ def analyze_documents_combined(file_path):
     # 25.07.17 timestamp 제거
     
     # 디렉토리 생성
-    result_md_dir = os.path.join(BASE_DIR, "result", "md")
-    result_tables_dir = os.path.join(BASE_DIR, "result", "tables")
+    result_md_dir = os.path.join(BASE_DIR, "docs", "save_result", "save")
+    result_tables_dir = os.path.join(BASE_DIR, "docs", "save_result", "save")
     os.makedirs(result_md_dir, exist_ok=True)
     os.makedirs(result_tables_dir, exist_ok=True)
     

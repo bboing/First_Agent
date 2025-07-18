@@ -16,11 +16,28 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 
-// API 프록시 설정 (모든 라우트보다 위에 위치해야 함)
-app.use('/log', createProxyMiddleware({
-  target: backendApiUrl,
-  changeOrigin: true
-}))
+// 로그 API 직접 구현 (프록시 대신)
+app.get('/api/log', async (req, res) => {
+  try {
+    console.log('Log API called, fetching from backend:', backendApiUrl + '/log');
+    const backendResponse = await fetch(`${backendApiUrl}/log`);
+    
+    if (!backendResponse.ok) {
+      console.error('Backend log API error:', backendResponse.status, backendResponse.statusText);
+      return res.status(backendResponse.status).json({ 
+        error: 'Backend log API error', 
+        status: backendResponse.status 
+      });
+    }
+    
+    const data = await backendResponse.json();
+    console.log('Log data received, length:', JSON.stringify(data).length);
+    res.json(data);
+  } catch (error) {
+    console.error('Error fetching logs:', error.message);
+    res.status(500).json({ error: 'Error fetching logs', message: error.message });
+  }
+});
 
 // Serve static files from public directory
 app.use('/public', express.static(path.join(__dirname, 'public')));
@@ -133,6 +150,24 @@ app.post('/process-pdf', upload.array('files'), async (req, res) => {
     } catch (error) {
         console.error('Error processing PDF:', error);
         res.status(500).send({ error: 'Error processing PDF' });
+    }
+});
+
+// RAG 챗봇 API 프록시
+app.post('/chat', async (req, res) => {
+    try {
+        const backendResponse = await fetch(`${backendApiUrl}/chat`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(req.body)
+        });
+        const data = await backendResponse.json();
+        res.json(data);
+    } catch (error) {
+        console.error('Error in chat API:', error);
+        res.status(500).send({ error: 'Error in chat API' });
     }
 });
 

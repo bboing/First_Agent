@@ -1,48 +1,122 @@
-# OS/에디터 임시 파일
+# ===== OS/에디터 임시 파일 =====
 .DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
 Thumbs.db
 *.swp
 *.swo
 *.bak
 *.tmp
-*.log
+*~
 
-# 환경 변수 파일
+# ===== 환경 변수 파일 =====
 .env
 .env.*
+!.env.example
 
-# Python
+# ===== Python (Backend) =====
 __pycache__/
-*.pyc
-*.pyo
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Python 가상환경
 .venv/
 venv/
 env/
+ENV/
+env.bak/
+venv.bak/
 
-# Node.js
+# Python 테스트
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.nox/
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+
+# ===== Node.js (Frontend) =====
 node_modules/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+lerna-debug.log*
+.pnpm-debug.log*
 
-# Docker
-*.pid
+# 패키지 매니저
+.npm
+.yarn-integrity
+.yarn/cache
+.yarn/unplugged
+.yarn/build-state.yml
+.yarn/install-state.gz
+.pnp.*
 
-# 빌드/배포
-/dist/
-/build/
-/coverage/
+# ===== 빌드/배포 =====
+dist/
+build/
+coverage/
+.nyc_output/
 
-# IDE/에디터
+# ===== IDE/에디터 =====
 .vscode/
 .idea/
 *.iml
+*.ipr
+*.iws
+.project
+.classpath
+.settings/
 
-# Jupyter
+# ===== Jupyter =====
 .ipynb_checkpoints/
 
-# 기타
+# ===== 로그/임시파일 =====
 logs/
-logs/*
+*.log
+*.tmp
+*.temp
+
+# ===== Docker =====
+*.pid
+
+# ===== 프로젝트 특화 =====
+# 백엔드 생성 결과물
+backend/docs/save_result/
+backend/result/
 backend/logs/
-frontend/node_modules/
+
+# 프론트엔드 빌드 결과물
+frontend/dist/
+frontend/build/
+
+# 테스트 파일 (선택적)
+backend/test_azure_di.py
+*.test.py
