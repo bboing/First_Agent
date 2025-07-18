@@ -1,5 +1,26 @@
-# 통합 25.06.25 완성 최종코드 > 06.27 로직 추가 (주석으로 체크)
-from collections import defaultdict
+'''
+Azure 기반 Allgero NX Manual Auto Chunker
+
+< 개정 이력 >
+...
+# 25.06.25 파트별 기능 통
+# 25.06.27 로직 추가 (주석으로 체크)
+# 25.07.16 일부 기능 개선, 결과 디렉토리 재구성, os 일반화 등
+
+< 향후 논의해야 할 agenda >
+# Table Chunking Range
+    ㄴ 최소 Chunk 보다 작은 경우, 최소 Chunk 유지
+    ㄴ 김태균 과장 : 만약 최소 Chunk 보다 큰 경우, Table에서 병합된 부분까지 의미 단위로 쪼개는 방식 
+    ㄴ 박세영 대리 : 몇 Depth 까지 고려할 것인가? 1 Depth에서 엄청 길게 나오면?
+    ㄴ 김태균 과장 : 1 Depth 까지만 고려하는 것으로 우선 픽스
+# Table Chunking 이후 passage page update
+
+# DI 추출
+    ㄴ DI 로 잘못 추출된 경우, 내용의 변형이 일어날 수 있음
+    ㄴ 정확한 결과를 얻기 위해서 눈으로 검토하는 것은 불가피함.
+    ㄴ 1개년 사업 범위 내에선 DI 추출 결과를 믿고 사용해도 무방할 것으로 판단(openparser 테이블 추출 결과 DI보다 퀄리티가 낮은 것으로 판단 또한, GPU 내부 MPS 사용 불가한지 체크 필요)
+'''
+
 from datetime import datetime
 from azure.core.credentials import AzureKeyCredential
 from azure.ai.documentintelligence import DocumentIntelligenceClient
@@ -8,33 +29,33 @@ from azure.core.exceptions import HttpResponseError
 from dotenv import load_dotenv
 from datetime import datetime
 from typing import List, Dict
-from pathlib import Path # Pathlib 추가
-
+from pathlib import Path
+import logging
 import os
 import re
-import copy
 import pandas as pd
-import logging # logging 모듈 임포트
 
-# 로거 설정 (logger_config.py에서 설정된 로거를 사용)
-logger = logging.getLogger(__name__)
+logger = logging.getLogger("app")
+logger.setLevel(logging.DEBUG)
+
+
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))) # backend root 디렉토리
+DATA_DIR = os.path.join(BASE_DIR, "data")
 
 timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
-BASE_DIR = str(Path(__file__).parent.parent.parent)
-OUTPUT_BASE_DIR = os.path.join(BASE_DIR, "docs", "save_result") # Code added by Gemini
 
  ########################## Part 1 ###########################
 # Step 1-1
-def process_files_in_directory(directory):
+def process_files_in_directory(directory_path):
     '''디렉터리 순회하며 PDF 파일 처리 후 .md 파일 목록 반환'''
     results = []
     md_files = []  # 생성된 .md 파일 경로를 저장
-    for root, _, files in os.walk(directory):
+    for root, _, files in os.walk(directory_path):
         for file in files:
             file_path = os.path.join(root, file)
             file_ext = os.path.splitext(file)[-1].lower()
             if file_ext == '.pdf':
-                logger.info(f"PDF 파일 처리 중: {file_path}") # print -> logger.info
+                logging.info(f"allegronx_chunker: PDF 파일 처리 중: {file_path}")
                 try:
                     content, tables_data = analyze_documents_combined(file_path)
                     results.append({
@@ -45,21 +66,14 @@ def process_files_in_directory(directory):
                     # 생성된 .md 파일 경로 추가
                     # 버그 수정 (Windows 호환되도록 수정함)
                     filename_wo_ext = os.path.splitext(os.path.basename(file_path))[0]
-                    output_md_dir = os.path.join(OUTPUT_BASE_DIR, "save") # Code added by Gemini
-                    os.makedirs(output_md_dir, exist_ok=True) # Code added by Gemini
-                    output_md_file_path = os.path.join(output_md_dir, f"{filename_wo_ext}_{timestamp}.md") # Code added by Gemini
-                    
-                    # Code added by Gemini: 마크다운 내용을 .md 파일로 저장
-                    with open(output_md_file_path, "w", encoding="utf-8") as f:
-                        f.write(content)
-                    logger.info(f"Markdown content saved to {output_md_file_path}")
-                    
-                    md_files.append(output_md_file_path)
+                    # 25.07.17 timestamp 제거 
+                    output_file = os.path.join(BASE_DIR, "result", "md", f"{filename_wo_ext}.md")
+                    md_files.append(output_file)
                 except Exception as e:
-                    logger.error(f"파일 처리 중 에러 발생: {file_path}, 에러: {str(e)}") # print -> logger.error
+                    logging.error(f"allegronx_chunker: 파일 처리 중 에러 발생: {file_path}, 에러: {str(e)}")
                     continue
             else:
-                logger.warning(f"처리할 수 없는 파일 형식: {file_path}") # print -> logger.warning
+                logging.warning(f"allegronx_chunker: 처리할 수 없는 파일 형식: {file_path}")
     return results, md_files  # 결과와 .md 파일 목록 반환
 
 
@@ -67,7 +81,7 @@ def process_files_in_directory(directory):
 def analyze_documents_combined(file_path):
     '''
     Azure DI를 사용하여 PDF를 추출하는 함수
-    표 데이터 작업을 위해 같은 PDF 문서를 두 번 API 호출
+    표 데이터 작업을 위해 같은 PDF 문서를 두 번 API 호출합니다.
     이후, 마크다운 타입으로 정제한 표를 원본 데이터에 치환
     '''
     load_dotenv()
@@ -75,21 +89,25 @@ def analyze_documents_combined(file_path):
     endpoint = os.getenv("AZURE_DI_ENDPOINT")
     key = os.getenv("AZURE_DI_KEY")
     if not endpoint or not key:
-        logger.error("AZURE_DI_ENDPOINT or AZURE_DI_KEY is not set in the environment variables.") # print -> logger.error
         raise ValueError("AZURE_DI_ENDPOINT or AZURE_DI_KEY is not set in the environment variables.")
 
     # Windows 호환 가능하도록 수정
     filename_wo_ext = os.path.splitext(os.path.basename(file_path))[0]
-    output_txt_dir = os.path.join(OUTPUT_BASE_DIR, "save") # Code added by Gemini
-    os.makedirs(output_txt_dir, exist_ok=True) # Code added by Gemini
-    output_file = os.path.join(output_txt_dir, f"tables_{filename_wo_ext}_{timestamp}.txt") # Code added by Gemini
-    table_output_file = os.path.join(output_txt_dir, f"tables_{filename_wo_ext}_{timestamp}.txt") # Code added by Gemini
+    # 25.07.17 timestamp 제거
+    
+    # 디렉토리 생성
+    result_md_dir = os.path.join(BASE_DIR, "result", "md")
+    result_tables_dir = os.path.join(BASE_DIR, "result", "tables")
+    os.makedirs(result_md_dir, exist_ok=True)
+    os.makedirs(result_tables_dir, exist_ok=True)
+    
+    output_file = os.path.join(result_md_dir, f"{filename_wo_ext}.md")
+    table_output_file = os.path.join(result_tables_dir, f"tables_{filename_wo_ext}.txt")
 
     try:
         with open(file_path, "rb") as f:
             pdf_data = f.read()
     except FileNotFoundError:
-        logger.error(f"파일을 찾을 수 없습니다: {file_path}") # print -> logger.error
         raise FileNotFoundError(f"파일을 찾을 수 없습니다: {file_path}")
 
     client = DocumentIntelligenceClient(endpoint=endpoint, credential=AzureKeyCredential(key))
@@ -127,26 +145,26 @@ def analyze_documents_combined(file_path):
         markdown_content = result.content  # 마크다운 콘텐츠
         tables = result.tables  # 표 데이터
     except Exception as e:
-        logger.error(f"Failed to extract document data: {str(e)}") # print -> logger.error
         raise Exception(f"Failed to extract document data: {str(e)}")
 
 
     table_replacements = []
+    # 테이블 정보를 관리할 리스트 (tables가 없어도 빈 리스트로 초기화)
+    tables_data = []
+    
     # 결과 안에 tables 속성 체크
     if tables:
         with open(table_output_file, "w", encoding="utf-8") as f:
             f.write(f"Total Tables Detected: {tables}\n\n")
-            logger.info(f"Total Tables Detected: {len(tables)}") # print -> logger.info
+            logging.info(f"allegronx_chunker: Total Tables Detected: {len(tables)}")
 
-            # 테이블 정보를 관리할 리스트
-            tables_data = []
             # 테이블 번호를 1번 부터 시작해서 반복
             for table_idx, table in enumerate(tables, 1):
                 # 첫번째 셀을 가져와서 -> 위치 정보를 가져와서 -> 그 중, page 정보를 가져옴.
                 page_num = table.cells[0].bounding_regions[0].page_number if table.cells else "Unknown"
                 # 각 정보를 조합해서 table key 필드를 만들 것임.
                 table_key = f"Table {table_idx} (Page {page_num}, Rows: {table.row_count}, Columns: {table.column_count})"
-                logger.info(f"{table_key}") # print -> logger.info
+                logging.info(f"allegronx_chunker: {table_key}")
 
                 # row, column 길이에 맞게 테이블 모양을 만드는 작업
                 # 그리고 거기에 content를 하나씩 집어넣는다.
@@ -183,8 +201,8 @@ def analyze_documents_combined(file_path):
                 })
 
             # (로그 확인) 테이블 총 개수, 테이블 내부 구조 확인
-            logger.info(f'# {len(tables_data)}') # print -> logger.info
-            logger.info(f'{tables_data[:5]}') # print -> logger.info
+            logging.info(f"allegronx_chunker: 테이블 데이터 개수: {len(tables_data)}")
+            logging.debug(f"allegronx_chunker: 테이블 데이터 샘플: {tables_data[:2]}")
 
             # 초기 <table> 섹션 교체 함수
             def replace_table(match, merged_indices=None):
@@ -197,16 +215,16 @@ def analyze_documents_combined(file_path):
 
                 # 일단 보류.. 이 부분 동작 안 할듯..
                 if merged_indices and table_idx in merged_indices and table_idx not in [t["original_index"] for t in table_replacements]:
-                    logger.info(f"Removing <table> {table_idx} (merged into another table)") # print -> logger.info
+                    logging.debug(f"allegronx_chunker: Removing <table> {table_idx} (merged into another table)")
                     return ""
                 
                 for table_info in table_replacements:
                     # 인덱스가 일치하는 것만 교체할 것임.
                     if table_info["original_index"] == table_idx:
-                        logger.info(f"Replacing <table> {table_idx} with {table_info['key']}") # print -> logger.info
+                        logging.debug(f"allegronx_chunker: Replacing <table> {table_idx} with {table_info['key']}")
                         # table 태그를 마크다운으로 바꾼다.
                         return table_info["markdown"]
-                logger.info(f"No replacement found for <table> {table_idx}, using original") # print -> logger.info
+                logging.debug(f"allegronx_chunker: No replacement found for <table> {table_idx}, using original")
                 
                 return match.group(0)
 
@@ -218,16 +236,18 @@ def analyze_documents_combined(file_path):
             # markdown_content는 마크다운으로 뽑은 텍스트 전체
             # --> 최종적으로 <table>로 감지된 부분이 replace_table 함수가 적용되면서 마크다운으로 교체됨.            
             content = re.sub(r'<table>.*?</table>', lambda m: replace_table(m, merged_indices=set()), markdown_content, flags=re.DOTALL)
+    else:
+        logging.info(f"allegronx_chunker: 테이블이 감지되지 않았습니다.")
+        content = markdown_content
 
     try:
         with open(output_file, "w", encoding="utf-8") as f:
             f.write(content)
-        logger.info(f"Combined output saved to {output_file}") # print -> logger.info
-        logger.info(f"Table data saved to {table_output_file}") # print -> logger.info
+        logging.info(f"allegronx_chunker: Combined output saved to {output_file}")
+        logging.info(f"allegronx_chunker: Table data saved to {table_output_file}")
 
         return content, tables_data
     except Exception as e:
-        logger.error(f"Failed to save output: {str(e)}") # print -> logger.error
         raise Exception(f"Failed to save output: {str(e)}")
     
 
@@ -247,22 +267,23 @@ def format_table_to_markdown(table_data, column_count):
     
 
  ########################## Part 2 ###########################
- # Step 2-1.
-def batch_process_directory(md_files):
+ # Step 2-1. 
+ # 25.07.17 파일 이름 파라미터 추가
+def batch_process_directory(md_files, md_file_name):
     '''
     md 디렉토리 밑의 모든 마크다운 문서에 대한 패시지 작업,
     빈 페이지 번호 추가 추출,
     엑셀 변환 작업을 진행하는 함수'''
     data = []
-    for filepath in md_files:
-        if not os.path.exists(filepath):
-            logger.warning(f"파일이 존재하지 않습니다: {filepath}") # print -> logger.warning
-            continue
-        if filepath.endswith('.md'):
-            data.extend(process_markdown_file(filepath))
+    # for filepath in md_files:
+    #     if not os.path.exists(filepath):
+    #         print(f"파일이 존재하지 않습니다: {filepath}")
+    #         continue
+    if md_files.endswith('.md'):
+        data.extend(process_markdown_file(md_files))
 
     if not data:   
-        logger.warning("처리할 .md 파일이 없습니다.") # print -> logger.warning
+        logging.warning("allegronx_chunker: 처리할 .md 파일이 없습니다.")
         return pd.DataFrame()
 
     df = pd.DataFrame(data, columns=["file_name", "1 depth", "2 depth", "3 depth", "4 depth", "content"])
@@ -310,9 +331,9 @@ def batch_process_directory(md_files):
 
     df['content'] = df['content'].apply(lambda x: remove_page_markers(x))
 
-    output_excel_dir = os.path.join(OUTPUT_BASE_DIR, "pdf_result") # Code added by Gemini
-    os.makedirs(output_excel_dir, exist_ok=True) # Code added by Gemini
-    df.to_excel(os.path.join(output_excel_dir, f"Allegro_NX_Manual_Auto_Mid_Output_{timestamp}.xlsx"), index=False, engine='openpyxl') # Code added by Gemini
+ # 25.07.17 파일 이름 적용 수정
+    # 중간 결과 저장 제거 (최종 결과만 저장)
+    # df.to_excel(f"{BASE_DIR}/result/excel/{md_file_name}_Part2_Output_{timestamp}.xlsx", index=False, engine='openpyxl')
     return df
 
 
@@ -339,7 +360,7 @@ def extract_chunks_from_text(text):
     current_page = 1  # Track page number (default 1)
 
     # 넘버링 중, 불필요한 기호가 첨가된 넘버링을 변환 :: ex) 3\) -> # 3 으로 정제
-    text = re.sub(r'(?m)^(\s*)(\d+)\)\s+(.*)', r'\1# \2) \3', text)
+    text = re.sub(r'(?m)^(\s*)(\d+)\\\)\s+(.*)', r'\1# \2) \3', text)
     lines = text.splitlines()
     cleaned_lines = []
     i = 0
@@ -347,8 +368,8 @@ def extract_chunks_from_text(text):
     # 내용을 전체적으로 다시 클렌징 할 것임. (필요한 줄만 리스트에 담을 것.)
     while i < len(lines):
         line = lines[i].strip()
-        # PageFooter는 버림 (아무 행동도 안함.)
-        if line.startswith('<!-- PageFooter') or line.startswith('<!-- PageBreak'):
+        # PageFooter, PageBreak, PageHeader는 버림 (아무 행동도 안함.)
+        if line.startswith('<!-- PageFooter') or line.startswith('<!-- PageBreak') or line.startswith('<!-- PageHeader'):
             i += 1
             # 내가 탐색하는 줄이 빈 값이면, 그것도 pass
             while i < len(lines) and not lines[i].strip():
@@ -370,19 +391,28 @@ def extract_chunks_from_text(text):
 
     for line in lines:
         # Find markdown titles with numbering (# 1., # 1.1., # 1.1.1., # 3))
+        # 날짜/시간 형태는 제목으로 인식하지 않도록 개선된 정규식
         # 뒤에 사용하는 group()은 정규식에서 괄호로 묶인 부분을 추출한다.
-        title_match = re.match(r'^\s*#+\s+(\d+(\.\d+)*\.?|\d+\s*\\?\))\s+(.*)', line)
+        
+        # 먼저 날짜/시간 패턴인지 확인
+        date_time_pattern = re.match(r'^\s*#+\s+\d+\.\s*\d+\.\s*\d+\.\s*(오전|오후)\s*\d+:\d+', line)
+        if date_time_pattern:
+            # 날짜/시간 패턴이면 제목으로 인식하지 않고 일반 텍스트로 처리
+            title_match = None
+        else:
+            # 일반적인 문서 번호 체계만 인식
+            title_match = re.match(r'^\s*#+\s+(\d+(\.\d+)*\.?|\d+\s*\\?\))\s+(.*)', line)
 
         if title_match:
             # title_match가 되었다는 건 이전까지의 내용을 정리해서 올리고 새로운 청크를 준비해야 한다는 의미.
-            logger.debug('=====current chunk exists=====') # print -> logger.debug
+            logging.debug('allegronx_chunker: =====current chunk exists=====')
             # 이전에 쌓여있던 걸 하나로 뭉친다.
             content_text = '\n'.join(current_chunk).strip()
-            logger.debug(content_text) # print -> logger.debug
-            logger.debug('============') # print -> logger.debug
+            logging.debug(f'allegronx_chunker: content_text: {content_text[:100]}...')
+            logging.debug('allegronx_chunker: ============')
             # 위에서 뭉친 내용에 달라줄 라벨링 만드는 작업
             full_title = '\n'.join([parent_titles.get(i, '') for i in range(1, 5) if parent_titles.get(i)]).strip()
-            logger.debug(full_title) # print -> logger.debug
+            logging.debug(f'allegronx_chunker: full_title: {full_title}')
 
             # if full_title:
             #     # 라벨링 있으면 뭉친 내용이랑 결합
@@ -426,7 +456,7 @@ def extract_chunks_from_text(text):
 
             # 계층 딕셔너리에 갱신할 때 값에 해당하는 부분.
             single_title = f"{normalized_numbering} {title_text}".strip()
-            logger.debug(f'===single title=== {single_title}') # print -> logger.debug
+            logging.debug(f'allegronx_chunker: ===single title=== {single_title}')
 
             # 내가 추가하고자 하는 넘버링(depth)보다 작은 것만 남긴다.
             parent_titles = {k: v for k, v in parent_titles.items() if k < depth}
@@ -501,7 +531,8 @@ def remove_page_markers(content):
 
  ########################## Part 3 ###########################
  # Step 3-1.
-def merge_adjacent_table(df, tables_data):
+  # 25.07.17 파일 이름 파라미터 추가
+def merge_adjacent_table(df, tables_data, md_file_name):
     '''
     인접한 두 테이블을 병합하는 작업을 수행한다. 이 때 전제되는 필수조건인 '인접'의 개념은 다음과 같다.
     # '인접한다' : "Next Table"의 시작점에서 "Current Table"의 끝점의 차이가 0
@@ -545,16 +576,18 @@ def merge_adjacent_table(df, tables_data):
                 next_table = tables_data[i + 1]
                 
                 # (로그) 
-                if idx == 8 and i < 7:
-                    logger.debug(f'===cur_nxt_tb={idx}행의-{i}번째 테이블==') # print -> logger.debug
-                    logger.debug(f'===현재 테이블===\n {current_table}') # print -> logger.debug
-                    logger.debug('=======') # print -> logger.debug
-                    logger.debug(f'===다음 테이블===\n {next_table}') # print -> logger.debug
-                    logger.debug('=======') # print -> logger.debug
-                    logger.debug(content) # print -> logger.debug
-                    logger.debug(content.find(current_table["markdown"])) # print -> logger.debug
-                    logger.debug(content.find(next_table["markdown"])) # print -> logger.debug
-                    logger.debug('========') # print -> logger.debug
+                if idx == 5 or idx == 10 or idx == 11 or idx == 16:
+                    if i < 7:
+                        logging.debug(f'allegronx_chunker: ===cur_nxt_tb={idx}행의-{i}번째 테이블==')
+                        logging.debug(f'allegronx_chunker: ===현재 테이블===\n{current_table}')
+                        logging.debug('allegronx_chunker: =======')
+                        logging.debug(f'allegronx_chunker: ===다음 테이블===\n{next_table}')
+                        logging.debug('allegronx_chunker: =======')
+
+                        logging.debug(f'allegronx_chunker: content: {content[:200]}...')
+                        logging.debug(f'allegronx_chunker: current_table markdown 찾기: {content.find(current_table["markdown"])}')
+                        logging.debug(f'allegronx_chunker: next_table markdown 찾기: {content.find(next_table["markdown"])}')
+                        logging.debug('allegronx_chunker: ========')
 
                 # 내용에 테이블 인덱스 위치를 찾는다. 
                 current_table_end = content.find(current_table["markdown"])
@@ -566,7 +599,7 @@ def merge_adjacent_table(df, tables_data):
                     if len(table_tags) >= current_table["original_index"]:
                         current_table_end = table_tags[current_table["original_index"]-1] + len(re.search(table_tag_pattern, content[table_tags[current_table["original_index"]-1]:]).group(0))
                 else:
-                    logger.debug(f'==마크다운 엑셀 데이터 {idx} 행의 테이블 번호 {i} 번째 찾았습니다.') # print -> logger.debug
+                    logging.debug(f'allegronx_chunker: ==마크다운 엑셀 데이터 {idx} 행의 테이블 번호 {i} 번째 찾았습니다.')
                     # 현재 마크다운 테이블의 마지막 인덱스를 알 수 있음.
                     current_table_end += len(current_table["markdown"])
                 
@@ -582,34 +615,40 @@ def merge_adjacent_table(df, tables_data):
                 
                 # 로그 너무 많이 찍혀서 일단 주석처리함.
                 if next_table_start == -1 or current_table_end == -1:
-                    # logger.debug(f"Could not find table positions: current={current_table['key']} (end={current_table_end}), next={next_table['key']} (start={next_table_start})")
+                    # print(f"Could not find table positions: current={current_table['key']} (end={current_table_end}), next={next_table['key']} (start={next_table_start})")
                     break
                 
                 # (로그)
-                if idx == 8 and i < 7:
-                    logger.debug('===직전 값 로그====') # print -> logger.debug
-                    logger.debug(current_table_end) # print -> logger.debug
-                    logger.debug('====') # print -> logger.debug
-                    logger.debug(next_table_start) # print -> logger.debug
-                    logger.debug('=====') # print -> logger.debug
-                    logger.debug(content) # print -> logger.debug
-                    logger.debug('======') # print -> logger.debug
-                    logger.debug(content[current_table_end:next_table_start]) # print -> logger.debug
-                    logger.debug('====ddddd====') # print -> logger.debug
+                if idx == 5 or idx == 10 or idx == 11 or idx == 16:
+                    if i < 7:
+                        print('===직전 값 로그====')
+                        print(current_table_end)
+                        print('====')
+                        print(next_table_start)
+                        print('=====')
+                        print(content)
+                        print('======')
+                        print(content[current_table_end:next_table_start])
+                        print('====ddddd====')
 
                 # 인접여부 확인
                 if not is_adjacent_table(content, current_table_end, next_table_start):
                     break
 
-                logger.info(f'===인접했습니다!!=== Between {current_table["key"]} and {next_table["key"]}') # print -> logger.info
+                logging.info(f'allegronx_chunker: ===인접했습니다!!=== Between {current_table["key"]} and {next_table["key"]}')
 
                 # 여기서 나오는 반환값은 관리하는 테이블 딕셔너리 (갱신된 상태) 또는 None
                 merged_result = merge_tables(current_table, next_table)
                 if merged_result:
-                    logger.debug(f'=====if merged_result >> {idx}행의-{i}번째 테이블=======') # print -> logger.debug
+                    logging.info(f'allegronx_chunker: =====if merged_result >> {idx}행의-{i}번째 테이블=======')
                     # 병합된 딕셔너리 테이블을 통으로 merged_tables에 갱신
                     merged_tables[i] = merged_result
                     current_table = merged_result
+
+                    # log
+                    if next_table["original_index"] == 5 or next_table["original_index"] == 6 or next_table["original_index"] == 7:
+                        print('===merged_indics 조건 로그====')
+                        print(next_table["original_index"], "\n", merged_result, idx, i )
 
                     # 다음 테이블은 삭제된 것으로 간주 (나중에 필터링 할 대상임.)
                     merged_indices.add(next_table["original_index"])
@@ -621,7 +660,7 @@ def merge_adjacent_table(df, tables_data):
 
                     # 다음 테이블의 마지막 부분을 잡는다.
                     next_table_end = next_table_start + len(next_table["markdown"])
-                    logger.debug(f'==병합 전 체크합니다!!=(현재, 다음)={current_table_start}, {next_table_end}') # print -> logger.debug
+                    print('==병합 전 체크합니다!!=(현재, 다음)=', current_table_start, next_table_end)
                     if current_table_start != -1 and next_table_end != -1:
                         # 최종 결과 = 현재 테이블 직전 content + merged markdown + 다음 테이블 이후의 content
                         content = (
@@ -630,14 +669,14 @@ def merge_adjacent_table(df, tables_data):
                             content[next_table_end:]
                         )
                         
-                        logger.debug(f'===병합 된 content===\n {content}') # print -> logger.debug
+                        print('===병합 된 content===\n', content)
                         # 데이터프레임에 병합 내용 반영
                         df.at[idx, 'content'] = content
                         
-                        logger.info(f"Updated content with merged table: {merged_result['key']}") # print -> logger.info
+                        print(f"Updated content with merged table: {merged_result['key']}")
 
                     else:
-                        logger.warning(f"Warning: ≈t for merged table {merged_result['key']}") # print -> logger.warning
+                        print(f"Warning: ≈t for merged table {merged_result['key']}")
                     # 다음 테이블 대상을 연속해서 탐지해야 함.
                     i += 1
                 else:
@@ -645,11 +684,13 @@ def merge_adjacent_table(df, tables_data):
             # 현재 테이블 대상을 연속해서 탐지해야 함.
             i += 1
 
+    print("merged_indices:", merged_indices)
     # 병합으로 삭제된 테이블 제외하고 최종 merged_tables 생성
     filtered_tables = [table for table in merged_tables if table.get("original_index") not in merged_indices]
     
     # final_tables = filtered_tables
-    logger.info(f'====filtered_tables 수====={len(filtered_tables)}') # print -> logger.info
+    print(f'====filtered_tables 수====={len(filtered_tables)}')
+    print(filtered_tables)
   
     final_tables = []
     idx = 0
@@ -676,14 +717,14 @@ def merge_adjacent_table(df, tables_data):
             idx += 1
 
 
-    logger.info(f'====final_tables 수====={len(final_tables)}') # print -> logger.info
-
-    output_excel_dir = os.path.join(OUTPUT_BASE_DIR, "pdf_result") # Code added by Gemini
-    os.makedirs(output_excel_dir, exist_ok=True) # Code added by Gemini
-    df.to_excel(os.path.join(output_excel_dir, f'Allegro_NX_Manual_Auto_Mid_1_Output_{timestamp}.xlsx')) # Code added by Gemini
+    print(f'====final_tables 수====={len(final_tables)}')
+# 25.07.17 파일 이름 적용 수정
+    # 중간 결과 저장 제거 (최종 결과만 저장)
+    # df.to_excel(f'{BASE_DIR}/result/excel/{md_file_name}_Part3_Output_{timestamp}.xlsx')
     return df, final_tables
 
 
+ # Step 3-2.
 def is_adjacent_table(content, current_table_end_idx, next_table_start_idx) -> bool:
     """두 테이블이 인접한지 확인 (페이지 경계 마크다운 제거 및 공백/줄바꿈 무시)하는 함수"""
     page_boundary_pattern = r'<!-- PageNumber="[^"]*" -->'
@@ -691,13 +732,14 @@ def is_adjacent_table(content, current_table_end_idx, next_table_start_idx) -> b
     cleaned_content = re.sub(page_boundary_pattern, '', between_content, flags=re.DOTALL)
     cleaned_content = re.sub(r'\s+', '', cleaned_content)
     # 앞의 전처리 이후 테이블 사이에 아무 것도 없다면(between_content의 length가 0) 표가 붙어있는 것임.
-    logger.debug(f"Checking adjacency: Cleaned content length between tables: {len(cleaned_content)}") # print -> logger.debug
+    print(f"Checking adjacency: Cleaned content length between tables: {len(cleaned_content)}")
     if len(cleaned_content) > 0:
-        logger.debug(f"Non-empty content between tables: {between_content[:200]}...") # print -> logger.debug
+        print(f"Non-empty content between tables: {between_content[:200]}...")
     
     return not cleaned_content
 
 
+# Step 3-3.
 def merge_tables(current_table, next_table):
     """두 테이블을 병합하는 함수"""
     current_cols = current_table['columns']
@@ -707,7 +749,7 @@ def merge_tables(current_table, next_table):
 
     # 다음 테이블의 컬럼 수가 1 적은 경우
     if next_cols == current_cols - 1:
-        logger.info(f"Merging tables: Padding 1 column for {next_table['key']} (Columns: {next_cols} -> {current_cols})") # print -> logger.info
+        print(f"Merging tables: Padding 1 column for {next_table['key']} (Columns: {next_cols} -> {current_cols})")
 
         # 각 행마다 순회하며, 앞쪽에 패딩을 추가한다.
         padded_next_data = [[""] + row for row in next_data]
@@ -727,7 +769,7 @@ def merge_tables(current_table, next_table):
 
     # 기존 조건
     if next_cols > current_cols:
-        logger.info(f"Skipping merge: Next table has more columns ({next_cols} > {current_cols})") # print -> logger.info
+        print(f"Skipping merge: Next table has more columns ({next_cols} > {current_cols})")
         return None
 
     elif next_cols == current_cols:
@@ -738,7 +780,7 @@ def merge_tables(current_table, next_table):
         next_first_row_has_empty_cell = any(not cell.strip() for cell in next_data[0]) if next_data and next_data[0] else True
 
         if titles_match or next_first_row_has_empty_cell:
-            logger.info(f"Merging tables: Titles match={titles_match}, First cell empty={next_first_row_has_empty_cell}") # print -> logger.info
+            print(f"Merging tables: Titles match={titles_match}, First cell empty={next_first_row_has_empty_cell}")
             # title이 일치하면 다음 테이블의 두번째 행부터 합치고, 아니면 첫번째 행부터 합친다. 
             merged_data = current_data + (next_data[1:] if titles_match else next_data)
 
@@ -755,11 +797,10 @@ def merge_tables(current_table, next_table):
                 "llm_generate_data": current_table.get("llm_generate_data", "")  # 기존 필드 유지
             }
         else:
-            logger.info(f"Skipping merge: Titles match={titles_match}, First cell empty={next_first_row_has_empty_cell}") # print -> logger.info
+            print(f"Skipping merge: Titles match={titles_match}, First cell empty={next_first_row_has_empty_cell}")
             return None
-
     else:
-        logger.info(f"Skipping merge: Incompatible column counts ({next_cols} vs {current_cols})") # print -> logger.info
+        print(f"Skipping merge: Incompatible column counts ({next_cols} vs {current_cols})")
         return None
 
 
@@ -770,8 +811,15 @@ def parse_table_for_embedding(tables_data: List[Dict]) -> List[Dict]:
     임베딩 전용 포맷으로 변환하는 함수
     형태는 (Column 1) : (Value 1), (Column 2) : (Value 2)
     '''
+    # 25.07.17 빈 칸 채우기를 예외 처리할 컬럼명 리스트 (공백 제거 후 비교)
+    # Mandatory는 빈 공란에 selected 체크가 연속으로 찍히면 안됨.
+    # Explanation은 하위 병합 셀이 있을 경우 해당 부분에 내용이 들어가면 안됨.
+    fill_exclude_columns = {"Mandatory", "Explanation"}
+
+    # 25.07.17 로직 변경 (for 영역)
     for element in tables_data:
-        headers = [data.replace(' ', '').strip() for data in element["data"][0]]
+        headers_raw = element["data"][0]
+        headers = [data.replace(' ', '').strip() for data in headers_raw]
         rows = element["data"][1:]
 
         parsed_data = []
@@ -780,14 +828,19 @@ def parse_table_for_embedding(tables_data: List[Dict]) -> List[Dict]:
         for row in rows:
             row_filled = []
             for i, cell in enumerate(row):
-                if cell.strip() == "":
-                    row_filled.append(prev_values[i])
+                column_name = headers[i]
+                cell_stripped = cell.strip()
+                
+                if cell_stripped == "":
+                    if column_name in fill_exclude_columns:
+                        row_filled.append("")  # 빈 칸 유지
+                    else:
+                        row_filled.append(prev_values[i])  # 이전 값으로 채우기
                 else:
-                    row_filled.append(cell.strip())
-                    prev_values[i] = cell.strip()
+                    row_filled.append(cell_stripped)
+                    prev_values[i] = cell_stripped  # 이전 값 갱신
 
-            # 무조건 한 row = 한 entry
-            current_entry = {header: row_filled[i] for i, header in enumerate(headers)}
+            current_entry = {headers[i]: row_filled[i] for i in range(len(headers))}
             parsed_data.append(current_entry)
 
         def dict_to_sentence(data_dict: Dict[str, str]) -> str:
@@ -799,7 +852,8 @@ def parse_table_for_embedding(tables_data: List[Dict]) -> List[Dict]:
 
 
  # Step 4.2
-def replace_markdown_with_llm_data(df, tables_data):
+  # 25.07.17 파일 이름 파라미터 추가
+def replace_markdown_with_llm_data(df, tables_data, md_file_name):
     """
     패시지의 마크다운 테이블을 llm_generate_data로 치환하는 함수.
     
@@ -810,8 +864,7 @@ def replace_markdown_with_llm_data(df, tables_data):
     Returns:
     - df: 갱신된 데이터프레임
     - updated_tables: 갱신된 테이블 데이터
-    """    
-    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    """
     updated_tables = tables_data.copy()  # 원본 데이터 복사
 
     for idx, original_content in enumerate(df['content']):
@@ -822,7 +875,7 @@ def replace_markdown_with_llm_data(df, tables_data):
             markdown_start = content.find(table["markdown"])
             
             if markdown_start == -1:
-                logger.warning(f"Warning: Markdown for table {table['key']} not found in content at row {idx}") # print -> logger.warning
+                print(f"Warning: Markdown for table {table['key']} not found in content at row {idx}")
                 continue
             
             markdown_end = markdown_start + len(table["markdown"])
@@ -838,14 +891,15 @@ def replace_markdown_with_llm_data(df, tables_data):
             )
 
             if idx == 77 and i < 10:
-                logger.debug(f'{idx}-{i} :: start index >> {markdown_start}') # print -> logger.debug
-                logger.debug(f'{idx}-{i} :: end index >> {markdown_end}') # print -> logger.debug
-                logger.debug('======') # print -> logger.debug
-                logger.debug(content) # print -> logger.debug
-                logger.debug('=====') # print -> logger.debug
-                logger.debug(llm_data_str) # print -> logger.debug
+                print(f'{idx}-{i} :: start index >> {markdown_start}')
+                print(f'{idx}-{i} :: end index >> {markdown_end}')
 
-        logger.info(f"Replaced markdown with llm_generate_data for table {table['key']} at row {idx}") # print -> logger.info
+                print('======')
+                print(content)
+                print('=====')
+                print(llm_data_str)
+
+        print(f"Replaced markdown with llm_generate_data for table {table['key']} at row {idx}")
         
             # 루프 종료 후, 최종 content를 df에 반영
         df.at[idx, 'content'] = content            
@@ -854,17 +908,16 @@ def replace_markdown_with_llm_data(df, tables_data):
 
     # 최종 치환된 content 길이 정보를 갱신함.
     df['length'] = df['content'].apply(len)
-    # 결과 저장
-    output_excel_dir = os.path.join(OUTPUT_BASE_DIR, "pdf_result") # Code added by Gemini
-    os.makedirs(output_excel_dir, exist_ok=True) # Code added by Gemini
-    df.to_excel(os.path.join(output_excel_dir, f'Allegro_NX_Manual_Auto_Mid_2_Output_{timestamp}.xlsx')) # Code added by Gemini
+    # 중간 결과 저장 제거 (최종 결과만 저장)
+    # df.to_excel(f'{BASE_DIR}/result/excel/{md_file_name}_Part4_Output_{timestamp}.xlsx')
     return df, updated_tables
 
 
  ########################## Part 5 ###########################
  # Step 5.1
  # 06.27 chunk_size를 받도록 수정
-def divide_large_passage(df, chunk_size=2000):
+  # 25.07.17 파일 이름 파라미터 추가
+def divide_large_passage(df, md_file_name, chunk_size=2000):
     '''추가 chunking 진행 함수'''
     # 데이터프레임에 함수 적용
     new_rows = []
@@ -875,9 +928,8 @@ def divide_large_passage(df, chunk_size=2000):
 
     # 결과 데이터프레임 생성
     result_df = pd.DataFrame(new_rows, columns=df.columns)
-    output_excel_dir = os.path.join(OUTPUT_BASE_DIR, "pdf_result") # Code added by Gemini
-    os.makedirs(output_excel_dir, exist_ok=True) # Code added by Gemini
-    result_df.to_excel(os.path.join(output_excel_dir, f"Allegro_NX_Manual_Auto_Final_Last_Output_{timestamp}.xlsx")) # Code added by Gemini
+     # 25.07.17 파일 이름 적용 수정
+    result_df.to_excel(f"{BASE_DIR}/docs/save_result/pdf_result/{md_file_name}_Part5_Output_{timestamp}.xlsx")
 
     return result_df
 
@@ -946,51 +998,3 @@ def add_depth_label(row, is_split=False, is_second_split=False):
     
     # 라벨링 값 join + 잘려진 내용
     return "\n".join(depth_labels) + "\n" + row['content'] if depth_labels else row['content']
-
-
- ########################## !!메인!! ###########################
-# if __name__ == "__main__":
-#     try:
-#         logger.info('=[PART 1]==PDF를 마크다운으로 변환하는 작업을 시작합니다.=====') # print -> logger.info
-#         results = process_files_in_directory("./data")
-#         if not results:
-#             logger.warning("처리된 PDF 파일이 없습니다.") # print -> logger.warning
-#             exit()
-
-#         all_tables_data = []
-#         for result in results:
-#             logger.info(f"처리된 파일: {result['file_path']}") # print -> logger.info
-#             all_tables_data.extend(result['tables_data'])
-
-#         logger.info('=[PART 2]==chunking 작업을 시작합니다.=====') # print -> logger.info
-#         df = batch_process_directory("./md")  # 한 번만 호출
-#         logger.info(len(all_tables_data)) # print -> logger.info
-
-#         logger.info('=[PART 3]===추가 병합 작업을 시작합니다.====') # print -> logger.info
-#         df, all_tables_data = merge_adjacent_table(df, all_tables_data)
-
-        # logger.info('=[PART 4]===표 데이터 Description 작업을 시작합니다.====') # print -> logger.info
-        # logger.info(f"PART 3 최종 통합 테이블 수: {len(all_tables_data)}") # print -> logger.info
-        # all_tables_data = parse_table_for_embedding(all_tables_data)
-        # df, all_tables_data = replace_markdown_with_llm_data(df, all_tables_data)
-        # logger.info(f'=테이블 관리 딕셔너리 출력=\n {all_tables_data}') # print -> logger.info
-
-        # logger.info('=[PART 5]===chunking size에 맞게 분할하는 작업을 시작합니다.====') # print -> logger.info
-        # logger.info('===기본값은 2,000입니다. 유동적으로 조절 가능합니다.=====') # print -> logger.info
-        # # 06.27 chunk_size를 받도록 수정
-        # df = divide_large_passage(df, chunk_size=2000)
-        # logger.info('===최종 Chunking 작업이 완료되었습니다. 엑셀 파일을 확인해주세요.=====') # print -> logger.info
-
-    # except HttpResponseError as error:
-    #     if error.error is not None:
-    #         if error.error.code == "InvalidImage":
-    #             logger.error(f"Received an invalid image error: {error.error}") # print -> logger.error
-    #         if error.error.code == "InvalidRequest":
-    #             logger.error(f"Received an invalid request error: {error.error}") # print -> logger.error
-    #         raise
-    #     if "Invalid request".casefold() in error.message.casefold():
-    #         logger.error(f"Uh-oh! Seems there was an invalid request: {error}") # print -> logger.error
-    #     raise
-    # except Exception as e:
-    #     logger.error(f"An error occurred: {str(e)}") # print -> logger.error
-    #     raise

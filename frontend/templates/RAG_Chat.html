@@ -124,7 +124,7 @@
         // 실시간 로그 표시 함수
         async function loadAndDisplayLogs() {
             try {
-                const response = await fetch('/api/log');
+                const response = await fetch('/log');
                 const data = await response.json();
                 if (data.logs && data.logs.length > 0) {
                     const logContainer = document.getElementById('log-container');

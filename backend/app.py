@@ -5,12 +5,13 @@ from pathlib import Path
 # 상위 디렉토리의 .env 파일을 로드하기 위해 경로 추가
 sys.path.append(str(Path(__file__).parent.parent))
 
+# BASE_DIR 정의 (backend root)
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
-
-from logger_config import setup_logging
 import logging
+from logger_config import setup_logging
 setup_logging()
-logger = logging.getLogger(__name__)
+logger = logging.getLogger("app")
 
 from agent.rag_agent import handle_rag
 import re
@@ -27,13 +28,16 @@ from fastapi import FastAPI, File, Form, UploadFile, HTTPException, Request, Bac
 from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 from starlette.responses import FileResponse
-from typing import Union
+from typing import Union, List
 from tempfile import NamedTemporaryFile
 from enum import Enum
 from pydantic import BaseModel
 
-from agent.document_processing.processing_pdf import process_files_in_directory, batch_process_directory, merge_adjacent_table, parse_table_for_embedding, replace_markdown_with_llm_data, divide_large_passage
+from agent.document_processing.allegronx_chunker import process_files_in_directory, batch_process_directory, merge_adjacent_table, parse_table_for_embedding, replace_markdown_with_llm_data, divide_large_passage
 from agent.embedding import process_chunks, process_chunks_with_metadata
+from agent.document_processing.clear_collection import list_collections, get_collections_info, clear_collection, clear_all_collections
+
+
 
 def detect_table_content(content_str: str) -> bool:
     """
@@ -93,30 +97,51 @@ class ChatRequest(BaseModel):
     question: str
 
 @app.post("/process-pdf")
-async def process_pdf_endpoint(file: UploadFile = File(...)):
+async def process_pdf_endpoint(files: List[UploadFile] = File(...)):
     logger.info("✅ /process-pdf 엔드포인트 호출 시작")
     try:
-        logger.info(f"📄 업로드된 파일명: {file.filename}")
-        # 임시 파일로 저장
-        with NamedTemporaryFile(delete=False, suffix=".pdf") as temp_file:
+        logger.info(f"📄 업로드된 파일 개수: {len(files)}")
+        
+        # 업로드 디렉토리 생성 (docs 하위)
+        upload_dir = os.path.join(BASE_DIR, "docs", "uploads")
+        os.makedirs(upload_dir, exist_ok=True)
+        
+        # 모든 파일을 업로드 디렉토리에 저장
+        uploaded_files = []
+        
+        for i, file in enumerate(files):
+            logger.info(f"📄 파일 {i+1} 처리 중: {file.filename}")
+            
+            # 파일명 정리 (특수문자 제거, 중복 방지)
+            safe_filename = f"upload_{i+1}_{file.filename.replace(' ', '_')}"
+            file_path = os.path.join(upload_dir, safe_filename)
+            
+            # 파일 저장
             content = await file.read()
-            temp_file.write(content)
-            temp_file_path = temp_file.name
-        logger.info(f"💾 파일 임시 저장 완료: {temp_file_path}")
+            with open(file_path, "wb") as f:
+                f.write(content)
+            
+            uploaded_files.append(file_path)
+            logger.info(f"💾 파일 {i+1} 저장 완료: {file_path}")
+        
+        logger.info(f"💾 총 {len(uploaded_files)}개 파일 저장 완료")
+        logger.info(f"📁 업로드 디렉토리: {upload_dir}")
+        logger.info(f"📄 저장된 파일들: {uploaded_files}")
 
-        # 임시 파일이 저장된 디렉토리
-        temp_dir = os.path.dirname(temp_file_path)
-
-        # processing_pdf.py의 함수들을 순서대로 호출
+        # allgeronx_chunker.py의 함수들을 순서대로 호출
         logger.info(">> 1. PDF -> Markdown 변환 시작")
-        results, md_files = process_files_in_directory(temp_dir)
+        results, md_files = process_files_in_directory(upload_dir)
         if not results:
             logger.error("❌ PDF 처리 실패: 'results'가 비어있습니다.")
             raise HTTPException(status_code=400, detail="PDF 파일 처리 중 오류가 발생했습니다.")
         logger.info("✅ 1. PDF -> Markdown 변환 완료")
 
+        # 첫 번째 파일명을 기준으로 사용 (타임스탬프 제거)
+        filename_wo_ext = os.path.splitext(os.path.basename(files[0].filename))[0]
+        md_file_name = filename_wo_ext
+
         logger.info(">> 2. 마크다운 Chunking 시작")
-        df = batch_process_directory(md_files)
+        df = batch_process_directory(md_files[0], md_file_name)  # md_files는 리스트이므로 첫 번째 파일 사용
         if df.empty:
             logger.error("❌ 마크다운 처리 실패: 데이터프레임이 비어있습니다.")
             raise HTTPException(status_code=400, detail="마크다운 파일 처리 중 오류가 발생했습니다.")
@@ -127,16 +152,16 @@ async def process_pdf_endpoint(file: UploadFile = File(...)):
             all_tables_data.extend(result['tables_data'])
 
         logger.info(">> 3. 테이블 병합 시작")
-        df, all_tables_data = merge_adjacent_table(df, all_tables_data)
+        df, all_tables_data = merge_adjacent_table(df, all_tables_data, md_file_name)
         logger.info("✅ 3. 테이블 병합 완료")
 
         logger.info(">> 4. 테이블 데이터 문장 변환 시작")
         all_tables_data = parse_table_for_embedding(all_tables_data)
-        df, all_tables_data = replace_markdown_with_llm_data(df, all_tables_data)
+        df, all_tables_data = replace_markdown_with_llm_data(df, all_tables_data, md_file_name)
         logger.info("✅ 4. 테이블 데이터 문장 변환 완료")
 
         logger.info(">> 5. 대용량 패시지 분할 시작")
-        df = divide_large_passage(df)
+        df = divide_large_passage(df, md_file_name)
         logger.info("✅ 5. 대용량 패시지 분할 완료")
 
 
@@ -229,13 +254,23 @@ async def process_pdf_endpoint(file: UploadFile = File(...)):
         logger.info("✅ 7. Milvus 임베딩 및 저장 완료")
 
 
-        # 임시 파일 삭제
-        os.remove(temp_file_path)
-        logger.info(f"🗑️ 임시 파일 삭제: {temp_file_path}")
+        # 업로드된 파일들 삭제
+        for uploaded_file_path in uploaded_files:
+            if os.path.exists(uploaded_file_path):
+                os.remove(uploaded_file_path)
+                logger.info(f"🗑️ 업로드 파일 삭제: {uploaded_file_path}")
+        
+        # 업로드 디렉토리가 비어있으면 삭제
+        try:
+            if os.path.exists(upload_dir) and not os.listdir(upload_dir):
+                os.rmdir(upload_dir)
+                logger.info(f"🗑️ 빈 업로드 디렉토리 삭제: {upload_dir}")
+        except Exception as e:
+            logger.warning(f"⚠️ 업로드 디렉토리 삭제 실패: {e}")
 
         # 성공적으로 처리되었을 때 반환
         logger.info("🎉 모든 처리 성공! JSON 응답을 반환합니다.")
-        return JSONResponse(content={"message": "PDF 파일 처리 및 임베딩이 완료되었습니다.", "chunk_count": len(df)})
+        return JSONResponse(content={"success": True, "message": "PDF 파일 처리 및 임베딩이 완료되었습니다.", "chunk_count": len(df)})
 
     except Exception as e:
         import traceback
@@ -481,4 +516,45 @@ async def get_mcp_data():
         raise HTTPException(status_code=404, detail="MCP data file not found")
     except Exception as e:
         logger.exception("app.py: An error occurred while processing MCP data")
+        raise HTTPException(status_code=500, detail=str(e))
+
+# 컬렉션 관리 API
+@app.get("/api/collections")
+async def get_collections():
+    """컬렉션 목록을 가져오는 API"""
+    try:
+        collections = list_collections()
+        return JSONResponse(content={"collections": collections})
+    except Exception as e:
+        logger.error(f"❌ 컬렉션 목록 가져오기 실패: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/api/collections/info")
+async def get_collections_info():
+    """컬렉션 상세 정보를 가져오는 API"""
+    try:
+        collections_info = get_collections_info()
+        return JSONResponse(content={"collections_info": collections_info})
+    except Exception as e:
+        logger.error(f"❌ 컬렉션 정보 가져오기 실패: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.delete("/api/collections/{collection_name}")
+async def delete_collection(collection_name: str):
+    """특정 컬렉션을 삭제하는 API"""
+    try:
+        clear_collection(collection_name)
+        return JSONResponse(content={"success": True, "message": f"컬렉션 '{collection_name}' 삭제 완료"})
+    except Exception as e:
+        logger.error(f"❌ 컬렉션 삭제 실패: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.delete("/api/collections")
+async def delete_all_collections():
+    """모든 컬렉션을 삭제하는 API"""
+    try:
+        clear_all_collections()
+        return JSONResponse(content={"success": True, "message": "모든 컬렉션 삭제 완료"})
+    except Exception as e:
+        logger.error(f"❌ 모든 컬렉션 삭제 실패: {e}")
         raise HTTPException(status_code=500, detail=str(e))

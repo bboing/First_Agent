@@ -1,6 +1,8 @@
 from router.agent_orchestrator import route_query
+from logger_config import setup_logging
 
 def main():
+    setup_logging()
     while True:
         user_input = input("User > ")
         if user_input.lower() in ["exit", "quit"]:

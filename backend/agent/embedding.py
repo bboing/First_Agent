@@ -1,9 +1,12 @@
 import logging
 import os
+import pandas as pd
 from langchain_openai import AzureOpenAIEmbeddings
 from pymilvus import connections, Collection, FieldSchema, CollectionSchema, DataType, utility
 
 
+logger = logging.getLogger("app")
+logger.setLevel(logging.DEBUG)
 
 # 2. Azure OpenAI 임베딩 모델 준비
 embedding_model = AzureOpenAIEmbeddings(
@@ -25,11 +28,11 @@ try:
         host=os.getenv("MILVUS_HOST", "localhost"),
         port=os.getenv("MILVUS_PORT", "19530")
     )
-    logging.info("embedding.py: ✅ Milvus 연결 성공!")
+    logger.info("embedding.py: ✅ Milvus 연결 성공!")
     MILVUS_AVAILABLE = True
 except Exception as e:
-    logging.warning(f"embedding.py: ⚠️ Milvus 연결 실패: {e}")
-    logging.info("embedding.py: Milvus 없이 애플리케이션을 실행합니다.")
+    logger.warning(f"embedding.py: ⚠️ Milvus 연결 실패: {e}")
+    logger.info("embedding.py: Milvus 없이 애플리케이션을 실행합니다.")
     MILVUS_AVAILABLE = False
 
 # 5. Milvus 컬렉션 생성 (없으면)
@@ -43,7 +46,7 @@ def recreate_collection_if_needed(name: str, vector_dim: int):
             FieldSchema(name="category", dtype=DataType.VARCHAR, max_length=128),
             FieldSchema(name="topic", dtype=DataType.VARCHAR, max_length=256)
         ]
-        schema = CollectionSchema(fields, description="임베딩 테스트용 컬렉션")
+        schema = CollectionSchema(fields, description="Cyberlogitec Test Collection")
         collection = Collection(name=name, schema=schema)
         
         # 압축 알고리즘 선택 (환경 변수로 설정 가능)
@@ -89,7 +92,7 @@ def recreate_collection_if_needed(name: str, vector_dim: int):
                 "params": {"nlist": 128}
             }
         
-        logging.info(f"embedding.py: 🔧 Milvus 인덱스 생성: {index_type}")
+        logger.info(f"embedding.py: 🔧 Milvus 인덱스 생성: {index_type}")
         collection.create_index(field_name="embedding", index_params=index_params)
         collection.load()
         return collection
@@ -118,18 +121,26 @@ vector = get_embedding("이 문장을 벡터로 변환해줘")
 if MILVUS_AVAILABLE:
     try:
         collection = recreate_collection_if_needed(collection_name, len(vector))
-        logging.info(f"embedding.py: ✅ 컬렉션 '{collection_name}' 준비 완료")
+        logger.info(f"embedding.py: ✅ 컬렉션 '{collection_name}' 준비 완료")
     except Exception as e:
-        logging.error(f"embedding.py: ❌ 컬렉션 생성 실패: {e}")
+        logger.error(f"embedding.py: ❌ 컬렉션 생성 실패: {e}")
         collection = None
 else:
     collection = None
 
 # 6. Milvus에 벡터 삽입
 def insert_text_and_embedding(text: str, page: int, category: str, topic: str):
+    global collection
+    
+    # 컬렉션이 None이거나 오류가 발생한 경우 다시 초기화 시도
     if collection is None:
-        logging.error("embedding.py: ❌ 컬렉션이 초기화되지 않았습니다.")
-        return
+        try:
+            vector = get_embedding("이 문장을 벡터로 변환해줘")
+            collection = recreate_collection_if_needed(collection_name, len(vector))
+            logger.info(f"embedding.py: ✅ 컬렉션 '{collection_name}' 재초기화 완료")
+        except Exception as e:
+            logger.error(f"embedding.py: ❌ 컬렉션 재초기화 실패: {e}")
+            return
     
     try:
         vector = [float(x) for x in get_embedding(text)]
@@ -144,9 +155,11 @@ def insert_text_and_embedding(text: str, page: int, category: str, topic: str):
         ]
         collection.insert(insert_data)
         collection.flush()
-        logging.info(f"embedding.py: Milvus에 벡터 저장 완료! (page: {page}, category: {category}, topic: {topic}, text: {text[:50]}...)")
+        logger.info(f"embedding.py: Milvus에 벡터 저장 완료! (page: {page}, category: {category}, topic: {topic}, text: {text[:50]}...)")
     except Exception as e:
-        logging.error(f"embedding.py: ❌ 벡터 삽입 실패: {e}")
+        logger.error(f"embedding.py: ❌ 벡터 삽입 실패: {e}")
+        # 컬렉션이 삭제되었을 가능성이 있으므로 None으로 설정하여 다음 호출 시 재초기화
+        collection = None
         raise
 
 # 7. Milvus에서 벡터 검색
@@ -162,9 +175,21 @@ def search_similar_texts(query: str, limit: int = 3, similarity_threshold: float
     Returns:
         list: 임계값을 만족하는 검색 결과들
     """
+    global collection
+    
     if not MILVUS_AVAILABLE:
-        logging.warning("embedding.py: ⚠️ Milvus가 연결되지 않아 검색을 수행할 수 없습니다.")
+        logger.warning("embedding.py: ⚠️ Milvus가 연결되지 않아 검색을 수행할 수 없습니다.")
         return []
+    
+    # 컬렉션이 None인 경우 재초기화 시도
+    if collection is None:
+        try:
+            vector = get_embedding("이 문장을 벡터로 변환해줘")
+            collection = recreate_collection_if_needed(collection_name, len(vector))
+            logger.info(f"embedding.py: ✅ 컬렉션 '{collection_name}' 재초기화 완료")
+        except Exception as e:
+            logger.error(f"embedding.py: ❌ 컬렉션 재초기화 실패: {e}")
+            return []
     
     query_vector = get_embedding(query)
     search_params = {"metric_type": "COSINE", 
@@ -185,9 +210,9 @@ def search_similar_texts(query: str, limit: int = 3, similarity_threshold: float
             if hit.distance >= similarity_threshold:
                 filtered_results.append(hit)
     
-    logging.info(f"embedding.py: 🔍 검색 결과: {len(results[0])}개 중 {len(filtered_results)}개가 임계값({similarity_threshold}) 이상")
+    logger.info(f"embedding.py: 🔍 검색 결과: {len(results[0])}개 중 {len(filtered_results)}개가 임계값({similarity_threshold}) 이상")
     for hit in filtered_results:
-        logging.info(f"embedding.py:   - 유사도: {hit.distance:.3f}, 텍스트: {hit.entity.get('text')[:50]}...")
+        logger.info(f"embedding.py:   - 유사도: {hit.distance:.3f}, 텍스트: {hit.entity.get('text')[:50]}...")
     
     return filtered_results
 
@@ -200,12 +225,12 @@ def process_chunks(chunks: list, category: str = ""):
         category (str): 수동 입력 카테고리 (선택 사항)
     """
     for i, (text, page) in enumerate(chunks):
-        logging.info(f"embedding.py: 💾 청크 {i+1}/{len(chunks)} 임베딩 중... (page: {page}, category: {category})")
+        logger.info(f"embedding.py: 💾 청크 {i+1}/{len(chunks)} 임베딩 중... (page: {page}, category: {category})")
         topic_llm = extract_topic(text)
         # 카테고리가 있으면 토픽에 포함, 없으면 LLM이 추출한 토픽만 사용
         topic = f"{category} - {topic_llm}" if category else topic_llm
         insert_text_and_embedding(text, page, category, topic)
-    logging.info(f"embedding.py: 🎉 모든 청크가 벡터DB에 저장되었습니다!")
+    logger.info(f"embedding.py: 🎉 모든 청크가 벡터DB에 저장되었습니다!")
 
 # 8-1. 테이블 메타데이터를 포함한 청크 처리 (개선된 버전)
 def process_chunks_with_metadata(chunks: list):
@@ -230,44 +255,113 @@ def process_chunks_with_metadata(chunks: list):
             
             # 텍스트 길이 검증
             if not text or len(text.strip()) == 0:
-                logging.warning(f"embedding.py: ⚠️ 빈 텍스트 건너뛰기 (청크 {i+1})")
+                logger.warning(f"embedding.py: ⚠️ 빈 텍스트 건너뛰기 (청크 {i+1})")
                 continue
             
-            logging.info(f"embedding.py: 💾 청크 {i+1}/{len(chunks)} 임베딩 중... (page: {page}, category: {category}, topic: {topic[:50]}...)")
+            logger.info(f"embedding.py: 💾 청크 {i+1}/{len(chunks)} 임베딩 중... (page: {page}, category: {category}, topic: {topic[:50]}...)")
             
             # 테이블 메타데이터가 있으면 추가 정보 로깅
             if table_metadata:
                 table_count += 1
-                logging.info(f"embedding.py: 📊 테이블 정보 - 행: {table_metadata.get('rows', 'N/A')}, 열: {table_metadata.get('columns', 'N/A')}, 키: {table_metadata.get('key', 'N/A')}")
+                logger.info(f"embedding.py: 📊 테이블 정보 - 행: {table_metadata.get('rows', 'N/A')}, 열: {table_metadata.get('columns', 'N/A')}, 키: {table_metadata.get('key', 'N/A')}")
                 
                 # 병합된 테이블 정보
                 if table_metadata.get('merged_indices'):
-                    logging.info(f"embedding.py: 🔗 병합된 테이블 - 병합된 인덱스: {table_metadata.get('merged_indices')}")
+                    logger.info(f"embedding.py: 🔗 병합된 테이블 - 병합된 인덱스: {table_metadata.get('merged_indices')}")
             else:
                 text_count += 1
             
             insert_text_and_embedding(text, page, category, topic)
             
         except Exception as e:
-            logging.error(f"embedding.py: ❌ 청크 {i+1} 처리 중 오류: {e}")
+            logger.error(f"embedding.py: ❌ 청크 {i+1} 처리 중 오류: {e}")
             continue
     
-    logging.info(f"embedding.py: 🎉 모든 청크가 벡터DB에 저장되었습니다!")
-    logging.info(f"embedding.py: 📈 통계 - 테이블: {table_count}개, 일반 텍스트: {text_count}개, 총: {len(chunks)}개")
+    logger.info(f"embedding.py: 🎉 모든 청크가 벡터DB에 저장되었습니다!")
+    logger.info(f"embedding.py: 📈 통계 - 테이블: {table_count}개, 일반 텍스트: {text_count}개, 총: {len(chunks)}개")
+
+
+def process_excel_file_for_embedding(excel_file_path: str, md_file_name: str):
+    """
+    엑셀 파일을 읽어서 임베딩 처리하는 함수
+    Args:
+        excel_file_path (str): 엑셀 파일 경로
+        md_file_name (str): 파일명 (타임스탬프 제거된)
+    """
+    if not MILVUS_AVAILABLE:
+        logger.warning("embedding.py: ⚠️ Milvus가 연결되지 않아 임베딩을 수행할 수 없습니다.")
+        return
+    
+    try:
+        # 엑셀 파일 읽기
+        logger.info(f"embedding.py: 📖 엑셀 파일 읽기: {excel_file_path}")
+        df = pd.read_excel(excel_file_path)
+        
+        logger.info(f"embedding.py: 🚀 {len(df)}개 행의 임베딩 처리 시작")
+        
+        for idx, row in df.iterrows():
+            try:
+                # 필요한 컬럼들 추출
+                content = row['content']
+                pages = row['pages'] if 'pages' in row else [1]
+                page = pages[0] if isinstance(pages, list) else pages
+                
+                # depth 정보 추출
+                depth_1 = row.get('1 depth', '')
+                depth_2 = row.get('2 depth', '')
+                depth_3 = row.get('3 depth', '')
+                depth_4 = row.get('4 depth', '')
+                
+                # 카테고리와 토픽 생성
+                if any([depth_1, depth_2, depth_3, depth_4]):
+                    # depth가 있으면 구조화된 문서
+                    category = "Structured_Document"
+                    topic_parts = [d for d in [depth_1, depth_2, depth_3, depth_4] if d]
+                    topic = " > ".join(topic_parts)[:200]  # 길이 제한
+                else:
+                    # depth가 없으면 일반 텍스트
+                    category = "Text"
+                    topic = f"Page_{page}"
+                
+                # 텍스트가 튜플인 경우 처리
+                if isinstance(content, tuple):
+                    content = content[4] if len(content) >= 5 else str(content)
+                
+                # 페이지 번호 정수 변환
+                if not isinstance(page, int):
+                    page = int(page) if page else 1
+                
+                logger.info(f"embedding.py: 📄 임베딩 처리: {category} - {topic} (페이지: {page})")
+                
+                insert_text_and_embedding(content, page, category, topic)
+                
+                if (idx + 1) % 10 == 0:
+                    logger.info(f"embedding.py: 📈 진행률: {idx + 1}/{len(df)} 완료")
+                    
+            except Exception as e:
+                logger.error(f"embedding.py: ❌ 행 {idx} 처리 실패: {e}")
+                continue
+        
+        logger.info(f"embedding.py: ✅ 엑셀 파일 임베딩 처리 완료!")
+        
+    except Exception as e:
+        logger.error(f"embedding.py: ❌ 엑셀 파일 처리 실패: {e}")
+        raise
+
 
 # 9. 컬렉션 정보 확인
 def check_collection_info():
     """
     Milvus 컬렉션 정보를 확인합니다.
     """
-    logging.info("embedding.py: 📊 Milvus 컬렉션 정보 확인")
-    logging.info("embedding.py: =" * 50)
+    logger.info("embedding.py: 📊 Milvus 컬렉션 정보 확인")
+    logger.info("embedding.py: =" * 50)
     
     # 모든 컬렉션 목록
     collections = utility.list_collections()
-    logging.info(f"embedding.py: 📋 전체 컬렉션 개수: {len(collections)}")
+    logger.info(f"embedding.py: 📋 전체 컬렉션 개수: {len(collections)}")
     for col in collections:
-        logging.info(f"embedding.py:   - {col}")
+        logger.info(f"embedding.py:   - {col}")
     
     # embedding_test 컬렉션 정보
     if "embedding_test" in collections:
@@ -276,18 +370,18 @@ def check_collection_info():
         
         # 데이터 개수
         num_entities = collection.num_entities
-        logging.info(f"embedding.py: \n📈 embedding_test 컬렉션:")
-        logging.info(f"embedding.py:   - 저장된 데이터 개수: {num_entities}")
+        logger.info(f"embedding.py: \n📈 embedding_test 컬렉션:")
+        logger.info(f"embedding.py:   - 저장된 데이터 개수: {num_entities}")
         
         # 스키마 정보
         schema = collection.schema
-        logging.info(f"embedding.py:   - 필드 개수: {len(schema.fields)}")
+        logger.info(f"embedding.py:   - 필드 개수: {len(schema.fields)}")
         for field in schema.fields:
-            logging.info(f"embedding.py:     * {field.name}: {field.dtype}")
+            logger.info(f"embedding.py:     * {field.name}: {field.dtype}")
         
         # 샘플 데이터 확인 (처음 3개)
         if num_entities > 0:
-            logging.info(f"embedding.py: \n📝 샘플 데이터 (처음 3개):")
+            logger.info(f"embedding.py: \n📝 샘플 데이터 (처음 3개):")
             results = collection.query(
                 expr="id >= 0",
                 output_fields=["id", "text"],
@@ -295,9 +389,9 @@ def check_collection_info():
             )
             for i, result in enumerate(results):
                 text = result['text'][:100] + "..." if len(result['text']) > 100 else result['text']
-                logging.info(f"embedding.py:   {i+1}. ID: {result['id']}, 텍스트: {text}")
+                logger.info(f"embedding.py:   {i+1}. ID: {result['id']}, 텍스트: {text}")
     else:
-        logging.info("embedding.py: ❌ embedding_test 컬렉션이 없습니다.")
+        logger.info("embedding.py: ❌ embedding_test 컬렉션이 없습니다.")
 
 if __name__ == "__main__":
     # 명령행 인수로 임시 파일 경로 받기

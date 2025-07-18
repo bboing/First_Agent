@@ -17,10 +17,9 @@ app.use(express.urlencoded({ extended: true }));
 
 
 // API 프록시 설정 (모든 라우트보다 위에 위치해야 함)
-app.use('/api', createProxyMiddleware({
+app.use('/log', createProxyMiddleware({
   target: backendApiUrl,
-  changeOrigin: true,
-  pathRewrite: { '^/api': '' }
+  changeOrigin: true
 }))
 
 // Serve static files from public directory
@@ -104,15 +103,19 @@ app.post('/uploadfiles/sentence', upload.fields([{ name: 'file1' }, { name: 'fil
   }
 });
 
-app.post('/process-pdf', upload.single('file'), async (req, res) => {
+app.post('/process-pdf', upload.array('files'), async (req, res) => {
     try {
-        if (!req.file) {
-            return res.status(400).send({ error: 'No file uploaded.' });
+        if (!req.files || req.files.length === 0) {
+            return res.status(400).send({ error: 'No files uploaded.' });
         }
 
         const formData = new FormData();
-        const blob = new Blob([req.file.buffer], { type: req.file.mimetype });
-        formData.append('file', blob, req.file.originalname);
+        
+        // 모든 파일을 FormData에 추가
+        for (const file of req.files) {
+            const blob = new Blob([file.buffer], { type: file.mimetype });
+            formData.append('files', blob, file.originalname);
+        }
 
         const backendResponse = await fetch(`${backendApiUrl}/process-pdf`, {
             method: 'POST',
@@ -130,6 +133,56 @@ app.post('/process-pdf', upload.single('file'), async (req, res) => {
     } catch (error) {
         console.error('Error processing PDF:', error);
         res.status(500).send({ error: 'Error processing PDF' });
+    }
+});
+
+// 컬렉션 관리 API 프록시
+app.get('/api/collections', async (req, res) => {
+    try {
+        const backendResponse = await fetch(`${backendApiUrl}/api/collections`);
+        const data = await backendResponse.json();
+        res.json(data);
+    } catch (error) {
+        console.error('Error fetching collections:', error);
+        res.status(500).send({ error: 'Error fetching collections' });
+    }
+});
+
+app.get('/api/collections/info', async (req, res) => {
+    try {
+        const backendResponse = await fetch(`${backendApiUrl}/api/collections/info`);
+        const data = await backendResponse.json();
+        res.json(data);
+    } catch (error) {
+        console.error('Error fetching collections info:', error);
+        res.status(500).send({ error: 'Error fetching collections info' });
+    }
+});
+
+app.delete('/api/collections/:collectionName', async (req, res) => {
+    try {
+        const { collectionName } = req.params;
+        const backendResponse = await fetch(`${backendApiUrl}/api/collections/${collectionName}`, {
+            method: 'DELETE'
+        });
+        const data = await backendResponse.json();
+        res.json(data);
+    } catch (error) {
+        console.error('Error deleting collection:', error);
+        res.status(500).send({ error: 'Error deleting collection' });
+    }
+});
+
+app.delete('/api/collections', async (req, res) => {
+    try {
+        const backendResponse = await fetch(`${backendApiUrl}/api/collections`, {
+            method: 'DELETE'
+        });
+        const data = await backendResponse.json();
+        res.json(data);
+    } catch (error) {
+        console.error('Error deleting all collections:', error);
+        res.status(500).send({ error: 'Error deleting all collections' });
     }
 });
 
