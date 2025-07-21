@@ -9,7 +9,7 @@ Azure 기반 Allgero NX Manual Auto Chunker
 
 < 향후 논의해야 할 agenda >
 # Table Chunking Range
-    ㄴ 최소 Chunk 보다 작은 경우, 최소 Chunk 유지
+    ㄴ 최소 Chunk 보다 작은 경우, 최소 Chunk 유지?
     ㄴ 김태균 과장 : 만약 최소 Chunk 보다 큰 경우, Table에서 병합된 부분까지 의미 단위로 쪼개는 방식 
     ㄴ 박세영 대리 : 몇 Depth 까지 고려할 것인가? 1 Depth에서 엄청 길게 나오면?
     ㄴ 김태균 과장 : 1 Depth 까지만 고려하는 것으로 우선 픽스
