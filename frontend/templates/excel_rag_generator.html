@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Document Chunking</title>
+    <title>Excel RAG Generator</title>
     <link rel="stylesheet" type="text/css" href="/static/style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
+        /* Code added by Gemini: Styles for the new grid layout */
         .grid-container {
             display: grid;
-            grid-template-columns: 1fr 1.2fr; /* 오른쪽 컬럼을 더 넓게 설정 */
+            grid-template-columns: 1fr 1fr; /* 2개의 동일한 너비의 컬럼 */
             grid-template-rows: auto 1fr; /* 첫 번째 행은 내용에 맞게, 두 번째 행은 남은 공간 차지 */
             gap: 20px; /* 그리드 아이템 사이의 간격 */
-            align-items: start; /* 아이템들을 위쪽으로 정렬 */
         }
 
         .grid-item-form {
@@ -56,14 +56,30 @@
             font-size: 12px;
             line-height: 1.4;
         }
+        .input-group input[type="submit"] {
+        font-family: 'Noto Sans KR';
+        background-color: #979797;
+        color: white;
+        padding: 10px 16px; 
+        border: none; /* 테두리 제거 */
+        border-radius: 4px; /* 모서리 둥글게 */
+        cursor: pointer; /* 마우스 오버 시 커서 변경 */
+        font-size: 14px;
+        transition: background-color 0.3s ease;
+        display: block;
+        margin: 0 auto;
+        margin-top: 30px;
+        margin-left: 150px;
+        width: 120px;
+        }
     </style>
 </head>
 <body>
     <div class="header-container">
-        <a href="http://localhost:8000/document-chunking">
-            <img src="/static/logo/clt_logo.jpg" alt="clt_logo" class="header-image">
-            </a>
-        <h1 class="header-title">AITech Automatic Query Generator</h1>
+        <a href="/excel_rag_generator">
+            <img src="/static/logo/CLT_logo.jpg" alt="clt_logo" class="header-image">
+        </a>
+        <h1 class="header-title">Excel RAG Answer Generator</h1>
     </div>
     <div class="menu">
         <ul>
@@ -89,43 +105,25 @@
                 <a href="/document-chunking">Document chunking</a></li>
         </ul>
     </div>
-
     <div class="content">
         <div class="grid-container">
             
             <!-- Top-left item: Form -->
             <div class="grid-item-form">
-                <form id="uploadForm" action="/process-pdf" method="post" enctype="multipart/form-data">
+                <form id="uploadForm" method="post" enctype="multipart/form-data">
                     <div style="font-size: 20px; margin-bottom: 5px;">
                         <div class="arrow-icon">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-caret-right-fill" viewBox="0 0 16 16">
                                 <path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/>
                             </svg>
                         </div>
-                        <strong class="subheading-text">문서 업로드 및 청킹</strong>
-                    </div>
-                    <div class="input-group">
-                        <label for="files"><strong>PDF 파일 : </strong></label>
-                        <input type="file" id="files" name="files" accept=".pdf" multiple required>
-                        <small style="color: #666; display: block; margin-top: 5px;">여러 파일을 선택하려면 Ctrl(Windows) 또는 Cmd(Mac)를 누른 상태에서 클릭하세요.</small>
-                    </div>
-                    <input type="submit" value="청킹 시작">
-                </form>
-                
-                <!-- 컬렉션 관리 섹션 -->
-                <div style="margin-top: 30px; padding: 20px; border: 1px solid #ddd; border-radius: 5px; background-color: #f9f9f9;">
-                    <div style="font-size: 18px; margin-bottom: 15px;">
-                        <div class="arrow-icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-database-fill" viewBox="0 0 16 16">
-                                <path d="M1.5 2.5A1.5 1.5 0 0 1 3 1h10a1.5 1.5 0 0 1 1.5 1.5v12a1.5 1.5 0 0 1-1.5 1.5H3A1.5 1.5 0 0 1 1.5 14.5v-12ZM8 3a.5.5 0 0 0 0 1h3.5a.5.5 0 0 0 0-1H8Zm0 3a.5.5 0 0 0 0 1h3.5a.5.5 0 0 0 0-1H8Zm0 3a.5.5 0 0 0 0 1h3.5a.5.5 0 0 0 0-1H8Zm-4.5-3a.5.5 0 0 0 0 1h3a.5.5 0 0 0 0-1h-3Zm0 3a.5.5 0 0 0 0 1h3a.5.5 0 0 0 0-1h-3Z"/>
-                            </svg>
-                        </div>
-                        <strong class="subheading-text">벡터 데이터베이스 관리</strong>
+                        <strong class="subheading-text">RAG 답변 생성기 (Excel)</strong>
                     </div>
                     
-                    <div class="input-group" style="margin-bottom: 15px;">
-                        <label for="collectionSelect"><strong>컬렉션 선택 : </strong></label>
-                        <select id="collectionSelect" style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 3px;">
+                    <!-- 컬렉션 선택 섹션 -->
+                    <div class="input-group" style="margin-bottom: 20px;">
+                        <label for="collectionSelect"><strong>벡터 데이터베이스 컬렉션 선택 : </strong></label>
+                        <select id="collectionSelect" style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 3px;" required>
                             <option value="">컬렉션을 선택하세요...</option>
                         </select>
                         <button type="button" id="refreshCollections" style="margin-top: 5px; padding: 5px 10px; background-color: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer;">
@@ -133,19 +131,19 @@
                         </button>
                     </div>
                     
-                    <div style="display: flex; gap: 10px; margin-bottom: 15px;">
-                        <button type="button" id="deleteCollection" style="flex: 1; padding: 10px; background-color: #dc3545; color: white; border: none; border-radius: 3px; cursor: pointer;">
-                            🗑️ 선택된 컬렉션 삭제
-                        </button>
-                        <button type="button" id="deleteAllCollections" style="flex: 1; padding: 10px; background-color: #fd7e14; color: white; border: none; border-radius: 3px; cursor: pointer;">
-                            🗑️ 모든 컬렉션 삭제
-                        </button>
+                    <div class="input-group">
+                        <label for="excelFile"><strong>Excel File : </strong></label>
+                        <input type="file" id="excelFile" name="file" accept=".xlsx, .xls" required>
                     </div>
-                    
-                    <div id="collectionInfo" style="margin-top: 15px; padding: 10px; background-color: #e9ecef; border-radius: 3px; display: none;">
-                        <strong>컬렉션 정보:</strong>
-                        <div id="collectionInfoContent"></div>
+                    <div class="input-group">
+                        <input type="submit" value="생성 및 다운로드" style="margin: 20px auto; display: block;">
                     </div>
+                </form>
+                
+                <!-- 컬렉션 정보 표시 -->
+                <div id="collectionInfo" style="margin-top: 20px; padding: 15px; border: 1px solid #ddd; border-radius: 5px; background-color: #f9f9f9; display: none;">
+                    <strong>선택된 컬렉션 정보:</strong>
+                    <div id="collectionInfoContent"></div>
                 </div>
             </div>
 
@@ -153,11 +151,11 @@
             <div class="grid-item-help">
                 <div class="help-area" style="margin:0;">
                     <div class="helper">
-                                        <span style="font-size: 18px;"><strong>※ 사용 시 유의사항</strong></span><br>
-<b>1.</b> PDF, DOCX, TXT 형식의 문서를 업로드할 수 있습니다.<br>
-<b>2.</b> 문서는 자동으로 문단 단위로 나뉘어(Chunking) 벡터 데이터베이스에 저장됩니다.<br>
-<b>3.</b> 카테고리를 입력하면, 해당 문서의 모든 청크에 동일한 카테고리가 적용됩니다.<br>
-<b>4.</b> 청킹 작업은 문서 크기에 따라 시간이 걸릴 수 있습니다. 완료 메시지가 나타날 때까지 기다려주세요.
+                                                <span style="font-size: 18px;"><strong>※ 사용 방법</strong></span><br>
+<b>1.</b> 'question'이라는 이름의 컬럼을 포함한 Excel 파일을 준비합니다. (.xlsx, .xls 형식 지원)<br>
+<b>2.</b> 아래 '파일 선택' 버튼을 눌러 준비한 엑셀 파일을 업로드합니다.<br>
+<b>3.</b> '생성 및 다운로드' 버튼을 누르면, 각 질문에 대한 RAG 답변이 'answer' 컬럼에 추가된 새로운 엑셀 파일이 다운로드됩니다.<br>
+<b>4.</b> 처리 시간은 질문의 수에 따라 달라질 수 있으니, 완료될 때까지 잠시 기다려주세요.<br>
                     </div>
                 </div>
             </div>
@@ -172,7 +170,6 @@
 
         </div>
     </div>
-
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         // 로그 표시 함수
@@ -199,38 +196,12 @@
             }
         }
 
-        // 페이지 로드 시 로그 표시 및 컬렉션 목록 로드
+        // 페이지 로드 시 로그 표시
         document.addEventListener('DOMContentLoaded', function() {
             loadAndDisplayLogs();
             loadCollections(); // 컬렉션 목록 로드
             // 5초마다 로그 새로고침
             setInterval(loadAndDisplayLogs, 5000);
-        });
-
-        // 파일 선택 시 선택된 파일들 표시
-        document.getElementById('files').addEventListener('change', function(event) {
-            const files = event.target.files;
-            const fileList = document.getElementById('file-list');
-            
-            if (fileList) {
-                fileList.remove();
-            }
-            
-            if (files.length > 0) {
-                const list = document.createElement('div');
-                list.id = 'file-list';
-                list.style.marginTop = '10px';
-                list.style.padding = '10px';
-                list.style.backgroundColor = '#f0f0f0';
-                list.style.borderRadius = '5px';
-                list.innerHTML = '<strong>선택된 파일들:</strong><br>';
-                
-                for (let i = 0; i < files.length; i++) {
-                    list.innerHTML += `${i + 1}. ${files[i].name}<br>`;
-                }
-                
-                this.parentNode.appendChild(list);
-            }
         });
 
         // 컬렉션 목록 로드 함수
@@ -302,138 +273,76 @@
             document.getElementById('collectionInfo').style.display = 'none';
         });
 
-        // 선택된 컬렉션 삭제 버튼 이벤트
-        document.getElementById('deleteCollection').addEventListener('click', function() {
-            const selectedCollection = document.getElementById('collectionSelect').value;
-            if (!selectedCollection) {
-                Swal.fire('오류', '삭제할 컬렉션을 선택해주세요.', 'error');
-                return;
-            }
+        $(document).ready(function() {
+            $("#uploadForm").on("submit", function(event) {
+                event.preventDefault();
 
-            Swal.fire({
-                title: '컬렉션 삭제',
-                text: `'${selectedCollection}' 컬렉션을 삭제하시겠습니까?`,
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonText: '삭제',
-                cancelButtonText: '취소',
-                confirmButtonColor: '#dc3545'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    fetch(`/api/collections/${selectedCollection}`, {
-                        method: 'DELETE'
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.success) {
-                            Swal.fire('성공', data.message, 'success');
-                            loadCollections();
-                            document.getElementById('collectionInfo').style.display = 'none';
-                        } else {
-                            Swal.fire('오류', data.message || '삭제 실패', 'error');
-                        }
-                    })
-                    .catch(error => {
-                        console.error('삭제 에러:', error);
-                        Swal.fire('오류', '네트워크 오류가 발생했습니다.', 'error');
-                    });
+                // 컬렉션 선택 확인
+                const selectedCollection = $('#collectionSelect').val();
+                if (!selectedCollection) {
+                    Swal.fire("컬렉션 미선택", "벡터 데이터베이스 컬렉션을 선택해주세요.", "warning");
+                    return;
                 }
-            });
-        });
 
-        // 모든 컬렉션 삭제 버튼 이벤트
-        document.getElementById('deleteAllCollections').addEventListener('click', function() {
-            Swal.fire({
-                title: '모든 컬렉션 삭제',
-                text: '모든 컬렉션을 삭제하시겠습니까? 이 작업은 되돌릴 수 없습니다!',
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonText: '모두 삭제',
-                cancelButtonText: '취소',
-                confirmButtonColor: '#fd7e14'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    fetch('/api/collections', {
-                        method: 'DELETE'
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.success) {
-                            Swal.fire('성공', data.message, 'success');
-                            loadCollections();
-                            document.getElementById('collectionInfo').style.display = 'none';
-                        } else {
-                            Swal.fire('오류', data.message || '삭제 실패', 'error');
-                        }
-                    })
-                    .catch(error => {
-                        console.error('삭제 에러:', error);
-                        Swal.fire('오류', '네트워크 오류가 발생했습니다.', 'error');
-                    });
+                if (!$('#excelFile').val()) {
+                    Swal.fire("파일 없음", "엑셀 파일을 선택해주세요.", "warning");
+                    return;
                 }
-            });
-        });
 
-        // 폼 제출 처리
-        $("#uploadForm").on("submit", function(event) {
-            event.preventDefault();
-            
-            const files = document.getElementById('files').files;
-            if (files.length === 0) {
-                Swal.fire('오류', 'PDF 파일을 선택해주세요.', 'error');
-                return;
-            }
-
-            Swal.fire({
-                title: '문서 청킹',
-                text: `${files.length}개의 PDF 파일을 청킹하여 데이터베이스에 저장하시겠습니까?`,
-                icon: 'question',
-                showCancelButton: true,
-                confirmButtonText: '예',
-                cancelButtonText: '아니오'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    var formData = new FormData();
-                    
-                    // 모든 파일을 FormData에 추가
-                    for (let i = 0; i < files.length; i++) {
-                        formData.append('files', files[i]);
+                Swal.fire({
+                    title: '답변 생성 중',
+                    text: '엑셀 파일의 질문들로부터 RAG 답변을 생성하고 있습니다. 잠시만 기다려주세요...', 
+                    allowOutsideClick: false,
+                    didOpen: () => {
+                        Swal.showLoading();
                     }
-                    
-                    Swal.fire({
-                        title: '청킹 중...',
-                        text: `${files.length}개의 문서를 처리하고 있습니다. 잠시만 기다려주세요.`,
-                        allowOutsideClick: false,
-                        didOpen: () => {
-                            Swal.showLoading();
-                        }
-                    });
+                });
 
-                    fetch('/process-pdf', {
-                        method: 'POST',
-                        body: formData
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.success) {
-                            Swal.fire('성공', `청킹이 완료되었습니다! 총 ${data.chunk_count}개의 청크가 생성되었습니다.`, 'success');
-                            // 청킹 완료 후 컬렉션 목록 새로고침
-                            loadCollections();
+                var formData = new FormData();
+                // 파일만 FormData에 추가
+                formData.append('file', $('#excelFile')[0].files[0]);
+                // 선택된 컬렉션 이름을 별도로 추가
+                formData.append('collection_name', selectedCollection);
+
+                fetch('/api/excel-rag', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(async response => {
+                    if (response.ok) {
+                        const data = await response.json();
+                        
+                        if (data.status === 'success') {
+                            // 새로운 다운로드 경로 사용
+                            const downloadUrl = `/download/excel-rag/${data.file_name}`;
+                            const a = document.createElement('a');
+                            a.style.display = 'none';
+                            a.href = downloadUrl;
+                            a.download = data.file_name;
+                            document.body.appendChild(a);
+                            a.click();
+                            document.body.removeChild(a);
+                            
+                            Swal.fire('성공', '답변 생성이 완료되었습니다! 파일이 다운로드됩니다.', 'success');
                         } else {
-                            Swal.fire('오류', `청킹 실패: ${data.error || '알 수 없는 오류'}`, 'error');
+                            Swal.fire('오류', `답변 생성에 실패했습니다: ${data.message || '알 수 없는 오류'}`, 'error');
                         }
-                    })
-                    .catch(error => {
-                        console.error("업로드 에러:", error);
-                        Swal.fire('오류', '네트워크 오류가 발생했습니다: ' + error, 'error');
-                    });
-                }
+                    } else {
+                        // 오류 응답 처리 (JSON 형태의 오류 메시지 기대)
+                        const errorData = await response.json();
+                        Swal.fire('오류', `답변 생성에 실패했습니다: ${errorData.detail || '알 수 없는 오류'}`, 'error');
+                    }
+                })
+                .catch(error => {
+                    console.error("Upload Error:", error);
+                    Swal.fire('네트워크 오류', '서버와 통신 중 오류가 발생했습니다.', 'error');
+                });
             });
         });
     </script>
-    <footer class="footer">
-        <p>© 2025 WiseNut AI Technologies. All rights reserved.</p>
-        <p>Contact us: <a href="mailto:bboing@cyberlogitec.com">bboing@cyberlogitec.com</a></p>
-    </footer>
 </body>
+<footer class="footer">
+    <p>© 2025 WiseNut AI Technologies. All rights reserved.</p>
+    <p>Contact us: <a href="mailto:bboing@cyberlogitec.com">bboing@cyberlogitec.com</a></p>
+</footer>
 </html>

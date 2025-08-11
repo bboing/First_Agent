@@ -171,6 +171,59 @@ app.post('/chat', async (req, res) => {
     }
 });
 
+
+app.post('/api/excel-rag', upload.fields([
+    { name: 'file', maxCount: 1 },
+    { name: 'collection_name', maxCount: 1 }
+]), async (req, res) => {
+    console.log('Received request for /api/excel-rag');
+    try {
+        if (!req.files || !req.files.file || !req.files.file[0]) {
+            console.error('No file uploaded.');
+            return res.status(400).json({ detail: 'No file uploaded.' });
+        }
+
+        // 컬렉션 이름 확인
+        const collectionName = req.body.collection_name;
+        if (!collectionName) {
+            console.error('No collection name provided.');
+            return res.status(400).json({ detail: 'Collection name is required.' });
+        }
+
+        const file = req.files.file[0];
+        console.log(`Forwarding file to backend: ${file.originalname}, Collection: ${collectionName}`);
+        
+        const formData = new FormData();
+        const blob = new Blob([file.buffer], { type: file.mimetype });
+        formData.append('file', blob, file.originalname);
+        formData.append('collection_name', collectionName);
+
+        const backendResponse = await fetch(`${backendApiUrl}/api/v1/agent/excel_rag_generator`, {
+            method: 'POST',
+            body: formData,
+        });
+
+        if (!backendResponse.ok) {
+            const errorData = await backendResponse.json();
+            console.error('Backend returned an error:', errorData.detail);
+            return res.status(backendResponse.status).json(errorData);
+        }
+
+        console.log('Backend processing successful, receiving JSON response.');
+        
+        // 백엔드에서 JSON 응답을 받아서 클라이언트로 전달
+        const jsonData = await backendResponse.json();
+        console.log('JSON response from backend:', jsonData);
+        
+        res.json(jsonData);
+
+    } catch (error) {
+        console.error('Error proxying to /api/v1/agent/excel_rag_generator:', error);
+        res.status(500).json({ detail: 'Error processing Excel file' });
+    }
+});
+
+
 // 컬렉션 관리 API 프록시
 app.get('/api/collections', async (req, res) => {
     try {
@@ -221,6 +274,45 @@ app.delete('/api/collections', async (req, res) => {
     }
 });
 
+// Excel RAG 파일 다운로드 프록시
+app.get('/download/excel-rag/:filename', async (req, res) => {
+    try {
+        const { filename } = req.params;
+        console.log(`Excel RAG file download request: ${filename}`);
+        
+        const backendResponse = await fetch(`${backendApiUrl}/download/excel-rag/${filename}`);
+        
+        if (!backendResponse.ok) {
+            const errorData = await backendResponse.json();
+            console.error('Backend download error:', errorData);
+            return res.status(backendResponse.status).json(errorData);
+        }
+        
+        // 백엔드에서 파일 스트림을 받아서 클라이언트로 전달
+        const contentType = backendResponse.headers.get('content-type');
+        const contentDisposition = backendResponse.headers.get('content-disposition');
+        
+        res.setHeader('Content-Type', contentType);
+        res.setHeader('Content-Disposition', contentDisposition);
+        
+        // 응답 타입 확인 및 적절한 처리
+        if (backendResponse.body && typeof backendResponse.body.pipe === 'function') {
+            // 스트림인 경우
+            backendResponse.body.pipe(res);
+        } else if (backendResponse.body) {
+            // 버퍼나 다른 형태인 경우
+            const buffer = await backendResponse.arrayBuffer();
+            res.send(Buffer.from(buffer));
+        } else {
+            // 응답이 없는 경우
+            res.status(500).json({ detail: 'Backend response has no body' });
+        }
+        
+    } catch (error) {
+        console.error('Error proxying download request:', error);
+        res.status(500).json({ detail: 'Error downloading file' });
+    }
+});
 
 
 // Serve templates as static HTML files
@@ -238,6 +330,11 @@ app.get('/csv_question_generator', (req, res) => {
 
 app.get('/document-chunking', (req, res) => {
   res.sendFile(path.join(__dirname, 'templates', 'document-chunking.html'));
+});
+
+// Code added by Gemini
+app.get('/excel_rag_generator', (req, res) => {
+  res.sendFile(path.join(__dirname, 'templates', 'excel_rag_generator.html'));
 });
 
 app.get('/node_editor', (req, res) => {

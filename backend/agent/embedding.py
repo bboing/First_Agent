@@ -101,22 +101,25 @@ def recreate_collection_if_needed(name: str, vector_dim: int):
         collection.load()
         return collection
 
-# LLM을 이용한 topic 추출 함수 예시 (OpenAI)
-def extract_topic(text: str) -> str:
+def extract_topic(text: str, collection_name: str = None) -> str:
     from langchain_openai import AzureChatOpenAI
-    from langchain_core.messages import HumanMessage # Code added by Gemini
-    llm = AzureChatOpenAI( # Code added by Gemini
+    from langchain_core.messages import HumanMessage
+    
+    # 컬렉션 이름이 제공되지 않은 경우 기본값 사용
+    if collection_name is None:
+        collection_name = "Booking_Embedding"
+    
+    llm = AzureChatOpenAI(
         azure_deployment=os.getenv("DEPLOYMENT_CHAT"),
         azure_endpoint=os.getenv("AZURE_OPENAI_ENDPOINT"),
         openai_api_key=os.getenv("AZURE_OPENAI_API_KEY"),
         openai_api_version=os.getenv("AZURE_OPENAI_API_VERSION"),
         openai_api_type="azure"
     )
-    prompt = f"다음 텍스트의 주제를 짧은 문장으로 요약해줘:\n{text[:300]}"
-    return llm.invoke([HumanMessage(content=prompt)]).content # Code added by Gemini
-
-collection_name = "embedding_test"
-vector = get_embedding("이 문장을 벡터로 변환해줘")
+    
+    # 컬렉션 정보를 포함한 프롬프트 생성
+    prompt = f"다음 텍스트의 주제를 짧은 문장으로 요약해줘. 컨텍스트: {collection_name} 관련 문서\n텍스트: {text[:300]}"
+    return llm.invoke([HumanMessage(content=prompt)]).content
 
 if MILVUS_AVAILABLE:
     try:
@@ -163,14 +166,15 @@ def insert_text_and_embedding(text: str, page: int, category: str, topic: str):
         raise
 
 # 7. Milvus에서 벡터 검색
-def search_similar_texts(query: str, limit: int = 3, similarity_threshold: float = 0.7):
+def search_similar_texts(query: str, limit: int = 3, similarity_threshold: float = 0.7, collection_name: str = None):
     """
-    유사한 텍스트를 검색합니다.
+    주어진 쿼리와 유사한 텍스트를 Milvus에서 검색합니다.
     
     Args:
         query (str): 검색할 쿼리
         limit (int): 반환할 최대 결과 수
         similarity_threshold (float): 유사도 임계값 (0~1, 1에 가까울수록 유사)
+        collection_name (str): 사용할 벡터 데이터베이스 컬렉션 이름 (선택사항)
     
     Returns:
         list: 임계값을 만족하는 검색 결과들
@@ -185,8 +189,10 @@ def search_similar_texts(query: str, limit: int = 3, similarity_threshold: float
     if collection is None:
         try:
             vector = get_embedding("이 문장을 벡터로 변환해줘")
-            collection = recreate_collection_if_needed(collection_name, len(vector))
-            logger.info(f"embedding.py: ✅ 컬렉션 '{collection_name}' 재초기화 완료")
+            # collection_name이 제공되면 해당 컬렉션 사용, 없으면 기본값
+            target_collection = collection_name if collection_name else "Booking_Embedding"
+            collection = recreate_collection_if_needed(target_collection, len(vector))
+            logger.info(f"embedding.py: ✅ 컬렉션 '{target_collection}' 재초기화 완료")
         except Exception as e:
             logger.error(f"embedding.py: ❌ 컬렉션 재초기화 실패: {e}")
             return []
@@ -210,37 +216,42 @@ def search_similar_texts(query: str, limit: int = 3, similarity_threshold: float
             if hit.distance >= similarity_threshold:
                 filtered_results.append(hit)
     
-    logger.info(f"embedding.py: 🔍 검색 결과: {len(results[0])}개 중 {len(filtered_results)}개가 임계값({similarity_threshold}) 이상")
+    collection_info = f" (컬렉션: {collection_name})" if collection_name else ""
+    logger.info(f"embedding.py: 🔍 검색 결과{collection_info}: {len(results[0])}개 중 {len(filtered_results)}개가 임계값({similarity_threshold}) 이상")
     for hit in filtered_results:
         logger.info(f"embedding.py:   - 유사도: {hit.distance:.3f}, 텍스트: {hit.entity.get('text')[:50]}...")
     
     return filtered_results
 
 # 8. 임시 파일에서 청킹된 텍스트 처리
-def process_chunks(chunks: list, category: str = ""):
+def process_chunks(chunks: list, category: str = "", collection_name: str = None):
     """
     (텍스트, 페이지번호) 리스트와 카테고리를 받아 임베딩 및 벡터DB에 저장합니다.
     Args:
         chunks (list): (텍스트, 페이지번호) 튜플 리스트
         category (str): 수동 입력 카테고리 (선택 사항)
+        collection_name (str): 벡터 데이터베이스 컬렉션 이름 (선택 사항)
     """
     for i, (text, page) in enumerate(chunks):
-        logger.info(f"embedding.py: 💾 청크 {i+1}/{len(chunks)} 임베딩 중... (page: {page}, category: {category})")
-        topic_llm = extract_topic(text)
+        logger.info(f"embedding.py: 💾 청크 {i+1}/{len(chunks)} 임베딩 중... (page: {page}, category: {category}, collection: {collection_name})")
+        topic_llm = extract_topic(text, collection_name)
         # 카테고리가 있으면 토픽에 포함, 없으면 LLM이 추출한 토픽만 사용
         topic = f"{category} - {topic_llm}" if category else topic_llm
         insert_text_and_embedding(text, page, category, topic)
     logger.info(f"embedding.py: 🎉 모든 청크가 벡터DB에 저장되었습니다!")
 
 # 8-1. 테이블 메타데이터를 포함한 청크 처리 (개선된 버전)
-def process_chunks_with_metadata(chunks: list):
+def process_chunks_with_metadata(chunks: list, collection_name: str = None):
     """
     (텍스트, 페이지번호, 카테고리, 토픽, 테이블메타데이터) 리스트를 받아 임베딩 및 벡터DB에 저장합니다.
     Args:
         chunks (list): (텍스트, 페이지번호, 카테고리, 토픽, 테이블메타데이터) 튜플 리스트
+        collection_name (str): 벡터 데이터베이스 컬렉션 이름 (선택 사항)
     """
     table_count = 0
     text_count = 0
+    
+    logger.info(f"embedding.py: 🚀 컬렉션 '{collection_name}'에서 청크 처리 시작")
     
     for i, chunk_data in enumerate(chunks):
         try:
@@ -258,7 +269,7 @@ def process_chunks_with_metadata(chunks: list):
                 logger.warning(f"embedding.py: ⚠️ 빈 텍스트 건너뛰기 (청크 {i+1})")
                 continue
             
-            logger.info(f"embedding.py: 💾 청크 {i+1}/{len(chunks)} 임베딩 중... (page: {page}, category: {category}, topic: {topic[:50]}...)")
+            logger.info(f"embedding.py: 💾 청크 {i+1}/{len(chunks)} 임베딩 중... (page: {page}, category: {category}, topic: {topic[:50]}..., collection: {collection_name})")
             
             # 테이블 메타데이터가 있으면 추가 정보 로깅
             if table_metadata:
@@ -278,7 +289,7 @@ def process_chunks_with_metadata(chunks: list):
             continue
     
     logger.info(f"embedding.py: 🎉 모든 청크가 벡터DB에 저장되었습니다!")
-    logger.info(f"embedding.py: 📈 통계 - 테이블: {table_count}개, 일반 텍스트: {text_count}개, 총: {len(chunks)}개")
+    logger.info(f"embedding.py: 📈 통계 - 테이블: {table_count}개, 일반 텍스트: {text_count}개, 총: {len(chunks)}개, 컬렉션: {collection_name}")
 
 
 def process_excel_file_for_embedding(excel_file_path: str, md_file_name: str):
@@ -352,46 +363,26 @@ def process_excel_file_for_embedding(excel_file_path: str, md_file_name: str):
 # 9. 컬렉션 정보 확인
 def check_collection_info():
     """
-    Milvus 컬렉션 정보를 확인합니다.
+    벡터 데이터베이스 연결 상태와 기본 정보를 확인합니다.
     """
-    logger.info("embedding.py: 📊 Milvus 컬렉션 정보 확인")
-    logger.info("embedding.py: =" * 50)
+    if not MILVUS_AVAILABLE:
+        logger.warning("embedding.py: ⚠️ Milvus 연결이 불가능합니다.")
+        return False
     
-    # 모든 컬렉션 목록
-    collections = utility.list_collections()
-    logger.info(f"embedding.py: 📋 전체 컬렉션 개수: {len(collections)}")
-    for col in collections:
-        logger.info(f"embedding.py:   - {col}")
-    
-    # embedding_test 컬렉션 정보
-    if "embedding_test" in collections:
-        collection = Collection("embedding_test")
-        collection.load()
+    try:
+        # 연결 확인
+        utility.get_server_version()
+        logger.info("embedding.py: ✅ Milvus 연결 성공!")
         
-        # 데이터 개수
-        num_entities = collection.num_entities
-        logger.info(f"embedding.py: \n📈 embedding_test 컬렉션:")
-        logger.info(f"embedding.py:   - 저장된 데이터 개수: {num_entities}")
+        # 전체 컬렉션 목록만 간단히 표시
+        collections = utility.list_collections()
+        logger.info(f"embedding.py: 📋 사용 가능한 컬렉션: {collections}")
         
-        # 스키마 정보
-        schema = collection.schema
-        logger.info(f"embedding.py:   - 필드 개수: {len(schema.fields)}")
-        for field in schema.fields:
-            logger.info(f"embedding.py:     * {field.name}: {field.dtype}")
+        return True
         
-        # 샘플 데이터 확인 (처음 3개)
-        if num_entities > 0:
-            logger.info(f"embedding.py: \n📝 샘플 데이터 (처음 3개):")
-            results = collection.query(
-                expr="id >= 0",
-                output_fields=["id", "text"],
-                limit=3
-            )
-            for i, result in enumerate(results):
-                text = result['text'][:100] + "..." if len(result['text']) > 100 else result['text']
-                logger.info(f"embedding.py:   {i+1}. ID: {result['id']}, 텍스트: {text}")
-    else:
-        logger.info("embedding.py: ❌ embedding_test 컬렉션이 없습니다.")
+    except Exception as e:
+        logger.error(f"embedding.py: ❌ Milvus 연결 실패: {e}")
+        return False
 
 if __name__ == "__main__":
     # 명령행 인수로 임시 파일 경로 받기

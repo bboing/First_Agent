@@ -21,11 +21,12 @@ import pandas as pd
 import uvicorn
 import random
 import ast
+import io
 import auto_generator.sentence_generator
 import auto_generator.pdf_question_generator
 from starlette.middleware.sessions import SessionMiddleware
 from fastapi import FastAPI, File, Form, UploadFile, HTTPException, Request, BackgroundTasks
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, StreamingResponse
 from fastapi.middleware.cors import CORSMiddleware
 from starlette.responses import FileResponse
 from typing import Union, List
@@ -288,9 +289,89 @@ async def chat_endpoint(req: ChatRequest):
     answer = handle_rag(req.question)
     return {"answer": answer}
 
+
+@app.post("/api/v1/agent/excel_rag_generator")
+async def excel_rag_generator_endpoint(
+    file: UploadFile = File(...),
+    collection_name: str = Form(...)
+):
+    """
+    엑셀 파일을 받아 'question' 컬럼의 각 질문에 대한 RAG 답변을 생성하고,
+    'answer' 컬럼을 추가하여 수정된 엑셀 파일을 반환합니다.
+    """
+    logger.info(f"✅ /api/v1/agent/excel_rag_generator 엔드포인트 호출 시작 (컬렉션: {collection_name})")
+    
+    # 파일 확장자 검사
+    if not file.filename.endswith((".xlsx", ".xls")):
+        logger.error(f"❌ 지원하지 않는 파일 형식: {file.filename}")
+        raise HTTPException(status_code=400, detail="잘못된 파일 형식입니다. .xlsx 또는 .xls 파일을 업로드해주세요.")
+
+    try:
+        # 엑셀 파일 읽기
+        content = await file.read()
+        df = pd.read_excel(content)
+        logger.info(f"📄 엑셀 파일 로드 완료: {file.filename}, {len(df)}개 행")
+
+        # 'question' 컬럼 확인
+        if 'question' not in df.columns:
+            logger.error("❌ 'question' 컬럼을 찾을 수 없습니다.")
+            raise HTTPException(status_code=400, detail="'question' 컬럼을 찾을 수 없습니다.")
+
+        # 각 질문에 대해 RAG 답변 생성 (선택된 컬렉션 사용)
+        answers = []
+        for question in df['question']:
+            if pd.isna(question) or not str(question).strip():
+                answers.append("") # 질문이 비어있는 경우
+                continue
+            
+            logger.info(f"💬 RAG 에이전트 호출: '{question}' (컬렉션: {collection_name})")
+            answer = handle_rag(str(question), collection_name=collection_name)
+            answers.append(answer)
+            logger.info("💡 RAG 답변 수신")
+
+        # 답변 컬럼 추가
+        df['answer'] = answers
+        logger.info("✅ 모든 질문에 대한 답변 생성 및 'answer' 컬럼 추가 완료")
+
+        # 수정된 엑셀 파일을 메모리에 저장
+        output = io.BytesIO()
+        df.to_excel(output, index=False)
+        output.seek(0)
+        
+        # 결과 파일명 생성
+        result_filename = f"result_{file.filename}"
+        download_directory = os.getenv('DOWNLOAD_DIRECTORY', 'save_result')
+        
+        # 디렉토리 생성
+        os.makedirs(os.path.join(download_directory, 'answer'), exist_ok=True)
+
+        # 파일을 디스크에 저장
+        result_path = os.path.join(download_directory, 'answer', result_filename)
+        with open(result_path, 'wb') as f:
+            f.write(output.getvalue())
+        
+        logger.info(f"💾 결과 파일 저장 완료: {result_path}")
+        
+        # JSON 응답 반환
+        return JSONResponse({
+            "status": "success",
+            "file_name": result_filename,
+            "message": "RAG 답변 생성이 완료되었습니다."
+        })
+
+    except Exception as e:
+        import traceback
+        error_details = traceback.format_exc()
+        logger.error(f"❗️❗️❗️ 엑셀 처리 중 심각한 오류 발생 ❗️❗️❗️\n{error_details}")
+        raise HTTPException(
+            status_code=500,
+            detail=f"엑셀 파일 처리 중 오류가 발생했습니다: {str(e)}"
+        )
+
 @app.get("/")
 async def root():
     return {"message": "RAG Chatbot API is running!"}
+
 
 @app.get("/health")
 async def health_check():
@@ -558,3 +639,33 @@ async def delete_all_collections():
     except Exception as e:
         logger.error(f"❌ 모든 컬렉션 삭제 실패: {e}")
         raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/download/excel-rag/{filename}")
+async def download_excel_rag(filename: str):
+    """
+    Excel RAG 결과 파일을 다운로드하는 엔드포인트
+    """
+    try:
+        # 파일 경로 설정
+        download_directory = os.getenv('DOWNLOAD_DIRECTORY', 'save_result')
+        file_path = os.path.join(download_directory, 'answer', filename)
+        
+        logger.info(f"📥 Excel RAG 파일 다운로드 요청: {filename}")
+        
+        # 파일 존재 여부 확인
+        if not os.path.exists(file_path):
+            logger.error(f"❌ 파일을 찾을 수 없습니다: {file_path}")
+            raise HTTPException(status_code=404, detail="파일을 찾을 수 없습니다")
+        
+        # 파일 다운로드 응답
+        return FileResponse(
+            file_path, 
+            media_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+            filename=filename
+        )
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"❌ Excel RAG 파일 다운로드 중 오류 발생: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"파일 다운로드 중 오류가 발생했습니다: {str(e)}")

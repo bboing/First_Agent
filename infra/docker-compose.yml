@@ -4,10 +4,11 @@ services:
     build:
       context: ../backend
       dockerfile: Dockerfile
-    container_name: sub_lang_backend
+    container_name: ch_em_backend
     ports:
       - "8000:8000"
     environment:
+      - DOWNLOAD_DIRECTORY=/app/docs/save_result
       - POSTGRES_HOST=postgres
       - REDIS_HOST=redis
       - MILVUS_HOST=standalone
@@ -32,7 +33,7 @@ services:
     build:
       context: ../frontend
       dockerfile: Dockerfile
-    container_name: sub_lang_frontend
+    container_name: ch_em_frontend
     ports:
       - "3000:3000"
     env_file:
