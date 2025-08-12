@@ -251,7 +251,8 @@ async def process_pdf_endpoint(files: List[UploadFile] = File(...)):
 
         # 임베딩 및 저장 (테이블 메타데이터 포함)
         logger.info(">> 7. Milvus 임베딩 및 저장 시작")
-        process_chunks_with_metadata(chunks_for_embedding)
+        # PDF 처리 시에는 기본 컬렉션 사용
+        process_chunks_with_metadata(chunks_for_embedding, collection_name="Booking_Embedding")
         logger.info("✅ 7. Milvus 임베딩 및 저장 완료")
 
 
